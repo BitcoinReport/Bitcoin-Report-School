@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitcoin Core — Codice Spiegato</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&family=Literata:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F7931A;
+    --gold-dim: #c8740f;
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --bg4: #222222;
+    --border: #2a2a2a;
+    --text: #e8e0d0;
+    --text-dim: #8a8070;
+    --text-muted: #5a5248;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --red: #f87171;
+    --cyan: #22d3ee;
+    --yellow: #fbbf24;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Literata', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .logo span { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+
+  .header-nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .header-nav button {
+    background: none;
+    border: 1px solid transparent;
+    color: var(--text-dim);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .header-nav button:hover { color: var(--text); border-color: var(--border); }
+  .header-nav button.active { color: var(--gold); border-color: var(--gold); background: rgba(247,147,26,0.08); }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 60%, #c8740f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .module-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+  }
+  .module-card:hover { border-color: var(--gold); transform: translateY(-3px); background: var(--bg3); }
+  .module-card.active { border-color: var(--gold); background: rgba(247,147,26,0.06); }
+
+  .module-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+  .module-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text); margin-bottom: 0.3rem; }
+  .module-card p { font-size: 0.72rem; color: var(--text-muted); font-style: italic; }
+
+  /* CONTENT AREA */
+  .content-area {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .module-section { display: none; animation: fadeUp 0.5s ease both; }
+  .module-section.active { display: block; }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  .section-header p { color: var(--text-dim); font-size: 1rem; line-height: 1.6; max-width: 700px; }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .code-block:hover { border-color: #3a3a3a; }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.2rem;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .code-filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .code-filename::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: inline-block; }
+  .code-lang { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .code-table { width: 100%; border-collapse: collapse; }
+
+  .code-line { cursor: pointer; transition: background 0.15s; }
+  .code-line:hover > td { background: rgba(247,147,26,0.05); }
+  .code-line.expanded > td { background: rgba(247,147,26,0.03); }
+
+  td.line-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 0.3rem 1rem 0.3rem 1.2rem;
+    text-align: right;
+    user-select: none;
+    width: 3.5rem;
+    border-right: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  td.line-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.3rem 1.2rem;
+    white-space: pre;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  td.line-toggle {
+    width: 2rem;
+    text-align: center;
+    padding: 0.3rem 0.5rem;
+    vertical-align: top;
+  }
+  .toggle-btn {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    transition: color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .code-line:hover .toggle-btn { color: var(--gold); }
+  .code-line.expanded .toggle-btn { color: var(--gold); transform: rotate(90deg); }
+
+  /* EXPLANATION ROW */
+  .explain-row { display: none; }
+  .explain-row.visible { display: table-row; animation: expandDown 0.25s ease; }
+
+  @keyframes expandDown {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .explain-row td {
+    padding: 0;
+  }
+  .explain-inner {
+    margin: 0 1.2rem 0.5rem 5.7rem;
+    background: rgba(247,147,26,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 0.9rem 1.2rem;
+  }
+  .explain-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .explain-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .explain-text strong { color: var(--gold); font-family: 'Syne', sans-serif; }
+  .explain-text em { color: var(--cyan); font-style: normal; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+  .explain-analogy {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-style: italic;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(247,147,26,0.15);
+  }
+  .explain-analogy::before { content: '💡 '; }
+
+  /* SYNTAX COLORS */
+  .kw { color: var(--purple); }
+  .type { color: var(--blue); }
+  .fn { color: var(--yellow); }
+  .str { color: var(--green); }
+  .num { color: var(--red); }
+  .cmt { color: var(--text-muted); font-style: italic; }
+  .op { color: var(--cyan); }
+  .var { color: var(--text); }
+  .cls { color: #fb923c; }
+
+  /* CONCEPT BOXES */
+  .concept-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .concept-box h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .concept-box p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; }
+
+  .concepts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0;
+    color: var(--text-muted);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.1s;
+    z-index: 99;
+  }
+
+  /* SCROLL TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 42px;
+    height: 42px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 1rem;
+    transition: all 0.2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: all; }
+  .scroll-top:hover { border-color: var(--gold); color: var(--gold); }
+
+  @media (max-width: 768px) {
+    .module-grid { grid-template-columns: repeat(2, 1fr); }
+    .concepts-grid { grid-template-columns: 1fr; }
+    .header-nav { display: none; }
+    td.line-code { font-size: 0.7rem; }
+  }
+
+  /* DONATION SECTION */
+  .donation-section {
+    background: linear-gradient(135deg, #0f0a00 0%, #1a0f00 50%, #0a0a0a 100%);
+    border-top: 1px solid #3a2500;
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .donation-section::before {
+    content: '₿';
+    position: absolute;
+    font-size: 28rem;
+    color: rgba(247,147,26,0.03);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+  .donation-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .donation-text .section-tag { margin-bottom: 1rem; }
+  .donation-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .donation-text p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 1.4rem;
+  }
+  .donation-manifesto {
+    background: rgba(247,147,26,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.2rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  .donation-manifesto strong { color: var(--gold); font-style: normal; }
+  .donation-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+  .stat-item { }
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Syne', sans-serif;
+  }
+  .donation-qr-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .qr-frame {
+    position: relative;
+    padding: 1.2rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow:
+      0 0 0 1px rgba(247,147,26,0.3),
+      0 0 40px rgba(247,147,26,0.12),
+      0 20px 60px rgba(0,0,0,0.6);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .qr-frame:hover {
+    box-shadow:
+      0 0 0 2px rgba(247,147,26,0.6),
+      0 0 60px rgba(247,147,26,0.25),
+      0 24px 70px rgba(0,0,0,0.7);
+    transform: translateY(-4px) scale(1.02);
+  }
+  .qr-frame img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+  }
+  .qr-badge {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .qr-label {
+    text-align: center;
+    margin-top: 0.6rem;
+  }
+  .qr-label p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+  .qr-label span {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .btcpay-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+  }
+  .btcpay-badge::before {
+    content: '⚡';
+    font-size: 0.9rem;
+  }
+  .donation-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+  }
+  .donation-footer strong { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .donation-text h2 { font-size: 1.7rem; }
+    .donation-qr-wrap { order: -1; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <div class="logo">₿ <span>Bitcoin Core — Codice Spiegato</span></div>
+  <nav class="header-nav">
+    <button onclick="showModule('blockchain')" id="nav-blockchain" class="active">Blockchain</button>
+    <button onclick="showModule('transazioni')" id="nav-transazioni">Transazioni</button>
+    <button onclick="showModule('wallet')" id="nav-wallet">Wallet</button>
+    <button onclick="showModule('rete')" id="nav-rete">Rete P2P</button>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">// bitcoin core · codice sorgente commentato</div>
+  <h1>Ogni riga di codice,<br>spiegata in italiano</h1>
+  <p>Esplora i moduli fondamentali di Bitcoin Core. Clicca su qualsiasi riga di codice per leggere la spiegazione in linguaggio semplice — senza dover sapere programmare.</p>
+</div>
+
+<div class="module-grid">
+  <div class="module-card active" onclick="showModule('blockchain')" id="card-blockchain">
+    <div class="module-icon">⛓️</div>
+    <h3>Blockchain</h3>
+    <p>La catena di blocchi immutabile</p>
+  </div>
+  <div class="module-card" onclick="showModule('transazioni')" id="card-transazioni">
+    <div class="module-icon">💸</div>
+    <h3>Transazioni</h3>
+    <p>Come si spediscono i bitcoin</p>
+  </div>
+  <div class="module-card" onclick="showModule('wallet')" id="card-wallet">
+    <div class="module-icon">🔐</div>
+    <h3>Wallet</h3>
+    <p>Chiavi private e portafogli</p>
+  </div>
+  <div class="module-card" onclick="showModule('rete')" id="card-rete">
+    <div class="module-icon">🌐</div>
+    <h3>Rete P2P</h3>
+    <p>La rete decentralizzata</p>
+  </div>
+</div>
+
+<div class="content-area">
+
+  <!-- ══════════════ BLOCKCHAIN ══════════════ -->
+  <div class="module-section active" id="module-blockchain">
+    <div class="section-header">
+      <div class="section-tag">// modulo 01 · chain.h / chain.cpp</div>
+      <h2>⛓️ Blockchain</h2>
+      <p>La blockchain è il cuore di Bitcoin: un registro pubblico e immutabile di tutte le transazioni mai avvenute. Ogni "blocco" contiene un gruppo di transazioni e un riferimento al blocco precedente, formando una catena.</p>
+    </div>
+
+    <div class="concepts-grid">
+      <div class="concept-box">
+        <h4>📦 Cos'è un Blocco?</h4>
+        <p>Un blocco è come una pagina di un libro mastro. Contiene decine di transazioni, una data, e un'impronta digitale del blocco precedente. Questo crea la "catena".</p>
+      </div>
+      <div class="concept-box">
+        <h4>🔒 Perché è Immutabile?</h4>
+        <p>Ogni blocco contiene l'hash del precedente. Modificare un blocco significherebbe ricalcolare tutti i blocchi successivi — computazionalmente impossibile.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/chain.h</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <!-- Line 1 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">1</td>
+          <td class="line-code"><span class="cmt">// Copyright (c) 2009-2023 The Bitcoin Core developers</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Questa è una <strong>nota di copyright</strong>. Indica che il codice è scritto e mantenuto dagli sviluppatori di Bitcoin Core dal 2009 (anno della nascita di Bitcoin) fino al 2023.</div>
+          <div class="explain-analogy">Come la firma dell'autore su un libro — dice chi ha scritto il codice e quando.</div>
+        </div></td></tr>
+
+        <!-- Line 2 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">2</td>
+          <td class="line-code"><span class="cmt">// Distributed under the MIT software license</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">La <strong>licenza MIT</strong> è una licenza open source molto permissiva. Significa che chiunque può usare, copiare, modificare e distribuire questo codice liberamente, anche per scopi commerciali, a patto di mantenere questa nota.</div>
+          <div class="explain-analogy">Come dire: "Questo è liberamente disponibile — usalo come vuoi, ma non togliere la firma."</div>
+        </div></td></tr>
+
+        <!-- Line 3 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">3</td>
+          <td class="line-code"><span class="kw">#ifndef</span> <span class="var">BITCOIN_CHAIN_H</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>#ifndef</em> significa "se non è definito". Insieme alla riga successiva, questo è un <strong>header guard</strong>: evita che questo file venga caricato due volte nello stesso programma, il che causerebbe errori.</div>
+          <div class="explain-analogy">Come un controllo "hai già letto questa pagina?". Se sì, salta. Evita di ripetere le istruzioni.</div>
+        </div></td></tr>
+
+        <!-- Line 4 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">4</td>
+          <td class="line-code"><span class="kw">#define</span> <span class="var">BITCOIN_CHAIN_H</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>#define</em> "marca" il file come già caricato. La prossima volta che il compilatore vede <em>#ifndef BITCOIN_CHAIN_H</em>, sa che è già stato incluso e lo salta.</div>
+        </div></td></tr>
+
+        <!-- Line 5 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">5</td>
+          <td class="line-code"><span class="kw">#include</span> <span class="str">&lt;uint256.h&gt;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>#include</em> importa un altro file di codice. <strong>uint256.h</strong> definisce il tipo di dato che rappresenta un numero a 256 bit — usato per gli hash SHA-256 di Bitcoin. Un hash a 256 bit è un numero con 78 cifre decimali.</div>
+          <div class="explain-analogy">Come "importa il capitolo sugli hash" da un altro libro dello stesso scaffale.</div>
+        </div></td></tr>
+
+        <!-- Line 6 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">6</td>
+          <td class="line-code"><span class="kw">#include</span> <span class="str">&lt;arith_uint256.h&gt;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Importa un file per fare <strong>operazioni aritmetiche</strong> su numeri a 256 bit (addizione, confronto, ecc.). Necessario per confrontare le difficoltà di mining.</div>
+        </div></td></tr>
+
+        <tr><td colspan="3" style="height:0.5rem;"></td></tr>
+
+        <!-- Line 7 — class CBlockIndex -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">7</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CBlockIndex</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>class</em> crea un <strong>tipo di dato personalizzato</strong>. <strong>CBlockIndex</strong> è la struttura che rappresenta un singolo blocco nella blockchain. La "C" davanti è una convenzione del codice Bitcoin per indicare una "classe". Tutto ciò che è racchiuso tra le parentesi graffe <em>{ }</em> appartiene a questa classe.</div>
+          <div class="explain-analogy">Come creare uno schema per una scheda di archivio: definisci quali campi avrà ogni scheda (numero blocco, data, hash, ecc.).</div>
+        </div></td></tr>
+
+        <!-- Line 8 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">8</td>
+          <td class="line-code"><span class="kw">public</span><span class="op">:</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>public:</em> significa che le variabili e funzioni che seguono sono <strong>accessibili da qualsiasi parte del programma</strong>. È il contrario di <em>private:</em>, che nasconde i dati all'esterno.</div>
+          <div class="explain-analogy">Come la parte di un modulo compilabile che tutti possono vedere e riempire, vs la parte interna riservata all'ufficio.</div>
+        </div></td></tr>
+
+        <!-- Line 9 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">9</td>
+          <td class="line-code">  <span class="type">uint256</span> <span class="var">phashBlock</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>phashBlock</strong> è il <strong>hash di questo blocco</strong> — la sua "impronta digitale" univoca a 256 bit. Come un'impronta digitale umana, è unica per ogni blocco. Se cambi anche solo un byte nel blocco, l'hash cambia completamente. Il tipo <em>uint256</em> è un intero senza segno da 256 bit.</div>
+          <div class="explain-analogy">Come il codice a barre su un prodotto: identifica univocamente quel preciso blocco nell'intera catena.</div>
+        </div></td></tr>
+
+        <!-- Line 10 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">10</td>
+          <td class="line-code">  <span class="cls">CBlockIndex</span><span class="op">*</span> <span class="var">pprev</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>pprev</strong> è un <strong>puntatore al blocco precedente</strong>. La <em>*</em> indica che è un puntatore (una freccia che punta a un altro oggetto in memoria). Questo è esattamente ciò che crea la "catena" nella blockchain: ogni blocco tiene un riferimento diretto al blocco che lo precede.</div>
+          <div class="explain-analogy">Come ogni pagina di un libro che dice "continua da pagina X". È il collegamento fisico tra un blocco e il precedente.</div>
+        </div></td></tr>
+
+        <!-- Line 11 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">11</td>
+          <td class="line-code">  <span class="type">int</span> <span class="var">nHeight</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nHeight</strong> è l'<strong>altezza del blocco</strong> — cioè la sua posizione nella catena, partendo da 0 (il blocco Genesis). Il blocco #0 è quello creato da Satoshi Nakamoto il 3 gennaio 2009. Al 2024, l'altezza supera i 820.000 blocchi.</div>
+          <div class="explain-analogy">Come il numero di piano di un grattacielo. Il piano 0 è il piano terra (il blocco Genesis), ogni blocco aggiunto sale di un piano.</div>
+        </div></td></tr>
+
+        <!-- Line 12 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">12</td>
+          <td class="line-code">  <span class="type">int64_t</span> <span class="var">nTime</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nTime</strong> è il <strong>timestamp del blocco</strong> — l'ora esatta in cui il blocco è stato minato, espresso come numero di secondi trascorsi dalla mezzanotte del 1 gennaio 1970 (Unix timestamp). <em>int64_t</em> è un intero a 64 bit, sufficiente per rappresentare date fino all'anno 292 miliardi.</div>
+          <div class="explain-analogy">Come il timbro postale su una lettera: certifica quando il blocco è stato "spedito" nella rete.</div>
+        </div></td></tr>
+
+        <!-- Line 13 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">13</td>
+          <td class="line-code">  <span class="type">uint32_t</span> <span class="var">nBits</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nBits</strong> rappresenta la <strong>difficoltà di mining</strong> di questo blocco, in formato compresso. La difficoltà determina quanto deve essere piccolo l'hash per essere accettato dalla rete. Si ricalibra ogni 2016 blocchi (~2 settimane) per mantenere un tempo medio di 10 minuti per blocco.</div>
+          <div class="explain-analogy">Come regolare la difficoltà di un puzzle: se troppi miner trovano la soluzione troppo in fretta, il puzzle diventa più difficile.</div>
+        </div></td></tr>
+
+        <!-- Line 14 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">14</td>
+          <td class="line-code">  <span class="type">uint32_t</span> <span class="var">nNonce</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nNonce</strong> è il <strong>numero casuale</strong> che i miner modificano milioni di volte al secondo per trovare un hash valido. "Nonce" sta per "number used once". È il campo che i miner cambiano durante il mining finché non trovano un hash che inizia con abbastanza zeri.</div>
+          <div class="explain-analogy">Come girare una rotella di combinazione: il miner prova ogni numero finché il lucchetto non si apre (= hash valido trovato).</div>
+        </div></td></tr>
+
+        <!-- Line 15 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">15</td>
+          <td class="line-code">  <span class="type">int64_t</span> <span class="fn">GetBlockTime</span>() <span class="kw">const</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Questa è una <strong>funzione</strong> (metodo) chiamata <em>GetBlockTime</em>. Restituisce (<em>int64_t</em>) il tempo del blocco. La parola <em>const</em> garantisce che questa funzione non modifica nulla — legge solo. Le funzioni sono blocchi di codice riutilizzabili che fanno una cosa specifica.</div>
+          <div class="explain-analogy">Come premere il tasto "ora" su un orologio digitale: ti dà l'informazione senza cambiare nulla.</div>
+        </div></td></tr>
+
+        <!-- Line 16 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">16</td>
+          <td class="line-code">    <span class="kw">return</span> (<span class="type">int64_t</span>)<span class="var">nTime</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>return</em> restituisce un valore alla parte del programma che ha chiamato questa funzione. Il <em>(int64_t)</em> è un <strong>cast</strong>: converte nTime (che era uint32_t) nel tipo int64_t, garantendo che non ci siano problemi con numeri grandi o negativi.</div>
+        </div></td></tr>
+
+        <!-- Line 17 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">17</td>
+          <td class="line-code">  }</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">La parentesi graffa chiusa <em>}</em> segna la <strong>fine della funzione</strong> GetBlockTime. Tutto il codice tra la <em>{</em> di apertura e questa <em>}</em> appartiene a quella funzione.</div>
+        </div></td></tr>
+
+        <!-- Line 18 -->
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">18</td>
+          <td class="line-code">  <span class="type">bool</span> <span class="fn">IsValid</span>() <span class="kw">const</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>IsValid()</strong> è una funzione che restituisce un <em>bool</em> (booleano: vero o falso). Verifica se questo blocco è <strong>valido</strong> secondo le regole del protocollo Bitcoin: formato corretto, difficoltà rispettata, transazioni valide, ecc. Il <em>;</em> finale indica che questa è solo la dichiarazione — il corpo della funzione è definito altrove.</div>
+          <div class="explain-analogy">Come il controllo di sicurezza in aeroporto: risponde solo sì/no alla domanda "questo blocco può passare?"</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+
+    <div class="divider">src/validation.cpp · Verifica della catena</div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/validation.cpp (estratto)</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">420</td>
+          <td class="line-code"><span class="type">bool</span> <span class="fn">CheckProofOfWork</span>(<span class="type">uint256</span> <span class="var">hash</span>, <span class="type">unsigned int</span> <span class="var">nBits</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Questa funzione verifica la <strong>Proof of Work</strong> (prova di lavoro) — il meccanismo fondamentale di Bitcoin. Controlla che l'hash del blocco sia effettivamente minore del target di difficoltà. Riceve l'hash calcolato e il valore di difficoltà (nBits).</div>
+          <div class="explain-analogy">Come un esaminatore che controlla: "hai davvero risolto questo puzzle difficile? Mostrami la soluzione."</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">421</td>
+          <td class="line-code">  <span class="cls">arith_uint256</span> <span class="var">bnTarget</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Crea una variabile <em>bnTarget</em> di tipo <em>arith_uint256</em> che conterrà il <strong>valore target</strong>: il numero massimo che l'hash del blocco deve avere per essere valido. Più basso è il target, più difficile è il mining.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">422</td>
+          <td class="line-code">  <span class="var">bnTarget</span>.<span class="fn">SetCompact</span>(<span class="var">nBits</span>)<span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><em>SetCompact</em> decomprime <em>nBits</em> nel numero target completo a 256 bit. Bitcoin usa una rappresentazione compressa (4 byte) per la difficoltà per risparmiare spazio nell'header del blocco.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">423</td>
+          <td class="line-code">  <span class="kw">if</span> (<span class="fn">UintToArith256</span>(<span class="var">hash</span>) <span class="op">&gt;</span> <span class="var">bnTarget</span>)</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Questo è il <strong>controllo centrale del mining</strong>. Converte l'hash in un numero e lo confronta con il target. Se l'hash è <em>maggiore</em> del target, il blocco non è valido. I miner cercano un hash che sia <em>minore</em> del target. Statisticamente, un hash su X miliardi soddisfa questa condizione.</div>
+          <div class="explain-analogy">Come lanciare un dado enorme con miliardi di facce e sperare di ottenere un numero basso. Il miner lancia il dado (cambia il nonce) finché non ottiene un numero abbastanza basso.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">424</td>
+          <td class="line-code">    <span class="kw">return</span> <span class="kw">false</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Se l'hash è troppo grande (mining non valido), la funzione restituisce <em>false</em> — blocco rifiutato. Questo è il meccanismo che rende impossibile falsificare un blocco senza rifarlo il lavoro computazionale.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">425</td>
+          <td class="line-code">  <span class="kw">return</span> <span class="kw">true</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Se arriviamo a questa riga, significa che l'hash è valido (minore del target). La funzione restituisce <em>true</em>: il blocco ha superato il controllo della Proof of Work e può essere aggiunto alla blockchain.</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════ TRANSAZIONI ══════════════ -->
+  <div class="module-section" id="module-transazioni">
+    <div class="section-header">
+      <div class="section-tag">// modulo 02 · primitives/transaction.h</div>
+      <h2>💸 Transazioni</h2>
+      <p>Una transazione Bitcoin è il meccanismo con cui i bitcoin si spostano da un indirizzo all'altro. Ogni transazione ha degli "input" (da dove vengono i bitcoin) e degli "output" (dove vanno).</p>
+    </div>
+
+    <div class="concepts-grid">
+      <div class="concept-box">
+        <h4>📥 Input e Output</h4>
+        <p>Gli input fanno riferimento agli output di transazioni precedenti. Non esiste il concetto di "saldo": i bitcoin sono sempre output non spesi (UTXO).</p>
+      </div>
+      <div class="concept-box">
+        <h4>✍️ Firma Digitale</h4>
+        <p>Per spendere bitcoin, devi firmare la transazione con la tua chiave privata. La rete verifica la firma con la chiave pubblica corrispondente.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/primitives/transaction.h</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">1</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CTxIn</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CTxIn</strong> rappresenta un <strong>input di transazione</strong>. Un input dice: "sto usando questi bitcoin che qualcuno mi ha inviato in una transazione precedente". Ogni transazione può avere uno o più input.</div>
+          <div class="explain-analogy">Come dichiarare "prendo i soldi dal mio conto A" prima di fare un pagamento.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">2</td>
+          <td class="line-code"><span class="kw">public</span><span class="op">:</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Sezione pubblica: questi campi sono accessibili da tutto il programma.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">3</td>
+          <td class="line-code">  <span class="cls">COutPoint</span> <span class="var">prevout</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>prevout</strong> è il riferimento all'output della transazione precedente che stiamo spendendo. Contiene l'hash della transazione passata e l'indice dell'output specifico (una transazione può avere più output). Questo crea la "catena" di proprietà dei bitcoin.</div>
+          <div class="explain-analogy">Come indicare "sto usando l'assegno numero 47 che mi ha dato Maria il 3 marzo" — un riferimento preciso a un'entrata precedente.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">4</td>
+          <td class="line-code">  <span class="cls">CScript</span> <span class="var">scriptSig</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>scriptSig</strong> è lo <strong>script di sblocco</strong>. Contiene la firma digitale e la chiave pubblica del mittente. È la "prova" che chi sta inviando i bitcoin ha davvero il diritto di farlo. Senza una firma valida, la transazione viene rifiutata dalla rete.</div>
+          <div class="explain-analogy">Come la firma in calce a un assegno bancario: dimostra che sei tu il proprietario del conto e hai autorizzato il pagamento.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">5</td>
+          <td class="line-code">  <span class="type">uint32_t</span> <span class="var">nSequence</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nSequence</strong> è un campo multipurpose. Originariamente pensato per le transazioni sostitutive, oggi è usato principalmente per i <strong>timelock relativi</strong> (RBF - Replace-by-Fee) e per SegWit. Permette di dire "questa transazione non può essere confermata prima di X blocchi".</div>
+        </div></td></tr>
+
+        <tr><td colspan="3" style="height:1rem;background:var(--bg2)"></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">6</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CTxOut</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CTxOut</strong> rappresenta un <strong>output di transazione</strong>. Un output dice: "mando questi bitcoin a questo indirizzo". È l'altra metà di CTxIn. Gli output non spesi (UTXO - Unspent Transaction Output) formano il "saldo" dell'intera rete.</div>
+          <div class="explain-analogy">Come un assegno che emetti: specifica quanto vale e chi può incassarlo.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">7</td>
+          <td class="line-code">  <span class="cls">CAmount</span> <span class="var">nValue</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nValue</strong> è la <strong>quantità di bitcoin</strong> in questo output, espressa in <strong>satoshi</strong> (1 BTC = 100.000.000 satoshi). Usare satoshi come unità base evita errori con i decimali. <em>CAmount</em> è in realtà un int64_t — un intero a 64 bit.</div>
+          <div class="explain-analogy">Come i centesimi di euro: invece di scrivere €0,00001 BTC, Bitcoin conta tutto in "centesimi" chiamati satoshi.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">8</td>
+          <td class="line-code">  <span class="cls">CScript</span> <span class="var">scriptPubKey</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>scriptPubKey</strong> è lo <strong>script di blocco</strong>. Definisce le condizioni che devono essere soddisfatte per spendere questi bitcoin. Normalmente contiene l'hash dell'indirizzo Bitcoin del destinatario. Solo chi possiede la chiave privata corrispondente può creare un scriptSig valido.</div>
+          <div class="explain-analogy">Come scrivere su un assegno "pagabile solo a Mario Rossi con documento d'identità". Definisce chi può riscuotere.</div>
+        </div></td></tr>
+
+        <tr><td colspan="3" style="height:1rem;background:var(--bg2)"></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">9</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CTransaction</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CTransaction</strong> è la <strong>transazione completa</strong>: raggruppa uno o più CTxIn e uno o più CTxOut. Una transazione è valida quando: la somma degli input ≥ somma degli output, tutte le firme sono valide, e gli UTXO referenziati non sono già stati spesi.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">10</td>
+          <td class="line-code">  <span class="kw">const</span> <span class="type">int32_t</span> <span class="var">nVersion</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nVersion</strong> indica la <strong>versione del formato</strong> della transazione. Attualmente Bitcoin usa le versioni 1 e 2. La versione 2 (introdotta con BIP 68) abilita i timelock relativi tramite nSequence. La parola <em>const</em> indica che una volta impostata, non può essere cambiata.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">11</td>
+          <td class="line-code">  <span class="kw">const</span> <span class="type">std::vector</span><span class="op">&lt;</span><span class="cls">CTxIn</span><span class="op">&gt;</span> <span class="var">vin</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>vin</strong> è la <strong>lista degli input</strong>. <em>std::vector</em> è un array dinamico (lista) della libreria standard C++. Può contenere zero o più CTxIn. Una transazione con vin vuoto è la "coinbase transaction" — la ricompensa al miner per aver trovato il blocco.</div>
+          <div class="explain-analogy">Come la sezione "provenienza fondi" di un bonifico, dove puoi indicare uno o più conti da cui stai prelevando.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">12</td>
+          <td class="line-code">  <span class="kw">const</span> <span class="type">std::vector</span><span class="op">&lt;</span><span class="cls">CTxOut</span><span class="op">&gt;</span> <span class="var">vout</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>vout</strong> è la <strong>lista degli output</strong>. Una transazione tipica ha 2 output: uno per il destinatario e uno di "resto" che torna al mittente. La differenza tra input totali e output totali è la <strong>commissione al miner</strong>.</div>
+          <div class="explain-analogy">Come la sezione "destinazione" di un bonifico: puoi mandare a più destinatari in una volta sola.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">13</td>
+          <td class="line-code">  <span class="kw">const</span> <span class="type">uint32_t</span> <span class="var">nLockTime</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nLockTime</strong> è il <strong>timelock assoluto</strong>. Può essere 0 (nessun lock), un'altezza di blocco, o un timestamp Unix. Se impostato, la transazione non può essere inclusa in nessun blocco fino a quando la blockchain non raggiunge quell'altezza o timestamp.</div>
+          <div class="explain-analogy">Come un assegno postdatato: "questo pagamento non può essere incassato prima del 1° gennaio 2025".</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">14</td>
+          <td class="line-code">  <span class="type">uint256</span> <span class="fn">GetHash</span>() <span class="kw">const</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>GetHash()</strong> calcola e restituisce il <strong>TXID</strong> (Transaction ID) — l'identificatore univoco della transazione. È calcolato con SHA-256 doppio (SHA256d) su tutti i campi della transazione. Il TXID è quello che vedi quando cerchi una transazione su un block explorer.</div>
+          <div class="explain-analogy">Come il numero di ricevuta di un bonifico: un codice univoco che identifica questa specifica transazione tra tutte quelle mai avvenute.</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════ WALLET ══════════════ -->
+  <div class="module-section" id="module-wallet">
+    <div class="section-header">
+      <div class="section-tag">// modulo 03 · wallet/wallet.h · key.h</div>
+      <h2>🔐 Wallet</h2>
+      <p>Il wallet Bitcoin gestisce le chiavi crittografiche che provano la proprietà dei bitcoin. Non contiene bitcoin in sé — contiene le chiavi per accedere agli UTXO registrati nella blockchain.</p>
+    </div>
+
+    <div class="concepts-grid">
+      <div class="concept-box">
+        <h4>🔑 Chiave Privata e Pubblica</h4>
+        <p>La chiave privata è un numero casuale a 256 bit. Da essa si deriva la chiave pubblica (matematica a curve ellittiche), e dall'indirizzo Bitcoin. Non è possibile risalire alla chiave privata dalla pubblica.</p>
+      </div>
+      <div class="concept-box">
+        <h4>🌱 HD Wallet (BIP32)</h4>
+        <p>I wallet moderni generano tutte le chiavi da un unico "seed" di 12/24 parole. Puoi ricostruire tutto il wallet da quella frase seme — perdere le parole significa perdere i bitcoin.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/key.h</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">1</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CKey</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CKey</strong> rappresenta una <strong>chiave privata Bitcoin</strong>. È il dato più sensibile dell'intero sistema. Chiunque posseda questa chiave può spendere i bitcoin associati. Internamente è gestita con molta cura per non esporla mai in memoria più del necessario.</div>
+          <div class="explain-analogy">Come il PIN del tuo bancomat: il segreto assoluto che non deve mai essere condiviso o esposto.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">2</td>
+          <td class="line-code"><span class="kw">private</span><span class="op">:</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">La sezione <em>private:</em> è accessibile solo dall'interno della classe. I dati sensibili come i byte della chiave privata sono dichiarati qui per protezione — nessuna parte esterna del codice può leggerli o modificarli direttamente.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">3</td>
+          <td class="line-code">  <span class="type">unsigned char</span> <span class="var">keydata</span>[<span class="num">32</span>]<span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>keydata</strong> è l'array di <strong>32 byte (256 bit)</strong> che contiene effettivamente la chiave privata. Ogni byte va da 0 a 255 (unsigned char). 32 byte = 2^256 combinazioni possibili — più atomi dell'universo osservabile. La probabilità di indovinare una chiave privata è astronomicamente bassa.</div>
+          <div class="explain-analogy">Come una cassaforte con una combinazione di 78 cifre decimali — impossibile da indovinare con la forza bruta.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">4</td>
+          <td class="line-code">  <span class="type">bool</span> <span class="var">fCompressed</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>fCompressed</strong> indica se la chiave pubblica derivata da questa chiave privata è in <strong>formato compresso</strong> (33 byte) o non compresso (65 byte). I wallet moderni usano sempre il formato compresso per risparmiare spazio. Questa scelta influenza l'indirizzo Bitcoin risultante.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">5</td>
+          <td class="line-code"><span class="kw">public</span><span class="op">:</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Inizia la sezione pubblica: queste funzioni sono l'interfaccia sicura attraverso cui il resto del codice interagisce con la chiave privata, senza mai accedere ai dati grezzi.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">6</td>
+          <td class="line-code">  <span class="kw">void</span> <span class="fn">MakeNewKey</span>(<span class="type">bool</span> <span class="var">fCompressed</span>)<span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>MakeNewKey()</strong> genera una <strong>nuova chiave privata casuale</strong>. Usa il generatore di numeri casuali crittograficamente sicuro del sistema operativo (CSPRNG). Il parametro <em>fCompressed</em> determina se la chiave pubblica sarà compressa. <em>void</em> significa che non restituisce nulla — modifica l'oggetto direttamente.</div>
+          <div class="explain-analogy">Come il momento in cui la banca ti assegna un PIN casuale per la prima volta — un numero unico generato in modo sicuro.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">7</td>
+          <td class="line-code">  <span class="cls">CPubKey</span> <span class="fn">GetPubKey</span>() <span class="kw">const</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>GetPubKey()</strong> deriva e restituisce la <strong>chiave pubblica</strong> corrispondente. Usa la crittografia a curva ellittica secp256k1 (la stessa di Bitcoin). La derivazione è unidirezionale: dalla chiave privata si ottiene la pubblica, ma non viceversa. La chiave pubblica può essere condivisa liberamente.</div>
+          <div class="explain-analogy">Come il numero di conto corrente che puoi dare a chiunque voglia inviarti soldi — è pubblico e sicuro da condividere.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">8</td>
+          <td class="line-code">  <span class="type">bool</span> <span class="fn">Sign</span>(<span class="kw">const</span> <span class="type">uint256</span><span class="op">&amp;</span> <span class="var">hash</span>, <span class="type">std::vector</span><span class="op">&lt;</span><span class="type">unsigned char</span><span class="op">&gt;&amp;</span> <span class="var">vchSig</span>) <span class="kw">const</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>Sign()</strong> crea una <strong>firma digitale ECDSA</strong>. Prende l'hash della transazione (<em>hash</em>) e produce la firma (<em>vchSig</em>). La firma è matematicamente legata sia alla transazione sia alla chiave privata — cambiare anche un solo bit della transazione invaliderebbe la firma. Il simbolo <em>&amp;</em> indica passaggio per riferimento (efficienza).</div>
+          <div class="explain-analogy">Come firmare un contratto con una firma impossibile da falsificare, che certifica sia l'identità del firmatario sia che il documento non è stato alterato.</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+
+    <div class="divider">wallet/wallet.h · HD Wallet (BIP32)</div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/wallet/wallet.h (estratto)</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">100</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CWallet</span> <span class="op">:</span> <span class="kw">public</span> <span class="cls">WalletStorage</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CWallet</strong> è la classe principale del portafoglio. Il <em>: public WalletStorage</em> significa che eredita da WalletStorage (ereditarietà in C++): CWallet ha tutte le funzionalità di WalletStorage più le proprie. Gestisce chiavi, transazioni, saldi e interazione con la blockchain.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">101</td>
+          <td class="line-code">  <span class="cls">SecureString</span> <span class="fn">GetPassphrase</span>() <span class="kw">const</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>GetPassphrase()</strong> restituisce la <strong>passphrase di cifratura</strong> del wallet. <em>SecureString</em> è una stringa speciale che viene cancellata dalla memoria immediatamente dopo l'uso, per non lasciare tracce della password in memoria anche dopo che non serve più.</div>
+          <div class="explain-analogy">Come un post-it che si autodistrugge dopo la lettura — sicuro perché non lascia tracce.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">102</td>
+          <td class="line-code">  <span class="cls">CAmount</span> <span class="fn">GetBalance</span>() <span class="kw">const</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>GetBalance()</strong> calcola il <strong>saldo del wallet</strong> sommando tutti gli UTXO (output non spesi) associati agli indirizzi del wallet. Non è un numero memorizzato — viene calcolato ogni volta scorrendo la blockchain. Restituisce il valore in satoshi.</div>
+          <div class="explain-analogy">Come contare tutte le banconote nel portafoglio ogni volta che vuoi sapere quanto hai — non c'è un numero scritto da qualche parte, si conta ogni volta.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">103</td>
+          <td class="line-code">  <span class="type">bool</span> <span class="fn">CreateTransaction</span>(<span class="kw">const</span> <span class="type">std::vector</span><span class="op">&lt;</span><span class="cls">CRecipient</span><span class="op">&gt;&amp;</span> <span class="var">vecSend</span>,</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CreateTransaction()</strong> è la funzione che <strong>costruisce una nuova transazione</strong> da inviare. Riceve la lista dei destinatari (<em>vecSend</em>: a chi mandare e quanto), seleziona gli UTXO da usare come input, calcola il resto, aggiunge la commissione al miner, e firma tutto con la chiave privata.</div>
+          <div class="explain-analogy">Come compilare un bonifico bancario: inserisci i destinatari, l'importo, e la banca (= wallet) seleziona automaticamente da quale conto prelevare e calcola le commissioni.</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════ RETE P2P ══════════════ -->
+  <div class="module-section" id="module-rete">
+    <div class="section-header">
+      <div class="section-tag">// modulo 04 · net.h / net_processing.cpp</div>
+      <h2>🌐 Rete P2P</h2>
+      <p>Bitcoin è una rete peer-to-peer: non c'è un server centrale. Ogni nodo si connette direttamente agli altri, propaga transazioni e blocchi, e mantiene una copia della blockchain.</p>
+    </div>
+
+    <div class="concepts-grid">
+      <div class="concept-box">
+        <h4>🤝 Nodi e Connessioni</h4>
+        <p>Un nodo Bitcoin si connette tipicamente a 8-125 peer. Quando riceve una nuova transazione o blocco, la verifica e la propaga agli altri nodi — come un'onda che si espande.</p>
+      </div>
+      <div class="concept-box">
+        <h4>📡 Gossip Protocol</h4>
+        <p>Le informazioni si diffondono come pettegolezzi: ogni nodo le racconta ai vicini, che le raccontano ai loro vicini. In secondi, l'intera rete sa di una nuova transazione.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/net.h</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">1</td>
+          <td class="line-code"><span class="kw">class</span> <span class="cls">CNode</span> {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>CNode</strong> rappresenta una <strong>connessione a un peer</strong> della rete. Ogni nodo Bitcoin mantiene una lista di CNode — uno per ogni altro nodo a cui è connesso. Contiene le informazioni sulla connessione, le statistiche, e le code di messaggi in entrata e uscita.</div>
+          <div class="explain-analogy">Come la rubrica del telefono: ogni CNode è un contatto con cui il tuo nodo sta parlando.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">2</td>
+          <td class="line-code">  <span class="kw">const</span> <span class="cls">NodeId</span> <span class="var">id</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>id</strong> è l'<strong>identificatore univoco</strong> di questa connessione — un numero intero assegnato progressivamente. Non è l'indirizzo IP, ma un ID interno al nodo. <em>const</em> significa che non cambia per tutta la durata della connessione.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">3</td>
+          <td class="line-code">  <span class="cls">CAddress</span> <span class="var">addr</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>addr</strong> è l'<strong>indirizzo IP e porta</strong> del peer (es. 192.168.1.1:8333). La porta standard di Bitcoin è 8333. <em>CAddress</em> supporta IPv4, IPv6, e anche indirizzi Tor (.onion) per la privacy.</div>
+          <div class="explain-analogy">Come l'indirizzo fisico di un amico: dove trovarlo sulla rete per parlargli.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">4</td>
+          <td class="line-code">  <span class="type">std::atomic</span><span class="op">&lt;</span><span class="type">int64_t</span><span class="op">&gt;</span> <span class="var">nLastRecv</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nLastRecv</strong> registra l'<strong>ultimo timestamp in cui si è ricevuto un messaggio</strong> da questo peer. <em>std::atomic</em> garantisce che l'accesso a questa variabile sia thread-safe — più thread possono leggerla/scriverla contemporaneamente senza conflitti. Usato per rilevare peer disconnessi (timeout).</div>
+          <div class="explain-analogy">Come annotare "ultima volta che ho sentito Marco: ieri alle 15:00". Se non risponde per troppo tempo, si considera disconnesso.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">5</td>
+          <td class="line-code">  <span class="type">bool</span> <span class="var">fInbound</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>fInbound</strong> distingue le connessioni <strong>in entrata</strong> (true: il peer si è connesso a noi) da quelle <strong>in uscita</strong> (false: siamo noi ad esserci connessi). I nodi accettano fino a 125 connessioni in entrata e ne mantengono circa 8-10 in uscita per sicurezza.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">6</td>
+          <td class="line-code">  <span class="type">uint64_t</span> <span class="var">nSendBytes</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>nSendBytes</strong> conta il <strong>totale di byte inviati</strong> a questo peer. Usato per le statistiche di banda. Un nodo completo che propaga la blockchain usa tipicamente centinaia di GB al mese in upload.</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+
+    <div class="divider">net_processing.cpp · Ricezione messaggi</div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-filename">src/net_processing.cpp (estratto)</div>
+        <div class="code-lang">C++</div>
+      </div>
+      <table class="code-table">
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">200</td>
+          <td class="line-code"><span class="type">bool</span> <span class="fn">ProcessMessage</span>(<span class="cls">CNode</span><span class="op">*</span> <span class="var">pfrom</span>, <span class="kw">const</span> <span class="type">std::string</span><span class="op">&amp;</span> <span class="var">strCommand</span>, <span class="cls">CDataStream</span><span class="op">&amp;</span> <span class="var">vRecv</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>ProcessMessage()</strong> è il <strong>cuore della comunicazione P2P</strong>. Viene chiamata ogni volta che si riceve un messaggio da un peer. <em>pfrom</em> è il nodo mittente, <em>strCommand</em> è il tipo di messaggio (es. "tx", "block", "inv", "ping"), <em>vRecv</em> è il contenuto del messaggio in formato binario.</div>
+          <div class="explain-analogy">Come il centralino di un ufficio: riceve le chiamate e le smista al reparto giusto in base all'argomento.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">201</td>
+          <td class="line-code">  <span class="kw">if</span> (<span class="var">strCommand</span> <span class="op">==</span> <span class="str">"inv"</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Il messaggio <strong>"inv"</strong> (inventory) è un annuncio: "ho queste transazioni/blocchi, li vuoi?" Invece di mandare subito i dati completi, i nodi si annunciano a vicenda. Solo se il ricevente non ce li ha, li richiede. Questo evita di trasmettere dati duplicati.</div>
+          <div class="explain-analogy">Come dire "ho comprato il giornale di oggi, lo vuoi?" prima di consegnarlo — non lo porti a casa di tutti, solo a chi non ce l'ha.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">202</td>
+          <td class="line-code">    <span class="type">std::vector</span><span class="op">&lt;</span><span class="cls">CInv</span><span class="op">&gt;</span> <span class="var">vInv</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Crea una lista vuota di <em>CInv</em> (inventory items). Ogni CInv contiene un tipo (transazione o blocco) e un hash. Un singolo messaggio "inv" può annunciare fino a 50.000 elementi contemporaneamente.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">203</td>
+          <td class="line-code">    <span class="var">vRecv</span> <span class="op">&gt;&gt;</span> <span class="var">vInv</span><span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">L'operatore <em>&gt;&gt;</em> qui è la <strong>deserializzazione</strong>: converte il flusso di byte grezzi (<em>vRecv</em>) nella struttura dati <em>vInv</em>. È come "decodificare" il messaggio binario ricevuto dalla rete in qualcosa che il programma può usare.</div>
+          <div class="explain-analogy">Come tradurre un messaggio in codice Morse in lettere leggibili.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">204</td>
+          <td class="line-code">    <span class="kw">for</span> (<span class="kw">const</span> <span class="cls">CInv</span><span class="op">&amp;</span> <span class="var">inv</span> <span class="op">:</span> <span class="var">vInv</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Questo è un <strong>ciclo for</strong> (range-based) che itera su ogni elemento della lista vInv. Per ogni annuncio ricevuto, il codice che segue controlla se lo abbiamo già oppure no. La sintassi <em>for (auto&amp; item : lista)</em> è il modo moderno C++ di scorrere una lista.</div>
+          <div class="explain-analogy">Come scorrere un elenco di titoli di giornale, uno per uno, per vedere quali non hai ancora letto.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">205</td>
+          <td class="line-code">      <span class="kw">if</span> (<span class="op">!</span><span class="fn">AlreadyHave</span>(<span class="var">inv</span>)) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>AlreadyHave()</strong> controlla se questa transazione o blocco è già nella mempool (transazioni in attesa) o nella blockchain. Il <em>!</em> è la negazione: il codice dentro l'if viene eseguito solo se NON abbiamo già quell'elemento.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">206</td>
+          <td class="line-code">        <span class="var">pfrom</span><span class="op">-&gt;</span><span class="fn">AskFor</span>(<span class="var">inv</span>)<span class="op">;</span></td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text"><strong>AskFor()</strong> invia al peer un messaggio <strong>"getdata"</strong>: "inviami quell'elemento che hai annunciato". L'operatore <em>-&gt;</em> è usato per accedere ai metodi di un puntatore (pfrom è un puntatore a CNode). Solo a questo punto i dati reali vengono trasferiti.</div>
+          <div class="explain-analogy">Come rispondere "sì, mandamelo!" dopo che un amico ti ha detto "ho un articolo interessante".</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">207</td>
+          <td class="line-code">  } <span class="kw">else if</span> (<span class="var">strCommand</span> <span class="op">==</span> <span class="str">"tx"</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Il messaggio <strong>"tx"</strong> contiene una <strong>transazione completa</strong>. Quando un nodo riceve questo messaggio, decodifica la transazione, la valida (firme, saldo, ecc.) e se è valida la aggiunge alla <em>mempool</em> (pool di transazioni in attesa di essere incluse in un blocco) e la propaga agli altri peer.</div>
+          <div class="explain-analogy">Come ricevere il giornale che avevi richiesto — ora lo leggi per verificare che sia autentico, poi lo passi ai vicini.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">208</td>
+          <td class="line-code">  } <span class="kw">else if</span> (<span class="var">strCommand</span> <span class="op">==</span> <span class="str">"block"</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Il messaggio <strong>"block"</strong> contiene un <strong>blocco completo</strong>. È il messaggio più importante: quando un miner trova un blocco valido, lo propaga immediatamente. Il nodo ricevente verifica la Proof of Work, tutte le transazioni contenute, e se tutto è valido lo aggiunge alla propria blockchain.</div>
+          <div class="explain-analogy">Come ricevere la notizia di un nuovo capitolo di storia: verifichi che sia autentico, poi aggiorni i tuoi libri e avvisi gli altri.</div>
+        </div></td></tr>
+
+        <tr class="code-line" onclick="toggleExplain(this)">
+          <td class="line-num">209</td>
+          <td class="line-code">  } <span class="kw">else if</span> (<span class="var">strCommand</span> <span class="op">==</span> <span class="str">"ping"</span>) {</td>
+          <td class="line-toggle"><span class="toggle-btn">▶</span></td>
+        </tr>
+        <tr class="explain-row"><td colspan="3"><div class="explain-inner">
+          <div class="explain-label">Spiegazione</div>
+          <div class="explain-text">Il messaggio <strong>"ping"</strong> è il controllo di connettività — come il ping di rete tradizionale. Viene inviato periodicamente per verificare che il peer sia ancora connesso. Il ricevente risponde con un "pong". Se non risponde entro il timeout, la connessione viene chiusa.</div>
+          <div class="explain-analogy">Come bussare alla porta per capire se c'è ancora qualcuno — "ci sei?" "sì!" Se non risponde, si considera che non c'è più.</div>
+        </div></td></tr>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  function showModule(name) {
+    // Hide all sections
+    document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.module-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.header-nav button').forEach(b => b.classList.remove('active'));
+
+    // Show selected
+    document.getElementById('module-' + name).classList.add('active');
+    document.getElementById('card-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+
+    // Scroll to content
+    document.querySelector('.content-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function toggleExplain(row) {
+    const explainRow = row.nextElementSibling;
+    const isExpanded = row.classList.contains('expanded');
+
+    row.classList.toggle('expanded');
+    explainRow.classList.toggle('visible');
+  }
+
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+
+    // Scroll top button
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('visible', scrollTop > 400);
+  });
+</script>
+
+<!-- DONATION SECTION -->
+<section class="donation-section">
+  <div class="donation-inner">
+
+    <div class="donation-text">
+      <div class="section-tag">// supporta il progetto</div>
+      <h2>La conoscenza<br>dovrebbe essere libera</h2>
+      <p>
+        Questa guida è completamente gratuita e open source, come Bitcoin stesso.
+        Se ti ha aiutato a capire come funziona il protocollo più rivoluzionario
+        della storia della moneta, considera di supportare il progetto.
+      </p>
+      <div class="donation-manifesto">
+        <strong>Perché questo conta:</strong> ogni persona che capisce Bitcoin
+        è una persona in più che controlla il proprio denaro — senza banche,
+        senza intermediari, senza censura. La divulgazione è la vera rivoluzione.
+      </div>
+      <div class="donation-stats">
+        <div class="stat-item">
+          <span class="stat-value">0 sat</span>
+          <span class="stat-label">commissioni banca</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">∞</span>
+          <span class="stat-label">divisibilità</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">21M</span>
+          <span class="stat-label">supply massima</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="donation-qr-wrap">
+      <div class="qr-frame">
+        <img src="data:image/png;base64,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" alt="QR Code BTCPay Server - Donazione Bitcoin" />
+        <div class="qr-badge">₿ Scansiona &amp; Dona</div>
+      </div>
+      <div class="qr-label">
+        <p>// BTCPay Server · on-chain &amp; Lightning</p>
+        <span>Qualsiasi importo è benvenuto</span>
+      </div>
+      <div class="btcpay-badge">Powered by BTCPay Server — self-hosted</div>
+    </div>
+
+  </div>
+
+  <div class="donation-footer">
+    <strong>Bitcoin Core — Codice Spiegato</strong> &nbsp;·&nbsp;
+    Open Source · MIT License · Nessun tracker · Nessuna pubblicità
+  </div>
+</section>
+
+</body>
+</html>
