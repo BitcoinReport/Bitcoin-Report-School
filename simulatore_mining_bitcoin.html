@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulatore Mining Bitcoin — Bitcoin Report School</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060608;
+  --bg2: #0d0d12;
+  --bg3: #13131a;
+  --bg4: #1a1a24;
+  --border: #1e1e2e;
+  --border2: #2a2a40;
+  --gold: #f7931a;
+  --gold2: #ffb347;
+  --gold-dim: rgba(247,147,26,0.15);
+  --green: #00ff88;
+  --green-dim: rgba(0,255,136,0.12);
+  --red: #ff4466;
+  --red-dim: rgba(255,68,102,0.12);
+  --blue: #4488ff;
+  --cyan: #00ddff;
+  --text: #e0ddd8;
+  --text2: #888880;
+  --text3: #444440;
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* HEADER */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(6,6,8,0.9);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.site-logo {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.site-logo span { color: var(--text2); font-weight: 300; }
+.progress-steps {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.step-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.step-dot.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.step-dot.done { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+.step-line { width: 20px; height: 1px; background: var(--border); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '⛏';
+  position: absolute;
+  font-size: 20rem;
+  opacity: 0.03;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  margin-bottom: 1.2rem;
+  color: #fff;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+  display: block;
+}
+.hero p {
+  color: var(--text2);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* DIFFICULTY SELECTOR */
+.diff-selector {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.diff-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.diff-btn:hover { border-color: var(--gold); color: var(--text); }
+.diff-btn.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+.diff-btn .zeros { color: var(--green); }
+
+/* MAIN LAYOUT */
+.main-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+/* STEP CARDS */
+.step-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.step-card.active-step { border-color: var(--gold); }
+.step-card.completed { border-color: var(--green); }
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.step-num {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--text3);
+  line-height: 1;
+  min-width: 2rem;
+  transition: color 0.3s;
+}
+.step-card.active-step .step-num { color: var(--gold); }
+.step-card.completed .step-num { color: var(--green); }
+.step-titles { flex: 1; }
+.step-title {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+.step-subtitle {
+  font-size: 0.78rem;
+  color: var(--text2);
+  font-weight: 300;
+  margin-top: 0.1rem;
+}
+.step-status {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  transition: all 0.3s;
+}
+.step-card.active-step .step-status { border-color: var(--gold); color: var(--gold); }
+.step-card.completed .step-status { border-color: var(--green); color: var(--green); }
+
+.step-body {
+  padding: 1.5rem;
+  display: none;
+}
+.step-card.active-step .step-body,
+.step-card.completed .step-body { display: block; }
+
+/* HINT BOX */
+.hint-box {
+  background: rgba(247,147,26,0.05);
+  border: 1px solid rgba(247,147,26,0.2);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.6;
+  display: none;
+}
+.hint-box.visible { display: block; }
+.hint-box strong { color: var(--gold); }
+.hint-toggle {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.hint-toggle:hover { border-color: var(--gold); color: var(--gold); }
+
+/* MEMPOOL TABLE */
+.mempool-grid {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr auto;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+}
+.mp-head {
+  background: var(--bg4);
+  padding: 0.6rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--border);
+}
+.mp-cell {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+.mp-row:hover .mp-cell { background: var(--bg3); }
+.mp-row.selected .mp-cell { background: rgba(247,147,26,0.06); }
+.mp-row.selected .mp-cell:first-child { border-left: 3px solid var(--gold); }
+.tx-id { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); }
+.tx-from { font-size: 0.8rem; }
+.tx-amount { font-family: var(--mono); color: var(--gold); }
+.tx-fee { font-family: var(--mono); color: var(--green); font-size: 0.75rem; }
+.select-tx {
+  width: 16px; height: 16px;
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  cursor: pointer;
+  appearance: none;
+  background: var(--bg3);
+  position: relative;
+  transition: all 0.15s;
+}
+.select-tx:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.select-tx:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -1px; left: 1px;
+  font-size: 0.7rem;
+  color: #000;
+}
+
+.block-summary {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+.summary-chip {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.summary-chip span { color: var(--text2); }
+.summary-chip strong { color: var(--gold); margin-left: 0.4rem; }
+
+/* MERKLE TREE */
+.merkle-wrap {
+  margin-bottom: 1.2rem;
+}
+.merkle-level {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.merkle-node {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text2);
+  text-align: center;
+  transition: all 0.3s;
+  min-width: 100px;
+  max-width: 140px;
+  word-break: break-all;
+}
+.merkle-node.tx-node { border-color: rgba(247,147,26,0.3); color: var(--gold); }
+.merkle-node.hash-node { border-color: rgba(0,221,255,0.3); color: var(--cyan); }
+.merkle-node.root-node {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-dim);
+  font-size: 0.7rem;
+}
+.merkle-node .node-label {
+  font-size: 0.58rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.merkle-arrows {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text3);
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+.merkle-root-display {
+  background: var(--green-dim);
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--green);
+  word-break: break-all;
+  margin-top: 0.5rem;
+}
+.merkle-root-display .label {
+  font-size: 0.62rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+/* BLOCK HEADER BUILDER */
+.header-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  font-size: 0.82rem;
+}
+.hg-label {
+  background: var(--bg4);
+  padding: 0.75rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+.hg-value {
+  padding: 0.75rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  border-bottom: 1px solid var(--border);
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+}
+.hg-value.editable {
+  padding: 0.4rem 0.6rem;
+}
+.nonce-input {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  color: var(--gold2);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.nonce-input:focus { border-color: var(--gold); }
+.hg-label:last-of-type, .hg-value:last-of-type { border-bottom: none; }
+
+/* HASH DISPLAY */
+.hash-display {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+.hash-display.valid { border-color: var(--green); background: var(--green-dim); }
+.hash-display.invalid { border-color: var(--red); }
+.hash-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+.hash-value {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  word-break: break-all;
+  line-height: 1.5;
+  transition: color 0.2s;
+}
+.hash-zero { color: var(--green); font-weight: bold; }
+.hash-rest { color: var(--text2); }
+.hash-invalid-rest { color: var(--text3); }
+
+.hash-verdict {
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.verdict-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--text3);
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.verdict-dot.valid { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.verdict-dot.invalid { background: var(--red); }
+
+/* ATTEMPT COUNTER */
+.attempt-counter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.counter-chip {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+.counter-val {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.counter-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+/* SUCCESS BANNER */
+.success-banner {
+  background: var(--green-dim);
+  border: 2px solid var(--green);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  display: none;
+  animation: pulseGreen 0.5s ease;
+}
+.success-banner.visible { display: block; }
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); opacity: 0; }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.success-banner h3 {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.success-banner p { color: var(--text2); font-size: 0.85rem; }
+.success-banner .winning-nonce {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--green);
+  margin-top: 0.8rem;
+  background: var(--bg);
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+}
+
+/* DIFFICULTY COMPARISON */
+.diff-compare {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.diff-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.diff-card:hover { border-color: var(--gold); }
+.diff-card.selected { border-color: var(--gold); background: var(--gold-dim); }
+.diff-zeros {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  margin-bottom: 0.4rem;
+}
+.diff-zero-char { color: var(--green); }
+.diff-any-char { color: var(--text3); }
+.diff-name {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.diff-prob {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+}
+.diff-real {
+  font-size: 0.7rem;
+  color: var(--text2);
+  margin-top: 0.3rem;
+  font-weight: 300;
+}
+
+/* HISTORY LOG */
+.hash-log {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 160px;
+  overflow-y: auto;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 0.5rem;
+}
+.log-entry {
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  margin-bottom: 0.1rem;
+  display: flex;
+  gap: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform: translateX(-5px); } to { opacity:1; transform:none; } }
+.log-entry.log-valid { background: var(--green-dim); color: var(--green); }
+.log-entry.log-invalid { color: var(--text3); }
+.log-nonce { color: var(--gold); min-width: 80px; }
+.log-hash { word-break: break-all; flex: 1; }
+
+/* FINAL BLOCK */
+.final-block {
+  background: var(--bg2);
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: none;
+}
+.final-block.visible { display: block; animation: fadeIn 0.5s ease; }
+.final-block-title {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.block-viz {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.block-field { margin-bottom: 0.7rem; }
+.block-field .bf-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+.block-field .bf-val {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  word-break: break-all;
+}
+.block-field .bf-val.gold { color: var(--gold); }
+.block-field .bf-val.green { color: var(--green); }
+
+/* ASIC COMPARISON */
+.asic-box {
+  background: var(--red-dim);
+  border: 1px solid rgba(255,68,102,0.3);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.asic-box strong { color: var(--red); }
+
+/* BUTTONS */
+.btn {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.btn-gold {
+  background: var(--gold);
+  color: #000;
+}
+.btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-outline {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn-green {
+  background: var(--green);
+  color: #000;
+}
+.btn-green:hover { opacity: 0.9; }
+
+.btn-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem; }
+
+/* EXPLANATION TOOLTIP */
+.explain-inline {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--text3);
+  color: var(--text3);
+  font-size: 0.6rem;
+  text-align: center;
+  line-height: 14px;
+  cursor: help;
+  font-family: var(--mono);
+  vertical-align: middle;
+  margin-left: 0.3rem;
+  position: relative;
+}
+.explain-inline:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.72rem;
+  color: var(--text);
+  white-space: nowrap;
+  z-index: 10;
+  font-family: var(--sans);
+  font-weight: 400;
+  max-width: 260px;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .diff-compare { grid-template-columns: repeat(2,1fr); }
+  .block-viz { grid-template-columns: 1fr; }
+  .header-grid { grid-template-columns: 120px 1fr; }
+  .mempool-grid { font-size: 0.72rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-logo">₿ Bitcoin Report School <span>/ Mining Simulator</span></div>
+  <div class="progress-steps">
+    <div class="step-dot active" id="dot1" onclick="jumpToStep(1)">1</div>
+    <div class="step-line"></div>
+    <div class="step-dot" id="dot2" onclick="jumpToStep(2)">2</div>
+    <div class="step-line"></div>
+    <div class="step-dot" id="dot3" onclick="jumpToStep(3)">3</div>
+    <div class="step-line"></div>
+    <div class="step-dot" id="dot4" onclick="jumpToStep(4)">4</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">// simulazione interattiva · bitcoin report school</div>
+  <h1>Mina un blocco<em>da zero</em></h1>
+  <p>Segui ogni passo del processo che un miner esegue milioni di volte al secondo. Scegli le transazioni, costruisci il Merkle Root, e trova il Nonce vincente.</p>
+
+  <div class="diff-selector">
+    <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text3);display:flex;align-items:center;margin-right:0.5rem;">DIFFICOLTÀ:</div>
+    <button class="diff-btn active" onclick="setDifficulty(1,this)">1 zero <span class="zeros">0</span>×······</button>
+    <button class="diff-btn" onclick="setDifficulty(2,this)">2 zeri <span class="zeros">00</span>×·····</button>
+    <button class="diff-btn" onclick="setDifficulty(3,this)">3 zeri <span class="zeros">000</span>×····</button>
+    <button class="diff-btn" onclick="setDifficulty(4,this)">4 zeri <span class="zeros">0000</span>×···</button>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <!-- ══ STEP 1: MEMPOOL ══ -->
+  <div class="step-card active-step" id="card1">
+    <div class="step-header" onclick="toggleStep(1)">
+      <div class="step-num">01</div>
+      <div class="step-titles">
+        <div class="step-title">Seleziona le transazioni dalla Mempool</div>
+        <div class="step-subtitle">Scegli quali transazioni includere nel tuo blocco. Le fee più alte = più guadagno.</div>
+      </div>
+      <div class="step-status" id="status1">IN CORSO</div>
+    </div>
+    <div class="step-body">
+      <button class="hint-toggle" onclick="toggleHint('hint1')">💡 Mostra suggerimento</button>
+      <div class="hint-box" id="hint1">
+        <strong>Come funziona la Mempool?</strong><br>
+        La mempool (memory pool) è una zona di attesa dove vivono le transazioni non ancora confermate.
+        I miner scelgono quali includere nel blocco — tipicamente quelle con le fee più alte, perché
+        la fee va direttamente a loro come ricompensa extra oltre al block reward.
+        Seleziona almeno 2 transazioni per procedere.
+      </div>
+
+      <div class="mempool-grid">
+        <div class="mp-head">✓</div>
+        <div class="mp-head">TX ID</div>
+        <div class="mp-head">Mittente → Destinatario</div>
+        <div class="mp-head">Importo</div>
+        <div class="mp-head">Fee (sat/vB)</div>
+
+        <div class="mp-row" id="row0">
+          <div class="mp-cell"><input type="checkbox" class="select-tx" onchange="updateMempool()" data-idx="0"></div>
+          <div class="mp-cell"><span class="tx-id">a1b2c3d4...</span></div>
+          <div class="mp-cell tx-from">Alice → Bob</div>
+          <div class="mp-cell tx-amount">0.5 BTC</div>
+          <div class="mp-cell tx-fee">42 sat/vB</div>
+        </div>
+        <div class="mp-row" id="row1">
+          <div class="mp-cell"><input type="checkbox" class="select-tx" onchange="updateMempool()" data-idx="1"></div>
+          <div class="mp-cell"><span class="tx-id">e5f6a7b8...</span></div>
+          <div class="mp-cell tx-from">Carlo → Diana</div>
+          <div class="mp-cell tx-amount">1.2 BTC</div>
+          <div class="mp-cell tx-fee">87 sat/vB</div>
+        </div>
+        <div class="mp-row" id="row2">
+          <div class="mp-cell"><input type="checkbox" class="select-tx" onchange="updateMempool()" data-idx="2"></div>
+          <div class="mp-cell"><span class="tx-id">c9d0e1f2...</span></div>
+          <div class="mp-cell tx-from">Elena → Francesco</div>
+          <div class="mp-cell tx-amount">0.08 BTC</div>
+          <div class="mp-cell tx-fee">15 sat/vB</div>
+        </div>
+        <div class="mp-row" id="row3">
+          <div class="mp-cell"><input type="checkbox" class="select-tx" onchange="updateMempool()" data-idx="3"></div>
+          <div class="mp-cell"><span class="tx-id">g3h4i5j6...</span></div>
+          <div class="mp-cell tx-from">Giulia → Hector</div>
+          <div class="mp-cell tx-amount">2.0 BTC</div>
+          <div class="mp-cell tx-fee">120 sat/vB</div>
+        </div>
+        <div class="mp-row" id="row4">
+          <div class="mp-cell"><input type="checkbox" class="select-tx" onchange="updateMempool()" data-idx="4"></div>
+          <div class="mp-cell"><span class="tx-id">k7l8m9n0...</span></div>
+          <div class="mp-cell tx-from">Ivan → Laura</div>
+          <div class="mp-cell tx-amount">0.35 BTC</div>
+          <div class="mp-cell tx-fee">55 sat/vB</div>
+        </div>
+      </div>
+
+      <div class="block-summary">
+        <div class="summary-chip"><span>Transazioni selezionate:</span><strong id="tx-count">0</strong></div>
+        <div class="summary-chip"><span>Fee totali:</span><strong id="tx-fees">0 sat/vB</strong></div>
+        <div class="summary-chip"><span>BTC totali:</span><strong id="tx-btc">0 BTC</strong></div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="confirmMempool()">Conferma selezione →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2: MERKLE ROOT ══ -->
+  <div class="step-card" id="card2">
+    <div class="step-header" onclick="toggleStep(2)">
+      <div class="step-num">02</div>
+      <div class="step-titles">
+        <div class="step-title">Costruisci il Merkle Root</div>
+        <div class="step-subtitle">Combina gli hash delle transazioni in un'unica impronta digitale del blocco.</div>
+      </div>
+      <div class="step-status" id="status2">IN ATTESA</div>
+    </div>
+    <div class="step-body" id="body2" style="display:none;">
+      <button class="hint-toggle" onclick="toggleHint('hint2')">💡 Mostra suggerimento</button>
+      <div class="hint-box" id="hint2">
+        <strong>Cos'è il Merkle Root?</strong><br>
+        Il Merkle Tree è una struttura ad albero di hash. Ogni transazione viene "hashata" (trasformata
+        in un codice univoco). Poi si prendono le hash a coppie, si concatenano e si rihashano,
+        fino a ottenere un'unica hash finale: il <strong>Merkle Root</strong>. Questa singola stringa
+        riassume matematicamente tutte le transazioni del blocco. Se cambi anche solo un satoshi
+        in una transazione, il Merkle Root cambia completamente.
+      </div>
+
+      <div class="merkle-wrap" id="merkleTree"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="confirmMerkle()">Usa questo Merkle Root →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3: BLOCK HEADER + NONCE ══ -->
+  <div class="step-card" id="card3">
+    <div class="step-header" onclick="toggleStep(3)">
+      <div class="step-num">03</div>
+      <div class="step-titles">
+        <div class="step-title">Assembla l'Header e trova il Nonce</div>
+        <div class="step-subtitle">Prova diversi nonce finché l'hash del blocco non inizia con abbastanza zeri.</div>
+      </div>
+      <div class="step-status" id="status3">IN ATTESA</div>
+    </div>
+    <div class="step-body" id="body3" style="display:none;">
+      <button class="hint-toggle" onclick="toggleHint('hint3')">💡 Mostra suggerimento</button>
+      <div class="hint-box" id="hint3">
+        <strong>Come funziona il mining?</strong><br>
+        L'header del blocco contiene: versione, hash del blocco precedente, Merkle Root, timestamp,
+        bits (difficoltà) e <strong>nonce</strong>. Il miner calcola SHA256(SHA256(header)) e controlla
+        se il risultato inizia con abbastanza zeri. Se no, incrementa il nonce di 1 e riprova.
+        Un ASIC moderno esegue <strong>100 miliardi</strong> di questi tentativi ogni secondo.
+        Tu qui lo fai manualmente — digita numeri e osserva l'hash cambiare in tempo reale!
+      </div>
+
+      <div class="header-grid">
+        <div class="hg-label">Versione</div>
+        <div class="hg-value" id="hv-version">0x20000000</div>
+        <div class="hg-label">Hash Blocco Precedente</div>
+        <div class="hg-value" id="hv-prevhash" style="font-size:0.65rem;">00000000000000000002a7...</div>
+        <div class="hg-label">Merkle Root</div>
+        <div class="hg-value" id="hv-merkle" style="font-size:0.65rem;color:var(--green);">—</div>
+        <div class="hg-label">Timestamp</div>
+        <div class="hg-value" id="hv-time">—</div>
+        <div class="hg-label">Bits (Difficoltà)</div>
+        <div class="hg-value" id="hv-bits">—</div>
+        <div class="hg-label" style="border-bottom:none;">Nonce <span class="explain-inline" data-tip="Il numero che cambi per trovare un hash valido. È l'unica variabile che controlli durante il mining.">?</span></div>
+        <div class="hg-value editable" style="border-bottom:none;">
+          <input type="number" class="nonce-input" id="nonceInput" value="0" min="0" max="4294967295" oninput="onNonceChange()" placeholder="Prova un numero...">
+        </div>
+      </div>
+
+      <div class="attempt-counter">
+        <div class="counter-chip">
+          <span class="counter-val" id="attempts">0</span>
+          <span class="counter-label">Tentativi</span>
+        </div>
+        <div class="counter-chip">
+          <span class="counter-val" id="best-zeros">0</span>
+          <span class="counter-label">Zeri consecutivi (record)</span>
+        </div>
+        <div class="counter-chip">
+          <span class="counter-val" id="target-zeros-display">—</span>
+          <span class="counter-label">Zeri richiesti</span>
+        </div>
+      </div>
+
+      <div class="hash-display" id="hashDisplay">
+        <div class="hash-label">SHA256d(Header) → Hash del Blocco</div>
+        <div class="hash-value" id="hashValue">Digita un nonce per calcolare l'hash...</div>
+        <div class="hash-verdict">
+          <div class="verdict-dot" id="verdictDot"></div>
+          <span id="verdictText" style="color:var(--text3);font-family:var(--mono);font-size:0.72rem;">In attesa...</span>
+        </div>
+      </div>
+
+      <div class="success-banner" id="successBanner">
+        <h3>⛏ Blocco Trovato!</h3>
+        <p>Hai trovato un nonce valido! L'hash inizia con il numero richiesto di zeri.</p>
+        <div class="winning-nonce" id="winningNonce">Nonce: —</div>
+      </div>
+
+      <details style="margin-top:1rem;">
+        <summary style="font-family:var(--mono);font-size:0.72rem;color:var(--text3);cursor:pointer;margin-bottom:0.5rem;">▶ Storico tentativi</summary>
+        <div class="hash-log" id="hashLog"></div>
+      </details>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetNonce()">Reset Nonce</button>
+        <button class="btn btn-gold" id="confirmMiningBtn" onclick="confirmMining()" disabled>Blocco trovato! Vai al riepilogo →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4: RIEPILOGO ══ -->
+  <div class="step-card" id="card4">
+    <div class="step-header" onclick="toggleStep(4)">
+      <div class="step-num">04</div>
+      <div class="step-titles">
+        <div class="step-title">Il tuo Blocco — Riepilogo</div>
+        <div class="step-subtitle">Hai completato il processo di mining. Ecco il blocco che hai costruito.</div>
+      </div>
+      <div class="step-status" id="status4">IN ATTESA</div>
+    </div>
+    <div class="step-body" id="body4" style="display:none;">
+
+      <div class="final-block" id="finalBlock">
+        <div class="final-block-title">⛏ Blocco Minato con Successo</div>
+        <div class="block-viz">
+          <div>
+            <div class="block-field">
+              <div class="bf-label">Hash del Blocco (vincente)</div>
+              <div class="bf-val green" id="fb-hash">—</div>
+            </div>
+            <div class="block-field">
+              <div class="bf-label">Nonce Vincente</div>
+              <div class="bf-val gold" id="fb-nonce">—</div>
+            </div>
+            <div class="block-field">
+              <div class="bf-label">Tentativi Necessari</div>
+              <div class="bf-val gold" id="fb-attempts">—</div>
+            </div>
+            <div class="block-field">
+              <div class="bf-label">Difficoltà Usata</div>
+              <div class="bf-val" id="fb-diff">—</div>
+            </div>
+          </div>
+          <div>
+            <div class="block-field">
+              <div class="bf-label">Merkle Root</div>
+              <div class="bf-val" id="fb-merkle">—</div>
+            </div>
+            <div class="block-field">
+              <div class="bf-label">Transazioni Incluse</div>
+              <div class="bf-val gold" id="fb-txcount">—</div>
+            </div>
+            <div class="block-field">
+              <div class="bf-label">Fee Totali Guadagnate</div>
+              <div class="bf-val gold" id="fb-fees">—</div>
+            </div>
+            <div class="block-field">
+              <div class="bf-label">Timestamp</div>
+              <div class="bf-val" id="fb-time">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Difficulty comparison section -->
+      <div style="margin-top:2rem;">
+        <div style="font-family:var(--cond);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text);margin-bottom:1rem;">
+          Confronto difficoltà — quanti zeri richiede Bitcoin vero?
+        </div>
+        <div class="diff-compare">
+          <div class="diff-card selected" id="dc1">
+            <div class="diff-zeros"><span class="diff-zero-char">0</span><span class="diff-any-char">xxxxxxx...</span></div>
+            <div class="diff-name">Livello 1</div>
+            <div class="diff-prob">1 su 16</div>
+            <div class="diff-real">Questo simulatore</div>
+          </div>
+          <div class="diff-card" id="dc2">
+            <div class="diff-zeros"><span class="diff-zero-char">00</span><span class="diff-any-char">xxxxxx...</span></div>
+            <div class="diff-name">Livello 2</div>
+            <div class="diff-prob">1 su 256</div>
+            <div class="diff-real">Rete primissimi giorni</div>
+          </div>
+          <div class="diff-card" id="dc3">
+            <div class="diff-zeros"><span class="diff-zero-char">000000</span><span class="diff-any-char">xx...</span></div>
+            <div class="diff-name">6 zeri</div>
+            <div class="diff-prob">1 su ~16M</div>
+            <div class="diff-real">Bitcoin ~2010</div>
+          </div>
+          <div class="diff-card" id="dc4">
+            <div class="diff-zeros"><span class="diff-zero-char">0000000000000000000</span></div>
+            <div class="diff-name">19+ zeri</div>
+            <div class="diff-prob">1 su miliardi</div>
+            <div class="diff-real">Bitcoin oggi 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="asic-box">
+        <strong>Prospettiva reale:</strong> Il blocco che hai minato tu con difficoltà 1 richiede in media
+        16 tentativi. Un ASIC moderno (Antminer S21) esegue <strong>200 terahash al secondo</strong>
+        — cioè 200.000 miliardi di tentativi ogni secondo. La vera rete Bitcoin richiede hash con
+        circa 19 zeri iniziali: statisticamente 1 tentativo su <strong>1.200 miliardi di miliardi</strong>
+        è valido. Per questo ci vuole tutta la potenza computazionale del mondo messa insieme.
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="resetAll()">↺ Ricomincia da capo</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════
+// SHA-256 implementation (pure JS)
+// ═══════════════════════════════
+function sha256(message) {
+  const K = [
+    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+  ];
+  const H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  function rightRotate(val, amount) { return (val >>> amount) | (val << (32-amount)); }
+  const bytes = new TextEncoder().encode(message);
+  const bitLen = bytes.length * 8;
+  let msg = Array.from(bytes);
+  msg.push(0x80);
+  while ((msg.length % 64) !== 56) msg.push(0);
+  for (let i=7;i>=0;i--) msg.push((bitLen / Math.pow(2, i*8)) & 0xff);
+  const words = new Array(64);
+  const hash = [...H];
+  for (let i=0;i<msg.length;i+=64) {
+    for (let j=0;j<16;j++) words[j]=(msg[i+j*4]<<24)|(msg[i+j*4+1]<<16)|(msg[i+j*4+2]<<8)|msg[i+j*4+3];
+    for (let j=16;j<64;j++) {
+      const s0=rightRotate(words[j-15],7)^rightRotate(words[j-15],18)^(words[j-15]>>>3);
+      const s1=rightRotate(words[j-2],17)^rightRotate(words[j-2],19)^(words[j-2]>>>10);
+      words[j]=(words[j-16]+s0+words[j-7]+s1)|0;
+    }
+    let [a,b,c,d,e,f,g,h2]=[...hash];
+    for (let j=0;j<64;j++) {
+      const S1=rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25);
+      const ch=(e&f)^(~e&g);
+      const temp1=(h2+S1+ch+K[j]+words[j])|0;
+      const S0=rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22);
+      const maj=(a&b)^(a&c)^(b&c);
+      const temp2=(S0+maj)|0;
+      h2=g;g=f;f=e;e=(d+temp1)|0;d=c;c=b;b=a;a=(temp1+temp2)|0;
+    }
+    hash[0]=(hash[0]+a)|0;hash[1]=(hash[1]+b)|0;hash[2]=(hash[2]+c)|0;hash[3]=(hash[3]+d)|0;
+    hash[4]=(hash[4]+e)|0;hash[5]=(hash[5]+f)|0;hash[6]=(hash[6]+g)|0;hash[7]=(hash[7]+h2)|0;
+  }
+  return hash.map(n=>n.toString(16).padStart(8,'0')).join('');
+}
+
+function sha256d(str) { return sha256(sha256(str)); }
+
+// ═══════════════════════════════
+// STATE
+// ═══════════════════════════════
+const txData = [
+  { id:'a1b2c3d4', from:'Alice', to:'Bob', amount:0.5, fee:42 },
+  { id:'e5f6a7b8', from:'Carlo', to:'Diana', amount:1.2, fee:87 },
+  { id:'c9d0e1f2', from:'Elena', to:'Francesco', amount:0.08, fee:15 },
+  { id:'g3h4i5j6', from:'Giulia', to:'Hector', amount:2.0, fee:120 },
+  { id:'k7l8m9n0', from:'Ivan', to:'Laura', amount:0.35, fee:55 }
+];
+
+let state = {
+  difficulty: 1,
+  selectedTx: [],
+  merkleRoot: '',
+  blockFound: false,
+  attempts: 0,
+  bestZeros: 0,
+  winningNonce: null,
+  winningHash: null,
+  timestamp: null,
+  totalFees: 0
+};
+
+const PREV_HASH = '00000000000000000002a7c4c1e48d76e3a33e02c9d4c30a7f3b5e81f2d4c9a8';
+const BITS = '1d00ffff';
+
+// ═══════════════════════════════
+// DIFFICULTY
+// ═══════════════════════════════
+function setDifficulty(n, btn) {
+  state.difficulty = n;
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('hv-bits').textContent = BITS + ' (target: ' + '0'.repeat(n) + 'x...)';
+  document.getElementById('target-zeros-display').textContent = n;
+  if (state.blockFound) {
+    state.blockFound = false;
+    document.getElementById('successBanner').classList.remove('visible');
+    document.getElementById('confirmMiningBtn').disabled = true;
+    recalcHash();
+  }
+}
+
+// ═══════════════════════════════
+// STEP NAVIGATION
+// ═══════════════════════════════
+function toggleStep(n) {
+  const card = document.getElementById('card'+n);
+  const body = card.querySelector('.step-body');
+  if (body) {
+    const isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : 'block';
+  }
+}
+
+function jumpToStep(n) {
+  for(let i=1;i<=4;i++) {
+    const dot = document.getElementById('dot'+i);
+    if(i < n) dot.className = 'step-dot done';
+    else if(i === n) dot.className = 'step-dot active';
+    else dot.className = 'step-dot';
+  }
+}
+
+function activateStep(n) {
+  const card = document.getElementById('card'+n);
+  card.classList.add('active-step');
+  const body = document.getElementById('body'+n) || card.querySelector('.step-body');
+  if(body) body.style.display = 'block';
+  document.getElementById('status'+n).textContent = 'IN CORSO';
+  jumpToStep(n);
+  setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+}
+
+function completeStep(n) {
+  const card = document.getElementById('card'+n);
+  card.classList.remove('active-step');
+  card.classList.add('completed');
+  document.getElementById('status'+n).textContent = '✓ COMPLETATO';
+  document.getElementById('dot'+n).className = 'step-dot done';
+}
+
+// ═══════════════════════════════
+// STEP 1: MEMPOOL
+// ═══════════════════════════════
+function updateMempool() {
+  const checks = document.querySelectorAll('.select-tx');
+  state.selectedTx = [];
+  let totalFees = 0, totalBtc = 0;
+  checks.forEach((cb, i) => {
+    const row = document.getElementById('row'+i);
+    if(cb.checked) {
+      state.selectedTx.push(txData[i]);
+      totalFees += txData[i].fee;
+      totalBtc += txData[i].amount;
+      row.classList.add('selected');
+    } else {
+      row.classList.remove('selected');
+    }
+  });
+  state.totalFees = totalFees;
+  document.getElementById('tx-count').textContent = state.selectedTx.length;
+  document.getElementById('tx-fees').textContent = totalFees + ' sat/vB';
+  document.getElementById('tx-btc').textContent = totalBtc.toFixed(2) + ' BTC';
+}
+
+function confirmMempool() {
+  if(state.selectedTx.length < 2) {
+    alert('Seleziona almeno 2 transazioni!');
+    return;
+  }
+  completeStep(1);
+  buildMerkleTree();
+  activateStep(2);
+}
+
+// ═══════════════════════════════
+// STEP 2: MERKLE ROOT
+// ═══════════════════════════════
+function buildMerkleTree() {
+  const txHashes = state.selectedTx.map(tx => sha256(tx.id + tx.from + tx.to + tx.amount));
+  let levels = [txHashes];
+  let current = txHashes;
+  while(current.length > 1) {
+    let next = [];
+    for(let i=0;i<current.length;i+=2) {
+      const a = current[i];
+      const b = current[i+1] || current[i];
+      next.push(sha256(a+b));
+    }
+    levels.push(next);
+    current = next;
+  }
+  state.merkleRoot = current[0];
+
+  const container = document.getElementById('merkleTree');
+  container.innerHTML = '';
+
+  // Render tree bottom-up (leaves first)
+  const labels = ['Transazioni (TX Hash)', 'Livello 1', 'Livello 2', 'Livello 3'];
+  levels.forEach((level, li) => {
+    const label = document.createElement('div');
+    label.style.cssText = 'font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.3rem;';
+    label.textContent = li === 0 ? '▼ ' + labels[0] : li === levels.length-1 ? '▼ Merkle Root' : '▼ ' + labels[li];
+    container.appendChild(label);
+
+    const row = document.createElement('div');
+    row.className = 'merkle-level';
+    level.forEach((h, hi) => {
+      const node = document.createElement('div');
+      node.className = 'merkle-node ' + (li===0?'tx-node':li===levels.length-1?'root-node':'hash-node');
+      const nodeLabel = li===0 ? state.selectedTx[hi]?.id + '...' : '';
+      node.innerHTML = `<div class="node-label">${nodeLabel}</div>${h.substring(0,16)}...`;
+      node.title = h;
+      row.appendChild(node);
+    });
+    container.appendChild(row);
+
+    if(li < levels.length-1) {
+      const arrows = document.createElement('div');
+      arrows.className = 'merkle-arrows';
+      for(let i=0;i<Math.ceil(level.length/2);i++) arrows.innerHTML += '<span>↓</span>';
+      container.appendChild(arrows);
+    }
+  });
+
+  const rootDisplay = document.createElement('div');
+  rootDisplay.className = 'merkle-root-display';
+  rootDisplay.innerHTML = `<div class="label">Merkle Root (SHA256 finale)</div>${state.merkleRoot}`;
+  container.appendChild(rootDisplay);
+
+  document.getElementById('hv-merkle').textContent = state.merkleRoot.substring(0,32) + '...';
+}
+
+function confirmMerkle() {
+  completeStep(2);
+  state.timestamp = Math.floor(Date.now()/1000);
+  document.getElementById('hv-time').textContent = new Date().toISOString().replace('T',' ').substring(0,19) + ' UTC';
+  document.getElementById('hv-bits').textContent = BITS + ' (target: ' + '0'.repeat(state.difficulty) + 'x...)';
+  document.getElementById('target-zeros-display').textContent = state.difficulty;
+  activateStep(3);
+}
+
+// ═══════════════════════════════
+// STEP 3: NONCE + MINING
+// ═══════════════════════════════
+function getHeaderString(nonce) {
+  return '20000000' + PREV_HASH + state.merkleRoot + state.timestamp + BITS + nonce;
+}
+
+function countLeadingZeros(hash) {
+  let count = 0;
+  for(let ch of hash) {
+    if(ch === '0') count++;
+    else break;
+  }
+  return count;
+}
+
+function onNonceChange() {
+  state.attempts++;
+  recalcHash();
+  document.getElementById('attempts').textContent = state.attempts;
+}
+
+function recalcHash() {
+  const nonce = parseInt(document.getElementById('nonceInput').value) || 0;
+  const header = getHeaderString(nonce);
+  const hash = sha256d(header);
+  const zeros = countLeadingZeros(hash);
+
+  if(zeros > state.bestZeros) {
+    state.bestZeros = zeros;
+    document.getElementById('best-zeros').textContent = zeros;
+  }
+
+  const display = document.getElementById('hashDisplay');
+  const valueEl = document.getElementById('hashValue');
+  const dotEl = document.getElementById('verdictDot');
+  const textEl = document.getElementById('verdictText');
+
+  const zerosPart = hash.substring(0, zeros);
+  const restPart = hash.substring(zeros);
+  const isValid = zeros >= state.difficulty;
+
+  if(isValid) {
+    display.className = 'hash-display valid';
+    valueEl.innerHTML = `<span class="hash-zero">${zerosPart}</span><span class="hash-rest">${restPart}</span>`;
+    dotEl.className = 'verdict-dot valid';
+    textEl.textContent = `✓ HASH VALIDO — ${zeros} zeri (richiesti: ${state.difficulty})`;
+    textEl.style.color = 'var(--green)';
+
+    if(!state.blockFound) {
+      state.blockFound = true;
+      state.winningNonce = nonce;
+      state.winningHash = hash;
+      document.getElementById('successBanner').classList.add('visible');
+      document.getElementById('winningNonce').textContent = 'Nonce vincente: ' + nonce;
+      document.getElementById('confirmMiningBtn').disabled = false;
+    }
+  } else {
+    display.className = 'hash-display invalid';
+    valueEl.innerHTML = `<span class="hash-zero">${zerosPart}</span><span class="hash-invalid-rest">${restPart}</span>`;
+    dotEl.className = 'verdict-dot invalid';
+    textEl.textContent = `✗ Non valido — solo ${zeros} zeri (richiesti: ${state.difficulty})`;
+    textEl.style.color = 'var(--red)';
+  }
+
+  // Add to log
+  const log = document.getElementById('hashLog');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry ' + (isValid ? 'log-valid' : 'log-invalid');
+  entry.innerHTML = `<span class="log-nonce">nonce: ${nonce}</span><span class="log-hash">${hash.substring(0,40)}...</span>`;
+  log.insertBefore(entry, log.firstChild);
+  if(log.children.length > 50) log.removeChild(log.lastChild);
+}
+
+function resetNonce() {
+  document.getElementById('nonceInput').value = 0;
+  state.attempts = 0;
+  state.bestZeros = 0;
+  state.blockFound = false;
+  document.getElementById('attempts').textContent = '0';
+  document.getElementById('best-zeros').textContent = '0';
+  document.getElementById('successBanner').classList.remove('visible');
+  document.getElementById('confirmMiningBtn').disabled = true;
+  document.getElementById('hashLog').innerHTML = '';
+  document.getElementById('hashDisplay').className = 'hash-display';
+  document.getElementById('hashValue').textContent = 'Digita un nonce per calcolare l\'hash...';
+  document.getElementById('verdictDot').className = 'verdict-dot';
+  document.getElementById('verdictText').textContent = 'In attesa...';
+  document.getElementById('verdictText').style.color = 'var(--text3)';
+}
+
+function confirmMining() {
+  if(!state.blockFound) return;
+  completeStep(3);
+  activateStep(4);
+  buildFinalBlock();
+}
+
+// ═══════════════════════════════
+// STEP 4: FINAL BLOCK
+// ═══════════════════════════════
+function buildFinalBlock() {
+  document.getElementById('finalBlock').classList.add('visible');
+  document.getElementById('fb-hash').textContent = state.winningHash;
+  document.getElementById('fb-nonce').textContent = state.winningNonce;
+  document.getElementById('fb-attempts').textContent = state.attempts + ' tentativ' + (state.attempts===1?'o':'i');
+  document.getElementById('fb-diff').textContent = state.difficulty + ' zer' + (state.difficulty===1?'o':'i') + ' iniziali';
+  document.getElementById('fb-merkle').textContent = state.merkleRoot.substring(0,32) + '...';
+  document.getElementById('fb-txcount').textContent = state.selectedTx.length + ' transazioni';
+  document.getElementById('fb-fees').textContent = state.totalFees + ' sat/vB totali';
+  document.getElementById('fb-time').textContent = new Date().toISOString().replace('T',' ').substring(0,19) + ' UTC';
+}
+
+// ═══════════════════════════════
+// RESET
+// ═══════════════════════════════
+function resetAll() {
+  state = { difficulty: state.difficulty, selectedTx:[], merkleRoot:'', blockFound:false,
+    attempts:0, bestZeros:0, winningNonce:null, winningHash:null, timestamp:null, totalFees:0 };
+
+  for(let i=1;i<=4;i++) {
+    const card = document.getElementById('card'+i);
+    card.classList.remove('active-step','completed');
+    document.getElementById('status'+i).textContent = i===1?'IN CORSO':'IN ATTESA';
+    const dot = document.getElementById('dot'+i);
+    dot.className = 'step-dot' + (i===1?' active':'');
+  }
+  document.getElementById('card1').classList.add('active-step');
+  document.querySelectorAll('.select-tx').forEach(cb => { cb.checked=false; });
+  document.querySelectorAll('.mp-row').forEach(r => r.classList.remove('selected'));
+  updateMempool();
+  document.getElementById('merkleTree').innerHTML = '';
+  document.getElementById('hv-merkle').textContent = '—';
+  document.getElementById('hv-time').textContent = '—';
+  document.getElementById('finalBlock').classList.remove('visible');
+  resetNonce();
+
+  // hide bodies
+  for(let i=2;i<=4;i++) {
+    const body = document.getElementById('body'+i);
+    if(body) body.style.display = 'none';
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ═══════════════════════════════
+// HINT TOGGLES
+// ═══════════════════════════════
+function toggleHint(id) {
+  const box = document.getElementById(id);
+  box.classList.toggle('visible');
+}
+
+// Init
+document.getElementById('target-zeros-display').textContent = state.difficulty;
+document.getElementById('hv-bits').textContent = BITS + ' (target: 0x...)';
+</script>
+</body>
+</html>
