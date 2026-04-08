@@ -1012,7 +1012,7 @@ function p2trAddress(pubkeyBytes){
 }
 
 // ═══════════════════════════════════════
-// SECP256K1 (simplified big-int arithmetic)
+// SECP256K1 (main thread — usato solo come fallback)
 // ═══════════════════════════════════════
 const P=BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F');
 const N=BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
@@ -1022,25 +1022,24 @@ const Gy=BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D
 function modp(a){return((a%P)+P)%P;}
 function modinv(a,m){let[r,s,t,u]=[m,a,0n,1n];while(t){const q=r/t;[r,s,t,u]=[t,u,r-q*t,s-q*u];}return modp(s);}
 
+function pointDouble(pt){
+  if(!pt||pt[1]===0n)return null;
+  const m=modp(3n*pt[0]*pt[0]*modinv(2n*pt[1],P));
+  const x=modp(m*m-2n*pt[0]);
+  return[x,modp(m*(pt[0]-x)-pt[1])];
+}
 function pointAdd(P1,P2){
   if(!P1)return P2;if(!P2)return P1;
-  if(P1[0]===P2[0]){
-    if(P1[1]!==P2[1])return null;
-    const m=modp(3n*P1[0]*P1[0]*modinv(2n*P1[1],P));
-    const x=modp(m*m-2n*P1[0]);
-    return[x,modp(m*(P1[0]-x)-P1[1])];
-  }
+  if(P1[0]===P2[0]){if(P1[1]!==P2[1])return null;return pointDouble(P1);}
   const m=modp((P2[1]-P1[1])*modinv(P2[0]-P1[0],P));
   const x=modp(m*m-P1[0]-P2[0]);
   return[x,modp(m*(P1[0]-x)-P1[1])];
 }
 function scalarMul(k,pt){
-  let r=null,kk=k;
-  let add=pt;
-  while(kk>0n){if(kk&1n)r=pointAdd(r,add);add=pointAdd(add,add);kk>>=1n;}
+  let r=null,kk=k,add=pt;
+  while(kk>0n){if(kk&1n)r=pointAdd(r,add);add=pointDouble(add);kk>>=1n;}
   return r;
 }
-
 function privToPub(privHex){
   const k=BigInt('0x'+privHex);
   if(k<=0n||k>=N)return null;
@@ -1051,6 +1050,68 @@ function privToPub(privHex){
   const prefix=(pt[1]%2n===0n)?'02':'03';
   return{x,y,compressed:prefix+x,uncompressed:'04'+x+y,pt};
 }
+
+// ─── WORKER SOURCE (ottimizzato con wNAF w=4 — ~33% meno addizioni) ───────
+// Viene eseguito in un thread separato: il browser non può mai killarlo,
+// la UI rimane reattiva, nessun "page unresponsive" durante live/presentazioni.
+const _WORKER_SRC = `
+const P  = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F');
+const N  = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
+const Gx = BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798');
+const Gy = BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8');
+function modp(a){return((a%P)+P)%P;}
+function modinv(a,m){let[r,s,t,u]=[m,a,0n,1n];while(t){const q=r/t;[r,s,t,u]=[t,u,r-q*t,s-q*u];}return modp(s);}
+function pointDouble(pt){
+  if(!pt||pt[1]===0n)return null;
+  const m=modp(3n*pt[0]*pt[0]*modinv(2n*pt[1],P));
+  const x=modp(m*m-2n*pt[0]);
+  return[x,modp(m*(pt[0]-x)-pt[1])];
+}
+function pointAdd(A,B){
+  if(!A)return B;if(!B)return A;
+  if(A[0]===B[0]){if(A[1]!==B[1])return null;return pointDouble(A);}
+  const m=modp((B[1]-A[1])*modinv(B[0]-A[0],P));
+  const x=modp(m*m-A[0]-B[0]);
+  return[x,modp(m*(A[0]-x)-A[1])];
+}
+// wNAF (window=4): produce cifre in {-7,-5,-3,-1,0,1,3,5,7}
+// Riduce le addizioni di ~33% rispetto al double-and-add classico
+function wnaf4(k){
+  const d=[];let kk=k;
+  while(kk>0n){
+    if(kk&1n){let w=Number(kk&15n);if(w>=8)w-=16;d.push(w);kk-=BigInt(w);}
+    else d.push(0);
+    kk>>=1n;
+  }
+  return d;
+}
+function scalarMulFast(k,pt){
+  // Precalcola 1P, 3P, 5P, 7P
+  const t2=pointDouble(pt);
+  const pre=[null,pt,null,pointAdd(t2,pt),null,pointAdd(pointAdd(t2,pt),t2),null,pointAdd(pointAdd(pointAdd(t2,pt),t2),t2)];
+  // pre[1]=1P, pre[3]=3P, pre[5]=5P, pre[7]=7P
+  const naf=wnaf4(k);
+  let r=null;
+  for(let i=naf.length-1;i>=0;i--){
+    r=pointDouble(r);
+    const di=naf[i];
+    if(di>0)r=pointAdd(r,pre[di]);
+    else if(di<0)r=pointAdd(r,[pre[-di][0],modp(-pre[-di][1])]);
+  }
+  return r;
+}
+self.onmessage=function(e){
+  try{
+    const k=BigInt('0x'+e.data);
+    if(k<=0n||k>=N){self.postMessage({error:'range'});return;}
+    const pt=scalarMulFast(k,[Gx,Gy]);
+    if(!pt){self.postMessage({error:'null'});return;}
+    const x=pt[0].toString(16).padStart(64,'0');
+    const y=pt[1].toString(16).padStart(64,'0');
+    self.postMessage({x,y,compressed:(pt[1]%2n===0n?'02':'03')+x,uncompressed:'04'+x+y});
+  }catch(err){self.postMessage({error:err.message});}
+};
+`;
 
 // ═══════════════════════════════════════
 // ADDRESS DERIVATION
@@ -1184,29 +1245,63 @@ function generatePrivKey(){
   });
 }
 
+// Applica la chiave pubblica calcolata (usato sia dal Worker che dal fallback)
+function _applyPubKey(data){
+  state.pubComp  =data.compressed;
+  state.pubUncomp=data.uncompressed;
+  state.pubPt    =[BigInt('0x'+data.x),BigInt('0x'+data.y)];
+  document.getElementById('pubUncomp').textContent=data.uncompressed;
+  document.getElementById('pubComp').textContent=data.compressed;
+  document.getElementById('pubX').textContent=data.x;
+  document.getElementById('pubY').textContent=data.y;
+  drawCurve(data.x,state.pubPt[1]);
+  activateStep(2);
+}
+
 function confirmStep1(){
   if(!state.privHex){alert('Genera prima una chiave privata!');return;}
-  // Mostra stato di caricamento — la moltiplicazione scalare BigInt e' lenta (~5-20s)
   const btn=document.querySelector('#card1 .btn-outline');
-  if(btn){btn.textContent='Calcolo curva ellittica...';btn.disabled=true;btn.style.opacity='0.6';}
+  const resetBtn=()=>{if(btn){btn.textContent='Usa questa chiave \u2192';btn.disabled=false;btn.style.opacity='';}};
+  if(btn){btn.textContent='Calcolo curva ellittica\u2026';btn.disabled=true;btn.style.opacity='0.6';}
   completeStep(1);
-  // setTimeout lascia al browser il tempo di ridisegnare la UI prima del calcolo pesante
+
+  // ── Tentativo 1: Web Worker (thread separato — non bloccante, mai killabile) ──
+  // Il Worker usa wNAF w=4 che riduce le addizioni di ~33% rispetto al double-and-add classico.
+  // Funziona su GitHub Pages (HTTPS) e in tutti i browser moderni (Chrome 4+, Firefox 3.5+, Safari 4+).
+  try{
+    const blob=new Blob([_WORKER_SRC],{type:'application/javascript'});
+    const url=URL.createObjectURL(blob);
+    const worker=new Worker(url);
+    let done=false;
+
+    worker.onmessage=function(e){
+      done=true;
+      URL.revokeObjectURL(url);worker.terminate();
+      resetBtn();
+      if(e.data.error){alert('Chiave fuori range — rigenera.');return;}
+      _applyPubKey(e.data);
+    };
+    worker.onerror=function(){
+      if(done)return;
+      done=true;
+      URL.revokeObjectURL(url);worker.terminate();
+      // ── Fallback: main thread (solo se Worker non disponibile) ──
+      _fallbackCalc(resetBtn);
+    };
+    worker.postMessage(state.privHex);
+  }catch(e){
+    // Worker non disponibile (raro: CSP strict o file:// in alcuni browser)
+    _fallbackCalc(resetBtn);
+  }
+}
+
+function _fallbackCalc(resetBtn){
+  // Esegue sul main thread — funziona sempre ma può bloccare la UI per qualche secondo
   setTimeout(()=>{
     const pub=privToPub(state.privHex);
-    if(!pub){
-      if(btn){btn.textContent='Usa questa chiave \u2192';btn.disabled=false;btn.style.opacity='';}
-      alert('Chiave fuori range — rigenera.');
-      return;
-    }
-    state.pubComp=pub.compressed;
-    state.pubUncomp=pub.uncompressed;
-    state.pubPt=pub.pt;
-    document.getElementById('pubUncomp').textContent=pub.uncompressed;
-    document.getElementById('pubComp').textContent=pub.compressed;
-    document.getElementById('pubX').textContent=pub.x;
-    document.getElementById('pubY').textContent=pub.y;
-    drawCurve(pub.x,pub.pt[1]);
-    activateStep(2);
+    resetBtn();
+    if(!pub){alert('Chiave fuori range — rigenera.');return;}
+    _applyPubKey({x:pub.x,y:pub.y,compressed:pub.compressed,uncompressed:pub.uncompressed});
   },50);
 }
 
