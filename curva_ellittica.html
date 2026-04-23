@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<meta name="description" content="Lezione interattiva in 7 passi sulla curva ellittica secp256k1: matematica dei campi finiti, addizione di punti, moltiplicazione scalare, ECDSA, derivazione chiave pubblica Bitcoin. Con simulazioni visive.">
+<meta name="keywords" content="curva ellittica Bitcoin, secp256k1, ECDSA, crittografia a curva ellittica, chiave pubblica Bitcoin, firma digitale Bitcoin, matematica Bitcoin, campi finiti, addizione punti">
+<meta name="author" content="Bitcoin Report School">
+<meta name="language" content="it">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Curva Ellittica secp256k1 — La Crittografia di Bitcoin Spiegata">
+<meta property="og:description" content="Lezione interattiva sulla curva ellittica secp256k1: campi finiti, addizione di punti, ECDSA e derivazione chiave pubblica Bitcoin in 7 passi con simulazioni visive.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bitcoinreportschool.com/curva_ellittica.html">
+<meta property="og:image" content="https://bitcoinreportschool.com/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Curva Ellittica secp256k1 — La Crittografia di Bitcoin Spiegata">
+<meta name="twitter:description" content="Lezione interattiva sulla curva ellittica secp256k1: campi finiti, ECDSA e derivazione chiave pubblica Bitcoin in 7 passi.">
+<link rel="canonical" href="https://bitcoinreportschool.com/curva_ellittica.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title>Curva Ellittica secp256k1 — Bitcoin Report School</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07080a;
+  --bg2: #0c0e12;
+  --bg3: #111318;
+  --bg4: #181b22;
+  --border: #1c2030;
+  --border2: #252a3a;
+  --gold: #f7931a;
+  --gold2: #ffc55a;
+  --gold-dim: rgba(247,147,26,0.1);
+  --green: #22d3a0;
+  --green-dim: rgba(34,211,160,0.1);
+  --red: #ff5566;
+  --red-dim: rgba(255,85,102,0.1);
+  --blue: #4d9fff;
+  --blue-dim: rgba(77,159,255,0.1);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.1);
+  --cyan: #22d3ee;
+  --text: #ddd8cc;
+  --text2: #7a7870;
+  --text3: #3a3830;
+  --mono: "DM Mono", monospace;
+  --sans: "Outfit", sans-serif;
+  --serif: "Playfair Display", serif;
+  --text-dim: #7a7870;
+  --text-muted: #3a3830;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
+
+/* SECURITY WARNING */
+.sec-warning{
+  background:linear-gradient(90deg,rgba(255,85,102,0.15),rgba(255,85,102,0.05));
+  border-bottom:1px solid rgba(255,85,102,0.3);
+  padding:0.9rem 2rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.sec-warning-icon{font-size:1.2rem;flex-shrink:0;}
+.sec-warning-text{font-size:0.8rem;line-height:1.5;color:#ffb3bb;}
+.sec-warning-text strong{color:var(--red);font-family:var(--mono);}
+
+/* STICKY STEP BAR */
+.step-bar{
+  position:sticky;top:0;z-index:200;
+  background:rgba(7,8,10,0.97);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  padding:0.75rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:var(--sans);font-weight:900;font-size:1rem;color:var(--gold);letter-spacing:0.03em;}
+.nav-logo span{color:var(--text2);font-weight:300;font-size:0.85rem;}
+.step-pills{display:flex;gap:0.35rem;align-items:center;flex-wrap:wrap;}
+.spill{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:0.65rem;color:var(--text3);
+  cursor:pointer;transition:all 0.25s;user-select:none;
+  background:var(--bg2);
+}
+.spill.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.spill.done{border-color:var(--green);color:var(--green);background:var(--green-dim);}
+.spill:hover:not(.active){border-color:var(--border2);color:var(--text2);background:var(--bg3);}
+.sline{width:14px;height:1px;background:var(--border);}
+
+/* HERO */
+.hero{
+  padding:3rem 2rem 2rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"📐";
+  position:absolute;font-size:20rem;
+  opacity:0.025;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-tag{font-family:var(--mono);font-size:0.68rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;}
+.hero h1{
+  font-family:var(--serif);
+  font-weight:900;font-size:clamp(2rem,5vw,3.5rem);
+  line-height:1.1;margin-bottom:1rem;color:#fff;
+}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-desc{color:var(--text2);font-size:0.95rem;max-width:600px;margin:0 auto 1.5rem;line-height:1.75;font-weight:300;}
+
+/* MAIN WIZARD */
+.wizard-wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem 2rem;}
+
+/* WIZARD STEP PANEL */
+.wstep{display:none;}
+.wstep.active{display:block;}
+
+/* TWO-PANEL LAYOUT */
+.panel-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  align-items:start;
+}
+.panel-left{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:1.4rem;
+}
+.panel-right{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:1.4rem;
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+
+/* EXPLANATION STYLES */
+.exp-tag{font-family:var(--mono);font-size:0.62rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;}
+.exp-title{font-family:var(--serif);font-weight:900;font-size:1.4rem;color:#fff;margin-bottom:0.8rem;line-height:1.2;}
+.exp-body{font-size:0.88rem;color:var(--text2);line-height:1.75;font-weight:300;}
+.exp-body strong{color:var(--text);font-weight:600;}
+.exp-body em{color:var(--cyan);font-style:normal;font-family:var(--mono);font-size:0.82rem;}
+
+/* FORMULA BOX */
+.formula-box{
+  background:var(--bg);border:1px solid rgba(247,147,26,0.25);
+  border-radius:8px;padding:0.9rem 1.1rem;margin:0.9rem 0;
+  font-family:var(--mono);font-size:0.83rem;color:var(--gold);
+  line-height:1.8;
+}
+.formula-box .formula-title{font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.4rem;font-family:var(--mono);}
+.formula-box .f-comment{color:var(--text3);font-size:0.75rem;}
+.formula-box .f-highlight{color:var(--green);}
+
+/* CANVAS WRAPPER */
+.canvas-wrap{
+  border:1px solid var(--border2);border-radius:10px;
+  overflow:hidden;background:var(--bg);
+  position:relative;
+}
+.canvas-label{
+  font-family:var(--mono);font-size:0.62rem;color:var(--text3);
+  text-align:center;padding:0.4rem;letter-spacing:0.08em;
+}
+
+/* BUTTONS */
+.btn{
+  font-family:var(--sans);font-weight:700;font-size:0.88rem;
+  padding:0.65rem 1.4rem;border-radius:8px;
+  cursor:pointer;transition:all 0.2s;border:none;
+  letter-spacing:0.02em;
+}
+.btn-gold{background:var(--gold);color:#000;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+.btn-outline{background:none;border:1px solid var(--border2);color:var(--text2);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-green{background:var(--green);color:#000;}
+.btn-green:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn-row{display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:1.2rem;justify-content:flex-start;}
+.btn-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border);}
+
+/* OUT BOXES */
+.out-box{
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:8px;padding:0.9rem 1rem;margin-bottom:0.7rem;
+  width:100%;
+}
+.out-label{font-family:var(--mono);font-size:0.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.35rem;}
+.out-val{font-family:var(--mono);font-size:0.8rem;word-break:break-all;line-height:1.55;color:var(--cyan);}
+.out-val.gold{color:var(--gold);}
+.out-val.green{color:var(--green);}
+.out-val.white{color:#fff;}
+.out-val.red{color:var(--red);}
+.out-box.highlight{border-color:var(--green);background:var(--green-dim);}
+.out-box.gold-border{border-color:var(--gold);background:var(--gold-dim);}
+
+/* POINTS LIST */
+.points-list{
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:8px;padding:0.7rem 1rem;
+  font-family:var(--mono);font-size:0.72rem;color:var(--text2);
+  max-height:160px;overflow-y:auto;line-height:1.6;
+  width:100%;
+}
+.points-list span{color:var(--gold);}
+
+/* SLIDER */
+.slider-wrap{width:100%;}
+.slider-wrap label{font-family:var(--mono);font-size:0.72rem;color:var(--text2);display:block;margin-bottom:0.4rem;}
+input[type=range]{
+  width:100%;accent-color:var(--gold);cursor:pointer;
+}
+
+/* PARAM BOX (step 5) */
+.param-grid{display:flex;flex-direction:column;gap:0.7rem;width:100%;}
+.param-item{
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:8px;padding:0.8rem 1rem;
+}
+.param-key{font-family:var(--mono);font-size:0.62rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:0.3rem;}
+.param-val{font-family:var(--mono);font-size:0.72rem;color:var(--cyan);word-break:break-all;line-height:1.5;}
+
+/* ECDLP DIAGRAM */
+.ecdlp-diagram{
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  padding:1.5rem;background:var(--bg);border:1px solid var(--border2);border-radius:10px;
+  width:100%;
+}
+.ecdlp-row{display:flex;align-items:center;gap:1rem;font-family:var(--mono);}
+.ecdlp-box{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:8px;padding:0.6rem 1rem;text-align:center;
+}
+.ecdlp-box.k-box{border-color:var(--gold);color:var(--gold);}
+.ecdlp-box.q-box{border-color:var(--green);color:var(--green);}
+.ecdlp-box.g-box{border-color:var(--purple);color:var(--purple);}
+.ecdlp-label{font-size:0.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem;}
+.ecdlp-val{font-size:0.9rem;font-weight:700;}
+.ecdlp-arrow{font-size:1.2rem;color:var(--text3);}
+.ecdlp-arrow.gold{color:var(--gold);}
+.ecdlp-sep{width:100%;height:1px;background:var(--border);}
+.ecdlp-easy{color:var(--green);font-size:0.78rem;font-family:var(--mono);}
+.ecdlp-hard{color:var(--red);font-size:0.78rem;font-family:var(--mono);}
+
+/* INPUT FIELD */
+.hex-input{
+  background:var(--bg);border:1px solid var(--border2);
+  color:var(--gold);font-family:var(--mono);font-size:0.75rem;
+  padding:0.6rem 0.9rem;border-radius:8px;width:100%;
+  outline:none;transition:border-color 0.2s;
+  margin-bottom:0.7rem;
+}
+.hex-input:focus{border-color:var(--gold);}
+
+.text-input{
+  background:var(--bg);border:1px solid var(--border2);
+  color:var(--text);font-family:var(--sans);font-size:0.88rem;
+  padding:0.6rem 0.9rem;border-radius:8px;width:100%;
+  outline:none;transition:border-color 0.2s;
+  margin-bottom:0.7rem;
+}
+.text-input:focus{border-color:var(--gold);}
+
+/* STATUS */
+.status-badge{
+  font-family:var(--mono);font-size:0.78rem;
+  padding:0.5rem 1rem;border-radius:6px;text-align:center;
+  width:100%;margin-top:0.5rem;
+}
+.status-badge.loading{background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.3);color:var(--gold);}
+.status-badge.success{background:rgba(34,211,160,0.1);border:1px solid rgba(34,211,160,0.3);color:var(--green);}
+.status-badge.error{background:rgba(255,85,102,0.1);border:1px solid rgba(255,85,102,0.3);color:var(--red);}
+.status-badge.hidden{display:none;}
+
+/* SECTION DIVIDER */
+.sec-div{
+  display:flex;align-items:center;gap:1rem;
+  margin:1.2rem 0;color:var(--text3);
+  font-family:var(--mono);font-size:0.62rem;
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+.sec-div::before,.sec-div::after{content:"";flex:1;height:1px;background:var(--border);}
+
+/* STEP HEADER */
+.wstep-header{
+  text-align:center;margin-bottom:1.5rem;
+}
+.wstep-num{
+  font-family:var(--mono);font-size:0.65rem;color:var(--gold);
+  letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.4rem;
+}
+.wstep-title{
+  font-family:var(--serif);font-weight:900;font-size:1.8rem;color:#fff;
+  margin-bottom:0.4rem;line-height:1.15;
+}
+.wstep-subtitle{color:var(--text2);font-size:0.9rem;font-weight:300;}
+
+/* INFO CALLOUT */
+.callout{
+  background:rgba(34,211,160,0.05);border:1px solid rgba(34,211,160,0.2);
+  border-radius:8px;padding:0.9rem 1.1rem;margin:0.9rem 0;
+  font-size:0.84rem;color:var(--text2);line-height:1.65;
+}
+.callout strong{color:var(--green);}
+.callout.gold{background:rgba(247,147,26,0.05);border-color:rgba(247,147,26,0.2);}
+.callout.gold strong{color:var(--gold);}
+
+/* DONATION SECTION */
+.donation-section {
+  background: linear-gradient(135deg, #0f0a00 0%, #1a0f00 50%, #0a0a0a 100%);
+  border-top: 1px solid #3a2500;
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.donation-section::before {
+  content: "₿";
+  position: absolute;
+  font-size: 28rem;
+  color: rgba(247,147,26,0.03);
+  font-family: var(--serif);
+  font-weight: 800;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+.donation-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.section-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.donation-text h2 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, #fff 0%, var(--gold) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.donation-text p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+.donation-manifesto {
+  background: rgba(247,147,26,0.06);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.2rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+.donation-manifesto strong { color: var(--gold); font-style: normal; }
+.donation-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+.stat-value {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: 700;
+  display: block;
+}
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.donation-qr-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.qr-frame {
+  position: relative;
+  padding: 1.2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(247,147,26,0.3),
+    0 0 40px rgba(247,147,26,0.12),
+    0 20px 60px rgba(0,0,0,0.6);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.qr-frame:hover {
+  box-shadow:
+    0 0 0 2px rgba(247,147,26,0.6),
+    0 0 60px rgba(247,147,26,0.25),
+    0 24px 70px rgba(0,0,0,0.7);
+  transform: translateY(-4px) scale(1.02);
+}
+.qr-frame img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 4px;
+}
+.btcpay-pill {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+@media (max-width: 768px) {
+  .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .donation-text h2 { font-size: 1.7rem; }
+  .donation-qr-wrap { order: -1; }
+  .panel-row { grid-template-columns: 1fr; }
+  .step-pills { gap: 0.2rem; }
+  .spill { width:26px; height:26px; font-size:0.6rem; }
+  .sline { width:8px; }
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem;text-align:center;
+  font-family:var(--mono);font-size:0.72rem;color:var(--text3);
+}
+footer a{color:var(--text2);text-decoration:none;}
+footer a:hover{color:var(--gold);}
+.footer-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin:0.8rem 0;}
+
+/* ANIMATION */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.fadein{animation:fadeUp 0.35s ease;}
+
+/* COPY BTN */
+.copy-btn{
+  background:none;border:none;color:var(--text3);
+  font-family:var(--mono);font-size:0.6rem;cursor:pointer;
+  padding:0.1rem 0.3rem;border-radius:3px;
+  transition:color 0.2s;letter-spacing:0.05em;
+  text-transform:uppercase;float:right;
+}
+.copy-btn:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<!-- SECURITY WARNING -->
+<div class="sec-warning">
+  <div class="sec-warning-icon">⚠️</div>
+  <div class="sec-warning-text">
+    <strong>NOTA EDUCATIVA:</strong> Questa pagina illustra la crittografia a curva ellittica in modo interattivo.
+    Le chiavi generate negli step 6–7 sono a soli fini dimostrativi — non usarle per bitcoin reali.
+    Nessun dato viene trasmesso a server esterni. Tutto gira nel tuo browser.
+  </div>
+</div>
+
+<!-- STICKY STEP BAR -->
+<div class="step-bar">
+  <div class="nav-logo">₿ Bitcoin Report School <span>/ Curva Ellittica secp256k1</span></div>
+  <div class="step-pills">
+    <div class="spill active" id="pill1" onclick="goStep(1)">1</div><div class="sline"></div>
+    <div class="spill" id="pill2" onclick="goStep(2)">2</div><div class="sline"></div>
+    <div class="spill" id="pill3" onclick="goStep(3)">3</div><div class="sline"></div>
+    <div class="spill" id="pill4" onclick="goStep(4)">4</div><div class="sline"></div>
+    <div class="spill" id="pill5" onclick="goStep(5)">5</div><div class="sline"></div>
+    <div class="spill" id="pill6" onclick="goStep(6)">6</div><div class="sline"></div>
+    <div class="spill" id="pill7" onclick="goStep(7)">7</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">// matematica · crittografia · secp256k1 · ECDSA</div>
+  <h1>La matematica dietro<br>ogni <em>chiave Bitcoin</em></h1>
+  <p class="hero-desc">Esplora passo dopo passo la crittografia a curva ellittica: dalla geometria delle curve reali fino alla firma digitale ECDSA che protegge ogni transazione Bitcoin.</p>
+</div>
+
+<div class="wizard-wrap">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 1: LA CURVA ELLITTICA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep active fadein" id="step1">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 01 / 07</div>
+    <div class="wstep-title">La Curva Ellittica</div>
+    <div class="wstep-subtitle">La forma geometrica alla base di Bitcoin — y² = x³ + 7</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// teoria</div>
+      <div class="exp-title">Cos'è una curva ellittica?</div>
+      <div class="exp-body">
+        <p>Una <strong>curva ellittica</strong> è definita dall'equazione generale:</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Forma generale di Weierstrass</div>
+        y² = x³ + ax + b
+      </div>
+      <div class="exp-body">
+        <p>Bitcoin usa la curva chiamata <strong>secp256k1</strong>, dove <em>a=0</em> e <em>b=7</em>:</p>
+      </div>
+      <div class="formula-box" style="border-color:rgba(34,211,160,0.4);">
+        <div class="formula-title">secp256k1 — usata da Bitcoin</div>
+        <span class="f-highlight">y² = x³ + 7</span>
+      </div>
+      <div class="exp-body">
+        <p>La curva è <strong>simmetrica rispetto all'asse x</strong>: per ogni punto (x, y) sulla curva, esiste il suo simmetrico (x, −y). Questo significa che ogni valore di x positivo corrisponde a <strong>due punti</strong>: uno con y positivo e uno con y negativo.</p>
+        <p style="margin-top:0.8rem;">Un <strong>punto sulla curva</strong> è qualunque coppia (x, y) che soddisfa l'equazione. Nella crittografia Bitcoin, i punti vengono calcolati su un campo finito (modulo un numero primo enorme), ma la geometria di base rimane la stessa.</p>
+      </div>
+      <div class="callout gold">
+        <strong>Perché questa curva?</strong> La forma y² = x³ + 7 è scelta perché ha proprietà matematiche che rendono le operazioni su di essa computazionalmente sicure. I parametri di secp256k1 sono stati scelti in modo trasparente e verificabile, senza "backdoor".
+      </div>
+    </div>
+
+    <div class="panel-right">
+      <div class="canvas-wrap">
+        <canvas id="curveCanvas1" width="520" height="320" style="display:block;max-width:100%;"></canvas>
+      </div>
+      <div class="canvas-label">Curva y² = x³ + 7 su ℝ — range x: [−3, 4], y: [−6, 6]</div>
+      <div class="out-box" style="width:100%;">
+        <div class="out-label">Punti evidenziati sulla curva</div>
+        <div class="out-val" style="font-size:0.75rem;line-height:1.8;">
+          <span style="color:var(--gold);">P₁ = (−1, +√6)</span> ≈ (−1, +2.449)<br>
+          <span style="color:var(--gold);">P₁' = (−1, −√6)</span> ≈ (−1, −2.449)<br>
+          <span style="color:var(--green);">P₂ = (0, +√7)</span> ≈ (0, +2.646)<br>
+          <span style="color:var(--green);">P₂' = (0, −√7)</span> ≈ (0, −2.646)<br>
+          <span style="color:var(--cyan);">P₃ = (1, +√8)</span> ≈ (1, +2.828)<br>
+          <span style="color:var(--cyan);">P₃' = (1, −√8)</span> ≈ (1, −2.828)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <span></span>
+    <button class="btn btn-gold" onclick="goStep(2)">Successivo: Addizione di Punti →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 2: ADDIZIONE DI PUNTI -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep" id="step2">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 02 / 07</div>
+    <div class="wstep-title">Addizione di Punti P + Q</div>
+    <div class="wstep-subtitle">La regola geometrica che dà struttura di gruppo alla curva</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// geometria</div>
+      <div class="exp-title">La regola della corda e della tangente</div>
+      <div class="exp-body">
+        <p>Per sommare due punti P e Q su una curva ellittica, si usa la <strong>regola della corda</strong>:</p>
+        <ol style="margin:0.7rem 0 0.7rem 1.2rem;line-height:2;">
+          <li>Traccia la retta che passa per P e Q</li>
+          <li>Trova il terzo punto di intersezione −R con la curva</li>
+          <li>Rifletti −R rispetto all'asse x → ottieni R = P + Q</li>
+        </ol>
+        <p>Il risultato è <strong>sempre sulla curva</strong>: questa è la proprietà magica che rende l'addizione ellittica un'operazione di gruppo chiusa.</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Formule per P + Q (caso generico)</div>
+        λ = (y₂ − y₁) / (x₂ − x₁)<br>
+        x₃ = λ² − x₁ − x₂<br>
+        y₃ = λ(x₁ − x₃) − y₁
+      </div>
+      <div class="exp-body">
+        <p>Il <strong>caso speciale</strong> P = Q (raddoppio) usa la tangente alla curva nel punto P:</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Raddoppio: 2P (tangente in P)</div>
+        λ = (3x₁² + a) / (2y₁) <span class="f-comment">← per secp256k1: a=0</span><br>
+        x₃ = λ² − 2x₁<br>
+        y₃ = λ(x₁ − x₃) − y₁
+      </div>
+      <div class="callout">
+        <strong>Perché la riflessione?</strong> La retta interseca sempre la curva in esattamente 3 punti (contati con molteplicità). Il terzo punto viene riflesso per garantire che l'operazione sia un <strong>omomorfismo di gruppo</strong> — ovvero che rispetti le proprietà associativa e commutativa.
+      </div>
+    </div>
+
+    <div class="panel-right">
+      <div class="canvas-wrap" style="width:100%;">
+        <canvas id="addCanvas" width="520" height="320" style="display:block;width:100%;"></canvas>
+      </div>
+      <div class="canvas-label" id="addCanvasLabel">P = (−1, √6) · Q = (1, √8) — premi il bottone per animare</div>
+      <div class="btn-row" style="justify-content:center;width:100%;">
+        <button class="btn btn-gold" id="btnAddAnim" onclick="animateAddition()">▶ Mostra Costruzione P+Q</button>
+        <button class="btn btn-outline" id="btnDoubleAnim" onclick="animateDouble()">Caso Speciale: 2P</button>
+        <button class="btn btn-outline" onclick="resetAddCanvas()">↺ Reset</button>
+      </div>
+      <div class="out-box" style="width:100%;" id="addResult" style="display:none;">
+        <div class="out-label">Risultato</div>
+        <div class="out-val gold" id="addResultVal">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goStep(1)">← Precedente</button>
+    <button class="btn btn-gold" onclick="goStep(3)">Successivo: Campo Finito →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 3: CAMPO FINITO Fp -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep" id="step3">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 03 / 07</div>
+    <div class="wstep-title">Il Campo Finito F<sub style="font-size:0.7em">p</sub></div>
+    <div class="wstep-subtitle">y² ≡ x³ + 7 (mod p) — dalla geometria continua alla griglia discreta</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// algebra modulare</div>
+      <div class="exp-title">Perché usare i numeri interi?</div>
+      <div class="exp-body">
+        <p>La curva reale usa numeri in virgola mobile con <strong>precisione infinita</strong> — impraticabile per un computer. Invece, Bitcoin lavora su un <strong>campo finito</strong>: tutti i calcoli sono fatti modulo un numero primo enorme p.</p>
+        <p style="margin-top:0.8rem;">L'equazione diventa:</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Curva su F_p (p primo)</div>
+        <span class="f-highlight">y² ≡ x³ + 7 (mod p)</span><br>
+        <span class="f-comment">dove x, y ∈ {0, 1, 2, ..., p−1}</span>
+      </div>
+      <div class="exp-body">
+        <p>I punti non formano più una curva liscia, ma un <strong>insieme discreto di punti interi</strong> su una griglia p × p. La struttura di gruppo è tuttavia preservata: l'addizione di punti funziona esattamente come prima, ma con aritmetica modulare.</p>
+        <p style="margin-top:0.8rem;">Nell'esempio interattivo a destra usiamo <strong>p = 23</strong> (piccolo per visualizzare). In Bitcoin, p è un numero a 256 bit.</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Numero di punti su F_23</div>
+        Trovati: <span id="fpCount" class="f-highlight">?</span> punti<br>
+        <span class="f-comment">+ il "punto all'infinito" (elemento neutro)</span>
+      </div>
+      <div class="callout">
+        <strong>La sicurezza viene da qui:</strong> su un campo finito con p ≈ 2²⁵⁶, esistono circa 2²⁵⁶ punti. Trovare k dato k×G è computazionalmente impossibile — ci vorrebbero più anni dell'età dell'universo anche con tutti i computer esistenti.
+      </div>
+    </div>
+
+    <div class="panel-right">
+      <div class="canvas-wrap" style="width:100%;">
+        <canvas id="fpCanvas" width="420" height="420" style="display:block;width:100%;max-width:420px;"></canvas>
+      </div>
+      <div class="canvas-label">y² ≡ x³ + 7 (mod 23) — griglia 23×23</div>
+      <div style="width:100%;">
+        <div class="out-label">Tutti i punti su F₂₃:</div>
+        <div class="points-list" id="fpPointsList">Calcolo...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goStep(2)">← Precedente</button>
+    <button class="btn btn-gold" onclick="goStep(4)">Successivo: Moltiplicazione Scalare →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 4: MOLTIPLICAZIONE SCALARE k×G -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep" id="step4">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 04 / 07</div>
+    <div class="wstep-title">Moltiplicazione Scalare k×G</div>
+    <div class="wstep-subtitle">Il cuore della crittografia — "saltare" su una griglia in modo imprevedibile</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// algoritmo</div>
+      <div class="exp-title">Come si moltiplica un punto per uno scalare?</div>
+      <div class="exp-body">
+        <p><strong>k×G</strong> significa aggiungere il punto G a se stesso k volte: G + G + G + … (k volte). Con k = 2²⁵⁶ questo sarebbe impossibile direttamente, ma si usa l'algoritmo <strong>double-and-add</strong>:</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Double-and-Add (pseudocodice)</div>
+        R = ∞ (punto neutro)<br>
+        per ogni bit di k (dal meno significativo):<br>
+        &nbsp;&nbsp;se bit = 1: R = R + G<br>
+        &nbsp;&nbsp;G = G + G (raddoppia)<br>
+        ritorna R
+      </div>
+      <div class="exp-body">
+        <p>Con soli <strong>log₂(k)</strong> operazioni si ottiene il risultato. Per k a 256 bit: massimo 512 operazioni.</p>
+        <p style="margin-top:0.8rem;">La cosa affascinante è che k×G <strong>sembra saltare casualmente</strong> sulla griglia quando k cresce di 1. Non c'è nessuna relazione visibile tra k e la posizione di k×G — questo è il nucleo matematico della sicurezza Bitcoin.</p>
+      </div>
+      <div class="callout gold">
+        <strong>Il Problema del Logaritmo Discreto (ECDLP):</strong> Dato Q = k×G, trovare k è computazionalmente impossibile. Eppure calcolare k×G dato k è facile. Questa asimmetria è ciò che rende sicure le chiavi Bitcoin.
+      </div>
+      <div style="margin-top:0.9rem;" id="scalarInfo">
+        <div class="out-box gold-border">
+          <div class="out-label">k corrente</div>
+          <div class="out-val gold" id="kDisplay">1</div>
+        </div>
+        <div class="out-box">
+          <div class="out-label">k×G — coordinate</div>
+          <div class="out-val" id="kgDisplay">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-right">
+      <div class="canvas-wrap" style="width:100%;">
+        <canvas id="scalarCanvas" width="420" height="420" style="display:block;width:100%;max-width:420px;"></canvas>
+      </div>
+      <div class="canvas-label" id="scalarLabel">y² ≡ x³ + 7 (mod 97) — trascina il cursore</div>
+      <div class="slider-wrap" style="width:100%;">
+        <label id="sliderLabel">k = 1 &nbsp;(G sembra "saltare" casualmente — questo è il cuore della sicurezza)</label>
+        <input type="range" id="kSlider" min="1" max="40" value="1" oninput="onKSlider(this.value)">
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goStep(3)">← Precedente</button>
+    <button class="btn btn-gold" onclick="goStep(5)">Successivo: Parametri secp256k1 →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 5: secp256k1 PARAMETRI REALI -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep" id="step5">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 05 / 07</div>
+    <div class="wstep-title">secp256k1: I Parametri Reali</div>
+    <div class="wstep-subtitle">I valori fissati pubblicamente che definiscono il sistema crittografico di Bitcoin</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// standard</div>
+      <div class="exp-title">Parametri pubblici fissi</div>
+      <div class="exp-body">
+        <p>In Bitcoin, tutti usano <strong>esattamente gli stessi parametri</strong> per la curva ellittica. Questi valori sono definiti nello standard secp256k1 e sono completamente pubblici. La sicurezza <strong>non</strong> dipende dalla segretezza di questi parametri, ma dall'impossibilità matematica di invertire la moltiplicazione scalare.</p>
+        <p style="margin-top:0.8rem;">Il <strong>Punto Generatore G</strong> è un punto speciale fisso sulla curva. Tutti i wallet Bitcoin del mondo derivano le loro chiavi moltiplicando G per una chiave privata diversa.</p>
+      </div>
+      <div class="callout gold">
+        <strong>Perché "k1" nel nome?</strong> "sec" = Standards for Efficient Cryptography. "p" = campo primo. "256" = 256 bit. "k1" = tipo Koblitz, variante 1. Koblitz curves hanno la proprietà di ammettere algoritmi di calcolo particolarmente efficienti.
+      </div>
+      <div class="callout" style="margin-top:0.9rem;">
+        <strong>~2²⁵⁶ punti</strong> — più del numero stimato di atomi nell'universo osservabile (~10⁸⁰). Anche con tutti i computer del pianeta, cercare esaustivamente k sarebbe impossibile.
+      </div>
+      <div class="ecdlp-diagram" style="margin-top:1rem;">
+        <div class="ecdlp-row">
+          <div class="ecdlp-box k-box"><div class="ecdlp-label">Chiave Privata</div><div class="ecdlp-val">k</div></div>
+          <div class="ecdlp-arrow gold">×</div>
+          <div class="ecdlp-box g-box"><div class="ecdlp-label">Generatore</div><div class="ecdlp-val">G</div></div>
+          <div class="ecdlp-arrow">=</div>
+          <div class="ecdlp-box q-box"><div class="ecdlp-label">Chiave Pubblica</div><div class="ecdlp-val">Q</div></div>
+        </div>
+        <div class="ecdlp-sep"></div>
+        <div class="ecdlp-easy">→ Facile: calcola Q dato k (double-and-add, ~512 operazioni)</div>
+        <div class="ecdlp-hard">← Impossibile: trova k dato Q (ECDLP — problema su curva ellittica)</div>
+      </div>
+    </div>
+
+    <div class="panel-right" style="align-items:stretch;">
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-key">p — il primo campo (256 bit)</div>
+          <div class="param-val">FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF<br>FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F</div>
+        </div>
+        <div class="param-item">
+          <div class="param-key">a — coefficiente quadratico</div>
+          <div class="param-val">0x00 &nbsp;<span style="color:var(--text3);font-size:0.7rem;">(curva semplificata: y² = x³ + b)</span></div>
+        </div>
+        <div class="param-item">
+          <div class="param-key">b — coefficiente costante</div>
+          <div class="param-val">0x07</div>
+        </div>
+        <div class="param-item">
+          <div class="param-key">Gx — coordinata X del Punto Generatore</div>
+          <div class="param-val">79BE667E F9DCBBAC 55A06295 CE870B07<br>029BFCDB 2DCE28D9 59F2815B 16F81798</div>
+        </div>
+        <div class="param-item">
+          <div class="param-key">Gy — coordinata Y del Punto Generatore</div>
+          <div class="param-val">483ADA77 26A3C465 5DA4FBFC 0E1108A8<br>FD17B448 A6855419 9C47D08F FB10D4B8</div>
+        </div>
+        <div class="param-item" style="border-color:rgba(247,147,26,0.3);">
+          <div class="param-key" style="color:var(--green);">n — ordine del gruppo (numero di punti)</div>
+          <div class="param-val" style="color:var(--green);">FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE<br>BAAEDCE6 AF48A03B BFD25E8C D0364141</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goStep(4)">← Precedente</button>
+    <button class="btn btn-gold" onclick="goStep(6)">Successivo: Chiave Privata → Pubblica →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 6: CHIAVE PRIVATA → CHIAVE PUBBLICA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep" id="step6">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 06 / 07</div>
+    <div class="wstep-title">Chiave Privata → Chiave Pubblica</div>
+    <div class="wstep-subtitle">Q = k×G — la funzione a senso unico che protegge i tuoi bitcoin</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// derivazione</div>
+      <div class="exp-title">Da un numero segreto a una chiave pubblica</div>
+      <div class="exp-body">
+        <p>La <strong>chiave privata</strong> k è un numero casuale a 256 bit. Deve rimanere segreto — chi lo conosce controlla i bitcoin associati.</p>
+        <p style="margin-top:0.8rem;">La <strong>chiave pubblica</strong> Q = k×G è il risultato della moltiplicazione scalare del Punto Generatore G per k. È completamente sicuro condividere Q pubblicamente — da Q è impossibile ricavare k.</p>
+        <p style="margin-top:0.8rem;">La chiave pubblica viene poi compressa: si conserva solo la coordinata X più un prefisso (02 se Y è pari, 03 se Y è dispari) — questo funziona perché dalla x si può sempre ricostruire la y (±√(x³+7 mod p)).</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Chiave pubblica compressa</div>
+        Se Y pari: &nbsp;<span class="f-highlight">02</span> + X (33 byte totali)<br>
+        Se Y dispari: <span class="f-highlight">03</span> + X (33 byte totali)<br>
+        <span class="f-comment">Non compressa: 04 + X + Y (65 byte)</span>
+      </div>
+      <div class="callout gold">
+        <strong>Algoritmo Double-and-Add su secp256k1:</strong> il calcolo usa BigInt JavaScript e le stesse costanti di secp256k1. Ci vogliono alcuni secondi perché la moltiplicazione su un campo a 256 bit richiede molte operazioni modulo un numero enorme.
+      </div>
+    </div>
+
+    <div class="panel-right" style="align-items:stretch;">
+      <div class="out-label">Chiave Privata (64 caratteri hex)</div>
+      <input type="text" class="hex-input" id="privKeyInput" maxlength="64" placeholder="Inserisci 64 caratteri hex oppure genera...">
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="generateRandomKey()">🎲 Genera Casuale</button>
+        <button class="btn btn-gold" id="calcPubBtn" onclick="calcPublicKey()">Calcola Q = k×G</button>
+      </div>
+      <div class="status-badge hidden" id="calcStatus">Calcolo in corso...</div>
+      <div id="pubkeyResult" style="width:100%;margin-top:0.5rem;">
+        <div class="out-box">
+          <div class="out-label">Coordinata X (Qx) <button class="copy-btn" onclick="copyEl('qxDisplay')">copia</button></div>
+          <div class="out-val" id="qxDisplay" style="font-size:0.72rem;">—</div>
+        </div>
+        <div class="out-box">
+          <div class="out-label">Coordinata Y (Qy) <button class="copy-btn" onclick="copyEl('qyDisplay')">copia</button></div>
+          <div class="out-val" id="qyDisplay" style="font-size:0.72rem;">—</div>
+        </div>
+        <div class="out-box highlight">
+          <div class="out-label">Chiave Pubblica Compressa (33 byte) <button class="copy-btn" onclick="copyEl('compKeyDisplay')">copia</button></div>
+          <div class="out-val green" id="compKeyDisplay" style="font-size:0.72rem;">—</div>
+        </div>
+        <div class="out-box">
+          <div class="out-label">Prefisso</div>
+          <div class="out-val gold" id="prefixDisplay">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goStep(5)">← Precedente</button>
+    <button class="btn btn-gold" onclick="goStep(7)">Successivo: ECDSA Firma →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- STEP 7: ECDSA FIRMA E VERIFICA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="wstep" id="step7">
+  <div class="wstep-header">
+    <div class="wstep-num">// step 07 / 07</div>
+    <div class="wstep-title">ECDSA: Firma e Verifica</div>
+    <div class="wstep-subtitle">La prova matematica che possiedi una chiave privata — senza rivelarla</div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel-left">
+      <div class="exp-tag">// crittografia</div>
+      <div class="exp-title">Cos'è una firma digitale ECDSA?</div>
+      <div class="exp-body">
+        <p>Con ECDSA (Elliptic Curve Digital Signature Algorithm) puoi <strong>firmare un messaggio</strong> con la tua chiave privata k. Chiunque abbia la tua chiave pubblica Q può <strong>verificare</strong> che la firma sia tua — senza che tu abbia rivelato k.</p>
+        <p style="margin-top:0.8rem;">In Bitcoin, ogni transazione contiene una firma ECDSA che prova che il proprietario della chiave privata ha autorizzato il trasferimento.</p>
+      </div>
+      <div class="formula-box">
+        <div class="formula-title">Firma (sign)</div>
+        z = SHA256(messaggio)<br>
+        k_nonce = random()<br>
+        R = k_nonce × G<br>
+        r = R.x mod n<br>
+        s = k_nonce⁻¹ × (z + r·privKey) mod n<br>
+        <span class="f-highlight">firma = (r, s)</span>
+      </div>
+      <div class="formula-box" style="border-color:rgba(34,211,160,0.3);">
+        <div class="formula-title">Verifica (verify)</div>
+        w = s⁻¹ mod n<br>
+        u1 = z·w mod n<br>
+        u2 = r·w mod n<br>
+        P = u1×G + u2×Q<br>
+        <span class="f-highlight">valida se P.x ≡ r (mod n)</span>
+      </div>
+      <div class="callout">
+        <strong>Il nonce k_nonce è critico:</strong> deve essere sempre un nuovo numero casuale per ogni firma. Se si riusa lo stesso nonce due volte, la chiave privata può essere estratta matematicamente dalle due firme. Questo è esattamente ciò che accadde alla PlayStation 3.
+      </div>
+    </div>
+
+    <div class="panel-right" style="align-items:stretch;">
+      <div class="out-box" style="background:var(--bg3);">
+        <div class="out-label">Coppia di chiavi generata automaticamente</div>
+        <div class="out-val" style="font-size:0.7rem;">
+          <span style="color:var(--text2);">privKey: </span><span id="ecdsaPrivDisplay" style="color:var(--gold);">—</span><br>
+          <span style="color:var(--text2);">pubKey: &nbsp;</span><span id="ecdsaPubDisplay" style="color:var(--green);">—</span>
+        </div>
+      </div>
+      <button class="btn btn-outline" onclick="ecdsaGenKeys()" style="align-self:flex-start;font-size:0.78rem;padding:0.45rem 0.9rem;">🎲 Nuova coppia di chiavi</button>
+
+      <div class="out-label" style="margin-top:0.5rem;">Messaggio da firmare</div>
+      <input type="text" class="text-input" id="ecdsaMsg" value="Satoshi Nakamoto, 03 Jan 2009">
+
+      <button class="btn btn-gold" id="signBtn" onclick="ecdsaSign()">✍ Firma con ECDSA</button>
+      <div class="status-badge hidden" id="signStatus">Firma in corso...</div>
+
+      <div id="signResult" style="width:100%;display:none;">
+        <div class="sec-div">risultato firma</div>
+        <div class="out-box">
+          <div class="out-label">z — hash SHA256 del messaggio</div>
+          <div class="out-val" id="zDisplay" style="font-size:0.68rem;">—</div>
+        </div>
+        <div class="out-box">
+          <div class="out-label">k_nonce (casuale)</div>
+          <div class="out-val" id="nonceDisplay" style="font-size:0.68rem;">—</div>
+        </div>
+        <div class="out-box">
+          <div class="out-label">r = R.x mod n</div>
+          <div class="out-val gold" id="rDisplay" style="font-size:0.68rem;">—</div>
+        </div>
+        <div class="out-box">
+          <div class="out-label">s = k_nonce⁻¹(z + r·privKey) mod n</div>
+          <div class="out-val gold" id="sDisplay" style="font-size:0.68rem;">—</div>
+        </div>
+
+        <div class="sec-div">verifica</div>
+        <button class="btn btn-green" onclick="ecdsaVerify()" style="width:100%;">✔ Verifica Firma</button>
+        <div class="status-badge hidden" id="verifyResult"></div>
+
+        <div class="sec-div" style="margin-top:1rem;">test modifica</div>
+        <div class="out-label">Modifica il messaggio per testare la verifica</div>
+        <input type="text" class="text-input" id="ecdsaVerifyMsg">
+        <button class="btn btn-outline" onclick="ecdsaVerifyModified()" style="width:100%;font-size:0.82rem;">✔ Verifica Messaggio Modificato</button>
+        <div class="status-badge hidden" id="verifyModResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goStep(6)">← Precedente</button>
+    <span style="font-family:var(--mono);font-size:0.75rem;color:var(--green);">✓ Hai completato il tour di secp256k1!</span>
+  </div>
+</div>
+
+</div><!-- /wizard-wrap -->
+
+<!-- DONATION SECTION -->
+<section class="donation-section">
+  <div class="donation-inner">
+    <div class="donation-text">
+      <div class="section-tag">// supporta il progetto</div>
+      <h2>La conoscenza<br>dovrebbe essere libera</h2>
+      <p>Bitcoin Report School è un progetto open source completamente gratuito. Nessuna pubblicità, nessun tracker, nessun paywall. Se questi strumenti ti sono stati utili, considera una donazione in bitcoin.</p>
+      <div class="donation-manifesto">
+        <strong>Manifesto:</strong> La crittografia che protegge i tuoi bitcoin è matematica pubblica, accessibile a tutti. Capire come funziona non è solo istruttivo — è un atto di sovranità digitale. <strong>Verifica, non fidarti.</strong>
+      </div>
+      <div class="donation-stats">
+        <div class="stat-item">
+          <span class="stat-value">7</span>
+          <span class="stat-label">Strumenti</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Open Source</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">0</span>
+          <span class="stat-label">Tracker</span>
+        </div>
+      </div>
+    </div>
+    <div class="donation-qr-wrap">
+      <div class="qr-frame">
+        <img src="data:image/png;base64,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" alt="Bitcoin QR Donazione">
+      </div>
+      <div class="btcpay-pill">⚡ Powered by BTCPay Server — self-hosted</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="font-weight:700;color:var(--gold);font-size:0.9rem;margin-bottom:0.8rem;">₿ Bitcoin Report School</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="guida_codice_bitcoin.html">Codice Spiegato</a>
+    <a href="simulatore_mining_bitcoin.html">Simulatore Mining</a>
+    <a href="generatore_chiavi_bitcoin.html">Generatore Chiavi</a>
+    <a href="generatore_seed_phrase.html">Seed Phrase BIP39</a>
+    <a href="lightning-network.html">Lightning Network</a>
+    <a href="glossario_bitcoin.html">Glossario Bitcoin</a>
+    <a href="curva_ellittica.html">Curva Ellittica</a>
+  </div>
+  <div style="margin-top:0.8rem;">Open Source · MIT License · Nessun tracker · Nessuna pubblicità</div>
+</footer>
+
+<script>
+"use strict";
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
+let currentStep = 1;
+const TOTAL_STEPS = 7;
+const visitedSteps = new Set([1]);
+
+function goStep(n) {
+  if (n < 1 || n > TOTAL_STEPS) return;
+  document.getElementById("step" + currentStep).classList.remove("active");
+  document.getElementById("step" + n).classList.add("active");
+  document.getElementById("step" + n).classList.add("fadein");
+
+  // pills
+  const prev = document.getElementById("pill" + currentStep);
+  if (visitedSteps.has(currentStep) && currentStep !== n) {
+    prev.classList.remove("active");
+    prev.classList.add("done");
+  }
+  document.getElementById("pill" + n).classList.remove("done");
+  document.getElementById("pill" + n).classList.add("active");
+
+  currentStep = n;
+  visitedSteps.add(n);
+
+  // lazy-init steps
+  if (n === 1) drawCurve1();
+  if (n === 2) initAddCanvas();
+  if (n === 3) drawFpCanvas();
+  if (n === 4) initScalarCanvas();
+  if (n === 6) initStep6();
+  if (n === 7) initStep7();
+
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+// ═══════════════════════════════════════════════════════════
+// UTILITY
+// ═══════════════════════════════════════════════════════════
+function copyEl(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).catch(function(){});
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 1: DRAW REAL CURVE y² = x³ + 7
+// ═══════════════════════════════════════════════════════════
+function drawCurve1() {
+  const canvas = document.getElementById("curveCanvas1");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+
+  const xMin = -3, xMax = 4, yMin = -6, yMax = 6;
+  function tx(x) { return (x - xMin) / (xMax - xMin) * W; }
+  function ty(y) { return H - (y - yMin) / (yMax - yMin) * H; }
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = "#07080a";
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = "rgba(255,255,255,0.05)";
+  ctx.lineWidth = 1;
+  for (let x = -3; x <= 4; x++) {
+    ctx.beginPath(); ctx.moveTo(tx(x), 0); ctx.lineTo(tx(x), H); ctx.stroke();
+  }
+  for (let y = -6; y <= 6; y++) {
+    ctx.beginPath(); ctx.moveTo(0, ty(y)); ctx.lineTo(W, ty(y)); ctx.stroke();
+  }
+
+  // Axes
+  ctx.strokeStyle = "rgba(255,255,255,0.25)";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, ty(0)); ctx.lineTo(W, ty(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(tx(0), 0); ctx.lineTo(tx(0), H); ctx.stroke();
+
+  // Axis labels
+  ctx.fillStyle = "rgba(255,255,255,0.3)";
+  ctx.font = "11px DM Mono, monospace";
+  ctx.textAlign = "center";
+  for (let x = -3; x <= 4; x++) {
+    if (x === 0) continue;
+    ctx.fillText(x, tx(x), ty(0) + 14);
+  }
+  ctx.textAlign = "right";
+  for (let y = -6; y <= 6; y++) {
+    if (y === 0) continue;
+    ctx.fillText(y, tx(0) - 4, ty(y) + 4);
+  }
+
+  // Draw curve (both branches)
+  ctx.strokeStyle = "#f7931a";
+  ctx.lineWidth = 2.5;
+  ctx.shadowColor = "#f7931a";
+  ctx.shadowBlur = 8;
+
+  // Upper branch
+  ctx.beginPath();
+  let first = true;
+  for (let px = 0; px <= W; px++) {
+    const x = xMin + (px / W) * (xMax - xMin);
+    const v = x * x * x + 7;
+    if (v < 0) { first = true; continue; }
+    const y = Math.sqrt(v);
+    if (y > yMax) { first = true; continue; }
+    if (first) { ctx.moveTo(px, ty(y)); first = false; }
+    else ctx.lineTo(px, ty(y));
+  }
+  ctx.stroke();
+
+  // Lower branch
+  ctx.beginPath();
+  first = true;
+  for (let px = 0; px <= W; px++) {
+    const x = xMin + (px / W) * (xMax - xMin);
+    const v = x * x * x + 7;
+    if (v < 0) { first = true; continue; }
+    const y = -Math.sqrt(v);
+    if (y < yMin) { first = true; continue; }
+    if (first) { ctx.moveTo(px, ty(y)); first = false; }
+    else ctx.lineTo(px, ty(y));
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Symmetry arrow
+  ctx.strokeStyle = "rgba(255,255,255,0.2)";
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(tx(2), ty(3)); ctx.lineTo(tx(2), ty(-3)); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = "rgba(255,255,255,0.4)";
+  ctx.font = "11px DM Mono, monospace";
+  ctx.textAlign = "left";
+  ctx.fillText("simmetria", tx(2) + 6, ty(0) - 6);
+
+  // Labeled points
+  const pts = [
+    { x: -1, y: Math.sqrt(6), color: "#f7931a", label: "(-1,+\u221a6)" },
+    { x: -1, y: -Math.sqrt(6), color: "#f7931a", label: "(-1,-\u221a6)" },
+    { x: 0, y: Math.sqrt(7), color: "#22d3a0", label: "(0,+\u221a7)" },
+    { x: 0, y: -Math.sqrt(7), color: "#22d3a0", label: "(0,-\u221a7)" },
+    { x: 1, y: Math.sqrt(8), color: "#22d3ee", label: "(1,+\u221a8)" },
+    { x: 1, y: -Math.sqrt(8), color: "#22d3ee", label: "(1,-\u221a8)" }
+  ];
+  pts.forEach(function(p) {
+    ctx.beginPath();
+    ctx.arc(tx(p.x), ty(p.y), 5, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.strokeStyle = "#07080a";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = p.color;
+    ctx.font = "10px DM Mono, monospace";
+    ctx.textAlign = p.x < 0 ? "right" : "left";
+    ctx.fillText(p.label, tx(p.x) + (p.x < 0 ? -8 : 8), ty(p.y) + 4);
+  });
+
+  // Equation label
+  ctx.fillStyle = "rgba(247,147,26,0.85)";
+  ctx.font = "bold 13px DM Mono, monospace";
+  ctx.textAlign = "left";
+  ctx.fillText("y\u00b2 = x\u00b3 + 7", 10, 22);
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 2: POINT ADDITION ANIMATION
+// ═══════════════════════════════════════════════════════════
+let addAnimState = 0;
+let addAnimTimer = null;
+
+const ADD_P = { x: -1, y: Math.sqrt(6) };
+const ADD_Q = { x: 1, y: Math.sqrt(8) };
+
+function drawCurveOnCtx(ctx, W, H, xMin, xMax, yMin, yMax) {
+  function tx(x) { return (x - xMin) / (xMax - xMin) * W; }
+  function ty(y) { return H - (y - yMin) / (yMax - yMin) * H; }
+
+  ctx.fillStyle = "#07080a";
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = "rgba(255,255,255,0.05)";
+  ctx.lineWidth = 1;
+  for (let x = -3; x <= 4; x++) {
+    ctx.beginPath(); ctx.moveTo(tx(x), 0); ctx.lineTo(tx(x), H); ctx.stroke();
+  }
+  for (let y = -6; y <= 6; y++) {
+    ctx.beginPath(); ctx.moveTo(0, ty(y)); ctx.lineTo(W, ty(y)); ctx.stroke();
+  }
+
+  // Axes
+  ctx.strokeStyle = "rgba(255,255,255,0.2)";
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(0, ty(0)); ctx.lineTo(W, ty(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(tx(0), 0); ctx.lineTo(tx(0), H); ctx.stroke();
+
+  // Curve
+  ctx.strokeStyle = "rgba(247,147,26,0.6)";
+  ctx.lineWidth = 2;
+  ctx.shadowColor = "#f7931a"; ctx.shadowBlur = 4;
+  var first = true;
+  ctx.beginPath();
+  for (var px = 0; px <= W; px++) {
+    var xv = xMin + (px / W) * (xMax - xMin);
+    var v = xv * xv * xv + 7;
+    if (v < 0) { first = true; continue; }
+    var yv = Math.sqrt(v);
+    if (yv > yMax) { first = true; continue; }
+    if (first) { ctx.moveTo(px, ty(yv)); first = false; }
+    else ctx.lineTo(px, ty(yv));
+  }
+  ctx.stroke();
+  first = true;
+  ctx.beginPath();
+  for (var px2 = 0; px2 <= W; px2++) {
+    var xv2 = xMin + (px2 / W) * (xMax - xMin);
+    var v2 = xv2 * xv2 * xv2 + 7;
+    if (v2 < 0) { first = true; continue; }
+    var yv2 = -Math.sqrt(v2);
+    if (yv2 < yMin) { first = true; continue; }
+    if (first) { ctx.moveTo(px2, ty(yv2)); first = false; }
+    else ctx.lineTo(px2, ty(yv2));
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+  return { tx: tx, ty: ty };
+}
+
+function initAddCanvas() {
+  addAnimState = 0;
+  resetAddCanvas();
+}
+
+function resetAddCanvas() {
+  if (addAnimTimer) { clearTimeout(addAnimTimer); addAnimTimer = null; }
+  addAnimState = 0;
+  const canvas = document.getElementById("addCanvas");
+  if (!canvas) return;
+  const W = canvas.width, H = canvas.height;
+  const ctx = canvas.getContext("2d");
+  const xMin = -3, xMax = 4, yMin = -6, yMax = 6;
+  const m = drawCurveOnCtx(ctx, W, H, xMin, xMax, yMin, yMax);
+
+  // Draw P (blue) and Q (green)
+  drawPointCircle(ctx, m.tx(ADD_P.x), m.ty(ADD_P.y), "#4d9fff", "P");
+  drawPointCircle(ctx, m.tx(ADD_Q.x), m.ty(ADD_Q.y), "#22d3a0", "Q");
+
+  document.getElementById("addResult").style.display = "none";
+  document.getElementById("addResultVal").textContent = "—";
+  document.getElementById("addCanvasLabel").textContent = "P = (-1, \u221a6) \u00b7 Q = (1, \u221a8) — premi il bottone per animare";
+}
+
+function drawPointCircle(ctx, cx, cy, color, label) {
+  ctx.beginPath();
+  ctx.arc(cx, cy, 7, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.strokeStyle = "#fff";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  if (label) {
+    ctx.fillStyle = color;
+    ctx.font = "bold 12px DM Mono, monospace";
+    ctx.textAlign = "left";
+    ctx.fillText(label, cx + 10, cy - 4);
+  }
+}
+
+function animateAddition() {
+  resetAddCanvas();
+  const canvas = document.getElementById("addCanvas");
+  if (!canvas) return;
+  const W = canvas.width, H = canvas.height;
+  const ctx = canvas.getContext("2d");
+  const xMin = -3, xMax = 4, yMin = -6, yMax = 6;
+  const m = drawCurveOnCtx(ctx, W, H, xMin, xMax, yMin, yMax);
+
+  drawPointCircle(ctx, m.tx(ADD_P.x), m.ty(ADD_P.y), "#4d9fff", "P");
+  drawPointCircle(ctx, m.tx(ADD_Q.x), m.ty(ADD_Q.y), "#22d3a0", "Q");
+
+  var lam = (ADD_Q.y - ADD_P.y) / (ADD_Q.x - ADD_P.x);
+  var x3 = lam * lam - ADD_P.x - ADD_Q.x;
+  var y3 = lam * (ADD_P.x - x3) - ADD_P.y;
+
+  // Step 1: draw chord (white dashed)
+  setTimeout(function() {
+    var extX1 = -2.5, extX2 = 3.5;
+    var extY1 = ADD_P.y + lam * (extX1 - ADD_P.x);
+    var extY2 = ADD_P.y + lam * (extX2 - ADD_P.x);
+    ctx.strokeStyle = "rgba(255,255,255,0.7)";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(m.tx(extX1), m.ty(extY1));
+    ctx.lineTo(m.tx(extX2), m.ty(extY2));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    document.getElementById("addCanvasLabel").textContent = "1. Retta passante per P e Q (corda)";
+
+    // Step 2: mark -R
+    setTimeout(function() {
+      drawPointCircle(ctx, m.tx(x3), m.ty(-y3), "#ff5566", "-R");
+      // dashed vertical from -R to R
+      ctx.strokeStyle = "rgba(255,85,102,0.6)";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(m.tx(x3), m.ty(-y3));
+      ctx.lineTo(m.tx(x3), m.ty(y3));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      document.getElementById("addCanvasLabel").textContent = "2. Terzo punto di intersezione -R";
+
+      // Step 3: draw R = P+Q (gold)
+      setTimeout(function() {
+        // Arrow from -R to R
+        var ax = m.tx(x3), ay1 = m.ty(-y3), ay2 = m.ty(y3);
+        ctx.strokeStyle = "#f7931a";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ax, ay1); ctx.lineTo(ax, ay2); ctx.stroke();
+        // Arrow head
+        ctx.fillStyle = "#f7931a";
+        ctx.beginPath(); ctx.moveTo(ax, ay2); ctx.lineTo(ax - 6, ay2 + 12); ctx.lineTo(ax + 6, ay2 + 12); ctx.fill();
+        drawPointCircle(ctx, m.tx(x3), m.ty(y3), "#f7931a", "R=P+Q");
+        document.getElementById("addCanvasLabel").textContent = "3. Rifletti -R \u2192 R = P+Q (oro)";
+
+        var res = "R = P+Q = (" + x3.toFixed(3) + ", " + y3.toFixed(3) + ")";
+        document.getElementById("addResult").style.display = "block";
+        document.getElementById("addResultVal").textContent = res;
+      }, 900);
+    }, 900);
+  }, 400);
+}
+
+function animateDouble() {
+  resetAddCanvas();
+  const canvas = document.getElementById("addCanvas");
+  if (!canvas) return;
+  const W = canvas.width, H = canvas.height;
+  const ctx = canvas.getContext("2d");
+  const xMin = -3, xMax = 4, yMin = -6, yMax = 6;
+  const m = drawCurveOnCtx(ctx, W, H, xMin, xMax, yMin, yMax);
+
+  var Pt = ADD_Q; // use Q = (1, sqrt(8))
+  drawPointCircle(ctx, m.tx(Pt.x), m.ty(Pt.y), "#22d3a0", "P");
+  document.getElementById("addCanvasLabel").textContent = "Raddoppio: 2P con P = (1, \u221a8)";
+
+  // tangent slope: lambda = 3x^2 / (2y)
+  var lam = (3 * Pt.x * Pt.x) / (2 * Pt.y);
+  var x3 = lam * lam - 2 * Pt.x;
+  var y3 = lam * (Pt.x - x3) - Pt.y;
+
+  setTimeout(function() {
+    var extX1 = -1.5, extX2 = 3.5;
+    var extY1 = Pt.y + lam * (extX1 - Pt.x);
+    var extY2 = Pt.y + lam * (extX2 - Pt.x);
+    ctx.strokeStyle = "rgba(255,255,255,0.7)";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(m.tx(extX1), m.ty(extY1));
+    ctx.lineTo(m.tx(extX2), m.ty(extY2));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    document.getElementById("addCanvasLabel").textContent = "Tangente in P (raddoppio)";
+
+    setTimeout(function() {
+      drawPointCircle(ctx, m.tx(x3), m.ty(-y3), "#ff5566", "-R");
+      ctx.strokeStyle = "rgba(255,85,102,0.5)";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(m.tx(x3), m.ty(-y3));
+      ctx.lineTo(m.tx(x3), m.ty(y3));
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      setTimeout(function() {
+        ctx.strokeStyle = "#f7931a";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(m.tx(x3), m.ty(-y3));
+        ctx.lineTo(m.tx(x3), m.ty(y3));
+        ctx.stroke();
+        drawPointCircle(ctx, m.tx(x3), m.ty(y3), "#f7931a", "2P");
+        document.getElementById("addCanvasLabel").textContent = "2P = (" + x3.toFixed(3) + ", " + y3.toFixed(3) + ")";
+        document.getElementById("addResult").style.display = "block";
+        document.getElementById("addResultVal").textContent = "2P = (" + x3.toFixed(3) + ", " + y3.toFixed(3) + ")";
+      }, 900);
+    }, 900);
+  }, 400);
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 3: Fp FINITE FIELD p=23
+// ═══════════════════════════════════════════════════════════
+function modPow(base, exp, mod) {
+  var result = 1;
+  base = ((base % mod) + mod) % mod;
+  while (exp > 0) {
+    if (exp & 1) result = (result * base) % mod;
+    exp >>= 1;
+    base = (base * base) % mod;
+  }
+  return result;
+}
+
+function computeFpPoints(p) {
+  var points = [];
+  for (var x = 0; x < p; x++) {
+    var rhs = (((x * x % p) * x % p) + 7) % p;
+    for (var y = 0; y < p; y++) {
+      if ((y * y) % p === rhs) {
+        points.push([x, y]);
+      }
+    }
+  }
+  return points;
+}
+
+var fpPoints23 = null;
+
+function drawFpCanvas() {
+  var p = 23;
+  if (!fpPoints23) fpPoints23 = computeFpPoints(p);
+  var points = fpPoints23;
+
+  document.getElementById("fpCount").textContent = points.length;
+
+  // Points list
+  var listEl = document.getElementById("fpPointsList");
+  var html = "";
+  for (var i = 0; i < points.length; i++) {
+    html += "<span>(" + points[i][0] + ", " + points[i][1] + ")</span>";
+    if (i < points.length - 1) html += "  ";
+  }
+  listEl.innerHTML = html;
+
+  var canvas = document.getElementById("fpCanvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var W = canvas.width, H = canvas.height;
+  var margin = 28;
+  var cellW = (W - margin * 2) / p;
+  var cellH = (H - margin * 2) / p;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = "#07080a";
+  ctx.fillRect(0, 0, W, H);
+
+  // Background grid dots
+  ctx.fillStyle = "rgba(255,255,255,0.06)";
+  for (var x = 0; x < p; x++) {
+    for (var y = 0; y < p; y++) {
+      var cx = margin + x * cellW + cellW / 2;
+      var cy = H - margin - y * cellH - cellH / 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Axis labels
+  ctx.fillStyle = "rgba(255,255,255,0.3)";
+  ctx.font = "9px DM Mono, monospace";
+  ctx.textAlign = "center";
+  for (var x2 = 0; x2 < p; x2 += 4) {
+    ctx.fillText(x2, margin + x2 * cellW + cellW / 2, H - 6);
+  }
+  ctx.textAlign = "right";
+  for (var y2 = 0; y2 < p; y2 += 4) {
+    ctx.fillText(y2, margin - 4, H - margin - y2 * cellH - cellH / 2 + 4);
+  }
+  ctx.fillStyle = "rgba(255,255,255,0.2)";
+  ctx.font = "10px DM Mono, monospace";
+  ctx.textAlign = "center";
+  ctx.fillText("x", W / 2, H - 1);
+  ctx.save();
+  ctx.translate(8, H / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText("y", 0, 0);
+  ctx.restore();
+
+  // Highlight curve points
+  points.forEach(function(pt) {
+    var cx = margin + pt[0] * cellW + cellW / 2;
+    var cy = H - margin - pt[1] * cellH - cellH / 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "#f7931a";
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 4: SCALAR MULTIPLICATION p=97
+// ═══════════════════════════════════════════════════════════
+var scalarPoints97 = null;
+var scalarG97 = null;
+
+function modInvJS(a, p) {
+  a = ((a % p) + p) % p;
+  var r = p, s = a, t = 0, u = 1;
+  while (t !== 0 || r !== a) {
+    // Extended Euclidean
+    var old_r = r; var old_s = s; var old_t = t; var old_u = u;
+    // redo properly
+    void old_r; void old_s; void old_t; void old_u;
+    break;
+  }
+  // Use direct loop
+  var old_r2 = p, old_s2 = a;
+  var old_t2 = 0, old_u2 = 1;
+  while (old_s2 !== 0) {
+    var q = Math.floor(old_r2 / old_s2);
+    var tmp = old_s2; old_s2 = old_r2 - q * old_s2; old_r2 = tmp;
+    tmp = old_u2; old_u2 = old_t2 - q * old_u2; old_t2 = tmp;
+  }
+  return ((old_t2 % p) + p) % p;
+}
+
+function addPointsJS(A, B, p) {
+  if (!A) return B;
+  if (!B) return A;
+  if (A[0] === B[0]) {
+    var sum = (A[1] + B[1]) % p;
+    if (sum === 0) return null;
+    // doubling
+    var lam = (3 * A[0] * A[0] % p * modInvJS(2 * A[1], p)) % p;
+    var x3 = ((lam * lam % p) - 2 * A[0] % p + 2 * p) % p;
+    var y3 = ((lam * (A[0] - x3) % p) - A[1] + 2 * p) % p;
+    return [x3, y3];
+  }
+  var dx = (B[0] - A[0] + p) % p;
+  var dy = (B[1] - A[1] + p) % p;
+  var lam2 = dy * modInvJS(dx, p) % p;
+  var x3b = ((lam2 * lam2 % p) - A[0] - B[0] + 2 * p) % p;
+  var y3b = ((lam2 * ((A[0] - x3b + p) % p)) % p - A[1] + p) % p;
+  return [x3b, y3b];
+}
+
+function scalarMulJS(k, G, p) {
+  var R = null;
+  var add = G.slice();
+  while (k > 0) {
+    if (k & 1) R = addPointsJS(R, add, p);
+    add = addPointsJS(add, add, p);
+    k >>= 1;
+  }
+  return R;
+}
+
+function initScalarCanvas() {
+  var p = 97;
+  if (!scalarPoints97) {
+    scalarPoints97 = computeFpPoints(p);
+    // find G
+    scalarG97 = scalarPoints97.length > 0 ? scalarPoints97[0].slice() : [3, 6];
+  }
+  onKSlider(1);
+}
+
+function onKSlider(k) {
+  k = parseInt(k);
+  document.getElementById("kDisplay").textContent = k;
+  document.getElementById("sliderLabel").textContent = "k = " + k + "  (G sembra \"saltare\" casualmente \u2014 questo \u00e8 il cuore della sicurezza)";
+  document.getElementById("kSlider").value = k;
+
+  var p = 97;
+  var G = scalarG97 || [3, 6];
+
+  // Compute path G, 2G, ..., kG
+  var path = [];
+  var cur = null;
+  var add = G.slice();
+  var kk = k;
+  var tmp_add = G.slice();
+  // Recompute step by step for trail
+  for (var i = 1; i <= k; i++) {
+    cur = scalarMulJS(i, G, p);
+    if (cur) path.push(cur.slice());
+  }
+
+  var kG = path.length > 0 ? path[path.length - 1] : null;
+  document.getElementById("kgDisplay").textContent = kG ? "(" + kG[0] + ", " + kG[1] + ")" : "Punto all'infinito";
+
+  drawScalarCanvas(path, kG, p);
+}
+
+function drawScalarCanvas(path, kG, p) {
+  var canvas = document.getElementById("scalarCanvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var W = canvas.width, H = canvas.height;
+  var margin = 24;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = "#07080a";
+  ctx.fillRect(0, 0, W, H);
+
+  var cellW = (W - margin * 2) / p;
+  var cellH = (H - margin * 2) / p;
+  function cx(x) { return margin + x * cellW + cellW / 2; }
+  function cy(y) { return H - margin - y * cellH - cellH / 2; }
+
+  // All group points as gray dots
+  if (scalarPoints97) {
+    ctx.fillStyle = "rgba(255,255,255,0.12)";
+    scalarPoints97.forEach(function(pt) {
+      ctx.beginPath();
+      ctx.arc(cx(pt[0]), cy(pt[1]), 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  // Trail path
+  if (path.length > 1) {
+    for (var i = 0; i < path.length - 1; i++) {
+      var t = i / (path.length - 1);
+      ctx.strokeStyle = "rgba(247,147,26," + (0.15 + t * 0.4) + ")";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(cx(path[i][0]), cy(path[i][1]));
+      ctx.lineTo(cx(path[i + 1][0]), cy(path[i + 1][1]));
+      ctx.stroke();
+    }
+  }
+
+  // G point (purple)
+  if (scalarG97) {
+    ctx.beginPath();
+    ctx.arc(cx(scalarG97[0]), cy(scalarG97[1]), 5, 0, Math.PI * 2);
+    ctx.fillStyle = "#a78bfa";
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = "#a78bfa";
+    ctx.font = "9px DM Mono, monospace";
+    ctx.textAlign = "left";
+    ctx.fillText("G", cx(scalarG97[0]) + 7, cy(scalarG97[1]) + 4);
+  }
+
+  // kG point (gold, large)
+  if (kG) {
+    ctx.beginPath();
+    ctx.arc(cx(kG[0]), cy(kG[1]), 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#f7931a";
+    ctx.shadowColor = "#f7931a";
+    ctx.shadowBlur = 14;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = "#f7931a";
+    ctx.font = "bold 10px DM Mono, monospace";
+    ctx.textAlign = "left";
+    ctx.fillText("kG", cx(kG[0]) + 10, cy(kG[1]) + 4);
+  }
+
+  // Axis labels
+  ctx.fillStyle = "rgba(255,255,255,0.2)";
+  ctx.font = "9px DM Mono, monospace";
+  ctx.textAlign = "center";
+  for (var x = 0; x <= p; x += 20) {
+    ctx.fillText(x, cx(x), H - 4);
+  }
+  ctx.textAlign = "right";
+  for (var y = 0; y <= p; y += 20) {
+    ctx.fillText(y, margin - 4, cy(y) + 4);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 6: PUBKEY GENERATION WITH WEB WORKER (BigInt secp256k1)
+// ═══════════════════════════════════════════════════════════
+var step6Worker = null;
+
+function initStep6() {
+  // nothing needed on init
+}
+
+function generateRandomKey() {
+  var arr = new Uint8Array(32);
+  crypto.getRandomValues(arr);
+  var hex = Array.from(arr).map(function(b) { return b.toString(16).padStart(2, "0"); }).join("");
+  document.getElementById("privKeyInput").value = hex;
+}
+
+function calcPublicKey() {
+  var hex = document.getElementById("privKeyInput").value.trim();
+  if (!/^[0-9a-fA-F]{64}$/.test(hex)) {
+    alert("Inserisci esattamente 64 caratteri esadecimali.");
+    return;
+  }
+
+  var statusEl = document.getElementById("calcStatus");
+  var btn = document.getElementById("calcPubBtn");
+  statusEl.className = "status-badge loading";
+  statusEl.textContent = "Calcolo in corso...";
+  btn.disabled = true;
+
+  var workerCode = [
+    "var P_=BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F');",
+    "var N_=BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');",
+    "var Gx_=BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798');",
+    "var Gy_=BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8');",
+    "function mp(a,p){return((a%p)+p)%p;}",
+    "function mi(a,p){var r=p,s=a,t=0n,u=1n;while(s!==0n){var q=r/s;var tmp=s;s=r-q*s;r=tmp;tmp=u;u=t-q*u;t=tmp;}return mp(r===1n?t:0n,p);}",
+    "function pa(A,B,p){if(!A)return B;if(!B)return A;if(A[0]===B[0]){if(mp(A[1]+B[1],p)===0n)return null;var m=mp(3n*A[0]*A[0]*mi(2n*A[1],p),p);var x=mp(m*m-2n*A[0],p);return[x,mp(m*(A[0]-x)-A[1],p)];}var m2=mp((B[1]-A[1])*mi(B[0]-A[0],p),p);var x2=mp(m2*m2-A[0]-B[0],p);return[x2,mp(m2*(A[0]-x2)-A[1],p)];}",
+    "function sm(k,pt,p){var r=null,add=pt;while(k>0n){if(k&1n)r=pa(r,add,p);add=pa(add,add,p);k>>=1n;}return r;}",
+    "self.onmessage=function(e){",
+    "  var k=BigInt('0x'+e.data);",
+    "  var Q=sm(k,[Gx_,Gy_],P_);",
+    "  if(!Q){self.postMessage({error:'Punto all\\'infinito'});return;}",
+    "  var qx=Q[0].toString(16).padStart(64,'0');",
+    "  var qy=Q[1].toString(16).padStart(64,'0');",
+    "  var prefix=Q[1]%2n===0n?'02':'03';",
+    "  self.postMessage({qx:qx,qy:qy,prefix:prefix});",
+    "};"
+  ].join("\n");
+
+  var blob = new Blob([workerCode], { type: "application/javascript" });
+  var url = URL.createObjectURL(blob);
+  if (step6Worker) { step6Worker.terminate(); }
+  step6Worker = new Worker(url);
+  step6Worker.onmessage = function(e) {
+    URL.revokeObjectURL(url);
+    btn.disabled = false;
+    if (e.data.error) {
+      statusEl.className = "status-badge error";
+      statusEl.textContent = "Errore: " + e.data.error;
+      return;
+    }
+    statusEl.className = "status-badge success";
+    statusEl.textContent = "Calcolo completato!";
+    document.getElementById("qxDisplay").textContent = e.data.qx;
+    document.getElementById("qyDisplay").textContent = e.data.qy;
+    document.getElementById("prefixDisplay").textContent = e.data.prefix + " (" + (e.data.prefix === "02" ? "Y pari" : "Y dispari") + ")";
+    document.getElementById("compKeyDisplay").textContent = e.data.prefix + e.data.qx;
+    step6Worker = null;
+  };
+  step6Worker.onerror = function(err) {
+    URL.revokeObjectURL(url);
+    btn.disabled = false;
+    statusEl.className = "status-badge error";
+    statusEl.textContent = "Errore nel calcolo: " + err.message;
+    step6Worker = null;
+  };
+  step6Worker.postMessage(hex);
+}
+
+// ═══════════════════════════════════════════════════════════
+// STEP 7: ECDSA SIGN & VERIFY (BigInt secp256k1)
+// ═══════════════════════════════════════════════════════════
+var ecdsaPrivKey = null;
+var ecdsaPubKey = null;
+var ecdsaSig = null;
+var ecdsaMsgSigned = null;
+
+var P_  = BigInt("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F");
+var N_  = BigInt("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141");
+var Gx_ = BigInt("0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798");
+var Gy_ = BigInt("0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8");
+
+function mpB(a, p) { return ((a % p) + p) % p; }
+function miB(a, p) {
+  a = mpB(a, p);
+  var r = p, s = a, t = 0n, u = 1n;
+  while (s !== 0n) {
+    var q = r / s;
+    var tmp = s; s = r - q * s; r = tmp;
+    tmp = u; u = t - q * u; t = tmp;
+  }
+  return mpB(t, p);
+}
+function paB(A, B, p) {
+  if (!A) return B;
+  if (!B) return A;
+  if (A[0] === B[0]) {
+    if (mpB(A[1] + B[1], p) === 0n) return null;
+    var m = mpB(3n * A[0] * A[0] * miB(2n * A[1], p), p);
+    var x = mpB(m * m - 2n * A[0], p);
+    return [x, mpB(m * (A[0] - x) - A[1], p)];
+  }
+  var m2 = mpB((B[1] - A[1]) * miB(B[0] - A[0], p), p);
+  var x2 = mpB(m2 * m2 - A[0] - B[0], p);
+  return [x2, mpB(m2 * (A[0] - x2) - A[1], p)];
+}
+function smB(k, pt, p) {
+  var r = null, add = pt.slice();
+  while (k > 0n) {
+    if (k & 1n) r = paB(r, add, p);
+    add = paB(add, add, p);
+    k >>= 1n;
+  }
+  return r;
+}
+
+function randomBigInt256() {
+  var arr = new Uint8Array(32);
+  crypto.getRandomValues(arr);
+  var hex = Array.from(arr).map(function(b) { return b.toString(16).padStart(2, "0"); }).join("");
+  return BigInt("0x" + hex);
+}
+
+function initStep7() {
+  ecdsaGenKeys();
+}
+
+function ecdsaGenKeys() {
+  var k = randomBigInt256();
+  while (k <= 0n || k >= N_) k = randomBigInt256();
+  var Q = smB(k, [Gx_, Gy_], P_);
+  ecdsaPrivKey = k;
+  ecdsaPubKey = Q;
+
+  var privHex = k.toString(16).padStart(64, "0");
+  var pubHex = (Q[1] % 2n === 0n ? "02" : "03") + Q[0].toString(16).padStart(64, "0");
+
+  document.getElementById("ecdsaPrivDisplay").textContent = privHex.substring(0, 16) + "..." + privHex.substring(48);
+  document.getElementById("ecdsaPubDisplay").textContent = pubHex.substring(0, 18) + "..." + pubHex.substring(60);
+
+  // Reset sign result
+  document.getElementById("signResult").style.display = "none";
+  document.getElementById("signStatus").className = "status-badge hidden";
+  ecdsaSig = null;
+  ecdsaMsgSigned = null;
+}
+
+async function ecdsaSign() {
+  var msg = document.getElementById("ecdsaMsg").value;
+  if (!msg) { alert("Inserisci un messaggio."); return; }
+  if (!ecdsaPrivKey) { ecdsaGenKeys(); }
+
+  var statusEl = document.getElementById("signStatus");
+  statusEl.className = "status-badge loading";
+  statusEl.textContent = "Firma in corso...";
+  document.getElementById("signBtn").disabled = true;
+
+  try {
+    var enc = new TextEncoder().encode(msg);
+    var hashBuf = await crypto.subtle.digest("SHA-256", enc);
+    var hashArr = Array.from(new Uint8Array(hashBuf));
+    var hashHex = hashArr.map(function(b) { return b.toString(16).padStart(2, "0"); }).join("");
+    var z = BigInt("0x" + hashHex);
+
+    var k_nonce, r, s;
+    do {
+      k_nonce = randomBigInt256();
+      while (k_nonce <= 0n || k_nonce >= N_) k_nonce = randomBigInt256();
+      var R = smB(k_nonce, [Gx_, Gy_], P_);
+      if (!R) continue;
+      r = mpB(R[0], N_);
+      if (r === 0n) continue;
+      s = mpB(miB(k_nonce, N_) * (z + r * ecdsaPrivKey), N_);
+    } while (r === 0n || s === 0n);
+
+    ecdsaSig = { r: r, s: s };
+    ecdsaMsgSigned = msg;
+
+    document.getElementById("zDisplay").textContent = hashHex;
+    document.getElementById("nonceDisplay").textContent = k_nonce.toString(16).padStart(64, "0").substring(0, 32) + "...";
+    document.getElementById("rDisplay").textContent = r.toString(16).padStart(64, "0");
+    document.getElementById("sDisplay").textContent = s.toString(16).padStart(64, "0");
+
+    document.getElementById("ecdsaVerifyMsg").value = msg;
+    document.getElementById("signResult").style.display = "block";
+    statusEl.className = "status-badge success";
+    statusEl.textContent = "Firma generata con successo!";
+  } catch(err) {
+    statusEl.className = "status-badge error";
+    statusEl.textContent = "Errore: " + err.message;
+  }
+  document.getElementById("signBtn").disabled = false;
+}
+
+async function verifyECDSA(msg, sig, pubKey) {
+  var enc = new TextEncoder().encode(msg);
+  var hashBuf = await crypto.subtle.digest("SHA-256", enc);
+  var hashHex = Array.from(new Uint8Array(hashBuf)).map(function(b) { return b.toString(16).padStart(2, "0"); }).join("");
+  var z = BigInt("0x" + hashHex);
+
+  var r = sig.r, s = sig.s;
+  var w = miB(s, N_);
+  var u1 = mpB(z * w, N_);
+  var u2 = mpB(r * w, N_);
+
+  var P1 = smB(u1, [Gx_, Gy_], P_);
+  var P2 = smB(u2, pubKey, P_);
+  var Pv = paB(P1, P2, P_);
+
+  if (!Pv) return false;
+  return mpB(Pv[0], N_) === r;
+}
+
+async function ecdsaVerify() {
+  if (!ecdsaSig || !ecdsaMsgSigned) { alert("Prima firma un messaggio."); return; }
+  var resultEl = document.getElementById("verifyResult");
+  resultEl.className = "status-badge loading";
+  resultEl.textContent = "Verifica in corso...";
+  try {
+    var valid = await verifyECDSA(ecdsaMsgSigned, ecdsaSig, ecdsaPubKey);
+    if (valid) {
+      resultEl.className = "status-badge success";
+      resultEl.textContent = "\u2713 Firma Valida — il messaggio originale corrisponde alla firma";
+    } else {
+      resultEl.className = "status-badge error";
+      resultEl.textContent = "\u2717 Firma Non Valida";
+    }
+  } catch(err) {
+    resultEl.className = "status-badge error";
+    resultEl.textContent = "Errore: " + err.message;
+  }
+}
+
+async function ecdsaVerifyModified() {
+  if (!ecdsaSig) { alert("Prima firma un messaggio."); return; }
+  var msg = document.getElementById("ecdsaVerifyMsg").value;
+  var resultEl = document.getElementById("verifyModResult");
+  resultEl.className = "status-badge loading";
+  resultEl.textContent = "Verifica in corso...";
+  try {
+    var valid = await verifyECDSA(msg, ecdsaSig, ecdsaPubKey);
+    if (valid) {
+      resultEl.className = "status-badge success";
+      resultEl.textContent = "\u2713 Firma Valida — il messaggio corrisponde alla firma";
+    } else {
+      resultEl.className = "status-badge error";
+      resultEl.textContent = "\u2717 Firma Non Valida — il messaggio \u00e8 stato modificato!";
+    }
+  } catch(err) {
+    resultEl.className = "status-badge error";
+    resultEl.textContent = "Errore: " + err.message;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+window.addEventListener("load", function() {
+  drawCurve1();
+});
+</script>
+</body>
+</html>
