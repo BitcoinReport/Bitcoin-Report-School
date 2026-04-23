@@ -3,6 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<meta name="description" content="Genera e comprendi le chiavi Bitcoin: da chiave privata a chiave pubblica con curva ellittica secp256k1, indirizzi P2PKH, P2SH, P2WPKH e Taproot. Tutto in locale, zero dati trasmessi.">
+<meta name="keywords" content="generatore chiavi Bitcoin, chiave privata Bitcoin, chiave pubblica Bitcoin, WIF, indirizzo Bitcoin, secp256k1, P2PKH, P2WPKH, Taproot, crittografia Bitcoin, HD wallet">
+<meta name="author" content="Bitcoin Report School">
+<meta name="language" content="it">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Generatore Chiavi Bitcoin — Da Privata a Indirizzo">
+<meta property="og:description" content="Genera chiavi Bitcoin e comprendi la crittografia: da chiave privata a pubblica con secp256k1, indirizzi P2PKH, P2WPKH, Taproot. Tutto in locale, zero dati trasmessi.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bitcoinreportschool.com/generatore_chiavi_bitcoin.html">
+<meta property="og:image" content="https://bitcoinreportschool.com/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Generatore Chiavi Bitcoin — Da Privata a Indirizzo">
+<meta name="twitter:description" content="Genera chiavi Bitcoin con curva ellittica secp256k1: chiave privata, pubblica, WIF e tutti i tipi di indirizzo. Tutto in locale.">
+<link rel="canonical" href="https://bitcoinreportschool.com/generatore_chiavi_bitcoin.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
 <title>Generatore Chiavi Bitcoin — Bitcoin Report School</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
@@ -1020,7 +1037,7 @@ const Gx=BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81
 const Gy=BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8');
 
 function modp(a){return((a%P)+P)%P;}
-function modinv(a,m){let[r,s,t,u]=[m,a,0n,1n];while(t){const q=r/t;[r,s,t,u]=[t,u,r-q*t,s-q*u];}return modp(s);}
+function modinv(a,m){let[r,s,t,u]=[m,0n,a,1n];while(t){const q=r/t;[r,s,t,u]=[t,u,r-q*t,s-q*u];}return modp(s);}
 
 function pointAdd(P1,P2){
   if(!P1)return P2;if(!P2)return P1;
@@ -1230,7 +1247,7 @@ function confirmStep1(){
     "var Gx=BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798');",
     "var Gy=BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8');",
     "function mp(a){return((a%P)+P)%P;}",
-    "function mi(a,m){var r=m,s=a,t=0n,u=1n,q,r2,s2,t2,u2;while(t!==0n){q=r/t;r2=t;s2=u;t2=r-q*t;u2=s-q*u;r=r2;s=s2;t=t2;u=u2;}return((s%P)+P)%P;}",
+    "function mi(a,m){var r=m,s=0n,t=a,u=1n,q,r2,s2,t2,u2;while(t!==0n){q=r/t;r2=t;s2=u;t2=r-q*t;u2=s-q*u;r=r2;s=s2;t=t2;u=u2;}return((s%P)+P)%P;}",
     "function pa(A,B){if(!A)return B;if(!B)return A;if(A[0]===B[0]){if(A[1]!==B[1])return null;var m=mp(3n*A[0]*A[0]*mi(2n*A[1],P));var x=mp(m*m-2n*A[0]);return[x,mp(m*(A[0]-x)-A[1])];}var m=mp((B[1]-A[1])*mi(B[0]-A[0],P));var x=mp(m*m-A[0]-B[0]);return[x,mp(m*(A[0]-x)-A[1])];}",
     "function sm(k,pt){var r=null,kk=k,add=pt;while(kk>0n){if(kk&1n)r=pa(r,add);add=pa(add,add);kk=kk>>1n;}return r;}",
     "self.onmessage=function(ev){try{var k=BigInt('0x'+ev.data);if(k<=0n||k>=N){self.postMessage({e:1});return;}var pt=sm(k,[Gx,Gy]);if(!pt){self.postMessage({e:1});return;}var x=pt[0].toString(16).padStart(64,'0');var y=pt[1].toString(16).padStart(64,'0');self.postMessage({x:x,y:y,c:(pt[1]%2n===0n?'02':'03')+x,u:'04'+x+y});}catch(err){self.postMessage({e:1});}};"
