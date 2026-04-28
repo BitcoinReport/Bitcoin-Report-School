@@ -619,6 +619,99 @@ nav {
     .donation-qr-wrap { order: -1; }
   }
 
+/* APPROFONDIMENTI SECTION */
+.approfondimenti-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+.approfondimenti-section .tools-header p {
+  max-width: 520px;
+}
+.read-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  max-width: 560px;
+}
+.read-card::before {
+  content: '📖';
+  position: absolute;
+  top: -0.4rem; right: 1rem;
+  font-size: 7rem;
+  opacity: 0.04;
+  pointer-events: none;
+  line-height: 1;
+  transition: opacity 0.3s;
+}
+.read-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(247,147,26,0.1);
+}
+.read-card:hover::before { opacity: 0.07; }
+.read-card-tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.read-card-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
+.read-card-title {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+.read-card-desc {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 1.4rem;
+  flex: 1;
+}
+.read-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.read-card-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.read-pill {
+  background: rgba(34,211,160,0.1);
+  border: 1px solid rgba(34,211,160,0.25);
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+.read-card-arrow {
+  color: var(--gold);
+  font-size: 1.3rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.read-card:hover .read-card-arrow { transform: translateX(5px); }
+
   </style>
 </head>
 <body>
@@ -883,6 +976,37 @@ nav {
     </a>
 
   </div>
+</section>
+
+<!-- APPROFONDIMENTI -->
+<div class="section-divider">
+  <span class="section-divider-label">// approfondimenti · letture consigliate</span>
+</div>
+
+<section class="approfondimenti-section">
+  <div class="tools-header">
+    <h2>Approfondimenti</h2>
+    <p>Articoli e guide per capire il sistema monetario, l&#8217;economia austriaca e Bitcoin come strumento di sovranit&#224; finanziaria.</p>
+  </div>
+
+  <a class="read-card" href="liberta-dal-potere.html">
+    <div class="read-card-tag">// Approfondimento &middot; Lettura consigliata</div>
+    <div class="read-card-icon">&#128218;</div>
+    <div class="read-card-title">Come Liberarsi<br>dal Potere</div>
+    <div class="read-card-desc">
+      Capire il sistema monetario per smettere di servirlo. Dal controllo della moneta alle banche centrali,
+      dall&#8217;effetto Cantillon a Bitcoin come strumento di sovranit&#224; reale.
+      Scritto da Mike di Bitcoin Report Italia &mdash; circa 15 minuti di lettura.
+    </div>
+    <div class="read-card-footer">
+      <div class="read-card-pills">
+        <span class="read-pill">Economia Austriaca</span>
+        <span class="read-pill">Moneta Fiat</span>
+        <span class="read-pill">Sovranit&#224;</span>
+      </div>
+      <span class="read-card-arrow">&rarr;</span>
+    </div>
+  </a>
 </section>
 
 <!-- MANIFESTO -->
