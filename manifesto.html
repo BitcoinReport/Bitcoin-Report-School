@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Internet vs Bitcoin: La Strada Comoda Porta Sempre alla Stessa Gabbia &mdash; Bitcoin Report School</title>
+<meta name="description" content="Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio. La storia della cattura di internet &egrave; la chiave per capire cosa rischia di succedere con Bitcoin &mdash; e perch&eacute; quella storia non deve ripetersi.">
+<meta name="author" content="Mike &mdash; Bitcoin Report Italia">
+<link rel="canonical" href="https://bitcoinreportschool.com/manifesto.html">
+<meta property="og:title" content="Internet vs Bitcoin: La Strada Comoda Porta Sempre alla Stessa Gabbia">
+<meta property="og:description" content="Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio. La storia della cattura di internet &egrave; la chiave per capire cosa rischia di succedere con Bitcoin.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bitcoinreportschool.com/manifesto.html">
+<meta property="article:author" content="Mike &mdash; Bitcoin Report Italia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg: #07080a;
+  --bg2: #0d0e14;
+  --bg3: #13141c;
+  --gold: #f7931a;
+  --gold-dim: rgba(247,147,26,0.10);
+  --gold-dim2: rgba(247,147,26,0.05);
+  --green: #22d3a0;
+  --red: #f87171;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e4dc;
+  --text2: #9a9790;
+  --text3: #4a4844;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Playfair Display', serif;
+}
+[data-theme="light"] {
+  --bg: #f8f6f1;
+  --bg2: #eeeae2;
+  --bg3: #e4e0d8;
+  --text: #1a1814;
+  --text2: #5a5650;
+  --text3: #a0a090;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --gold-dim: rgba(247,147,26,0.12);
+  --gold-dim2: rgba(247,147,26,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); transition: background .3s, color .3s; }
+
+/* ── PROGRESS BAR ─────────────────────────────────────────── */
+#reading-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--gold); z-index: 9999; transition: width .1s; pointer-events: none; }
+
+/* ── HOME BTN ──────────────────────────────────────────────── */
+.home-btn { position: fixed; top: 1rem; left: 1rem; z-index: 900; display: flex; align-items: center; gap: .4rem; background: rgba(7,8,10,.92); border: 1px solid var(--gold); border-radius: 6px; padding: .4rem .85rem; font-family: var(--mono); font-size: .68rem; color: var(--gold); text-decoration: none; letter-spacing: .05em; backdrop-filter: blur(8px); transition: background .2s, box-shadow .2s; }
+.home-btn:hover { background: rgba(247,147,26,.1); box-shadow: 0 0 12px rgba(247,147,26,.25); }
+[data-theme="light"] .home-btn { background: rgba(248,246,241,.92); }
+
+/* ── THEME TOGGLE ──────────────────────────────────────────── */
+.theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── NAV ────────────────────────────────────────────────────── */
+.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; }
+.nav-logo { font-family: var(--mono); font-size: .82rem; color: var(--gold); text-decoration: none; letter-spacing: .08em; }
+.nav-cat { font-family: var(--mono); font-size: .6rem; color: var(--text3); }
+
+/* ── HERO MANIFESTO ──────────────────────────────────────────── */
+.hero-manifesto { position: relative; overflow: hidden; padding: 0; background: linear-gradient(180deg, #020304 0%, #07080a 40%, var(--bg) 100%); }
+.hero-manifesto-inner { max-width: 900px; margin: 0 auto; padding: 5rem 2rem 4rem; position: relative; z-index: 2; }
+.hero-grid-bg { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(247,147,26,.04) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(247,147,26,.04) 40px); background-size: 40px 40px; pointer-events: none; }
+.hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse at center, rgba(247,147,26,.12) 0%, transparent 70%); pointer-events: none; }
+.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--gold); letter-spacing: .25em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: .8; }
+.hero-manifesto h1 { font-family: var(--serif); font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 700; color: var(--text); line-height: 1.05; margin-bottom: .5rem; }
+.hero-subtitle-line { font-family: var(--mono); font-size: clamp(.8rem, 1.5vw, 1rem); color: var(--gold); opacity: .75; margin-bottom: 2rem; letter-spacing: .04em; }
+.hero-manifesto-quote { border-left: 4px solid var(--gold); padding: 1.1rem 1.5rem; font-family: var(--serif); font-style: italic; font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text2); line-height: 1.75; background: rgba(247,147,26,.04); border-radius: 0 12px 12px 0; max-width: 640px; margin-bottom: 2.5rem; }
+.hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--mono); font-size: .62rem; color: var(--text3); margin-bottom: 2.5rem; }
+.hero-meta span { display: flex; align-items: center; gap: .3rem; }
+.hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.hero-stat { display: flex; flex-direction: column; gap: .25rem; }
+.hero-stat-num { font-family: var(--mono); font-size: 1.6rem; color: var(--gold); font-weight: 700; }
+.hero-stat-label { font-family: var(--mono); font-size: .55rem; color: var(--text3); text-transform: uppercase; letter-spacing: .15em; }
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page-layout { display: grid; grid-template-columns: 220px 1fr; gap: 0; max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem; align-items: start; }
+@media(max-width: 860px) { .page-layout { grid-template-columns: 1fr; } }
+
+/* ── TOC SIDEBAR ─────────────────────────────────────────────── */
+.toc-sidebar { position: sticky; top: 5rem; padding-right: 2rem; }
+.toc-toggle { display: none; font-family: var(--mono); font-size: .65rem; color: var(--gold); background: none; border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .8rem; cursor: pointer; margin-bottom: .6rem; }
+@media(max-width: 860px) { .toc-toggle { display: block; } .toc-list { display: none; } .toc-list.open { display: flex; } }
+.toc-label { font-family: var(--mono); font-size: .55rem; color: var(--text3); text-transform: uppercase; letter-spacing: .15em; margin-bottom: .8rem; }
+.toc-list { display: flex; flex-direction: column; gap: .2rem; }
+.toc-link { display: flex; gap: .6rem; align-items: flex-start; text-decoration: none; padding: .4rem .5rem; border-radius: 6px; transition: background .15s; }
+.toc-link:hover { background: var(--gold-dim); }
+.toc-link.active { background: var(--gold-dim); }
+.toc-num { font-family: var(--mono); font-size: .55rem; color: var(--gold); opacity: .6; padding-top: .1rem; flex-shrink: 0; }
+.toc-text { font-size: .72rem; color: var(--text2); line-height: 1.4; }
+.toc-link.active .toc-text { color: var(--gold); }
+
+/* ── ARTICLE BODY ────────────────────────────────────────────── */
+.article-body { min-width: 0; }
+.chapter { position: relative; padding: 3rem 0 1rem; }
+.chapter-num-bg { position: absolute; top: 1.5rem; right: 0; font-family: var(--serif); font-size: 8rem; font-weight: 700; color: var(--gold); opacity: .045; line-height: 1; pointer-events: none; user-select: none; }
+.chapter-label { font-family: var(--mono); font-size: .58rem; color: var(--gold); text-transform: uppercase; letter-spacing: .18em; opacity: .75; display: block; margin-bottom: .5rem; }
+.chapter-title { font-family: var(--serif); font-size: clamp(1.25rem, 2.5vw, 1.65rem); font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 1.8rem; }
+.chapter-body { max-width: 680px; }
+.chapter-body p { font-family: var(--serif); font-size: clamp(1rem, 1.8vw, 1.05rem); line-height: 1.85; color: var(--text); margin-bottom: 1.3rem; }
+.chapter-body strong { color: var(--text); font-weight: 600; font-family: var(--sans); }
+.chapter-body em { font-style: italic; }
+.inline-link { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(247,147,26,.35); transition: border-color .2s; }
+.inline-link:hover { border-color: var(--gold); }
+.content-list { list-style: none; padding-left: 1rem; margin-bottom: 1.3rem; }
+.content-list li { font-family: var(--serif); font-size: 1rem; line-height: 1.8; color: var(--text); margin-bottom: .6rem; padding-left: 1.1rem; position: relative; }
+.content-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: .7; }
+
+/* ── BLOCKQUOTE ──────────────────────────────────────────────── */
+.pull-quote { border-left: 3px solid var(--gold); padding: 1rem 1.4rem; margin: 1.8rem 0; font-family: var(--serif); font-style: italic; font-size: 1.1rem; line-height: 1.75; color: var(--text); background: var(--gold-dim2); border-radius: 0 10px 10px 0; }
+.pull-quote cite { display: block; margin-top: .6rem; font-family: var(--mono); font-size: .62rem; font-style: normal; color: var(--text3); }
+
+/* ── CHAPTER DIVIDER ─────────────────────────────────────────── */
+.chapter-divider { display: flex; align-items: center; max-width: 680px; margin: 1rem 0; }
+.chapter-divider span { flex: 1; height: 1px; background: var(--border); }
+
+/* ── AGISCI ADESSO ───────────────────────────────────────────── */
+.agisci-box { background: linear-gradient(135deg, rgba(247,147,26,.09), rgba(247,147,26,.04)); border: 1px solid rgba(247,147,26,.35); border-radius: 14px; padding: 1.8rem 2rem; margin: 2.5rem 0; max-width: 680px; }
+.agisci-title { font-family: var(--mono); font-size: .7rem; color: var(--gold); text-transform: uppercase; letter-spacing: .2em; margin-bottom: 1.2rem; }
+.agisci-items { display: flex; flex-direction: column; gap: 1rem; }
+.agisci-item { display: flex; gap: 1rem; align-items: flex-start; }
+.agisci-num { font-family: var(--mono); font-size: .75rem; color: var(--gold); font-weight: 700; min-width: 1.5rem; padding-top: .15rem; flex-shrink: 0; }
+.agisci-text { font-family: var(--sans); font-size: .9rem; line-height: 1.6; color: var(--text2); }
+.agisci-text strong { color: var(--text); font-weight: 600; }
+
+/* ── LEGGI ANCHE ─────────────────────────────────────────────── */
+.leggi-anche-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; margin: 2rem 0 1rem; }
+.la-title { font-family: var(--mono); font-size: .6rem; color: var(--text3); text-transform: uppercase; letter-spacing: .14em; margin-bottom: .9rem; }
+.la-links { display: flex; flex-direction: column; gap: .7rem; }
+.la-link { display: flex; gap: .9rem; align-items: flex-start; text-decoration: none; padding: .7rem .8rem; border-radius: 8px; background: var(--bg3); border: 1px solid var(--border); transition: border-color .2s, background .2s; }
+.la-link:hover { border-color: var(--gold); background: var(--gold-dim2); }
+.la-icon { font-size: 1.3rem; flex-shrink: 0; padding-top: .05rem; }
+.la-link-title { font-family: var(--sans); font-size: .85rem; font-weight: 600; color: var(--gold); margin-bottom: .2rem; }
+.la-link-desc { font-family: var(--sans); font-size: .78rem; color: var(--text2); line-height: 1.5; }
+
+/* ── DONATION ────────────────────────────────────────────────── */
+.donation-section { background: linear-gradient(135deg, #0f0a00, #1a0f00 50%, #0a0a0a); border-top: 1px solid #3a2500; padding: 5rem 2rem; }
+.donation-inner { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media(max-width: 680px) { .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; } .donation-qr-wrap { order: -1; } }
+.donation-text h2 { font-family: var(--sans); font-weight: 700; font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem; }
+.donation-text p { color: #8a8780; font-size: .88rem; line-height: 1.75; margin-bottom: 1rem; }
+.donation-manifesto { background: rgba(247,147,26,.06); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: .9rem 1.1rem; font-size: .82rem; font-style: italic; color: #8a8780; line-height: 1.65; }
+.donation-manifesto strong { color: var(--gold); font-style: normal; }
+.donation-qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+.qr-frame { padding: 1rem; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px rgba(247,147,26,.3), 0 0 40px rgba(247,147,26,.1), 0 20px 60px rgba(0,0,0,.6); display: inline-block; position: relative; transition: transform .3s; }
+.qr-frame:hover { transform: translateY(-4px) scale(1.02); }
+.qr-frame img { display: block; width: 190px; height: 190px; border-radius: 4px; }
+.qr-badge { position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; font-family: var(--mono); font-weight: 700; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 20px; white-space: nowrap; }
+.qr-label { text-align: center; font-family: var(--mono); font-size: .65rem; color: #4a4844; }
+
+/* ── BACK TO TOP ──────────────────────────────────────────────── */
+.back-top { position: fixed; bottom: 2rem; right: 1.5rem; background: var(--bg2); border: 1px solid var(--border2); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: .9rem; color: var(--text2); text-decoration: none; z-index: 500; opacity: 0; pointer-events: none; transition: opacity .3s, border-color .2s; }
+.back-top.visible { opacity: 1; pointer-events: all; }
+.back-top:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); }
+footer a { color: var(--text3); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div id="reading-bar"></div>
+
+<a href="index.html" class="home-btn">&#8592; Home</a>
+<button class="theme-btn" onclick="toggleTheme()" id="theme-btn">&#9788; Chiaro</button>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
+  <span class="nav-cat">// manifesto &middot; pensiero critico</span>
+</nav>
+
+<!-- ── HERO MANIFESTO ──────────────────────────────────────────────────── -->
+<header class="hero-manifesto">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-manifesto-inner">
+    <div class="hero-eyebrow">// manifesto &middot; Bitcoin Report Italia</div>
+    <h1>La strada comoda<br>porta sempre<br>alla stessa gabbia</h1>
+    <div class="hero-subtitle-line">Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio.</div>
+    <blockquote class="hero-manifesto-quote">
+      &ldquo;Perch&eacute; chi non conosce la storia &egrave; condannato a ripeterla, anche con la tecnologia.&rdquo;
+    </blockquote>
+    <div class="hero-meta">
+      <span>&#9997; di Mike &mdash; Bitcoin Report Italia</span>
+      <span>&#128337; ~15 minuti di lettura</span>
+      <span>&#128209; 10 capitoli</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">1996</div><div class="hero-stat-label">Dichiarazione di indipendenza del cyberspazio</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">2009</div><div class="hero-stat-label">Blocco genesi Bitcoin</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">2024</div><div class="hero-stat-label">BlackRock ETF &mdash; il cerchio si chiude</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="page-layout">
+
+  <!-- TOC sidebar -->
+  <aside class="toc-sidebar">
+    <button class="toc-toggle" onclick="document.getElementById('toc-list').classList.toggle('open')">&#9776; Indice capitoli</button>
+    <div class="toc-label">Indice</div>
+    <nav class="toc-list" id="toc-list">
+<a href="#cap1" class="toc-link" data-cap="1"><span class="toc-num">01</span><span class="toc-text">Prologo: il sogno che non sapevamo di avere</span></a>
+<a href="#cap2" class="toc-link" data-cap="2"><span class="toc-num">02</span><span class="toc-text">Come era fatta internet prima</span></a>
+<a href="#cap3" class="toc-link" data-cap="3"><span class="toc-num">03</span><span class="toc-text">I cypherpunk: chi aveva capito il pericolo prima</span></a>
+<a href="#cap4" class="toc-link" data-cap="4"><span class="toc-num">04</span><span class="toc-text">Come internet è stata catturata: la prima fase</span></a>
+<a href="#cap5" class="toc-link" data-cap="5"><span class="toc-num">05</span><span class="toc-text">La seconda fase: dalla sorveglianza al controllo</span></a>
+<a href="#cap6" class="toc-link" data-cap="6"><span class="toc-num">06</span><span class="toc-text">La struttura tecnica della cattura</span></a>
+<a href="#cap7" class="toc-link" data-cap="7"><span class="toc-num">07</span><span class="toc-text">Bitcoin al bivio: lo stesso schema, gli stessi attori</span></a>
+<a href="#cap8" class="toc-link" data-cap="8"><span class="toc-num">08</span><span class="toc-text">Perché questa volta è diverso — e perché non lo è</span></a>
+<a href="#cap9" class="toc-link" data-cap="9"><span class="toc-num">09</span><span class="toc-text">Cosa succede se lasciamo che vada così</span></a>
+<a href="#cap10" class="toc-link" data-cap="10"><span class="toc-num">10</span><span class="toc-text">Il manifesto: cosa fare adesso</span></a>
+    </nav>
+  </aside>
+
+  <!-- Article -->
+  <main class="article-body">
+
+<section class="chapter" id="cap1">
+  <div class="chapter-num-bg">01</div>
+  <span class="chapter-label">// capitolo &middot; 01</span>
+  <h2 class="chapter-title">Prologo: il sogno che non sapevamo di avere</h2>
+  <div class="chapter-body">
+<p>C&#8217;&egrave; un momento preciso in cui internet era ancora quello che avrebbe potuto essere.</p>
+<p>Era il 1996. John Perry Barlow &mdash; poeta, attivista, ex paroliere dei Grateful Dead &mdash; sed&#232; davanti a un computer a Davos, in Svizzera, mentre fuori i leader del mondo si riunivano al Forum Economico Mondiale. Scrisse in poche ore un documento che pubblic&#242; online quella stessa notte. Lo chiam&#242; <em>A Declaration of the Independence of Cyberspace</em> &mdash; Una Dichiarazione di Indipendenza del Cyberspazio.</p>
+<blockquote class="pull-quote">
+&ldquo;Governi del Mondo Industriale, voi stanchi giganti di carne e acciaio, vengo dal Cyberspazio, la nuova casa della Mente. A nome del futuro, vi chiedo di lasciarci in pace. Non siete i benvenuti tra noi. Non avete sovraniт&#224; dove ci riuniamo.&rdquo;
+<cite>&mdash; John Perry Barlow, A Declaration of the Independence of Cyberspace, 1996</cite>
+</blockquote>
+<p>Non era retorica romantica. Era la descrizione precisa di qualcosa che esisteva davvero in quel momento: una rete globale senza centro, senza proprietari, senza cancelli. Un sistema in cui chiunque poteva pubblicare, comunicare, scambiare informazioni con chiunque altro nel mondo, senza chiedere permesso a nessuno.</p>
+<p>Quel sogno era reale. E nel giro di vent&#8217;anni &egrave; stato quasi completamente catturato.</p>
+<p><strong>Capire come &egrave; successo non &egrave; un esercizio nostalgico.</strong> &Egrave; la chiave per capire cosa rischia di succedere con Bitcoin &mdash; e perch&#233; quella storia non deve ripetersi.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap2">
+  <div class="chapter-num-bg">02</div>
+  <span class="chapter-label">// capitolo &middot; 02</span>
+  <h2 class="chapter-title">Come era fatta internet prima</h2>
+  <div class="chapter-body">
+<p>Internet nasce come progetto militare americano negli anni &#8217;60 &mdash; ARPANET &mdash; ma la sua architettura fondamentale viene definita nei decenni successivi da una comunit&#224; di ricercatori, ingegneri e visionari con una filosofia precisa: la rete deve essere <strong>distribuita, aperta e resiliente</strong>.</p>
+<p><strong>Distribuita</strong> significa che non esiste un centro. Ogni nodo della rete &egrave; equivalente a ogni altro. Se un nodo viene eliminato, il traffico si reindirizza automaticamente attraverso altri percorsi. Questa architettura era stata pensata per sopravvivere a un attacco nucleare &mdash; ma aveva una conseguenza politica profonda: nessun singolo attore poteva controllare la rete spegnendo un interruttore.</p>
+<p><strong>Aperta</strong> significa che i protocolli su cui internet funziona &mdash; TCP/IP, HTTP, SMTP &mdash; sono pubblici, documentati, utilizzabili da chiunque senza licenze o permessi. Chiunque con un computer e una connessione poteva costruire qualsiasi cosa sopra quella infrastruttura. Non c&#8217;era un ufficio da cui chiedere l&#8217;autorizzazione.</p>
+<p>La cultura che costru&#236; internet era esplicitamente anti-autoritaria. Richard Stallman fond&#242; nel 1985 la Free Software Foundation e scrisse la GNU General Public License &mdash; il documento legale che garantiva che il software libero rimanesse libero. Linus Torvalds nel 1991 pubblic&#242; il kernel Linux: un sistema operativo costruito collettivamente, senza proprietari, disponibile a chiunque.</p>
+<p>Tim Berners-Lee invent&#242; il World Wide Web nel 1989 e scelse deliberatamente di non brevettarlo. Avrebbe potuto diventare uno degli uomini pi&#249; ricchi della storia. Scelse di regalare la sua invenzione all&#8217;umanit&#224;.</p>
+<p>Questa era internet. Una rete costruita da persone che credevano genuinamente che la tecnologia potesse <strong>distribuire il potere invece di concentrarlo</strong>.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap3">
+  <div class="chapter-num-bg">03</div>
+  <span class="chapter-label">// capitolo &middot; 03</span>
+  <h2 class="chapter-title">I cypherpunk: chi aveva capito il pericolo prima</h2>
+  <div class="chapter-body">
+<p>C&#8217;era un gruppo di persone che gi&#224; negli anni &#8217;90 aveva capito che quella libert&#224; non era garantita. Che i governi e le corporation avrebbero cercato di catturare la rete. E che l&#8217;unico modo per difendersi era la crittografia.</p>
+<p>Si chiamavano <strong>cypherpunk</strong>. Erano crittografi, matematici, programmatori, filosofi libertari, riuniti in una mailing list che produceva idee che avrebbero cambiato il mondo.</p>
+<blockquote class="pull-quote">
+&ldquo;La privacy &egrave; necessaria per una societ&#224; aperta nell&#8217;era elettronica. Non possiamo aspettarci che governi, corporation, o altre grandi organizzazioni senza volto ci concedano la privacy per loro buona grazia. Dobbiamo difendere la nostra privacy se vogliamo averne una. I cypherpunk scrivono codice.&rdquo;
+<cite>&mdash; Eric Hughes, A Cypherpunk's Manifesto, 1993</cite>
+</blockquote>
+<p>Phil Zimmermann nel 1991 pubblic&#242; PGP &mdash; Pretty Good Privacy &mdash; il primo sistema di cifratura a chiave pubblica accessibile al pubblico generale. Il governo americano apr&#236; un&#8217;indagine penale per esportazione illegale di munizioni. La crittografia era classificata come arma.</p>
+<p>Adam Back nel 1997 invent&#242; Hashcash &mdash; un sistema di proof-of-work per limitare lo spam via email. Il meccanismo che Back invent&#242; per quel problema marginale sarebbe diventato anni dopo il cuore del meccanismo di consenso di Bitcoin.</p>
+<p>Nick Szabo nel 1998 teorizza &#8220;bit gold&#8221; &mdash; un sistema di moneta digitale decentralizzata basata su proof-of-work e catene crittografiche. Non riusciva a risolvere il problema del double spending senza un&#8217;autorit&#224; centrale. Avrebbe dovuto aspettare dieci anni.</p>
+<p>I cypherpunk capivano una cosa che la maggioranza degli utenti di internet non aveva ancora compreso: <strong>la libert&#224; su una rete digitale non &egrave; automatica</strong>. &Egrave; il risultato di scelte architetturali precise. E quelle scelte possono essere fatte bene o fatte male &mdash; o possono essere disfatte.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap4">
+  <div class="chapter-num-bg">04</div>
+  <span class="chapter-label">// capitolo &middot; 04</span>
+  <h2 class="chapter-title">Come internet &egrave; stata catturata: la prima fase</h2>
+  <div class="chapter-body">
+<p>La cattura di internet non &egrave; avvenuta con la forza. &Egrave; avvenuta con la <strong>comodit&#224;</strong>.</p>
+<p>Negli anni &#8217;90, usare internet richiedeva competenze tecniche reali. Bisognava capire i protocolli. Bisognava configurare i client di posta. Per avere un sito, bisognava gestire un server. La rete era libera, ma non era semplice.</p>
+<p>Poi &egrave; arrivata la massa. E la massa non voleva capire i protocolli. Voleva qualcosa che funzionasse senza doverlo capire.</p>
+<p>AOL fu il primo grande esperimento di internet semplificata. Negli anni &#8217;90 invi&#242; per posta centinaia di milioni di CD-ROM a famiglie americane &mdash; letteralmente sped&#236; internet a casa delle persone. L&#8217;accesso era chiuso, controllato, mediato da AOL stessa. Non era internet &mdash; era un giardino recintato che si affacciava su internet. Ma era semplice. E semplice vinceva.</p>
+<p>Il modello che si afferm&#242; definitivamente negli anni 2000 aveva una caratteristica fondamentale: era <strong>gratis</strong>. Google era gratis. Facebook era gratis. Gmail era gratis. YouTube era gratis.</p>
+<blockquote class="pull-quote">
+&ldquo;Niente &egrave; gratis. La domanda era sempre: qual &egrave; il modello di business? La risposta fu elaborata con precisione crescente: il modello di business era l&#8217;utente stesso.&rdquo;
+</blockquote>
+<p>Shoshana Zuboff, professoressa emerita della Harvard Business School, ha chiamato questo sistema <strong>capitalismo della sorveglianza</strong>. La sua tesi: Google, Facebook e le piattaforme simili non vendono prodotti agli utenti &mdash; vendono previsioni sul comportamento degli utenti agli inserzionisti. L&#8217;utente non &egrave; il cliente. &Egrave; la materia prima.</p>
+<p>Nel 2006 Facebook apr&#236; la registrazione a chiunque. In quell&#8217;anno aveva 12 milioni di utenti. Nel 2012 raggiunse il miliardo. La rete di connessioni sociali dell&#8217;intera umanit&#224; &mdash; costruita gratuitamente dagli utenti stessi, ceduta a un&#8217;azienda privata in cambio di un servizio di messaggistica.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap5">
+  <div class="chapter-num-bg">05</div>
+  <span class="chapter-label">// capitolo &middot; 05</span>
+  <h2 class="chapter-title">La seconda fase: dalla sorveglianza al controllo</h2>
+  <div class="chapter-body">
+<p>La sorveglianza era il primo livello. Il secondo livello fu il <strong>controllo</strong>.</p>
+<p>Nel 2017 un documento interno di Facebook traped&#236; sulla stampa australiana. Era una presentazione commerciale per inserzionisti che mostrava come Facebook fosse in grado di identificare in tempo reale gli stati emotivi degli adolescenti &mdash; momenti di insicurezza, di vulnerabilit&#224;, di bisogno di approvazione &mdash; e di venderli come finestre di opportunit&#224; per la pubblicit&#224;. La piattaforma non stava solo osservando. Stava ottimizzando le emozioni degli utenti.</p>
+<p>Nel 2014 Facebook aveva pubblicato su PNAS uno studio in cui descriveva di aver manipolato il feed di 689.003 utenti senza consenso per studiare il contagio emotivo. Riducendo i contenuti positivi nel feed, aveva osservato un aumento dei post negativi. La piattaforma era in grado di modificare l&#8217;umore di centinaia di migliaia di persone alterando l&#8217;algoritmo.</p>
+<p>Ma il controllo non era solo comportamentale. Era anche politico. Nel gennaio 2021, Twitter sospese permanentemente l&#8217;account del presidente in carica degli Stati Uniti. Indipendentemente da qualsiasi giudizio sul soggetto: un&#8217;azienda privata aveva il potere tecnico e lo esercit&#242; di rimuovere dalla comunicazione pubblica la voce di un capo di Stato eletto. Apple e Google rimossero Parler dai loro store in 24 ore.</p>
+<blockquote class="pull-quote">
+&ldquo;Tre aziende private avevano il potere di silenziare chiunque, inclusi capi di governo, senza processo, senza appello, senza supervisione democratica.&rdquo;
+</blockquote>
+<p>Questo era il risultato finale della strada comoda. La rete distribuita e incensurabile degli anni &#8217;90 era diventata un sistema di comunicazione globale controllato da cinque aziende americane, soggette alla legge americana, agli interessi degli azionisti americani, e alle pressioni dei governi di tutto il mondo.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap6">
+  <div class="chapter-num-bg">06</div>
+  <span class="chapter-label">// capitolo &middot; 06</span>
+  <h2 class="chapter-title">La struttura tecnica della cattura</h2>
+  <div class="chapter-body">
+<p>Per capire davvero cosa &egrave; successo, bisogna guardare la struttura tecnica &mdash; non solo le conseguenze sociali.</p>
+<p>Internet funziona ancora sui protocolli aperti degli anni &#8217;70 e &#8217;80. TCP/IP &egrave; ancora l&#236;. HTTP &egrave; ancora l&#236;. Tecnicamente, la rete distribuita esiste ancora.</p>
+<p>Ma sopra quella infrastruttura aperta, &egrave; stata costruita una infrastruttura di accesso <strong>chiusa</strong> che per la stragrande maggioranza degli utenti &egrave; l&#8217;unica internet che esiste.</p>
+<p>Il DNS &mdash; il sistema che traduce i nomi di dominio in indirizzi IP &mdash; &egrave; gestito da un&#8217;organizzazione americana, ICANN, sotto supervisione del governo degli Stati Uniti. Il cloud computing &mdash; dove gira la maggior parte di internet &mdash; &egrave; concentrato in tre provider: Amazon Web Services, Microsoft Azure, Google Cloud. Nel 2021, quando AWS decise di terminare i servizi a Parler, il sito spar&#236; da internet in ore. Non perch&#233; i suoi server fisici fossero stati distrutti. Perch&#233; una singola azienda aveva deciso di non erogare pi&#249; un servizio.</p>
+<p>La fibra ottica sottomarina che connette i continenti &mdash; l&#8217;infrastruttura fisica di internet &mdash; &egrave; in larga parte di propriet&#224; di Google, Facebook, Microsoft e Amazon. Le stesse aziende che gestiscono i contenuti gestiscono i tubi attraverso cui quei contenuti viaggiano.</p>
+<p>Il risultato architettonico: <strong>internet sembra distribuita ma &egrave; logicamente centralizzata</strong>. Il protocollo &egrave; aperto ma l&#8217;accesso &egrave; controllato. La libert&#224; tecnica esiste ancora. Ma &egrave; accessibile solo a chi sa cercarla, sa usarla, e sa rinunciare alla comodit&#224; del sistema centralizzato.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap7">
+  <div class="chapter-num-bg">07</div>
+  <span class="chapter-label">// capitolo &middot; 07</span>
+  <h2 class="chapter-title">Bitcoin al bivio: lo stesso schema, gli stessi attori</h2>
+  <div class="chapter-body">
+<p>Ora guarda Bitcoin con questa storia in mente.</p>
+<p>Bitcoin nasce nel 2008 con le stesse caratteristiche fondamentali di internet originale. &Egrave; distribuito: non esiste un server centrale, non esiste un&#8217;azienda, non esiste un CEO. &Egrave; aperto: il protocollo &egrave; pubblico, il codice &egrave; open source, chiunque pu&#242; partecipare alla rete senza chiedere permesso. &Egrave; resistente alla censura: una transazione valida non pu&#242; essere bloccata da nessuna autorit&#224;, perch&#233; il consenso &egrave; distribuito su migliaia di nodi indipendenti nel mondo.</p>
+<p>Satoshi Nakamoto lo sapeva perfettamente. Nel blocco genesi &mdash; il primo blocco della blockchain Bitcoin, minato il 3 gennaio 2009 &mdash; &egrave; incluso un titolo di giornale del Times di Londra: <em>&#8220;Chancellor on brink of second bailout for banks.&#8221;</em> Non era un caso. Era un messaggio. Bitcoin nasceva come risposta diretta al sistema bancario centralizzato che aveva appena prodotto la peggior crisi finanziaria dal 1929.</p>
+<p>Nei primi anni, Bitcoin era usato quasi esclusivamente da persone con competenze tecniche. Cypherpunk, libertari, anarchici, crittografi. Persone che capivano cosa stavano usando e perch&#233;. Gestivano i propri wallet, le proprie chiavi, i propri nodi. La rete era piccola ma era genuinamente decentralizzata.</p>
+<p><strong>Poi &egrave; arrivata la massa.</strong> E la massa non voleva gestire le chiavi private. Non voleva capire la crittografia. Voleva qualcosa di semplice.</p>
+<p>E qualcuno glielo ha dato.</p>
+<p>Gli exchange centralizzati sono esplosi tra il 2013 e il 2017. Mt. Gox gestiva all&#8217;apice il 70% di tutti gli scambi Bitcoin globali &mdash; un singolo punto di fallimento che quando collass&#242; port&#242; con s&#233; 850.000 bitcoin e la fiducia di centinaia di migliaia di persone. La lezione non fu imparata: altri exchange presero il suo posto, pi&#249; grandi, pi&#249; centralizzati, pi&#249; finanziati.</p>
+<p>Nel 2024 BlackRock &mdash; il pi&#249; grande asset manager del mondo, con oltre dieci trilioni di dollari in gestione &mdash; lanc&#242; un ETF Bitcoin. Centinaia di migliaia di persone ora &#8220;possiedono Bitcoin&#8221; attraverso BlackRock. Non hanno chiavi. Non hanno wallet. Hanno una quota di un fondo che detiene bitcoin per loro conto &mdash; esattamente come un conto corrente bancario detiene euro per conto del correntista.</p>
+<p><strong>Il cerchio si stava chiudendo.</strong></p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap8">
+  <div class="chapter-num-bg">08</div>
+  <span class="chapter-label">// capitolo &middot; 08</span>
+  <h2 class="chapter-title">Perch&eacute; questa volta &egrave; diverso &mdash; e perch&eacute; non lo &egrave;</h2>
+  <div class="chapter-body">
+<p>C&#8217;&egrave; un argomento che si sente spesso: &#8220;Va bene, la gente usa gli exchange e gli ETF, ma il protocollo Bitcoin rimane decentralizzato. Il codice non cambia. La rete &egrave; ancora l&#236;.&#8221;</p>
+<p>&Egrave; vero. E <strong>non &egrave; sufficiente</strong>.</p>
+<p>Il protocollo TCP/IP &egrave; ancora l&#236;. Il Web aperto &egrave; ancora l&#236;. Tecnicamente, puoi ancora costruire un server indipendente e pubblicare quello che vuoi senza chiedere permesso a nessuno. Ma per il 95% degli utenti, internet &egrave; Google, Facebook e YouTube. Il protocollo aperto esiste ma non cambia la realt&#224; dell&#8217;esperienza di miliardi di persone.</p>
+<p>Se la maggioranza dei bitcoin finisce in custodia di BlackRock, Fidelity, Coinbase e delle banche tradizionali, il protocollo Bitcoin rimarr&#224; intatto &mdash; ma il sistema di potere intorno a Bitcoin sar&#224; identico al sistema che Bitcoin era nato per aggirare.</p>
+<p>I governi non avranno bisogno di attaccare il protocollo. Potranno regolamentare i custodi. Potranno congelare i conti degli exchange. Potranno richiedere il KYC per qualsiasi transazione. Potranno fare esattamente quello che fanno gi&#224; con il sistema bancario tradizionale &mdash; perch&#233; avranno gli stessi punti di controllo centralizzati su cui applicare pressione.</p>
+<p>C&#8217;&egrave; per&#242; una differenza fondamentale rispetto a internet, ed &egrave; la pi&#249; importante: <strong>con Bitcoin puoi ancora scegliere</strong>.</p>
+<p>Con internet, una volta che hai costruito la tua vita sociale su Facebook, che hai affidato la tua email a Gmail, che hai spostato il tuo business su AWS, uscire ha un costo enorme. Con Bitcoin, la scelta &egrave; sempre reversibile. Puoi ritirare i tuoi bitcoin da un exchange in qualsiasi momento. Puoi spostare i tuoi fondi da una soluzione custodial a una di autocustodia. Puoi scegliere di partecipare alla rete nel modo in cui Satoshi aveva immaginato &mdash; senza chiedere permesso a nessuno.</p>
+<p>Ma quella scelta richiede di capire cosa stai facendo. E richiede di farla <strong>prima</strong> &mdash; non quando le restrizioni saranno gi&#224; in atto.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap9">
+  <div class="chapter-num-bg">09</div>
+  <span class="chapter-label">// capitolo &middot; 09</span>
+  <h2 class="chapter-title">Cosa succede se lasciamo che vada cos&igrave;</h2>
+  <div class="chapter-body">
+<p>Facciamo uno scenario. Non &egrave; fantascienza &mdash; &egrave; estrapolazione lineare delle tendenze gi&#224; in atto.</p>
+<p>2030: il 60% dei bitcoin in circolazione &egrave; custodito da dieci grandi istituzioni finanziarie: BlackRock, Fidelity, JPMorgan, Coinbase e altri. Gli ETF Bitcoin sono il prodotto finanziario retail pi&#249; popolare del decennio. Le banche centrali di diversi paesi hanno riserve in Bitcoin.</p>
+<p>I governi del G7 hanno introdotto regolamentazioni KYC obbligatorie per qualsiasi transazione Bitcoin sopra i 1.000 euro. Gli exchange sono obbligati a segnalare tutte le transazioni alle autorit&#224; fiscali. I wallet non-custodial &mdash; quelli in cui controlli le tue chiavi &mdash; sono legali ma soggetti a restrizioni crescenti.</p>
+<p>La narrativa dominante &egrave; che Bitcoin &egrave; &#8220;diventato maturo&#8221;. Ha trovato il suo posto nel sistema finanziario. &Egrave; &#8220;regolamentato e sicuro&#8221;. &Egrave;, in sostanza, oro digitale gestito dalle stesse istituzioni che gestiscono l&#8217;oro fisico.</p>
+<p>Il protocollo Bitcoin &egrave; rimasto identico. La blockchain funziona esattamente come nel 2009. Ma il sistema di potere attorno a Bitcoin &egrave; identico al sistema che esisteva prima di Bitcoin.</p>
+<blockquote class="pull-quote">
+&ldquo;Chi ha imparato a usare Bitcoin nel modo corretto &mdash; autocustodia, nodo personale, transazioni privacy-preserving &mdash; ha ancora accesso alla rete aperta e incensurabile. Ma sono una minoranza. E in quattro non si cambia il mondo.&rdquo;
+</blockquote>
+<p>Questo scenario non &egrave; inevitabile. Ma richiede che un numero sufficiente di persone scelga consapevolmente la strada difficile invece di quella comoda.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+<section class="chapter" id="cap10">
+  <div class="chapter-num-bg">10</div>
+  <span class="chapter-label">// capitolo &middot; 10</span>
+  <h2 class="chapter-title">Il manifesto: cosa fare adesso</h2>
+  <div class="chapter-body">
+<p>La storia di internet insegna che le finestre si chiudono. Non con un&#8217;esplosione &mdash; con una lenta normalizzazione della comodit&#224; centralizzata, finch&#233; l&#8217;alternativa diventa marginale e poi irrilevante.</p>
+<p>Con Bitcoin quella finestra &egrave; ancora aperta. Ma non per sempre.</p>
+<p>Quello che puoi fare, adesso, &egrave; questo:</p>
+<div class="agisci-box">
+<div class="agisci-title">// Agisci adesso</div>
+<div class="agisci-items">
+<div class="agisci-item"><div class="agisci-num">01</div><div class="agisci-text"><strong>Studia prima di fare.</strong> Non comprare bitcoin prima di capire cosa stai comprando e come funziona la custodia. Il libro di partenza &egrave; <em>The Bitcoin Standard</em> di Saifedean Ammous &mdash; costruisce le fondamenta teoriche necessarie per capire perch&#233; Bitcoin esiste.</div></div>
+<div class="agisci-item"><div class="agisci-num">02</div><div class="agisci-text"><strong>Scegli l&#8217;autocustodia reale.</strong> Ogni bitcoin che lasci su un exchange &egrave; un bitcoin fuori dal tuo controllo. La guida pratica all&#8217;autocustodia &mdash; wallet, hardware wallet, seed phrase, acquisto senza KYC &mdash; la trovi in <a href="autocustodia-bitcoin.html" class="inline-link">Bitcoin &egrave; tuo. Se sai tenerlo.</a></div></div>
+<div class="agisci-item"><div class="agisci-num">03</div><div class="agisci-text"><strong>Impara a riconoscere il sistema.</strong> La propaganda che mantiene le persone distratte e inconsapevoli &egrave; documentata e analizzata in <a href="propaganda-per-procura.html" class="inline-link">Propaganda per Procura</a>. Capire come funziona il sistema di controllo del consenso &egrave; il presupposto per capire perch&#233; Bitcoin &egrave; una risposta a quel sistema.</div></div>
+<div class="agisci-item"><div class="agisci-num">04</div><div class="agisci-text"><strong>Partecipa alla rete, non solo al prezzo.</strong> Avere un proprio nodo Bitcoin, gestire la propria infrastruttura, usare Lightning Network per le transazioni quotidiane &mdash; tutto questo non &egrave; per appassionati tecnici. &Egrave; per chiunque voglia che Bitcoin rimanga quello che Satoshi aveva immaginato.</div></div>
+</div>
+</div>
+<p>Se vuoi fare questo percorso con un supporto, sono disponibile per consulenze private &mdash; dalla comprensione teorica alla configurazione pratica dell&#8217;intera infrastruttura. Per chi vuole esplorare il lato tecnico del protocollo in autonomia, <a href="index.html" class="inline-link">la piattaforma bitcoinreportschool.com offre strumenti interattivi open source</a>.</p>
+<p><a href="index.html#consulenze" class="inline-link">I contatti li trovi attraverso i canali di Bitcoin Report Italia.</a></p>
+<blockquote class="pull-quote">
+&ldquo;La libert&#224; non &egrave; mai stata il risultato predefinito della tecnologia. &Egrave; sempre stata il risultato di scelte consapevoli fatte da persone che capivano cosa stava succedendo. E che sceglievano la strada difficile.&rdquo;
+</blockquote>
+<div class="leggi-anche-box">
+<div class="la-title">// Leggi anche</div>
+<div class="la-links">
+<a href="autocustodia-bitcoin.html" class="la-link"><span class="la-icon">&#128273;</span><div><div class="la-link-title">Bitcoin &egrave; tuo. Se sai tenerlo.</div><div class="la-link-desc">La guida pratica completa all&#8217;autocustodia: wallet, hardware wallet, seed phrase e acquisto senza KYC.</div></div></a>
+<a href="propaganda-per-procura.html" class="la-link"><span class="la-icon">&#128240;</span><div><div class="la-link-title">Propaganda per Procura</div><div class="la-link-desc">Come funziona il sistema di consenso che ti circonda e come riconoscerlo. Dalla fabbrica del consenso di Chomsky alla propaganda per procura documentata da Thomas Fazi.</div></div></a>
+</div>
+</div>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+  </main>
+
+</div>
+
+<!-- ── DONATION ──────────────────────────────────────────────────────────── -->
+<section class="donation-section">
+  <div class="donation-inner">
+    <div class="donation-text">
+      <h2>Supporta il progetto</h2>
+      <p>Bitcoin Report School &egrave; un progetto indipendente, senza pubblicit&agrave;, senza tracker, senza finanziamenti istituzionali. Se questo materiale &egrave; stato utile, considera una donazione in bitcoin.</p>
+      <p>Ogni satoshi va direttamente a sostenere la produzione di nuovi contenuti educativi.</p>
+      <div class="donation-manifesto"><strong>Non-custodial only.</strong> Puoi donare direttamente on-chain oppure via Lightning Network scansionando il QR qui accanto.</div>
+    </div>
+    <div class="donation-qr-wrap">
+      <div class="qr-frame">
+        <img src="data:image/png;base64,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" alt="Bitcoin donation QR code" width="190" height="190">
+        <div class="qr-badge">&#8383; Donazione</div>
+      </div>
+      <div class="qr-label">Scansiona con qualsiasi wallet Bitcoin</div>
+    </div>
+  </div>
+</section>
+
+<a href="#" class="back-top" id="back-top" aria-label="Torna su">&#8593;</a>
+
+<footer>
+  <p>&copy; 2025 Bitcoin Report Italia &mdash; <a href="index.html">bitcoinreportschool.com</a> &mdash; Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a></p>
+</footer>
+
+<script>
+
+// ── READING BAR ────────────────────────────────────────────────────────────
+window.addEventListener('scroll', function() {
+  var el = document.getElementById('reading-bar');
+  if (!el) return;
+  var scrollTop = window.scrollY;
+  var docH = document.documentElement.scrollHeight - window.innerHeight;
+  el.style.width = (docH > 0 ? Math.min(100, (scrollTop / docH) * 100) : 0) + '%';
+  // back-top
+  var bt = document.getElementById('back-top');
+  if (bt) { if (scrollTop > 400) bt.classList.add('visible'); else bt.classList.remove('visible'); }
+  // TOC active
+  var caps = document.querySelectorAll('.chapter');
+  var active = null;
+  caps.forEach(function(c) { if (c.getBoundingClientRect().top <= 120) active = c.id; });
+  document.querySelectorAll('.toc-link').forEach(function(l) {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + active);
+  });
+});
+
+// ── THEME ───────────────────────────────────────────────────────────────────
+function toggleTheme() {
+  var t = document.documentElement.getAttribute('data-theme') === 'light';
+  document.documentElement.setAttribute('data-theme', t ? 'dark' : 'light');
+  var btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = t ? '\u2600 Chiaro' : '\u263c Scuro';
+}
+</script>
+
+</body>
+</html>

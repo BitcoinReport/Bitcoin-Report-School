@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Letture &mdash; Bitcoin Report School</title>
+<meta name="description" content="Approfondimenti, guide e analisi su Bitcoin, autocustodia, propaganda e sovranit&#224; finanziaria. Tutto il materiale di lettura di Bitcoin Report School.">
+<meta name="author" content="Mike &mdash; Bitcoin Report Italia">
+<link rel="canonical" href="https://bitcoinreportschool.com/letture.html">
+<meta property="og:title" content="Letture &mdash; Bitcoin Report School">
+<meta property="og:description" content="Approfondimenti, guide e analisi su Bitcoin, autocustodia e sovranit&#224; finanziaria.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bitcoinreportschool.com/letture.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg: #07080a;
+  --bg2: #0d0e14;
+  --bg3: #13141c;
+  --gold: #f7931a;
+  --gold-dim: rgba(247,147,26,0.10);
+  --gold-dim2: rgba(247,147,26,0.05);
+  --green: #22d3a0;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e4dc;
+  --text2: #9a9790;
+  --text3: #4a4844;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Playfair Display', serif;
+}
+[data-theme="light"] {
+  --bg: #f8f6f1;
+  --bg2: #eeeae2;
+  --bg3: #e4e0d8;
+  --text: #1a1814;
+  --text2: #5a5650;
+  --text3: #a0a090;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --gold-dim: rgba(247,147,26,0.12);
+  --gold-dim2: rgba(247,147,26,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); transition: background .3s, color .3s; }
+
+/* ── HOME BTN ──────────────────────────────────────────────── */
+.home-btn { position: fixed; top: 1rem; left: 1rem; z-index: 900; display: flex; align-items: center; gap: .4rem; background: rgba(7,8,10,.92); border: 1px solid var(--gold); border-radius: 6px; padding: .4rem .85rem; font-family: var(--mono); font-size: .68rem; color: var(--gold); text-decoration: none; letter-spacing: .05em; backdrop-filter: blur(8px); transition: background .2s, box-shadow .2s; }
+.home-btn:hover { background: rgba(247,147,26,.1); box-shadow: 0 0 12px rgba(247,147,26,.25); }
+[data-theme="light"] .home-btn { background: rgba(248,246,241,.92); }
+
+/* ── THEME TOGGLE ──────────────────────────────────────────── */
+.theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── NAV ────────────────────────────────────────────────────── */
+.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; }
+.nav-logo { font-family: var(--mono); font-size: .82rem; color: var(--gold); text-decoration: none; letter-spacing: .08em; }
+.nav-cat { font-family: var(--mono); font-size: .6rem; color: var(--text3); }
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.hero { max-width: 860px; margin: 0 auto; padding: 4rem 2rem 2.5rem; }
+.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1rem; opacity: .8; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--text); line-height: 1.1; margin-bottom: .6rem; }
+.hero-sub { font-size: 1rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.5rem; max-width: 560px; font-weight: 300; }
+.hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 1.2rem; }
+.hero-stat { display: flex; flex-direction: column; gap: .2rem; }
+.hero-stat-num { font-family: var(--mono); font-size: 1.4rem; color: var(--gold); font-weight: 700; }
+.hero-stat-label { font-family: var(--mono); font-size: .52rem; color: var(--text3); text-transform: uppercase; letter-spacing: .12em; }
+
+/* ── ARTICLE GRID ─────────────────────────────────────────── */
+.articles-section { max-width: 1080px; margin: 0 auto; padding: 2rem 2rem 5rem; }
+.section-label { font-family: var(--mono); font-size: .58rem; color: var(--text3); text-transform: uppercase; letter-spacing: .18em; margin-bottom: 1.8rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); }
+
+/* Featured article */
+.featured-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--bg2); border: 1px solid rgba(247,147,26,.25); border-radius: 14px; overflow: hidden; margin-bottom: 2rem; text-decoration: none; transition: border-color .25s, box-shadow .25s; }
+.featured-card:hover { border-color: var(--gold); box-shadow: 0 0 40px rgba(247,147,26,.08); }
+@media(max-width: 680px) { .featured-card { grid-template-columns: 1fr; } }
+.featured-visual { background: linear-gradient(135deg, #0a0500, #1a0f00 50%, #0d0a05); display: flex; align-items: center; justify-content: center; min-height: 200px; position: relative; overflow: hidden; }
+.featured-visual-icon { font-size: 5rem; opacity: .25; }
+.featured-visual-label { position: absolute; bottom: 1rem; left: 1rem; font-family: var(--mono); font-size: .55rem; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; background: rgba(247,147,26,.12); border: 1px solid rgba(247,147,26,.25); border-radius: 20px; padding: .25rem .75rem; }
+.featured-content { padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; }
+.featured-eyebrow { font-family: var(--mono); font-size: .55rem; color: var(--gold); text-transform: uppercase; letter-spacing: .18em; margin-bottom: .8rem; opacity: .75; }
+.featured-title { font-family: var(--serif); font-size: clamp(1.2rem, 2.5vw, 1.55rem); font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: .9rem; }
+.featured-desc { font-size: .9rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.2rem; flex: 1; }
+.featured-meta { font-family: var(--mono); font-size: .6rem; color: var(--text3); margin-bottom: 1rem; }
+.featured-cta { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--mono); font-size: .68rem; color: var(--gold); }
+
+/* Article cards grid */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+.article-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-decoration: none; display: flex; flex-direction: column; gap: .75rem; transition: border-color .2s, background .2s, transform .2s; }
+.article-card:hover { border-color: rgba(247,147,26,.35); background: var(--bg3); transform: translateY(-2px); }
+.card-tag { font-family: var(--mono); font-size: .52rem; color: var(--gold); text-transform: uppercase; letter-spacing: .18em; opacity: .7; }
+.card-icon { font-size: 1.8rem; opacity: .7; }
+.card-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.35; }
+.card-desc { font-size: .83rem; color: var(--text2); line-height: 1.65; flex: 1; }
+.card-meta { font-family: var(--mono); font-size: .58rem; color: var(--text3); margin-top: .25rem; }
+.card-arrow { font-family: var(--mono); font-size: .65rem; color: var(--gold); margin-top: auto; }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); }
+footer a { color: var(--text3); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home-btn">&#8592; Home</a>
+<button class="theme-btn" onclick="toggleTheme()" id="theme-btn">&#9788; Chiaro</button>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
+  <span class="nav-cat">// letture &middot; approfondimenti</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">// letture &middot; Bitcoin Report School</div>
+  <h1>Letture</h1>
+  <p class="hero-sub">Approfondimenti, guide pratiche e analisi critiche su Bitcoin, autocustodia e sovranit&#224; finanziaria. Materiale scritto per chi vuole capire davvero, non solo investire.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Letture disponibili</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">0</div><div class="hero-stat-label">Tracker o pubblicit&#224;</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">&#8734;</div><div class="hero-stat-label">Accesso libero</div></div>
+  </div>
+</header>
+
+<div class="articles-section">
+  <div class="section-label">// in evidenza</div>
+<a href="manifesto.html" class="featured-card">
+  <div class="featured-visual">
+    <div class="featured-visual-icon">&#9876;</div>
+    <div class="featured-visual-label">MANIFESTO</div>
+  </div>
+  <div class="featured-content">
+    <div>
+      <div class="featured-eyebrow">Manifesto</div>
+      <div class="featured-title">La strada comoda porta sempre alla stessa gabbia</div>
+      <div class="featured-desc">Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio. La storia della cattura di internet &egrave; la chiave per capire cosa rischia di succedere con Bitcoin.</div>
+    </div>
+    <div>
+      <div class="featured-meta">10 capitoli &middot; ~15 min</div>
+      <div class="featured-cta">Leggi il Manifesto &rarr;</div>
+    </div>
+  </div>
+</a>
+  <div class="section-label">// tutti gli approfondimenti</div>
+  <div class="cards-grid">
+<a href="autocustodia-bitcoin.html" class="article-card">
+  <div class="card-tag">GUIDA</div>
+  <div class="card-icon">&#128273;</div>
+  <div class="card-title">Bitcoin &egrave; tuo. Se sai tenerlo.</div>
+  <div class="card-desc">La guida completa all&#8217;autocustodia: wallet, hardware wallet, seed phrase e acquisto senza KYC. Da zero alla sovranit&#224; finanziaria reale.</div>
+  <div class="card-meta">9 capitoli &middot; ~20 min</div>
+  <div class="card-arrow">Leggi &rarr;</div>
+</a>
+
+<a href="avvicinarsi-bitcoin.html" class="article-card">
+  <div class="card-tag">INTRODUZIONE</div>
+  <div class="card-icon">&#127793;</div>
+  <div class="card-title">Avvicinarsi a Bitcoin: da dove iniziare</div>
+  <div class="card-desc">Il punto di ingresso per chi inizia. Perch&#233; Bitcoin, come funziona, e quale ordine seguire per costruire una comprensione solida senza perdersi.</div>
+  <div class="card-meta">Articolo introduttivo &middot; ~8 min</div>
+  <div class="card-arrow">Leggi &rarr;</div>
+</a>
+
+<a href="liberta-dal-potere.html" class="article-card">
+  <div class="card-tag">ANALISI</div>
+  <div class="card-icon">&#9968;</div>
+  <div class="card-title">Libert&agrave; dal Potere</div>
+  <div class="card-desc">Analisi delle strutture di potere che controllano la moneta, l&#8217;informazione e il consenso. Perch&#233; Bitcoin &egrave; una risposta sistemica, non solo finanziaria.</div>
+  <div class="card-meta">Approfondimento &middot; ~12 min</div>
+  <div class="card-arrow">Leggi &rarr;</div>
+</a>
+
+<a href="propaganda-per-procura.html" class="article-card">
+  <div class="card-tag">ANALISI</div>
+  <div class="card-icon">&#128240;</div>
+  <div class="card-title">Propaganda per Procura</div>
+  <div class="card-desc">Come funziona il sistema di consenso che ti circonda. Dalla fabbrica del consenso di Chomsky alla propaganda per procura documentata da Thomas Fazi.</div>
+  <div class="card-meta">9 capitoli &middot; ~10 min</div>
+  <div class="card-arrow">Leggi &rarr;</div>
+</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Bitcoin Report Italia &mdash; <a href="index.html">bitcoinreportschool.com</a> &mdash; Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a></p>
+</footer>
+
+<script>
+
+function toggleTheme() {
+  var t = document.documentElement.getAttribute('data-theme') === 'light';
+  document.documentElement.setAttribute('data-theme', t ? 'dark' : 'light');
+  var btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = t ? '\u2600 Chiaro' : '\u263c Scuro';
+}
+</script>
+
+</body>
+</html>
