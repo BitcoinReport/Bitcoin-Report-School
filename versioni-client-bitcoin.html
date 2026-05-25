@@ -158,6 +158,68 @@ nav { border-bottom:1px solid var(--border); padding:1rem 2rem; display:flex; al
 .dp-close { position:absolute; top:1rem; right:1rem; background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:0.3rem 0.6rem; font-family:var(--mono); font-size:0.65rem; color:var(--text3); cursor:pointer; transition:all 0.2s; }
 .dp-close:hover { color:var(--text); border-color:var(--text3); }
 
+/* BIP-110 special badge */
+.v-badge.bip { border-color:rgba(251,191,36,0.4); color:#fbbf24; }
+.dp-client-badge.bip { background:rgba(251,191,36,0.12); color:#fbbf24; border:1px solid rgba(251,191,36,0.3); }
+
+/* BIP-110 — Two-column controversy */
+.bip110-cols { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+@media(max-width:600px){ .bip110-cols { grid-template-columns:1fr; } }
+.bip110-col-pro { background:rgba(0,255,136,0.06); border:1px solid rgba(0,255,136,0.2); border-radius:8px; padding:0.9rem 1rem; }
+.bip110-col-con { background:rgba(255,68,102,0.06); border:1px solid rgba(255,68,102,0.2); border-radius:8px; padding:0.9rem 1rem; }
+.bip110-col-label { font-family:var(--mono); font-size:0.58rem; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.7rem; font-weight:700; }
+.bip110-col-pro .bip110-col-label { color:var(--green); }
+.bip110-col-con .bip110-col-label { color:var(--red); }
+.bip110-col ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; }
+.bip110-col li { font-size:0.78rem; color:var(--text2); line-height:1.55; padding-left:1rem; position:relative; }
+.bip110-col-pro li::before { content:"+ "; color:var(--green); position:absolute; left:0; font-family:var(--mono); font-size:0.7rem; }
+.bip110-col-con li::before { content:"- "; color:var(--red); position:absolute; left:0; font-family:var(--mono); font-size:0.7rem; }
+
+/* BIP-110 — Emblem cases */
+.bip110-emblem { background:var(--bg4); border:1px solid var(--border2); border-radius:8px; padding:0.8rem 1rem; margin-top:0.8rem; }
+.bip110-emblem-title { font-family:var(--mono); font-size:0.6rem; color:#fbbf24; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem; }
+.bip110-emblem p { font-size:0.78rem; color:var(--text2); line-height:1.55; }
+
+/* BIP-110 — Dual cypherpunk score */
+.bip110-dual-score { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media(max-width:500px){ .bip110-dual-score { grid-template-columns:1fr; } }
+.bip110-score-col { background:var(--bg4); border:1px solid var(--border2); border-radius:8px; padding:0.9rem; }
+.bip110-score-col-title { font-family:var(--mono); font-size:0.58rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.7rem; }
+.bip110-score-col-pro .bip110-score-col-title { color:var(--green); }
+.bip110-score-col-con .bip110-score-col-title { color:var(--red); }
+.bip110-score-item { margin-bottom:0.6rem; }
+.bip110-score-item label { font-family:var(--mono); font-size:0.55rem; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.25rem; }
+
+/* BIP-110 — Editorial note */
+.bip110-editorial { background:rgba(251,191,36,0.06); border-left:3px solid #fbbf24; border-radius:0 8px 8px 0; padding:0.8rem 1rem; font-size:0.78rem; font-style:italic; color:var(--text2); line-height:1.6; margin-top:0.9rem; }
+
+/* BIP-110 — Node guide */
+.bip110-node-guide { display:flex; flex-direction:column; gap:0.6rem; }
+.bip110-node-row { background:var(--bg4); border:1px solid var(--border2); border-radius:8px; padding:0.7rem 0.9rem; }
+.bip110-node-row-label { font-family:var(--mono); font-size:0.57rem; text-transform:uppercase; letter-spacing:0.1em; color:#fbbf24; margin-bottom:0.3rem; }
+.bip110-node-row p { font-size:0.78rem; color:var(--text2); line-height:1.55; }
+.bip110-node-row a { color:#fbbf24; text-decoration:none; border-bottom:1px solid rgba(251,191,36,0.35); }
+.bip110-node-row a:hover { border-color:#fbbf24; }
+.bip110-placeholder { background:rgba(251,191,36,0.08); border:1px dashed rgba(251,191,36,0.35); border-radius:8px; padding:0.7rem 1rem; font-family:var(--mono); font-size:0.65rem; color:#fbbf24; opacity:0.8; }
+
+/* BIP-110 — Links */
+.bip110-links { display:flex; flex-direction:column; gap:0.4rem; }
+.bip110-link { display:flex; gap:0.5rem; align-items:baseline; font-size:0.78rem; }
+.bip110-link-label { font-family:var(--mono); font-size:0.57rem; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; white-space:nowrap; flex-shrink:0; min-width:120px; }
+.bip110-link a { color:#fbbf24; text-decoration:none; border-bottom:1px solid rgba(251,191,36,0.3); font-size:0.75rem; word-break:break-all; }
+.bip110-link a:hover { border-color:#fbbf24; }
+
+/* BIP-110 — Timeline connector */
+.bip110-connector { display:flex; align-items:center; gap:0.6rem; padding:0.4rem 0.6rem; margin:0.5rem 0; background:rgba(251,191,36,0.05); border:1px dashed rgba(251,191,36,0.2); border-radius:6px; }
+.bip110-connector-label { font-family:var(--mono); font-size:0.55rem; color:rgba(251,191,36,0.6); text-transform:uppercase; letter-spacing:0.08em; flex:1; }
+.bip110-connector-dot { width:6px; height:6px; border-radius:50%; background:#fbbf24; opacity:0.6; flex-shrink:0; }
+
+/* BIP-110 — Status badge */
+.bip110-status { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--mono); font-size:0.6rem; background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); border-radius:20px; padding:0.2rem 0.7rem; color:#fbbf24; margin-bottom:1rem; }
+.bip110-status-dot { width:6px; height:6px; border-radius:50%; background:#fbbf24; animation:bip110pulse 1.5s ease-in-out infinite; }
+@keyframes bip110pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.3; } }
+
+
 /* COMPARE MODE */
 .compare-bar { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:1rem 1.5rem; margin:0 2rem 1.5rem; display:none; align-items:center; gap:1rem; flex-wrap:wrap; }
 .compare-bar.visible { display:flex; }
@@ -732,6 +794,76 @@ const VERSIONS = [
     highlight:`OP_RETURN illimitato: i nodi Knots saltano dal 2% al 22% della rete`
   },
   {
+    id:'bip110', client:'bip', version:'BIP-110', date:'2025-12-03', year:2025,
+    title:'BIP-110 — Reduced Data Temporary Softfork',
+    type:'controversial', importance:5,
+    tags:['POLICY','SOFT FORK','UASF','IN CORSO','Ordinals','Runes','Anti-Spam','BIP-110'],
+    summary:'Proposta di soft fork temporanea (52.416 blocchi, ~1 anno) che limita i dati arbitrari nelle transazioni Bitcoin. Punta a bloccare Ordinals e Runes. Attivazione MASF al 55% o UASF forzato a settembre 2026. Stato (maggio 2026): signaling molto basso, percorso UASF probabile.',
+    details:'BIP-110 e' una proposta di soft fork temporanea che dura esattamente 52.416 blocchi (circa un anno) limitando la quantita' di dati arbitrari inseribili nelle transazioni Bitcoin. L\'obiettivo dichiarato e' bloccare le iscrizioni Ordinals, Runes e altri protocolli che usano Bitcoin come database di file invece che come sistema monetario.\n\nE' temporanea per design: funziona come un interruttore di emergenza che da' alla community un anno per trovare una soluzione permanente. Dopo 52.416 blocchi le regole scadono automaticamente e Bitcoin torna allo stato precedente.\n\nIl punto piu' controverso e' il meccanismo di attivazione: invece della soglia tradizionale del 95% dell\'hashrate, BIP-110 usa il 55%. E ha una scadenza fissa al blocco ~965.664 (~settembre 2026) — indipendentemente dal signaling dei miner. Se i miner non la attivano prima tramite MASF, i nodi che supportano BIP-110 la attivano comunque tramite UASF.\n\nNota importante: gli UTXO creati prima dell\'attivazione sono permanentemente esenti — i fondi esistenti non vengono toccati.\n\nHint: come un semaforo di emergenza installato senza il permesso del comune — funziona tecnicamente, ma il dibattito su chi aveva il diritto di metterlo non finisce quando il semaforo e' acceso.\n\nOrigine: BIP-110 nasce dall\'evoluzione di BIP-444, proposto da Dathon Ohm il 24 ottobre 2025. Il 3 dicembre 2025 viene riassegnato come BIP-110 nel repository ufficiale. La proposta emerge dopo tre anni di dibattito sulle iscrizioni Ordinals (2022) e Runes. La controversia sulla rimozione del limite OP_RETURN in Bitcoin Core 29.0/30.0 aveva gia' spaccato la community e accelerato il surge di Bitcoin Knots al 22% dei nodi — BIP-110 e' il capitolo successivo della stessa frattura.',
+    contributors:['Dathon Ohm (autore BIP)','Luke Dashjr (implementazione Knots)'],
+    funding:'Nessun finanziamento istituzionale identificato pubblicamente. BIP-110 e' una proposta emersa dalla community grassroots, senza grant o sponsor riconoscibili — a differenza di molte modifiche a Bitcoin Core finanziate da Brink, Chaincode, Spiral o OpenSats.',
+    bips:['BIP-110 (ex BIP-444)'],
+    recommendation:'Se vuoi supportare BIP-110: scarica la release dedicata di Bitcoin Knots da bip110.org — e' l\'unico client che lo implementa. Se vuoi rimanere neutro o contrario: tieni Bitcoin Core o Bitcoin Knots standard. Da aggiornare dopo settembre 2026 con l\'esito effettivo dell\'attivazione.',
+    score:{privacy:3,decentral:3,censorship:3,soundness:4,verify:4},
+    controversy:'BIP-110 divide la community su linee ideologiche profonde. Chi vede Bitcoin come sound money puro supporta la proposta. Chi vede Bitcoin come protocollo neutro e immutabile la contrasta — soprattutto per il precedente del 55% e del UASF forzato.',
+    highlight:'Soft fork temporanea contro Ordinals/Runes — UASF deadline settembre 2026',
+    bip110special:true,
+    controversyPro:[
+      'Le iscrizioni Ordinals/Runes aumentano le fee e penalizzano i pagamenti monetari reali',
+      'L\'aumento del peso della blockchain rende piu' costoso gestire un nodo, danneggiando la decentralizzazione',
+      'Bitcoin dovrebbe restare focalizzato sul suo scopo monetario — non e' un database di file',
+      'La temporaneita' limita i danni in caso di errore — dopo un anno si torna allo stato precedente',
+      'Il surge di Knots al 22% dimostra che una parte significativa della community vuole questa direzione',
+      'I miner che non segnalano implicitamente endorsano l\'ambiente spam-permissivo attuale'
+    ],
+    controversyCon:[
+      'La soglia del 55% e' un precedente pericoloso — se funziona per limitare dati, potrebbe funzionare per limitare altro',
+      'Il meccanismo UASF forzato bypassa il processo di consenso tradizionale di Bitcoin',
+      'Chi paga il fee di mercato ha il diritto di usare lo spazio come vuole — la neutralita' della rete e' un principio',
+      'Rischio chain split se il supporto economico e' insufficiente al momento della deadline',
+      'Potenziali effetti collaterali su wallet Miniscript/Taproot legittimi che devono aggiornare prima dell\'attivazione',
+      'I miner dipendono dalle fee generate dalle iscrizioni per compensare il calo del block reward post-halving'
+    ],
+    controversyEmblems:[
+      {name:'Peter Todd',text:'Ha risposto alla proposta incorporando l\'intero testo di BIP-110 on-chain, dichiarando che l\'operazione era "100% standard e pienamente compatibile con la proposta" — dimostrando che le restrizioni possono essere aggirate. Un atto provocatorio che ha alimentato il dibattito sull\'efficacia tecnica della proposta.'},
+      {name:'Martin Habovstiak (maggio 2026)',text:'Il developer slovacco ha pubblicato una proof-of-concept che archivia un\'immagine TIFF da 66kB nella blockchain come singola transazione, senza usare OP_RETURN, Taproot o OP_IF — dimostrando che le restrizioni di BIP-110 sono aggirabili con metodi alternativi. Questo indebolisce uno degli argomenti centrali dei sostenitori e ha riacceso il dibattito sulla reale efficacia tecnica della proposta.'}
+    ],
+    scoreDual:{
+      pro:{
+        label:'Prospettiva "Bitcoin e' sound money" (sostenitori)',
+        items:[
+          {label:'Monetary soundness',val:5,icon:''},
+          {label:'Decentralizzazione nodi',val:4,icon:''},
+          {label:'Privacy',val:3,icon:''},
+          {label:'Resistenza censura',val:3,icon:''}
+        ]
+      },
+      con:{
+        label:'Prospettiva "Bitcoin e' neutro" (oppositori)',
+        items:[
+          {label:'Resistenza censura',val:2,icon:''},
+          {label:'Governance',val:2,icon:''},
+          {label:'Monetary soundness',val:3,icon:''},
+          {label:'Decentralizzazione',val:3,icon:''}
+        ]
+      }
+    },
+    nodeGuide:[
+      {label:'Supporto BIP-110',text:'Scarica la release dedicata di Bitcoin Knots da <a href="https://bip110.org" target="_blank" rel="noopener noreferrer">bip110.org</a> — unico client che implementa BIP-110 attualmente.'},
+      {label:'Posizione neutrale o contraria',text:'Tieni Bitcoin Core o Bitcoin Knots standard — non implementano BIP-110. Nessuna azione richiesta prima di settembre 2026.'},
+      {label:'Cosa monitorare',text:'Il signaling dei miner nelle settimane precedenti alla deadline (blocco ~965.664). La posizione degli exchange principali (Coinbase, Kraken, Binance) — determinante per l\'esito economico. Eventuali aggiornamenti tecnici alla proposta.'}
+    ],
+    links:[
+      {label:'Sito ufficiale BIP-110',url:'https://bip110.org'},
+      {label:'GitHub BIP ufficiale',url:'https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki'},
+      {label:'Sito originale BIP-444',url:'https://bip444.github.io'},
+      {label:'Discussione bitcoindev',url:'https://groups.google.com/g/bitcoindev/c/nOZim6FbuF8'},
+      {label:'Analisi Bitaroo',url:'https://www.bitaroo.com.au/what-the-beep-is-bip-110/'},
+      {label:'Study Knots guide',url:'https://studyknots.com/guides/bip-110'},
+      {label:'Caso Habovstiak (The Block)',url:'https://www.theblock.co/post/391667/developer-embeds-image-on-bitcoin-as-a-single-transaction-challenging-bip-110s-core-claims'}
+    ]
+  },
+  {
     id:'core-31.0', client:'core', version:'31.0', date:'2026-04-07', year:2026,
     title:`Cluster Mempool — Mempool Moderna`,
     type:'improvement', importance:5,
@@ -912,6 +1044,8 @@ const FUNDERS = [
   }
 ];
 
+const BIP110_FUNDER_NOTE = `BIP-110 rappresenta un caso raro nell\'ecosistema Bitcoin moderno: una proposta di modifica al consenso portata avanti senza finanziatori istituzionali identificabili. In un momento in cui la maggior parte dello sviluppo Bitcoin e\' finanziata da Brink, Chaincode, Spiral e OpenSats, BIP-110 ricorda che il cambiamento in Bitcoin puo\' ancora emergere dalla community senza backing economico organizzato.`;
+
 
 let activeId = null;
 let compareSlots = [null, null];
@@ -923,7 +1057,7 @@ function typeLabel(t) {
   return m[t]||t;
 }
 function clientLabel(c) {
-  const m = {core:'Bitcoin Core',knots:'Bitcoin Knots',productionready:'ProductionReady',btcd:'btcd',libbitcoin:'libbitcoin'};
+  const m = {core:'Bitcoin Core',knots:'Bitcoin Knots',productionready:'ProductionReady',btcd:'btcd',libbitcoin:'libbitcoin',bip:'Proposta'};
   return m[c]||c;
 }
 function impDots(n,type) {
@@ -977,6 +1111,14 @@ function renderAll() {
         <div class="v-summary">${v.summary.substring(0,120)}${v.summary.length>120?'...':''}</div>
         <div class="v-tags">${(v.tags||[]).map(t=>`<span class="v-tag">${t}</span>`).join('')}</div>
       </div>`;
+      // BIP-110 connector after OP_RETURN card
+      if(v.id==='core-30.0'){
+        html+=`<div class="bip110-connector">
+          <div class="bip110-connector-dot"></div>
+          <div class="bip110-connector-label">stessa frattura &mdash; capitolo successivo</div>
+          <div class="bip110-connector-dot"></div>
+        </div>`;
+      }
     });
     html+='</div>';
   });
@@ -1000,6 +1142,93 @@ function openDetail(id) {
   panel.style.display='block';
 
   const bipsHtml = v.bips&&v.bips.length ? `<div class="dp-bips">${v.bips.map(b=>`<span class="dp-bip">${b}</span>`).join('')}</div>` : '<span style="font-size:0.75rem;color:var(--text3)">Nessun BIP associato</span>';
+
+  // ── BIP-110 SPECIAL RENDERING ─────────────────────────────────────────────
+  if(v.bip110special) {
+    const sb = (val) => `<div class="dp-score-bar"><div class="dp-score-fill" style="width:${val*20}%"></div></div>`;
+
+    const proColHtml = `<div class="bip110-col bip110-col-pro">
+      <div class="bip110-col-label">&#9745; A favore</div>
+      <ul>${v.controversyPro.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>`;
+    const conColHtml = `<div class="bip110-col bip110-col-con">
+      <div class="bip110-col-label">&#9746; Contro</div>
+      <ul>${v.controversyCon.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>`;
+    const emblemHtml = v.controversyEmblems.map(e=>`<div class="bip110-emblem">
+      <div class="bip110-emblem-title">&#9670; Caso emblematico — ${e.name}</div>
+      <p>${e.text}</p>
+    </div>`).join('');
+
+    const dualScoreHtml = `<div class="bip110-dual-score">
+      <div class="bip110-score-col bip110-score-col-pro">
+        <div class="bip110-score-col-title">${v.scoreDual.pro.label}</div>
+        ${v.scoreDual.pro.items.map(it=>`<div class="bip110-score-item"><label>${it.label}</label>${sb(it.val)}</div>`).join('')}
+      </div>
+      <div class="bip110-score-col bip110-score-col-con">
+        <div class="bip110-score-col-title">${v.scoreDual.con.label}</div>
+        ${v.scoreDual.con.items.map(it=>`<div class="bip110-score-item"><label>${it.label}</label>${sb(it.val)}</div>`).join('')}
+      </div>
+    </div>
+    <div class="bip110-editorial">Questa e&#39; probabilmente la scheda piu&#39; importante dell&#39;enciclopedia per capire come Bitcoin si governa — e quanto sia difficile farlo senza un&#39;autorita&#39; centrale. Non c&#39;e&#39; una risposta oggettivamente corretta: dipende da cosa credi che Bitcoin debba essere.</div>`;
+
+    const nodeHtml = `<div class="bip110-node-guide">
+      <div class="bip110-placeholder">&#128338; Stato (maggio 2026) — Aggiorna questa sezione dopo settembre 2026 con l&#39;esito effettivo dell&#39;attivazione</div>
+      ${v.nodeGuide.map(row=>`<div class="bip110-node-row"><div class="bip110-node-row-label">${row.label}</div><p>${row.text}</p></div>`).join('')}
+    </div>`;
+
+    const linksHtml = `<div class="bip110-links">${v.links.map(l=>`<div class="bip110-link"><span class="bip110-link-label">${l.label}</span><a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.url.replace('https://','')}</a></div>`).join('')}</div>`;
+
+    const compareBtn2 = compareSlots.includes(v.id)
+      ? `<button class="filter-btn" style="margin-top:0.5rem" onclick="removeFromCompare('${v.id}')">&#10005; Rimuovi da confronto</button>`
+      : `<button class="filter-btn active" style="margin-top:0.5rem" onclick="addToCompare('${v.id}')">&#8644; Aggiungi a confronto</button>`;
+
+    panel.innerHTML = `
+      <span class="dp-client-badge bip">Proposta BIP</span>
+      <div class="dp-version">BIP-110 (ex BIP-444)</div>
+      <div class="dp-title">${v.title}</div>
+      <div class="dp-date">&#128197; Proposto: 24 ott 2025 (BIP-444) &mdash; Riassegnato: 3 dic 2025 (BIP-110)</div>
+      <div class="bip110-status"><div class="bip110-status-dot"></div>IN CORSO &mdash; Signaling molto basso, percorso UASF probabile &mdash; Deadline: blocco ~965.664 (~sett. 2026)</div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Cosa cambia &mdash; spiegato semplice</div>
+        <div class="dp-text">${v.details}</div>
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Controversia &mdash; due prospettive</div>
+        <div class="bip110-cols">${proColHtml}${conColHtml}</div>
+        ${emblemHtml}
+        <div class="bip110-emblem" style="margin-top:0.8rem;border-color:rgba(247,147,26,0.2);">
+          <div class="bip110-emblem-title" style="color:var(--gold);">&#128279; Connessione con la controversia OP_RETURN</div>
+          <p>BIP-110 e&#39; la continuazione diretta della frattura aperta da Core 29.0/30.0 con la rimozione del limite OP_RETURN. La stessa community che si e&#39; spostata su Knots nel 2025 e&#39; la base naturale di supporto per BIP-110. Sono due capitoli della stessa storia sul conflitto tra chi vuole Bitcoin come sound money puro e chi vuole Bitcoin come protocollo neutro e aperto.</p>
+        </div>
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Chi ci ha lavorato e finanziato</div>
+        <div class="dp-text"><strong>Autore:</strong> Dathon Ohm (dathonohm+bip@proton.me) — sviluppatore indipendente, non affiliato a organizzazioni finanziate.<br><strong>Implementazione:</strong> Luke Dashjr in Bitcoin Knots — release dedicata su bip110.org.<br><strong>Non implementato in:</strong> Bitcoin Core.<br><br>${v.funding}</div>
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Punteggio Cypherpunk &mdash; dipende dal punto di vista</div>
+        ${dualScoreHtml}
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Devo aggiornare il mio nodo?</div>
+        ${nodeHtml}
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// BIP associati</div>
+        ${bipsHtml}
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Link e risorse</div>
+        ${linksHtml}
+      </div>
+      ${compareBtn2}
+    `;
+    if(window.innerWidth<900) panel.scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  // ── END BIP-110 ────────────────────────────────────────────────────────────
+
   const controversyHtml = v.controversy ? `<div class="dp-section"><div class="dp-section-label">⚠ Controversia</div><div class="dp-controversy">${v.controversy}</div></div>` : '';
   const compareBtn = compareSlots.includes(id)
     ? `<button class="filter-btn" style="margin-top:0.5rem" onclick="removeFromCompare('${id}')">✕ Rimuovi da confronto</button>`
@@ -1138,7 +1367,11 @@ function renderFunding() {
       <div class="funder-desc">${f.desc}</div>
       <div class="funder-devs">${f.devs.map(d=>`<span class="funder-dev">${d}</span>`).join('')}</div>
     </div>
-  `).join('');
+  `).join('')+`<div class="funder-card" style="border-color:rgba(251,191,36,0.3);grid-column:1/-1">
+    <div class="funder-name" style="color:#fbbf24">&#9670; Nota BIP-110</div>
+    <div class="funder-type">Caso raro: proposta senza finanziatori istituzionali</div>
+    <div class="funder-desc">${BIP110_FUNDER_NOTE}</div>
+  </div>`;
 }
 
 // Progress bar
