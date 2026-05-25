@@ -795,74 +795,85 @@ const VERSIONS = [
   },
   {
     id:'bip110', client:'bip', version:'BIP-110', date:'2025-12-03', year:2025,
-    title:'BIP-110 — Reduced Data Temporary Softfork',
+    title:`BIP-110 — Reduced Data Temporary Softfork`,
     type:'controversial', importance:5,
     tags:['POLICY','SOFT FORK','UASF','IN CORSO','Ordinals','Runes','Anti-Spam','BIP-110'],
-    summary:'Proposta di soft fork temporanea (52.416 blocchi, ~1 anno) che limita i dati arbitrari nelle transazioni Bitcoin. Punta a bloccare Ordinals e Runes. Attivazione MASF al 55% o UASF forzato a settembre 2026. Stato (maggio 2026): signaling molto basso, percorso UASF probabile.',
-    details:'BIP-110 e' una proposta di soft fork temporanea che dura esattamente 52.416 blocchi (circa un anno) limitando la quantita' di dati arbitrari inseribili nelle transazioni Bitcoin. L\'obiettivo dichiarato e' bloccare le iscrizioni Ordinals, Runes e altri protocolli che usano Bitcoin come database di file invece che come sistema monetario.\n\nE' temporanea per design: funziona come un interruttore di emergenza che da' alla community un anno per trovare una soluzione permanente. Dopo 52.416 blocchi le regole scadono automaticamente e Bitcoin torna allo stato precedente.\n\nIl punto piu' controverso e' il meccanismo di attivazione: invece della soglia tradizionale del 95% dell\'hashrate, BIP-110 usa il 55%. E ha una scadenza fissa al blocco ~965.664 (~settembre 2026) — indipendentemente dal signaling dei miner. Se i miner non la attivano prima tramite MASF, i nodi che supportano BIP-110 la attivano comunque tramite UASF.\n\nNota importante: gli UTXO creati prima dell\'attivazione sono permanentemente esenti — i fondi esistenti non vengono toccati.\n\nHint: come un semaforo di emergenza installato senza il permesso del comune — funziona tecnicamente, ma il dibattito su chi aveva il diritto di metterlo non finisce quando il semaforo e' acceso.\n\nOrigine: BIP-110 nasce dall\'evoluzione di BIP-444, proposto da Dathon Ohm il 24 ottobre 2025. Il 3 dicembre 2025 viene riassegnato come BIP-110 nel repository ufficiale. La proposta emerge dopo tre anni di dibattito sulle iscrizioni Ordinals (2022) e Runes. La controversia sulla rimozione del limite OP_RETURN in Bitcoin Core 29.0/30.0 aveva gia' spaccato la community e accelerato il surge di Bitcoin Knots al 22% dei nodi — BIP-110 e' il capitolo successivo della stessa frattura.',
+    summary:`Proposta di soft fork temporanea (52.416 blocchi, ~1 anno) che limita i dati arbitrari nelle transazioni Bitcoin. Punta a bloccare Ordinals e Runes. Attivazione MASF al 55% o UASF forzato a settembre 2026. Stato (maggio 2026): signaling molto basso, percorso UASF probabile.`,
+    details:`BIP-110 è una proposta di soft fork temporanea che dura esattamente 52.416 blocchi (circa un anno) limitando la quantità di dati arbitrari inseribili nelle transazioni Bitcoin. L'obiettivo dichiarato è bloccare le iscrizioni Ordinals, Runes e altri protocolli che usano Bitcoin come database di file invece che come sistema monetario.
+
+È temporanea per design: funziona come un interruttore di emergenza che dà alla community un anno per trovare una soluzione permanente. Dopo 52.416 blocchi le regole scadono automaticamente e Bitcoin torna allo stato precedente.
+
+Il punto più controverso è il meccanismo di attivazione: invece della soglia tradizionale del 95% dell'hashrate, BIP-110 usa il 55%. E ha una scadenza fissa al blocco ~965.664 (~settembre 2026) — indipendentemente dal signaling dei miner. Se i miner non la attivano prima tramite MASF, i nodi che supportano BIP-110 la attivano comunque tramite UASF.
+
+Nota importante: gli UTXO creati prima dell'attivazione sono permanentemente esenti — i fondi esistenti non vengono toccati.
+
+Come un semaforo di emergenza installato senza il permesso del comune — funziona tecnicamente, ma il dibattito su chi aveva il diritto di metterlo non finisce quando il semaforo è acceso.
+
+Origine: BIP-110 nasce dall'evoluzione di BIP-444, proposto da Dathon Ohm il 24 ottobre 2025. Il 3 dicembre 2025 viene riassegnato come BIP-110 nel repository ufficiale. La proposta emerge dopo tre anni di dibattito sulle iscrizioni Ordinals (2022) e Runes. La controversia sulla rimozione del limite OP_RETURN in Bitcoin Core 29.0/30.0 aveva già spaccato la community e accelerato il surge di Bitcoin Knots al 22% dei nodi — BIP-110 è il capitolo successivo della stessa frattura.`,
     contributors:['Dathon Ohm (autore BIP)','Luke Dashjr (implementazione Knots)'],
-    funding:'Nessun finanziamento istituzionale identificato pubblicamente. BIP-110 e' una proposta emersa dalla community grassroots, senza grant o sponsor riconoscibili — a differenza di molte modifiche a Bitcoin Core finanziate da Brink, Chaincode, Spiral o OpenSats.',
+    funding:`Nessun finanziamento istituzionale identificato pubblicamente. BIP-110 è una proposta emersa dalla community grassroots, senza grant o sponsor riconoscibili — a differenza di molte modifiche a Bitcoin Core finanziate da Brink, Chaincode, Spiral o OpenSats.`,
     bips:['BIP-110 (ex BIP-444)'],
-    recommendation:'Se vuoi supportare BIP-110: scarica la release dedicata di Bitcoin Knots da bip110.org — e' l\'unico client che lo implementa. Se vuoi rimanere neutro o contrario: tieni Bitcoin Core o Bitcoin Knots standard. Da aggiornare dopo settembre 2026 con l\'esito effettivo dell\'attivazione.',
+    recommendation:`Se vuoi supportare BIP-110: scarica la release dedicata di Bitcoin Knots da bip110.org — è l'unico client che lo implementa. Se vuoi rimanere neutro o contrario: tieni Bitcoin Core o Bitcoin Knots standard. Da aggiornare dopo settembre 2026 con l'esito effettivo dell'attivazione.`,
     score:{privacy:3,decentral:3,censorship:3,soundness:4,verify:4},
-    controversy:'BIP-110 divide la community su linee ideologiche profonde. Chi vede Bitcoin come sound money puro supporta la proposta. Chi vede Bitcoin come protocollo neutro e immutabile la contrasta — soprattutto per il precedente del 55% e del UASF forzato.',
-    highlight:'Soft fork temporanea contro Ordinals/Runes — UASF deadline settembre 2026',
+    controversy:`BIP-110 divide la community su linee ideologiche profonde. Chi vede Bitcoin come sound money puro supporta la proposta. Chi vede Bitcoin come protocollo neutro e immutabile la contrasta — soprattutto per il precedente del 55% e del UASF forzato.`,
+    highlight:`Soft fork temporanea contro Ordinals/Runes — UASF deadline settembre 2026`,
     bip110special:true,
     controversyPro:[
-      'Le iscrizioni Ordinals/Runes aumentano le fee e penalizzano i pagamenti monetari reali',
-      'L\'aumento del peso della blockchain rende piu' costoso gestire un nodo, danneggiando la decentralizzazione',
-      'Bitcoin dovrebbe restare focalizzato sul suo scopo monetario — non e' un database di file',
-      'La temporaneita' limita i danni in caso di errore — dopo un anno si torna allo stato precedente',
-      'Il surge di Knots al 22% dimostra che una parte significativa della community vuole questa direzione',
-      'I miner che non segnalano implicitamente endorsano l\'ambiente spam-permissivo attuale'
+      `Le iscrizioni Ordinals/Runes aumentano le fee e penalizzano i pagamenti monetari reali`,
+      `L'aumento del peso della blockchain rende più costoso gestire un nodo, danneggiando la decentralizzazione`,
+      `Bitcoin dovrebbe restare focalizzato sul suo scopo monetario — non è un database di file`,
+      `La temporaneità limita i danni in caso di errore — dopo un anno si torna allo stato precedente`,
+      `Il surge di Knots al 22% dimostra che una parte significativa della community vuole questa direzione`,
+      `I miner che non segnalano implicitamente endorsano l'ambiente spam-permissivo attuale`
     ],
     controversyCon:[
-      'La soglia del 55% e' un precedente pericoloso — se funziona per limitare dati, potrebbe funzionare per limitare altro',
-      'Il meccanismo UASF forzato bypassa il processo di consenso tradizionale di Bitcoin',
-      'Chi paga il fee di mercato ha il diritto di usare lo spazio come vuole — la neutralita' della rete e' un principio',
-      'Rischio chain split se il supporto economico e' insufficiente al momento della deadline',
-      'Potenziali effetti collaterali su wallet Miniscript/Taproot legittimi che devono aggiornare prima dell\'attivazione',
-      'I miner dipendono dalle fee generate dalle iscrizioni per compensare il calo del block reward post-halving'
+      `La soglia del 55% è un precedente pericoloso — se funziona per limitare dati, potrebbe funzionare per limitare altro`,
+      `Il meccanismo UASF forzato bypassa il processo di consenso tradizionale di Bitcoin`,
+      `Chi paga il fee di mercato ha il diritto di usare lo spazio come vuole — la neutralità della rete è un principio`,
+      `Rischio chain split se il supporto economico è insufficiente al momento della deadline`,
+      `Potenziali effetti collaterali su wallet Miniscript/Taproot legittimi che devono aggiornare prima dell'attivazione`,
+      `I miner dipendono dalle fee generate dalle iscrizioni per compensare il calo del block reward post-halving`
     ],
     controversyEmblems:[
-      {name:'Peter Todd',text:'Ha risposto alla proposta incorporando l\'intero testo di BIP-110 on-chain, dichiarando che l\'operazione era "100% standard e pienamente compatibile con la proposta" — dimostrando che le restrizioni possono essere aggirate. Un atto provocatorio che ha alimentato il dibattito sull\'efficacia tecnica della proposta.'},
-      {name:'Martin Habovstiak (maggio 2026)',text:'Il developer slovacco ha pubblicato una proof-of-concept che archivia un\'immagine TIFF da 66kB nella blockchain come singola transazione, senza usare OP_RETURN, Taproot o OP_IF — dimostrando che le restrizioni di BIP-110 sono aggirabili con metodi alternativi. Questo indebolisce uno degli argomenti centrali dei sostenitori e ha riacceso il dibattito sulla reale efficacia tecnica della proposta.'}
+      {name:`Peter Todd`,text:`Ha risposto alla proposta incorporando l'intero testo di BIP-110 on-chain, dichiarando che l'operazione era "100% standard e pienamente compatibile con la proposta" — dimostrando che le restrizioni possono essere aggirate. Un atto provocatorio che ha alimentato il dibattito sull'efficacia tecnica della proposta.`},
+      {name:`Martin Habovštiak (maggio 2026)`,text:`Il developer slovacco ha pubblicato una proof-of-concept che archivia un'immagine TIFF da 66kB nella blockchain come singola transazione, senza usare OP_RETURN, Taproot o OP_IF — dimostrando che le restrizioni di BIP-110 sono aggirabili con metodi alternativi. Questo indebolisce uno degli argomenti centrali dei sostenitori.`}
     ],
     scoreDual:{
       pro:{
-        label:'Prospettiva "Bitcoin e' sound money" (sostenitori)',
+        label:`Prospettiva "Bitcoin è sound money" (sostenitori)`,
         items:[
-          {label:'Monetary soundness',val:5,icon:''},
-          {label:'Decentralizzazione nodi',val:4,icon:''},
-          {label:'Privacy',val:3,icon:''},
-          {label:'Resistenza censura',val:3,icon:''}
+          {label:`Monetary soundness`,val:5},
+          {label:`Decentralizzazione nodi`,val:4},
+          {label:`Privacy`,val:3},
+          {label:`Resistenza censura`,val:3}
         ]
       },
       con:{
-        label:'Prospettiva "Bitcoin e' neutro" (oppositori)',
+        label:`Prospettiva "Bitcoin è neutro" (oppositori)`,
         items:[
-          {label:'Resistenza censura',val:2,icon:''},
-          {label:'Governance',val:2,icon:''},
-          {label:'Monetary soundness',val:3,icon:''},
-          {label:'Decentralizzazione',val:3,icon:''}
+          {label:`Resistenza censura`,val:2},
+          {label:`Governance`,val:2},
+          {label:`Monetary soundness`,val:3},
+          {label:`Decentralizzazione`,val:3}
         ]
       }
     },
     nodeGuide:[
-      {label:'Supporto BIP-110',text:'Scarica la release dedicata di Bitcoin Knots da <a href="https://bip110.org" target="_blank" rel="noopener noreferrer">bip110.org</a> — unico client che implementa BIP-110 attualmente.'},
-      {label:'Posizione neutrale o contraria',text:'Tieni Bitcoin Core o Bitcoin Knots standard — non implementano BIP-110. Nessuna azione richiesta prima di settembre 2026.'},
-      {label:'Cosa monitorare',text:'Il signaling dei miner nelle settimane precedenti alla deadline (blocco ~965.664). La posizione degli exchange principali (Coinbase, Kraken, Binance) — determinante per l\'esito economico. Eventuali aggiornamenti tecnici alla proposta.'}
+      {label:`Supporto BIP-110`,text:`Scarica la release dedicata di Bitcoin Knots da <a href="https://bip110.org" target="_blank" rel="noopener noreferrer">bip110.org</a> — unico client che implementa BIP-110 attualmente.`},
+      {label:`Posizione neutrale o contraria`,text:`Tieni Bitcoin Core o Bitcoin Knots standard — non implementano BIP-110. Nessuna azione richiesta prima di settembre 2026.`},
+      {label:`Cosa monitorare`,text:`Il signaling dei miner nelle settimane precedenti alla deadline (blocco ~965.664). La posizione degli exchange principali (Coinbase, Kraken, Binance) — determinante per l'esito economico. Eventuali aggiornamenti tecnici alla proposta.`}
     ],
     links:[
-      {label:'Sito ufficiale BIP-110',url:'https://bip110.org'},
-      {label:'GitHub BIP ufficiale',url:'https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki'},
-      {label:'Sito originale BIP-444',url:'https://bip444.github.io'},
-      {label:'Discussione bitcoindev',url:'https://groups.google.com/g/bitcoindev/c/nOZim6FbuF8'},
-      {label:'Analisi Bitaroo',url:'https://www.bitaroo.com.au/what-the-beep-is-bip-110/'},
-      {label:'Study Knots guide',url:'https://studyknots.com/guides/bip-110'},
-      {label:'Caso Habovstiak (The Block)',url:'https://www.theblock.co/post/391667/developer-embeds-image-on-bitcoin-as-a-single-transaction-challenging-bip-110s-core-claims'}
+      {label:`Sito ufficiale BIP-110`,url:`https://bip110.org`},
+      {label:`GitHub BIP ufficiale`,url:`https://github.com/bitcoin/bips/blob/master/bip-0110.mediawiki`},
+      {label:`Sito originale BIP-444`,url:`https://bip444.github.io`},
+      {label:`Discussione bitcoindev`,url:`https://groups.google.com/g/bitcoindev/c/nOZim6FbuF8`},
+      {label:`Analisi Bitaroo`,url:`https://www.bitaroo.com.au/what-the-beep-is-bip-110/`},
+      {label:`Study Knots guide`,url:`https://studyknots.com/guides/bip-110`},
+      {label:`Caso Habovštiak (The Block)`,url:`https://www.theblock.co/post/391667/developer-embeds-image-on-bitcoin-as-a-single-transaction-challenging-bip-110s-core-claims`}
     ]
   },
+
   {
     id:'core-31.0', client:'core', version:'31.0', date:'2026-04-07', year:2026,
     title:`Cluster Mempool — Mempool Moderna`,
@@ -1044,7 +1055,7 @@ const FUNDERS = [
   }
 ];
 
-const BIP110_FUNDER_NOTE = `BIP-110 rappresenta un caso raro nell\'ecosistema Bitcoin moderno: una proposta di modifica al consenso portata avanti senza finanziatori istituzionali identificabili. In un momento in cui la maggior parte dello sviluppo Bitcoin e\' finanziata da Brink, Chaincode, Spiral e OpenSats, BIP-110 ricorda che il cambiamento in Bitcoin puo\' ancora emergere dalla community senza backing economico organizzato.`;
+const BIP110_FUNDER_NOTE = `BIP-110 rappresenta un caso raro nell’ecosistema Bitcoin moderno: una proposta di modifica al consenso portata avanti senza finanziatori istituzionali identificabili. In un momento in cui la maggior parte dello sviluppo Bitcoin è finanziata da Brink, Chaincode, Spiral e OpenSats, BIP-110 ricorda che il cambiamento in Bitcoin può ancora emergere dalla community senza backing economico organizzato.`;
 
 
 let activeId = null;
