@@ -210,6 +210,21 @@ nav { border-bottom:1px solid var(--border); padding:1rem 2rem; display:flex; al
 .bip110-link a:hover { border-color:#fbbf24; }
 
 /* BIP-110 — Timeline connector */
+.ecash-disambig { background:rgba(251,191,36,0.08); border:2px solid rgba(251,191,36,0.45); border-radius:10px; padding:1rem 1.1rem; margin-bottom:1rem; }
+.ecash-disambig-title { font-family:var(--mono); font-size:0.65rem; color:#fbbf24; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.6rem; font-weight:700; }
+.ecash-disambig ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.45rem; }
+.ecash-disambig li { font-size:0.78rem; color:var(--text2); line-height:1.55; padding-left:1.2rem; position:relative; }
+.ecash-disambig li::before { content:"\25B6"; position:absolute; left:0; color:#fbbf24; font-size:0.6rem; top:0.25rem; }
+.ecash-warning { background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.35); border-radius:10px; padding:1rem 1.1rem; margin-top:0.8rem; }
+.ecash-warning-title { font-family:var(--mono); font-size:0.62rem; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.6rem; font-weight:700; }
+.ecash-warning ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; }
+.ecash-warning li { font-size:0.78rem; color:var(--text2); line-height:1.55; padding-left:1.2rem; position:relative; }
+.ecash-warning li::before { content:"!"; position:absolute; left:0; color:var(--red); font-family:var(--mono); font-size:0.7rem; font-weight:700; }
+.ecash-connector { display:flex; align-items:center; gap:0.6rem; padding:0.5rem 0.8rem; margin:0.5rem 0; background:rgba(34,211,160,0.05); border:1px dashed rgba(34,211,160,0.25); border-radius:6px; }
+.ecash-connector-label { font-family:var(--mono); font-size:0.55rem; color:rgba(34,211,160,0.7); text-transform:uppercase; letter-spacing:0.08em; flex:1; }
+.ecash-connector-dot { width:6px; height:6px; border-radius:50%; background:var(--green); opacity:0.7; flex-shrink:0; }
+.ecash-status-hard { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--mono); font-size:0.6rem; background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.35); border-radius:20px; padding:0.2rem 0.7rem; color:var(--red); margin-bottom:1rem; }
+.ecash-hint { background:var(--bg4); border-left:3px solid var(--green); border-radius:0 8px 8px 0; padding:0.75rem 1rem; font-size:0.8rem; font-style:italic; color:var(--text2); line-height:1.6; margin:0.8rem 0; }
 .bip110-connector { display:flex; align-items:center; gap:0.6rem; padding:0.4rem 0.6rem; margin:0.5rem 0; background:rgba(251,191,36,0.05); border:1px dashed rgba(251,191,36,0.2); border-radius:6px; }
 .bip110-connector-label { font-family:var(--mono); font-size:0.55rem; color:rgba(251,191,36,0.6); text-transform:uppercase; letter-spacing:0.08em; flex:1; }
 .bip110-connector-dot { width:6px; height:6px; border-radius:50%; background:#fbbf24; opacity:0.6; flex-shrink:0; }
@@ -318,6 +333,7 @@ footer { border-top:1px solid var(--border); padding:2rem; text-align:center; fo
     <p class="hero-desc">
       Dalla versione 0.1 di Satoshi (2009) a Bitcoin Core 31.0, Bitcoin Knots e ProductionReady.
       Timeline interattiva, filtri, confronto versioni e punteggio cypherpunk &mdash; tutto in italiano.
+      Il fork eCash di Paul Sztorc (agosto 2026) &egrave; documentato come evento storico rilevante per chi gestisce un nodo Bitcoin, ma non &egrave; un client Bitcoin &mdash; &egrave; una catena separata e incompatibile. Come Bitcoin Cash e Bitcoin SV, viene documentato per completezza informativa e per aiutare chi deve prendere decisioni operative.
     </p>
     <div class="hero-stats">
       <div class="hero-stat"><span class="hero-stat-val">37</span><span class="hero-stat-label">Versioni documentate</span></div>
@@ -875,6 +891,75 @@ Origine: BIP-110 nasce dall'evoluzione di BIP-444, proposto da Dathon Ohm il 24 
   },
 
   {
+    id:'ecash-fork', client:'fork', version:'eCash Fork', date:'2026-04-24', year:2026,
+    title:`eCash — Hard Fork Bitcoin con Drivechains`,
+    type:'controversial', importance:5,
+    tags:['HARD FORK','CONTROVERSO','BIP300','BIP301','DRIVECHAINS','Sztorc','LayerTwo Labs'],
+    summary:`Hard fork di Bitcoin annunciato da Paul Sztorc (LayerTwo Labs) per agosto 2026 (blocco ~964.000). Attiva BIP300/BIP301 (Drivechains). Split 1:1: ogni BTC diventa 1 BTC + 1 eCash. NON compatibile con Bitcoin.`,
+    details:`Paul Sztorc ha annunciato il 24 aprile 2026 un hard fork di Bitcoin programmato per agosto 2026. Al blocco ~964.000 la catena si divide: da quel momento esistono Bitcoin originale e eCash come catene separate e incompatibili.
+
+Chiunque detenga BTC al momento del fork riceve automaticamente la stessa quantita' di eCash sulla nuova catena (1 BTC = 1 eCash). I bitcoin originali rimangono intatti sulla catena Bitcoin. L'eCash puo' essere venduto, tenuto o ignorato.
+
+La differenza tecnica fondamentale rispetto a Bitcoin: eCash attiva i Drivechains (BIP300/BIP301) — un sistema di sidechain che permette di costruire layer 2 con regole proprie, inclusi smart contract avanzati e funzionalita' di privacy. Sztorc lavora a questo progetto da anni e ha scelto il fork dopo che Bitcoin Core ha ripetutamente rifiutato di implementare BIP300/BIP301.
+
+Dettagli tecnici: algoritmo SHA-256d (identico a Bitcoin — i miner possono minare entrambe le catene); reset della difficolta' al minimo al momento del fork (condizioni caotiche previste — Sztorc lo ha riconosciuto esplicitamente); meccanismo CUSF (Core Untouched Soft Fork); seed nodes e network magic cambiati rispetto a Bitcoin; tool per splitting pianificato 30 giorni prima del fork; 7 catene L2 in sviluppo con obiettivo dichiarato di 8 miliardi di utenti.
+
+Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Satoshi-linked per distribuirli a "accredited investors" — definito "furto" da parte prominente della community.`,
+    contributors:['Paul Sztorc (CEO LayerTwo Labs)','LayerTwo Labs team'],
+    funding:`LayerTwo Labs (azienda privata di Sztorc) con investitori non divulgati pubblicamente. Punto controverso: 600.000 eCash aggiuntivi creati ex novo vengono assegnati agli indirizzi collegati a Satoshi Nakamoto per essere distribuiti a "accredited investors" — generando accuse di uso improprio del lascito di Satoshi per legittimare il progetto.`,
+    bips:['BIP300 (Hashrate Escrows / Drivechains)','BIP301 (Blind Merged Mining)'],
+    recommendation:`eCash di Sztorc NON e' Bitcoin — e' una catena separata e incompatibile. Se detieni BTC in autocustodia al blocco ~964.000 ricevi automaticamente eCash. Non muovere bitcoin nelle settimane intorno al fork senza capire la replay protection. Attendi il tool di splitting ufficiale.`,
+    score:{privacy:3,decentral:2,censorship:3,soundness:2,verify:3},
+    controversy:`Circa 80-85% di commenti negativi su X al momento dell'annuncio. Critiche principali: (1) la scelta del nome "eCash" crea confusione con XEC (criptovaluta esistente dal 2021); (2) i 600.000 eCash assegnati agli indirizzi Satoshi per finanziare investitori sono stati definiti "furto"; (3) e' un hard fork incompatibile, non Bitcoin; (4) reset difficolta' al minimo = condizioni caotiche al lancio; (5) obiettivo "8 miliardi di utenti" considerato irrealistico.`,
+    highlight:`Hard fork Bitcoin agosto 2026 — Drivechains attivate — NON compatibile con Bitcoin`,
+    ecashspecial:true,
+    controversyPro:[
+      `I Drivechains permettono innovazione su Bitcoin senza modificare il protocollo base`,
+      `Il processo di Bitcoin Core e' troppo conservativo — il fork e' una risposta legittima alla "dev capture"`,
+      `Chi vuole i Drivechains ha il diritto di costruirli — il fork non impedisce nulla a Bitcoin originale`,
+      `Chi riceve eCash gratuitamente non e' obbligato a usarli o venderli`,
+      `Sztorc ha dimostrato trasparenza riconoscendo esplicitamente i rischi al lancio`
+    ],
+    controversyCon:[
+      `E' un hard fork — crea una catena incompatibile che non e' Bitcoin`,
+      `La scelta del nome "eCash" crea confusione deliberata o negligente con XEC (esistente dal 2021)`,
+      `I 600.000 eCash assegnati agli indirizzi Satoshi per finanziare investitori sono stati definiti "furto"`,
+      `Il reset della difficolta' al minimo crea condizioni di sicurezza caotiche al lancio`,
+      `L'obiettivo dichiarato di "8 miliardi di utenti" e' considerato irrealistico e fuorviante`,
+      `Non e' Bitcoin — chi lo compra pensando di comprare Bitcoin si sbaglia`
+    ],
+    scoreDual:{
+      pro:{
+        label:`Prospettiva "innovazione e liberta' di fork"`,
+        items:[
+          {label:`Decentralizzazione sviluppo`,val:4},
+          {label:`Privacy potenziale (Drivechains)`,val:4},
+          {label:`Resistenza censura`,val:3}
+        ]
+      },
+      con:{
+        label:`Prospettiva "purita' del protocollo Bitcoin"`,
+        items:[
+          {label:`Monetary soundness`,val:2},
+          {label:`Trasparenza governance`,val:2},
+          {label:`Non e' Bitcoin`,val:1}
+        ]
+      }
+    },
+    nodeGuide:[
+      {label:`Cosa succede ai miei BTC`,text:`I tuoi bitcoin rimangono tuoi e invariati — il fork NON tocca la catena Bitcoin originale. Se detieni BTC in autocustodia al blocco ~964.000 ricevi automaticamente eCash sulla nuova catena.`},
+      {label:`BTC su exchange`,text:`Dipende dalla politica dell'exchange — alcuni supporteranno il fork, altri no. Verifica con il tuo exchange prima di agosto 2026.`},
+      {label:`BTC tramite ETF`,text:`Gli ETF Bitcoin (BlackRock, Fidelity ecc.) detengono complessivamente oltre 1 milione di BTC. La gestione degli asset forkati dipende dai prospetti regolamentari sotto supervisione SEC. Verifica con il tuo provider.`},
+      {label:`Attenzione replay protection`,text:`NON spostare bitcoin nelle settimane intorno al fork senza capire la replay protection — rischio di perdere fondi su una o entrambe le catene. Usa il tool di splitting ufficiale quando disponibile.`}
+    ],
+    links:[
+      {label:`Analisi CryptoTimes`,url:`https://www.cryptotimes.io/insights/raiding-satoshis-vault-how-the-2026-bitcoin-ecash-hard-fork-impacts-your-btc/`},
+      {label:`Bitcoin.com coverage`,url:`https://news.bitcoin.com/drivechain-architect-paul-sztorc-unveils-august-bitcoin-hard-fork-with-11-btc-coin-split/`},
+      {label:`BeInCrypto controversia Satoshi`,url:`https://beincrypto.com/ecash-hardfork-satoshi-bitcoin-backlash/`}
+    ]
+  },
+
+  {
     id:'core-31.0', client:'core', version:'31.0', date:'2026-04-07', year:2026,
     title:`Cluster Mempool — Mempool Moderna`,
     type:'improvement', importance:5,
@@ -1130,6 +1215,14 @@ function renderAll() {
           <div class="bip110-connector-dot"></div>
         </div>`;
       }
+      // eCash connector after BIP-110 card
+      if(v.id==='bip110'){
+        html+=`<div class="ecash-connector">
+          <div class="ecash-connector-dot"></div>
+          <div class="ecash-connector-label">Agosto 2026 &mdash; due eventi distinti, stesso blocco di riferimento (~964.000)</div>
+          <div class="ecash-connector-dot"></div>
+        </div>`;
+      }
     });
     html+='</div>';
   });
@@ -1239,6 +1332,108 @@ function openDetail(id) {
     return;
   }
   // ── END BIP-110 ────────────────────────────────────────────────────────────
+
+  // ── ECASH SPECIAL RENDERING ──────────────────────────────────────────────
+  if(v.ecashspecial) {
+    const sb2 = (val) => `<div class="dp-score-bar"><div class="dp-score-fill" style="width:${val*20}%"></div></div>`;
+
+    const disambigHtml = `<div class="ecash-disambig">
+      <div class="ecash-disambig-title">&#9888; Attenzione alla confusione dei nomi</div>
+      <ul>
+        <li><strong>eCash di Paul Sztorc (2026)</strong> &mdash; questo hard fork di Bitcoin, oggetto di questa scheda</li>
+        <li><strong>eCash (XEC)</strong> &mdash; criptovaluta esistente dal 2021, derivata da Bitcoin Cash tramite Bitcoin ABC, ticker XEC, capitalizzazione ~140 milioni di dollari ad aprile 2026 &mdash; progetto completamente separato</li>
+        <li><strong>eCash di David Chaum (1983)</strong> &mdash; il sistema di moneta digitale anonima degli anni &#8217;80, da cui il nome originariamente proviene</li>
+      </ul>
+      <div style="margin-top:0.6rem;font-size:0.75rem;color:#fbbf24;font-style:italic;">Il fork annunciato da Sztorc ha scelto deliberatamente un nome gi&agrave; in uso, generando confusione &mdash; la community ha reagito con circa 80-85% di commenti negativi su X proprio per questo motivo.</div>
+    </div>`;
+
+    const proColHtml2 = `<div class="bip110-col bip110-col-pro">
+      <div class="bip110-col-label">&#9745; A favore</div>
+      <ul>${v.controversyPro.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>`;
+    const conColHtml2 = `<div class="bip110-col bip110-col-con">
+      <div class="bip110-col-label">&#9746; Contro</div>
+      <ul>${v.controversyCon.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>`;
+
+    const dualScoreHtml2 = `<div class="bip110-dual-score">
+      <div class="bip110-score-col bip110-score-col-pro">
+        <div class="bip110-score-col-title">${v.scoreDual.pro.label}</div>
+        ${v.scoreDual.pro.items.map(it=>`<div class="bip110-score-item"><label>${it.label}</label>${sb2(it.val)}</div>`).join('')}
+      </div>
+      <div class="bip110-score-col bip110-score-col-con">
+        <div class="bip110-score-col-title">${v.scoreDual.con.label}</div>
+        ${v.scoreDual.con.items.map(it=>`<div class="bip110-score-item"><label>${it.label}</label>${sb2(it.val)}</div>`).join('')}
+      </div>
+    </div>
+    <div class="bip110-editorial" style="margin-top:0.9rem;">A differenza di BIP-110 dove il dibattito riguarda la direzione di Bitcoin, qui la questione e&#39; piu&#39; semplice: eCash di Sztorc non e&#39; Bitcoin. E&#39; un nuovo progetto che parte da una copia di Bitcoin. Puo&#39; avere valore proprio &mdash; ma chi lo valuta deve capire questa distinzione fondamentale.</div>`;
+
+    const nodeHtml2 = `<div class="bip110-node-guide">
+      ${v.nodeGuide.map(row=>`<div class="bip110-node-row"><div class="bip110-node-row-label">${row.label}</div><p>${row.text}</p></div>`).join('')}
+    </div>
+    <div class="ecash-warning" style="margin-top:0.8rem;">
+      <div class="ecash-warning-title">&#128308; Attenzione &mdash; leggi prima di agire</div>
+      <ul>
+        <li>NON spostare bitcoin nelle settimane intorno al fork senza capire la replay protection &mdash; rischio di perdere fondi</li>
+        <li>Usa il tool di splitting ufficiale quando disponibile &mdash; non tool di terze parti non verificati</li>
+        <li>Prima di qualsiasi azione, verifica sempre con quale "eCash" stai interagendo &mdash; esistono tre progetti con questo nome</li>
+        <li>Gli ETF Bitcoin dovranno decidere come gestire i forked asset in base ai prospetti regolamentari sotto supervisione SEC &mdash; verifica con il tuo provider</li>
+      </ul>
+    </div>`;
+
+    const linksHtml2 = `<div class="bip110-links">${v.links.map(l=>`<div class="bip110-link"><span class="bip110-link-label">${l.label}</span><a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.url.replace('https://','')}</a></div>`).join('')}</div>`;
+
+    const compareBtn3 = compareSlots.includes(v.id)
+      ? `<button class="filter-btn" style="margin-top:0.5rem" onclick="removeFromCompare('${v.id}')">&#10005; Rimuovi da confronto</button>`
+      : `<button class="filter-btn active" style="margin-top:0.5rem" onclick="addToCompare('${v.id}')">&#8644; Aggiungi a confronto</button>`;
+
+    panel.innerHTML = `
+      ${disambigHtml}
+      <span class="dp-client-badge" style="background:rgba(248,113,113,0.2);color:var(--red);border-color:rgba(248,113,113,0.4);">Hard Fork</span>
+      <div class="dp-version">eCash (fork Bitcoin di Paul Sztorc)</div>
+      <div class="dp-title">${v.title}</div>
+      <div class="dp-date">&#128197; Annunciato: 24 aprile 2026 &mdash; Blocco attivazione: ~964.000 (~agosto 2026)</div>
+      <div class="ecash-status-hard">&#128309; HARD FORK &mdash; Catena separata, incompatibile con Bitcoin &mdash; Blocco ~964.000 (~agosto 2026)</div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Cosa cambia &mdash; spiegato semplice</div>
+        <div class="ecash-hint">Come fare una fotocopia di un documento, poi modificare la fotocopia &mdash; il documento originale rimane invariato, la fotocopia diventa qualcosa di diverso. Chi aveva il documento originale si ritrova con entrambi.</div>
+        <div class="dp-text">${v.details}</div>
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Controversia &mdash; due prospettive</div>
+        <div class="bip110-cols">${proColHtml2}${conColHtml2}</div>
+        <div class="bip110-emblem" style="margin-top:0.8rem;border-color:rgba(248,113,113,0.2);">
+          <div class="bip110-emblem-title" style="color:var(--red);">&#128308; Reazione della community</div>
+          <p>Circa 80-85% di commenti negativi su X al momento dell&#39;annuncio &mdash; principalmente per la confusione del nome e la questione degli indirizzi Satoshi. Gli ETF Bitcoin (BlackRock, Fidelity e altri) detengono complessivamente oltre 1 milione di BTC: dovranno decidere come gestire i forked asset sotto supervisione SEC &mdash; questo rende il fork potenzialmente il pi&ugrave; grande per impatto istituzionale nella storia di Bitcoin.</p>
+        </div>
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Chi ci ha lavorato e finanziato</div>
+        <div class="dp-text"><strong>Autore/Promotore:</strong> Paul Sztorc, CEO di LayerTwo Labs &mdash; sviluppatore Bitcoin da anni, autore di BIP300/BIP301, critico del processo di governance di Bitcoin Core.<br><strong>Non supportato da:</strong> Bitcoin Core, Bitcoin Knots, ProductionReady &mdash; nessun client Bitcoin principale lo implementa.<br><strong>Bug bounty:</strong> programmati per l&#39;estate 2026 prima del lancio.<br><br>${v.funding}</div>
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Punteggio Cypherpunk &mdash; dipende dal punto di vista</div>
+        ${dualScoreHtml2}
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Cosa devo fare con i miei bitcoin?</div>
+        ${nodeHtml2}
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// BIP associati</div>
+        ${bipsHtml}
+      </div>
+      <div class="dp-section">
+        <div class="dp-section-label">// Link e risorse</div>
+        ${linksHtml2}
+      </div>
+      ${compareBtn3}
+    `;
+    if(window.innerWidth<900) panel.scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  // ── END ECASH ─────────────────────────────────────────────────────────────
+
 
   const controversyHtml = v.controversy ? `<div class="dp-section"><div class="dp-section-label">⚠ Controversia</div><div class="dp-controversy">${v.controversy}</div></div>` : '';
   const compareBtn = compareSlots.includes(id)
@@ -1382,7 +1577,12 @@ function renderFunding() {
     <div class="funder-name" style="color:#fbbf24">&#9670; Nota BIP-110</div>
     <div class="funder-type">Caso raro: proposta senza finanziatori istituzionali</div>
     <div class="funder-desc">${BIP110_FUNDER_NOTE}</div>
-  </div>`;
+  </div>
+  <div class="funder-card" style="border-color:rgba(248,113,113,0.3);grid-column:1/-1">
+    <div class="funder-name" style="color:var(--red)">&#9670; Nota eCash Fork (Sztorc)</div>
+    <div class="funder-type">Modello di finanziamento inedito e controverso</div>
+    <div class="funder-desc">Il fork eCash di Sztorc introduce un modello di finanziamento senza precedenti nella storia dei fork Bitcoin: la creazione ex novo di 600.000 unita&#39; assegnate a indirizzi storicamente collegati a Satoshi Nakamoto per distribuirle a investitori accreditati. E&#39; un uso del nome e del lascito di Satoshi che la community ha ampiamente contestato &mdash; definendolo "furto" in diversi thread pubblici. La scelta del nome "eCash" (gia&#39; in uso da XEC dal 2021) ha amplificato la percezione di disonesta&#39; o superficialita&#39; nel processo di lancio.</div>
+  </div>\``;
 }
 
 // Progress bar
