@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bitcoin per le Organizzazioni Non Profit &mdash; Guida HRF &mdash; Bitcoin Report School</title>
+<meta name="description" content="Guida completa per organizzazioni non profit su come usare Bitcoin per resistere alla repressione finanziaria. Human Rights Foundation, traduzione italiana di Bitcoin Report School.">
+<meta name="author" content="Human Rights Foundation | Traduzione: Bitcoin Report School">
+<link rel="canonical" href="https://bitcoinreportschool.com/guida-bitcoin-nonprofit.html">
+<meta property="og:title" content="Bitcoin per le Organizzazioni Non Profit">
+<meta property="og:description" content="Una guida per aiutare il tuo movimento a raggiungere la libert&agrave; finanziaria. Human Rights Foundation, traduzione italiana.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --gold: #F7931A;
+  --gold-dim: rgba(247,147,26,0.12);
+  --gold-dim2: rgba(247,147,26,0.06);
+  --bg: #07080a;
+  --bg2: #0d0e14;
+  --bg3: #13141c;
+  --bg4: #191b24;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #e8e4dc;
+  --text2: #9a9790;
+  --text3: #5a5550;
+  --green: #22d3a0;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Playfair Display', serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.75; }
+
+/* ── PROGRESS BAR */
+#prog { position:fixed; top:0; left:0; height:3px; width:0; background:var(--gold); z-index:9999; pointer-events:none; }
+
+/* ── HOME BTN */
+.home-btn { position:fixed; top:1rem; left:1rem; z-index:900; display:flex; align-items:center; gap:.4rem; background:rgba(7,8,10,.92); border:1px solid var(--gold); border-radius:6px; padding:.4rem .85rem; font-family:var(--mono); font-size:.68rem; color:var(--gold); text-decoration:none; letter-spacing:.05em; backdrop-filter:blur(8px); transition:background .2s; }
+.home-btn:hover { background:rgba(247,147,26,.1); }
+
+/* ── HEADER */
+.site-header { background: linear-gradient(180deg,#020304 0%,#07080a 60%,var(--bg) 100%); position:relative; overflow:hidden; padding:0; }
+.header-grid { position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(247,147,26,.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(247,147,26,.04) 40px); background-size:40px 40px; pointer-events:none; }
+.header-glow { position:absolute; top:-80px; left:50%; transform:translateX(-50%); width:600px; height:350px; background:radial-gradient(ellipse,rgba(247,147,26,.11) 0%,transparent 70%); pointer-events:none; }
+.header-inner { max-width:860px; margin:0 auto; padding:5rem 2rem 4rem; position:relative; z-index:2; }
+.header-badge { display:inline-flex; align-items:center; gap:.5rem; background:rgba(247,147,26,.12); border:1px solid rgba(247,147,26,.35); border-radius:20px; padding:.3rem .9rem; font-family:var(--mono); font-size:.6rem; color:var(--gold); letter-spacing:.12em; text-transform:uppercase; margin-bottom:1.4rem; }
+.header-badge span { width:6px; height:6px; border-radius:50%; background:var(--gold); display:inline-block; }
+.header-title { font-family:var(--serif); font-size:clamp(2.2rem,6vw,4rem); font-weight:700; color:var(--text); line-height:1.08; margin-bottom:.5rem; }
+.header-sub { font-family:var(--serif); font-size:clamp(1rem,2.2vw,1.3rem); font-style:italic; color:var(--text2); margin-bottom:1.6rem; line-height:1.5; }
+.header-credit { font-family:var(--mono); font-size:.65rem; color:var(--text3); margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+.header-credit span { color:var(--gold); opacity:.8; }
+.header-actions { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
+.btn-pdf { display:inline-flex; align-items:center; gap:.45rem; background:var(--gold); color:#000; font-family:var(--mono); font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; padding:.65rem 1.4rem; border-radius:8px; transition:opacity .2s; }
+.btn-pdf:hover { opacity:.88; }
+.btn-home-link { display:inline-flex; align-items:center; gap:.4rem; font-family:var(--mono); font-size:.68rem; color:var(--gold); text-decoration:none; border:1px solid rgba(247,147,26,.35); border-radius:8px; padding:.6rem 1.2rem; transition:border-color .2s; }
+.btn-home-link:hover { border-color:var(--gold); }
+
+/* ── LAYOUT */
+.page-layout { display:grid; grid-template-columns:240px 1fr; gap:0; max-width:1100px; margin:0 auto; padding:2rem 1.5rem 5rem; align-items:start; }
+@media(max-width:900px) { .page-layout { grid-template-columns:1fr; } }
+
+/* ── TOC */
+.toc-sidebar { position:sticky; top:4.5rem; padding-right:2rem; }
+.toc-toggle { display:none; font-family:var(--mono); font-size:.65rem; color:var(--gold); background:none; border:1px solid var(--border2); border-radius:6px; padding:.4rem .8rem; cursor:pointer; margin-bottom:.6rem; }
+@media(max-width:900px) { .toc-toggle { display:block; } .toc-nav { display:none; } .toc-nav.open { display:block; } }
+.toc-label { font-family:var(--mono); font-size:.55rem; color:var(--text3); text-transform:uppercase; letter-spacing:.15em; margin-bottom:.8rem; }
+.toc-nav a { display:block; font-family:var(--mono); font-size:.63rem; color:var(--text2); text-decoration:none; padding:.32rem .5rem; border-radius:5px; transition:background .15s,color .15s; line-height:1.45; margin-bottom:.1rem; }
+.toc-nav a:hover { background:var(--gold-dim); color:var(--gold); }
+.toc-nav a.active { background:var(--gold-dim); color:var(--gold); }
+
+/* ── ARTICLE */
+.article { min-width:0; }
+.section { padding:2.5rem 0 1.5rem; border-bottom:1px solid var(--border); }
+.section:last-child { border-bottom:none; }
+.section-title { font-family:var(--serif); font-size:clamp(1.3rem,2.8vw,1.75rem); font-weight:700; color:var(--text); line-height:1.2; margin-bottom:1.6rem; border-left:4px solid var(--gold); padding-left:.9rem; }
+.section p { font-family:var(--serif); font-size:1rem; color:var(--text); line-height:1.85; margin-bottom:1.1rem; max-width:680px; }
+.section strong { color:var(--text); font-family:var(--sans); font-weight:600; }
+.section em { font-style:italic; }
+.guide-list { list-style:none; padding-left:.5rem; margin-bottom:1.2rem; max-width:660px; }
+.guide-list li { font-family:var(--serif); font-size:1rem; color:var(--text); line-height:1.8; padding-left:1.4rem; position:relative; margin-bottom:.4rem; }
+.guide-list li::before { content:'\2014'; position:absolute; left:0; color:var(--gold); font-size:.85rem; }
+.inline-link { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(247,147,26,.35); }
+.inline-link:hover { border-color:var(--gold); }
+
+/* ── INFO BOX */
+.info-box { background:var(--gold-dim2); border:1px solid rgba(247,147,26,.25); border-radius:10px; padding:1rem 1.2rem; margin:1.5rem 0; max-width:660px; font-size:.9rem; color:var(--text2); line-height:1.7; }
+.info-box-label { display:block; font-family:var(--mono); font-size:.58rem; color:var(--gold); text-transform:uppercase; letter-spacing:.15em; margin-bottom:.5rem; }
+
+/* ── BLOCKQUOTE */
+.case-quote { border-left:3px solid var(--gold); margin:1.4rem 0; padding:.8rem 1.2rem; background:var(--gold-dim2); border-radius:0 8px 8px 0; max-width:640px; }
+.case-quote p { font-family:var(--serif); font-style:italic; font-size:1rem; color:var(--text); line-height:1.75; margin-bottom:.4rem; }
+.case-quote cite { font-family:var(--mono); font-size:.58rem; color:var(--gold); font-style:normal; letter-spacing:.05em; }
+
+/* ── ATTRIBUTES */
+.attrs-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; max-width:700px; }
+@media(max-width:580px) { .attrs-grid { grid-template-columns:1fr; } }
+.attr-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.2rem; transition:border-color .2s; }
+.attr-card:hover { border-color:rgba(247,147,26,.3); }
+.attr-num { font-family:var(--mono); font-size:.55rem; color:var(--gold); text-transform:uppercase; letter-spacing:.12em; margin-bottom:.3rem; opacity:.75; }
+.attr-title { font-family:var(--sans); font-size:.92rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+.attr-body { font-size:.82rem; color:var(--text2); line-height:1.6; }
+
+/* ── MYTHS */
+.myths-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin:1.5rem 0; max-width:720px; }
+@media(max-width:768px) { .myths-grid { grid-template-columns:1fr; } }
+.myth-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.2rem; }
+.myth-label { font-family:var(--mono); font-size:.55rem; color:var(--gold); text-transform:uppercase; letter-spacing:.12em; margin-bottom:.4rem; opacity:.75; }
+.myth-myth { font-family:var(--serif); font-size:.88rem; font-style:italic; color:var(--text2); margin-bottom:.7rem; line-height:1.55; }
+.myth-reality-label { font-family:var(--mono); font-size:.55rem; color:var(--green); text-transform:uppercase; letter-spacing:.1em; margin-bottom:.35rem; font-weight:700; }
+.myth-reality { font-size:.82rem; color:var(--text2); line-height:1.6; }
+
+/* ── CASES */
+.cases-grid { display:flex; flex-direction:column; gap:1.3rem; margin:1.5rem 0; }
+.case-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1.5rem; max-width:700px; }
+.case-header { display:flex; align-items:center; gap:.8rem; margin-bottom:.9rem; flex-wrap:wrap; }
+.case-country { font-family:var(--mono); font-size:.6rem; background:rgba(247,147,26,.12); border:1px solid rgba(247,147,26,.3); color:var(--gold); border-radius:20px; padding:.2rem .75rem; text-transform:uppercase; letter-spacing:.1em; }
+.case-org { font-family:var(--sans); font-size:.92rem; font-weight:700; color:var(--text); }
+.case-body { font-size:.88rem; color:var(--text2); line-height:1.7; margin-bottom:.6rem; }
+
+/* ── RISKS */
+.risks-grid { display:flex; flex-direction:column; gap:.9rem; margin:1.4rem 0; max-width:680px; }
+.risk-item { background:var(--bg2); border-left:3px solid rgba(248,113,113,.5); border-radius:0 8px 8px 0; padding:.8rem 1.1rem; }
+.risk-title { font-family:var(--sans); font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:.3rem; }
+.risk-body { font-size:.83rem; color:var(--text2); line-height:1.6; }
+
+/* ── BEST PRACTICES */
+.bp-grid { display:flex; flex-direction:column; gap:.6rem; margin:1.2rem 0; max-width:660px; }
+.bp-item { display:flex; gap:.8rem; align-items:flex-start; }
+.bp-num { font-family:var(--mono); font-size:.65rem; color:var(--gold); font-weight:700; min-width:1.6rem; padding-top:.15rem; flex-shrink:0; }
+.bp-text { font-size:.88rem; color:var(--text2); line-height:1.65; }
+.bp-text strong { color:var(--text); }
+
+/* ── TOOLS */
+.tools-section-title { font-family:var(--mono); font-size:.6rem; color:var(--text3); text-transform:uppercase; letter-spacing:.15em; margin:1.5rem 0 .7rem; padding-bottom:.4rem; border-bottom:1px solid var(--border); }
+.tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-bottom:1.2rem; max-width:680px; }
+@media(max-width:580px) { .tools-grid { grid-template-columns:1fr; } }
+.tool-card { background:var(--bg2); border:1px solid var(--border); border-radius:9px; padding:.9rem 1rem; transition:border-color .2s; }
+.tool-card:hover { border-color:rgba(247,147,26,.3); }
+.tool-card strong { display:block; font-family:var(--sans); font-size:.88rem; font-weight:700; color:var(--gold); margin-bottom:.3rem; }
+.tool-card p { font-size:.78rem; color:var(--text2); line-height:1.55; margin:0; }
+
+/* ── RESOURCES */
+.resource-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.3rem; margin-bottom:.8rem; max-width:660px; }
+.resource-title { font-family:var(--sans); font-size:.92rem; font-weight:700; color:var(--gold); margin-bottom:.3rem; }
+.resource-body { font-size:.83rem; color:var(--text2); line-height:1.6; }
+
+/* ── BACK TOP */
+.back-top { position:fixed; bottom:2rem; right:1.5rem; background:var(--bg2); border:1px solid var(--border2); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:var(--text2); text-decoration:none; z-index:500; opacity:0; pointer-events:none; transition:opacity .3s; font-size:.9rem; }
+.back-top.visible { opacity:1; pointer-events:all; }
+.back-top:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ── FOOTER */
+footer { border-top:1px solid var(--border); padding:2.5rem 2rem; max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; }
+.footer-links { display:flex; flex-wrap:wrap; gap:1rem; }
+.footer-links a { font-family:var(--mono); font-size:.65rem; color:var(--text3); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.07); transition:color .2s; }
+.footer-links a:hover { color:var(--gold); }
+.footer-note { font-family:var(--mono); font-size:.62rem; color:var(--text3); font-style:italic; }
+
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<a href="index.html" class="home-btn">&#8592; Home</a>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-grid"></div>
+  <div class="header-glow"></div>
+  <div class="header-inner">
+    <div class="header-badge"><span></span>Traduzione italiana ufficiale &mdash; Human Rights Foundation</div>
+    <h1 class="header-title">Bitcoin per le<br>Organizzazioni Non Profit</h1>
+    <p class="header-sub">Una Guida per Aiutare il Tuo Movimento a Raggiungere la Libert&agrave; Finanziaria</p>
+    <div class="header-credit">
+      <span>Human Rights Foundation</span> &middot;
+      <span>Traduzione: Bitcoin Report School</span>
+    </div>
+    <div class="header-actions">
+      <a href="assets/Bitcoin_per_NonProfit_IT.pdf" download class="btn-pdf">&#11015; Scarica PDF</a>
+      <a href="https://hrf.org" target="_blank" rel="noopener noreferrer" class="btn-home-link">hrf.org &rarr;</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-layout">
+
+  <!-- TOC -->
+  <aside class="toc-sidebar">
+    <button class="toc-toggle" onclick="document.getElementById('toc-nav').classList.toggle('open')">&#9776; Indice</button>
+    <div class="toc-label">Indice dei contenuti</div>
+    <nav class="toc-nav" id="toc-nav">
+<a href="#chi-puo-usare">Chi Può Usare Questa Guida?</a>
+<a href="#come-bitcoin-aiuta">Come Bitcoin Aiuta i Gruppi della Società Civile</a>
+<a href="#basi-bitcoin">Le Basi di Bitcoin</a>
+<a href="#attributi-fondamentali">Gli Attributi Fondamentali di Bitcoin</a>
+<a href="#bitcoin-vs-altcoins">Bitcoin vs. Criptovalute vs. Stablecoin</a>
+<a href="#usare-bitcoin-pratica">Usare Bitcoin nella Pratica</a>
+<a href="#lightning-network">La Lightning Network</a>
+<a href="#privacy-velocita">Privacy, Velocità e Costi Minimi</a>
+<a href="#falsi-miti">Falsi Miti Comuni</a>
+<a href="#casi-studio">Casi Studio: Bitcoin in Prima Linea</a>
+<a href="#rischi-sfide">Rischi e Sfide</a>
+<a href="#consigli-pratiche">Consigli e Buone Pratiche</a>
+<a href="#strumenti-consigliati">Strumenti Consigliati</a>
+<a href="#risorse-consigliate">Risorse Consigliate</a>
+<a href="#la-strada">La Strada da Percorrere</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article class="article">
+<section class="section" id="chi-puo-usare">
+  <h2 class="section-title">Chi Può Usare Questa Guida?</h2>
+<p>Nell&rsquo;inverno del 2018, Anna Chekhovich era seduta negli uffici moscoviti della Fondazione Anti-Corruzione quando arrivò la chiamata. I loro conti bancari erano stati congelati. Tutti, nel giro di una notte, per ordine del Cremlino. Per la maggior parte delle organizzazioni, sarebbe stata una condanna a morte: niente stipendi, niente spese legali, nessun budget operativo, nessun ossigeno. Ma anni prima, quando il clima politico si stava già oscurando e Chekhovich sentiva le pareti stringersi, la fondazione aveva silenziosamente iniziato ad accettare donazioni in Bitcoin. Era una precauzione, quasi un ripensamento all&rsquo;epoca, ma divenne una delle decisioni chiave che le tenne in vita.</p>
+<p>Questa guida esiste affinché la tua organizzazione non profit possa fare lo stesso e diventare più resiliente e indipendente di fronte alla repressione finanziaria da parte dei regimi autoritari. Che tu sia a Caracas, Nairobi o Nanchino, questa guida aiuterà la tua organizzazione a prendere il controllo dei propri fondi, transazioni e risparmi. Ti libererà dalla noia e dalla frustrazione dei bonifici bancari, dei pagamenti rifiutati, dei ritardi interminabili e dei governi autoritari che ti dicono: &laquo;No, non puoi usare i tuoi soldi così.&raquo;</p>
+<p>Questa guida è pensata in modo speciale per le organizzazioni non profit che operano in condizioni politiche difficili. È costruita su misura per i movimenti che lavorano sotto la tirannia, dove la privacy e la sovranità sono fondamentali.</p>
+<p>In tutto il mondo, i regimi autoritari usano regolarmente i sistemi finanziari come arma. Congelano i conti bancari, criminalizzano le donazioni, monitorano le transazioni, confiscano i beni e manipolano le regole per indebolire o mettere a tacere la società civile.</p>
+<p>Bitcoin è una rete monetaria digitale decentralizzata che permette alle persone di conservare e trasferire valore indipendentemente da banche, governi o intermediari. Offre alle organizzazioni non profit un&rsquo;alternativa ai sistemi finanziari controllati dallo Stato: un modo per detenere e spostare denaro senza l&rsquo;interferenza di un regime autoritario.</p>
+<p><strong>Dopo aver letto questa guida, la tua organizzazione non profit sarà in grado di:</strong></p>
+<ul class="guide-list"><li>Capire cos&rsquo;è Bitcoin e quando aiuta</li><li>Ricevere, conservare e inviare bitcoin usando strumenti di auto-custodia</li><li>Scegliere modelli appropriati di custodia, sicurezza e governance</li><li>Accedere a Bitcoin e uscirne attraverso adeguati on-ramp e off-ramp</li><li>Decidere come Bitcoin si inserisce nella tua missione e nel tuo contesto</li></ul>
+</section>
+
+<section class="section" id="come-bitcoin-aiuta">
+  <h2 class="section-title">Come Bitcoin Aiuta i Gruppi della Società Civile</h2>
+<p>Man mano che i sistemi finanziari sono diventati più digitali e centralizzati, sono diventati più facili da monitorare, pressare e controllare. La repressione oggi è applicata non solo da polizia politicizzata e tribunali truccati: è applicata attraverso un&rsquo;infrastruttura finanziaria corrotta.</p>
+<p>Considerate quello che è successo al movimento di Alexei Navalny in Russia, agli attivisti pro-democrazia di Hong Kong i cui conti bancari sono stati congelati dopo la Legge sulla Sicurezza Nazionale, o alle migliaia di manifestanti nigeriani i cui conti sono stati chiusi dopo le manifestazioni EndSARS del 2020. In ogni caso, l&rsquo;arma era la stessa: il sistema bancario. La repressione finanziaria assume molte forme:</p>
+<div class="risks-grid"><div class="risk-item"><div class="risk-title">Sorveglianza</div><div class="risk-body">I regimi autoritari fanno pressione sulle banche affinché monitorino le organizzazioni non profit, segnalino le attività come &laquo;sospette&raquo; e convoglino i dati finanziari alle autorità. In Cina, il sistema di credito sociale si estende alle transazioni finanziarie; in Egitto, i conti bancari delle ONG sono soggetti a regolari verifiche governative progettate per intimidire.</div></div><div class="risk-item"><div class="risk-title">Censura</div><div class="risk-body">I regimi bloccano le donazioni o negano silenziosamente le transazioni. Un bonifico che dovrebbe richiedere ore rimane in attesa per settimane. Una donazione ricorrente da un sostenitore in esilio viene silenziosamente rifiutata. L&rsquo;organizzazione non viene mai informata del perché.</div></div><div class="risk-item"><div class="risk-title">Esclusione</div><div class="risk-body">I regimi autoritari etichettano i gruppi come &laquo;estremisti&raquo; o &laquo;agenti stranieri&raquo; ed espellono completamente dal sistema finanziario. La legge russa sugli &laquo;agenti stranieri&raquo; è stata usata per chiudere decine di organizzazioni della società civile.</div></div><div class="risk-item"><div class="risk-title">Svalutazione valutaria</div><div class="risk-body">La cattiva gestione economica e l&rsquo;iperinflazione distruggono i risparmi. In Venezuela tra il 2016 e il 2019, il bolivar perse così tanto valore che i prezzi cambiavano tra la mattina e il pomeriggio.</div></div><div class="risk-item"><div class="risk-title">Blocco e sequestro dei conti</div><div class="risk-body">I regimi immobilizzano o confiscano i fondi per fermare le operazioni. In Bielorussia, dopo le elezioni del 2020, il regime ha congelato i conti di diverse organizzazioni per i diritti umani nel giro di ore dall&rsquo;inizio delle manifestazioni.</div></div><div class="risk-item"><div class="risk-title">Accesso limitato alle valute straniere</div><div class="risk-body">In paesi come Argentina, Turchia e Nigeria, i governi impongono rigidi controlli sui capitali che impediscono alle organizzazioni di detenere dollari o euro, costringendole a vedere il loro potere d&rsquo;acquisto erodere mese dopo mese.</div></div><div class="risk-item"><div class="risk-title">Molestie regolamentari</div><div class="risk-body">Sotto i regimi autoritari, le regole cambiano senza preavviso, le approvazioni si bloccano e le violazioni tecniche vengono inventate per drenare tempo e risorse. L&rsquo;obiettivo è l&rsquo;esaurimento.</div></div></div><h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--text);margin:2rem 0 1rem;padding-left:.9rem;border-left:3px solid rgba(247,147,26,.4);">Perché Bitcoin è il Denaro della Libertà</h3><p>Bitcoin può aiutare le organizzazioni non profit a bypassare molti di questi punti di strangolamento. Funziona su un sistema globale peer-to-peer. Nessuna banca centrale, azienda o autorità approva le transazioni o tiene i conti.</p>
+<ul class="guide-list"><li><strong>Sorveglianza:</strong> Le transazioni Bitcoin, eseguite correttamente, proteggono la privacy finanziaria e riducono la dipendenza dalle istituzioni che segnalano le attività alle autorità.</li><li><strong>Censura:</strong> Nessuno può bloccare una donazione in Bitcoin o rifiutare un trasferimento.</li><li><strong>Esclusione:</strong> La partecipazione non richiede approvazione da banche. Chiunque può usare la rete, indipendentemente dal sesso, dalle credenze, dal luogo di nascita o dalla ricchezza.</li><li><strong>Crollo valutario:</strong> I fondi vengono detenuti in una moneta indipendente dalle valute locali. Bitcoin è volatile, ma dalla sua creazione è stato l&rsquo;asset finanziario con le migliori performance di tutti i tempi.</li><li><strong>Congelamento dei conti:</strong> Il Bitcoin detenuto in auto-custodia è molto più resistente al congelamento o al sequestro attraverso i canali bancari tradizionali.</li><li><strong>Controlli sui capitali:</strong> Bitcoin può essere trasferito attraverso i confini senza richiedere il permesso di alcun sistema bancario.</li><li><strong>Indipendenza dall&rsquo;identità:</strong> Non richiede una forma di identificazione per essere utilizzato.</li></ul>
+<blockquote class="case-quote"><p>Bitcoin è un&rsquo;infrastruttura per la dignità umana. Offre alle persone, e alle organizzazioni che le servono, un modo per preservare il valore del loro tempo e del loro lavoro in una moneta che non può essere gonfiata o facilmente spenta.</p><cite>&#8212; Ella Hough, Junior Fellow, Cornell Brooks School Tech Policy Institute</cite></blockquote>
+</section>
+
+<section class="section" id="basi-bitcoin">
+  <h2 class="section-title">Le Basi di Bitcoin</h2>
+<p>Per la maggior parte delle persone, Bitcoin inizia con un momento di curiosità e un&rsquo;app wallet sul telefono. La scarichi, la apri e fissi uno schermo che mostra un saldo pari a zero. Non c&rsquo;è nessun modulo da compilare. Nessuna verifica dell&rsquo;identità. Nessuna banca da chiamare. In meno di un minuto, hai creato qualcosa di straordinario: un conto finanziario che nessun governo sulla terra controlla.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Cos&rsquo;è Bitcoin?</h3><p>Bitcoin è denaro digitale che esiste come rete globale piuttosto che all&rsquo;interno di una banca centralizzata. Nessuna azienda o governo lo gestisce. Decine di migliaia di computer indipendenti mantengono il sistema insieme, da server farm in Texas e Islanda a piccole macchine che ronzano in scantinati ad Accra e San Paolo. Nessuno sa chi ha creato Bitcoin: l&rsquo;identità di Satoshi Nakamoto rimane un mistero. Se Satoshi tornasse oggi, non sarebbe in grado di cambiare Bitcoin.</p>
+<p>Ogni bitcoin (1 BTC) è divisibile in 100 milioni di unità chiamate satoshi (o &laquo;sats&raquo;). A differenza del denaro governativo, ci saranno solo 21 milioni di bitcoin. Bitcoin è l&rsquo;unica moneta nella storia con un&rsquo;offerta che nessuno può gonfiare: non un presidente, non un banchiere centrale, non un dittatore.</p>
+<div class="info-box"><span class="info-box-label">&#128161; Lo sapevi?</span>Bitcoin vs. Contante: Bitcoin è contante digitale. Come il contante fisico, può essere detenuto e trasferito direttamente senza una banca. A differenza del contante, si muove istantaneamente attraverso i confini, da un telefono a Kiev a un telefono a Lisbona. A differenza del contante cartaceo, non può essere demonetizzato o svalutato.</div>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Cos&rsquo;è un Wallet Bitcoin?</h3><p>Un wallet Bitcoin è un portafoglio digitale che ti permette di controllare i tuoi bitcoin. Può essere un&rsquo;app sul tuo computer o telefono, oppure un piccolo dispositivo delle dimensioni di una chiavetta USB. Con l&rsquo;auto-custodia, nessuna banca può congelare il tuo conto. Nessun governo può prendere i tuoi soldi. Ma la sicurezza è tua responsabilità.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Come Mantieni al Sicuro i Tuoi Bitcoin?</h3><p>Quando crei un wallet Bitcoin, genera una <strong>frase di recupero</strong> (seed phrase): un elenco di 12 o 24 parole ordinarie che insieme formano la chiave per i tuoi bitcoin. Se il tuo dispositivo viene perso, danneggiato o rubato, la frase di recupero ti permette di ripristinare l&rsquo;accesso su qualsiasi dispositivo. Ma se qualcun altro ottiene la frase, può prendere i tuoi fondi.</p>
+<p><strong>Proteggere la tua frase di recupero è la singola pratica di sicurezza più importante quando si usa Bitcoin.</strong> Scrivila su carta o incidila nell&rsquo;acciaio. Conservala in un posto sicuro. Non condividerla mai con chi non fa parte del tuo nucleo di fiducia.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Come Ricevi e Invii Bitcoin?</h3><p>Quando fai clic su &laquo;ricevi bitcoin&raquo; in un wallet, genera un <strong>indirizzo bitcoin</strong>: una stringa di lettere e numeri come <code style="font-family:var(--mono);font-size:.82rem;color:var(--gold)">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>. Dai questo indirizzo a chiunque voglia inviarti denaro. Per motivi di privacy, dovresti generare un nuovo indirizzo ogni volta che ricevi bitcoin — la maggior parte dei wallet lo fa automaticamente.</p>
+<p>Inviare bitcoin è semplice: il tuo wallet ti chiede di inserire l&rsquo;indirizzo del destinatario, scegliere l&rsquo;importo e confermare. Una volta confermato, il pagamento si muove peer-to-peer senza approvazione da nessuna banca. Nessun numero di routing, nessun codice SWIFT, nessun intermediario.</p>
+</section>
+
+<section class="section" id="attributi-fondamentali">
+  <h2 class="section-title">Gli Attributi Fondamentali di Bitcoin</h2>
+<p>Questa sezione spiega perché Bitcoin resiste al controllo finanziario autoritario. Le proprietà specifiche di Bitcoin gli permettono di funzionare quando i sistemi tradizionali sono sotto pressione, manipolati o completamente spenti.</p>
+<div class="attrs-grid"><div class="attr-card"><div class="attr-num">Attributo 1</div><div class="attr-title">Il Mining di Bitcoin</div><div class="attr-body">Non esiste un&rsquo;autorità centrale che elabori le transazioni. I &laquo;miner&raquo; raccolgono le transazioni in attesa e ogni ~10 minuti uno vince e le inserisce nella blockchain. Con così tanti miner globali in competizione, è impossibile censurare singole transazioni.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 2</div><div class="attr-title">Resistenza alla Censura</div><div class="attr-body">Nella primavera del 2021, la Cina ha vietato il mining di Bitcoin. L&rsquo;hashrate è precipitato oltre il 70%, ma la rete non è morta. I miner si sono spostati in Texas, Kazakhstan, Paraguay. Bitcoin si è semplicemente spostato.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 3</div><div class="attr-title">Aperto e Senza Permessi</div><div class="attr-body">In Afghanistan, Afghanistan, Togo, Russia: Bitcoin non richiede approvazioni di identità e nessun guardiano istituzionale decide chi si qualifica. Chiunque può usarlo.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 4</div><div class="attr-title">Senza Confini e Globale</div><div class="attr-body">Una donazione inviata dal salotto di un sostenitore a Stoccolma a un&rsquo;organizzazione a Caracas segue lo stesso processo di una inviata dall&rsquo;altra parte della strada. Nessuna banca corrispondente, nessuna approvazione per i cambi di valuta.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 5</div><div class="attr-title">Protezione contro l&rsquo;Inflazione</div><div class="attr-body">L&rsquo;FMI ha stimato che il Venezuela ha avuto un&rsquo;inflazione di oltre un milione di percento nel 2018. L&rsquo;offerta totale di Bitcoin è fissata a 21 milioni. La nuova emissione segue un calendario trasparente che nessun governo può modificare.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 6</div><div class="attr-title">Nessuna Sorveglianza Incorporata</div><div class="attr-body">Usare Bitcoin non richiede l&rsquo;apertura di un conto legato a un&rsquo;identità legale. I pagamenti si muovono tra indirizzi Bitcoin, non profili personali. Il livello di privacy dipende da come viene usato.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 7</div><div class="attr-title">Resiliente sotto Stress</div><div class="attr-body">I fondi possono essere ripristinati da una frase di recupero anche se i dispositivi vengono persi o confiscati. Una seed phrase di 12 o 24 parole è recuperabile su qualsiasi wallet, su qualsiasi dispositivo, in qualsiasi paese.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 8</div><div class="attr-title">Pagamenti Veloci e Diretti</div><div class="attr-body">Le transazioni Bitcoin si regolano in pochi minuti, ma possono essere istantanee usando la Lightning Network. Non c&rsquo;è &laquo;chiuso il fine settimana&raquo;, nessun ritardo di 2-3 giorni, nessun giorno festivo bancario.</div></div>
+<div class="attr-card"><div class="attr-num">Attributo 9</div><div class="attr-title">Sicuro per Design</div><div class="attr-body">Ogni transazione viene verificata da migliaia di partecipanti indipendenti. Una volta registrata, una transazione non può essere alterata o cancellata. Non c&rsquo;è nessun override governativo di emergenza.</div></div>
+</div></section>
+
+<section class="section" id="bitcoin-vs-altcoins">
+  <h2 class="section-title">Bitcoin vs. Altre Criptovalute vs. Stablecoin</h2>
+<p>Criptovaluta è un termine generico che comprende vari tipi di denaro digitale. Solo una &mdash; bitcoin &mdash; è stata progettata per operare senza alcun controllo centrale. Per le organizzazioni che lavorano sotto pressione finanziaria, queste differenze di design sono enormemente importanti.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Bitcoin vs. Altre Criptovalute</h3><p>Ad eccezione di bitcoin, tutte le criptovalute sono state create e mantenute da aziende, fondazioni o team di sviluppo centralizzati. Le loro reti dipendono da un gruppo relativamente piccolo di persone che mantengono il software. Se un sistema dipende da un piccolo gruppo, quel gruppo diventa un punto di vulnerabilità: una gola che un regime autoritario può stringere.</p>
+<p>Bitcoin minimizza quella dipendenza. Le sue regole non sono applicate da un&rsquo;organizzazione centrale, ma da una rete globale di partecipanti indipendenti. Dopo 17 anni di operatività, le proprietà monetarie fondamentali di Bitcoin rimangono invariate: 21 milioni di monete, accesso aperto, nessuna autorità centrale. Nessun&rsquo;altra criptovaluta può rivendicare questo.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Bitcoin vs. Stablecoin</h3><p>Le stablecoin sono token digitali progettati per tracciare il valore di valute nazionali come il dollaro USA. Dipendono da aziende emittenti (come Tether o Circle) che detengono riserve bancarie. I saldi possono essere congelati o limitati dalle entità emittenti in determinate condizioni. Le stablecoin ereditano le vulnerabilità dei sistemi finanziari che le sostengono.</p>
+<p>Bitcoin fa un compromesso diverso. Accetta la volatilità del prezzo di mercato in cambio dell&rsquo;indipendenza. Per le organizzazioni in ambienti politicamente repressivi, questa indipendenza può avere più importanza della stabilità del prezzo a breve termine.</p>
+</section>
+
+<section class="section" id="usare-bitcoin-pratica">
+  <h2 class="section-title">Usare Bitcoin nella Pratica</h2>
+<p>Il controllo sui tuoi fondi è la base, ma usare Bitcoin quotidianamente si riduce a poche decisioni operative su come i fondi vengono detenuti, acceduti e protetti. Ci sono tre aree da considerare: wallet, custodia ed exchange.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Tipi di Custodia</h3><p><strong>Wallet custodiali</strong> conservano i tuoi bitcoin presso una terza parte, come un exchange, che mantiene la tua chiave privata. Quando la piattaforma FTX è crollata nel 2022, miliardi di dollari in fondi dei clienti sono svaniti in una notte.</p>
+<p><strong>Wallet in auto-custodia</strong> mettono la chiave privata direttamente sotto il controllo tuo o della tua organizzazione. Nessuna istituzione intermediaria controllata da un regime autoritario può bloccare le transazioni o confiscare i fondi. Questo è ciò che ti rende inarrestabile.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Hot vs. Cold Wallet</h3><p><strong>Hot wallet</strong> mantengono le chiavi su dispositivi connessi a internet. Sono facili da usare, adatti per transazioni frequenti. Pensa a un hot wallet come al contante in tasca: comodo per la spesa quotidiana. Esempi: Muun, AQUA, BULL Wallet, BlueWallet.</p>
+<p><strong>Cold wallet</strong> generano e conservano le chiavi private offline, tipicamente su hardware dedicato. Sono più adatti per riserve a lungo termine e saldi maggiori. Pensa a un cold wallet come a una cassetta di sicurezza. Esempi: COLDCARD, Trezor, Bitkey, SeedSigner.</p>
+<div class="info-box"><span class="info-box-label">&#128161; Lo sapevi?</span>Configurazione pratica: molte organizzazioni combinano entrambi gli approcci, mantenendo un hot wallet per le attività di routine e un cold wallet per le riserve a lungo termine &mdash; come tenere un po' di contante in cassa e il resto nel caveau.</div>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Wallet Multisignatura (Multisig)</h3><p>Un wallet multisig richiede l&rsquo;approvazione di più di una chiave privata prima che i fondi si muovano. In una comune configurazione 2-di-3, tre persone detengono ciascuna una chiave e due qualsiasi devono approvare un pagamento. Questa architettura distribuisce la responsabilità ed elimina i singoli punti di guasto — essenziale se la persona che detiene le chiavi viene arrestata.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Scambiare Bitcoin</h3><ul class="guide-list"><li><strong>Exchange centralizzati</strong> (Binance, Coinbase, Kraken): veloci e liquidi, ma richiedono verifica dell&rsquo;identità e creano pool centralizzati di dati sensibili.</li><li><strong>Exchange peer-to-peer (P2P)</strong>: spesso l&rsquo;opzione più affidabile in molti paesi. Hodl Hodl, LocalCoinSwap, Bisq, RoboSats, Vexl. Nessuna verifica dell&rsquo;identità, nessun record in database governativi.</li><li><strong>Bitcoin ATM</strong>: più di 38.000 macchine in tutto il mondo. Inserisci contanti, scansiona il QR del tuo wallet, i bitcoin arrivano. Commissioni tipicamente 5-15%.</li><li><strong>Voucher Bitcoin</strong> (come Azteco): acquistati con contanti e riscattati direttamente in un wallet in auto-custodia, simili a una scheda prepagata.</li></ul>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Spendere Bitcoin Direttamente</h3><p>Le organizzazioni non devono sempre convertire i bitcoin in valuta locale. In Sudafrica, MoneyBadger permette ai commercianti come Pick n Pay di accettare bitcoin. In Kenya, Tando consente di spendere bitcoin presso qualsiasi commerciante M-Pesa. A livello globale, Bitrefill permette di usare bitcoin per acquistare gift card per generi alimentari, biglietti aerei e altro da migliaia di rivenditori in più di cento paesi.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Raccolta Fondi con Bitcoin</h3><p><strong>BTCPay Server</strong> ti permette di creare la tua pagina di donazione Bitcoin usando software open-source. Non c&rsquo;è nessun processore di pagamento di terze parti: i fondi vanno direttamente al tuo wallet in auto-custodia. Genera un nuovo indirizzo Bitcoin per ogni donazione, migliorando la privacy dei donatori.</p>
+</section>
+
+<section class="section" id="lightning-network">
+  <h2 class="section-title">La Lightning Network</h2>
+<p>La spesa quotidiana funziona meglio quando i pagamenti sono veloci ed economici. È qui che entra in gioco la <strong>Lightning Network</strong>. Per pagamenti piccoli e veloci &mdash; dalle spese locali al supporto di emergenza, ai micropagamenti e ai trasferimenti transfrontalieri &mdash; Lightning ti permette di inviare bitcoin in secondi con commissioni molto basse.</p>
+<p>La rete base di Bitcoin dà priorità alla sicurezza e al regolamento a lungo termine. Lightning gestisce alti volumi di pagamenti di piccola entità senza sovraccaricare il livello base. Invece di registrare ogni piccola transazione sulla rete principale, le elabora fuori dalla chain e le salda su Bitcoin quando necessario.</p>
+<p><strong>Per le organizzazioni non profit, i casi d&rsquo;uso includono:</strong></p>
+<ul class="guide-list"><li>Ricevere piccole donazioni da sostenitori in tutto il mondo</li><li>Pagare spese locali rapidamente senza attendere le conferme dei blocchi</li><li>Effettuare micropagamenti privati</li><li>Spostare fondi operativi tra team attraverso i confini</li><li>Inviare supporto di emergenza durante una crisi, quando ore e minuti contano</li></ul>
+<div class="info-box"><span class="info-box-label">&#128161; Lo sapevi?</span>Lightning non è progettata per conservare grandi riserve. Pensa a essa come al contante nel tuo portafoglio, mentre il Bitcoin on-chain serve come conto di risparmio. Wallet Lightning consigliati in auto-custodia: Phoenix, BULL Wallet, ZEUS.</div>
+</section>
+
+<section class="section" id="privacy-velocita">
+  <h2 class="section-title">Privacy, Velocità e Costi Minimi</h2>
+<p>Lightning raggiunge un equilibrio tra velocità, costo e semplicità. In ambienti con forte sorveglianza o pagamenti frequenti di piccola entità, le organizzazioni potrebbero voler dare priorità a una maggiore privacy e costi più bassi.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Liquid (Sidechain)</h3><p>Quando invii un pagamento tramite un wallet basato su Liquid come AQUA, il pagamento viene instradato attraverso Liquid, una sidechain mantenuta da una federazione di più di due dozzine di aziende indipendenti. Il pagamento arriva prima, costa meno e rivela molto meno su chi lo ha inviato. Il costo è che gli utenti devono fidarsi di quella federazione.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Ecash Chaumiano</h3><p>L&rsquo;ecash chaumiano è denaro elettronico costruito su Bitcoin che si comporta come denaro fisico: privato, semplice e da persona a persona. Permette alla tua organizzazione di detenere denaro direttamente sui propri dispositivi e passarlo ad altri in modo discreto, con commissioni quasi nulle. Poiché non mantiene nessun registro delle transazioni, riduce l&rsquo;esposizione dei dati finanziari.</p>
+<p>La maggior parte delle organizzazioni usa l&rsquo;ecash insieme a Bitcoin e Lightning: Bitcoin per la custodia a lungo termine, Lightning per i pagamenti quotidiani, l&rsquo;ecash per un ulteriore livello di privacy quando le circostanze lo richiedono.</p>
+</section>
+
+<section class="section" id="falsi-miti">
+  <h2 class="section-title">Falsi Miti Comuni</h2>
+<p>Bitcoin è una delle tecnologie più fraintese al mondo. Titoli fuorvianti, retorica politica e confusione pubblica creano pregiudizi che impediscono a molte organizzazioni non profit di considerarlo &mdash; quando queste organizzazioni sono quelle che ne trarrebbero maggiore beneficio.</p>
+<div class="myths-grid"><div class="myth-card"><div class="myth-label">Mito 1</div><div class="myth-myth">&ldquo;Bitcoin è solo per criminali&rdquo;</div><div class="myth-reality-label">La realt&agrave;</div><div class="myth-reality">La stessa proprietà che permette a un trafficante di droga di effettuare transazioni senza una banca permette anche a un giornalista in Birmania di ricevere fondi di emergenza quando ogni banca nel paese è stata chiusa. Per il riciclaggio su larga scala, il sistema bancario tradizionale rimane lo strumento preferito: HSBC, Deutsche Bank e Danske Bank hanno ciascuna pagato miliardi in sanzioni per questo.</div></div>
+<div class="myth-card"><div class="myth-label">Mito 2</div><div class="myth-myth">&ldquo;Devi essere un esperto tecnico&rdquo;</div><div class="myth-reality-label">La realt&agrave;</div><div class="myth-reality">Se puoi usare WhatsApp, puoi inviare e ricevere bitcoin. I wallet moderni sono progettati per essere intuitivi. Molte organizzazioni non profit iniziano senza alcuna competenza tecnica e presto ricevono, conservano e inviano regolarmente bitcoin.</div></div>
+<div class="myth-card"><div class="myth-label">Mito 3</div><div class="myth-myth">&ldquo;Bitcoin è troppo volatile per essere utile&rdquo;</div><div class="myth-reality-label">La realt&agrave;</div><div class="myth-reality">In ambienti dove la valuta locale sta crollando, i controlli sui capitali sono in vigore e i conti sono congelati, la volatilità è un rischio minore rispetto all&rsquo;assenza totale di denaro accessibile. Nel corso di qualsiasi periodo di quattro anni nella sua storia, bitcoin non ha mai perso valore.</div></div>
+<div class="myth-card"><div class="myth-label">Mito 4</div><div class="myth-myth">&ldquo;I governi la vieteranno e basta&rdquo;</div><div class="myth-reality-label">La realt&agrave;</div><div class="myth-reality">Poiché Bitcoin non dipende da nessun singolo paese, banca o azienda, un divieto non spegne il sistema. Nigeria, Cina e Russia &mdash; paesi con politiche restrittive &mdash; hanno anche alcuni dei più alti livelli di utilizzo di Bitcoin, precisamente perché le persone cercano alternative.</div></div>
+</div></section>
+
+<section class="section" id="casi-studio">
+  <h2 class="section-title">Casi Studio: Bitcoin in Prima Linea</h2>
+<p>Le storie seguenti mostrano Bitcoin in azione. Attivisti, organizzazioni non profit e gruppi della società civile lo stanno già usando quando le vie finanziarie si restringono, quando la velocità è la differenza tra l&rsquo;azione e la paralisi.</p>
+<div class="cases-grid"><div class="case-card"><div class="case-header"><span class="case-country">Russia</span><span class="case-org">Fondazione Anti-Corruzione</span></div><div class="case-body">Fondata nel 2011 dal leader dell&rsquo;opposizione Alexei Navalny, la Fondazione Anti-Corruzione aveva iniziato ad accettare donazioni in Bitcoin come contingenza. Nel 2018, Putin ha bloccato i conti bancari dell&rsquo;ACF, tagliando l&rsquo;accesso al sistema bancario formale nel giro di una notte. Poiché l&rsquo;infrastruttura Bitcoin era già in atto, la fondazione ha continuato a ricevere supporto finanziario e a pagare le spese. Nel 2021 l&rsquo;ACF è stata etichettata come &laquo;organizzazione estremista&raquo; e costretta all&rsquo;esilio. Ha continuato a ricevere supporto dall&rsquo;interno e dall&rsquo;esterno della Russia, pagando il personale e finanziando la difesa legale.</div><blockquote class="case-quote"><p>Il governo russo ha capito molto rapidamente che il modo più facile per fermarci dal fare il nostro lavoro è privarci dell&rsquo;accesso al denaro. Perché se non hai accesso al denaro, è come essere privati dell&rsquo;ossigeno.</p><cite>&#8212; Anna Chekhovich, Direttrice Finanziaria dell&rsquo;ACF</cite></blockquote>
+</div>
+<div class="case-card"><div class="case-header"><span class="case-country">Ucraina</span><span class="case-org">Helping to Leave</span></div><div class="case-body">Helping to Leave fornisce assistenza all&rsquo;evacuazione e umanitaria agli ucraini in fuga dalle zone di frontline. L&rsquo;organizzazione usa Bitcoin per spostare fondi rapidamente senza fare affidamento su sistemi bancari locali sorvegliati. Dal 2022, ha evacuato più di 21.300 persone. Un coordinatore a Zaporizhzhia può ricevere bitcoin da un donatore a Berlino, convertirlo in grivna attraverso un contatto locale di fiducia, e pagare un autista per evacuare una famiglia da un villaggio occupato &mdash; tutto nel giro di ore.</div><blockquote class="case-quote"><p>Nel nostro caso, Bitcoin è un mezzo di sopravvivenza per le persone che hanno bisogno del nostro aiuto. Non è una speculazione. E dove le banche falliscono e il contante è rischioso, abilita l&rsquo;azione, la sicurezza e la libertà.</p><cite>&#8212; Daria Rabinovitsch, Co-CEO di Helping to Leave</cite></blockquote>
+</div>
+<div class="case-card"><div class="case-header"><span class="case-country">Venezuela</span><span class="case-org">Voluntad Popular</span></div><div class="case-body">Come ex sindaco di Caracas, Leopoldo López ha visto come i regimi di Chávez e Maduro abbiano consolidato il potere attraverso la &laquo;apartheid finanziaria&raquo;. Dal 2008, gli attivisti sono stati progressivamente esclusi dal sistema bancario venezuelano. Durante le elezioni presidenziali del 2024, Bitcoin è diventato un&rsquo;infrastruttura operativa per la democrazia, supportando i volontari ai seggi elettorali e coordinando gli osservatori civici.</div><blockquote class="case-quote"><p>Bitcoin è parte del nuovo toolkit di resistenza non violenta. Dà alle persone il potere di riappropriarsi del proprio futuro, quando i loro stessi governi preferirebbero vederle morire di fame piuttosto che essere libere.</p><cite>&#8212; Leopoldo López</cite></blockquote>
+</div>
+<div class="case-card"><div class="case-header"><span class="case-country">Globale</span><span class="case-org">Save the Children</span></div><div class="case-body">Nel dicembre 2025, Save the Children ha lanciato un Bitcoin Fund dedicato, progettato per detenere i bitcoin donati fino a quattro anni invece di convertirli immediatamente. È il primo fondo di questo tipo in una grande ONG umanitaria internazionale. Nel 2013, era diventata la prima grande ONG umanitaria ad accettare donazioni in bitcoin.</div><blockquote class="case-quote"><p>Le persone che sono bitcoiner sono entusiaste perché dicono non solo che stai detenendo i bitcoin, ma che stai effettivamente utilizzando la tecnologia sottostante.</p><cite>&#8212; Antonia Roupell, Save the Children</cite></blockquote>
+</div>
+<div class="case-card"><div class="case-header"><span class="case-country">Afghanistan</span><span class="case-org">Digital Citizen Fund</span></div><div class="case-body">Roya Mahboob ha fondato il Digital Citizen Fund, aprendo la strada al supporto dell&rsquo;istruzione femminile in Afghanistan. Nel 2013, ha iniziato a pagare alcune dipendenti donne in bitcoin. Per la prima volta, potevano ricevere i salari direttamente, senza fare affidamento su tutori maschi. Una dipendente è riuscita a portare i suoi bitcoin, protetti da una seed phrase, attraverso i confini quando è fuggita dall&rsquo;Afghanistan. Oggi, Bitcoin è il modo in cui Mahboob finanziai le scuole sotterranee che educano le ragazze da Herat a Kabul.</div><blockquote class="case-quote"><p>Bitcoin rappresenta la prima opportunità che molte donne afghane hanno mai avuto di possedere asset finanziari in modo indipendente.</p><cite>&#8212; Roya Mahboob, Fondatrice del Digital Citizen Fund</cite></blockquote>
+</div>
+<div class="case-card"><div class="case-header"><span class="case-country">Togo</span><span class="case-org">Farida Nabourema</span></div><div class="case-body">Farida Nabourema è un&rsquo;attivista per i diritti umani e la democrazia. Man mano che il regime Gnassingbé intensificava la pressione sui dissidenti, Nabourema ha iniziato a usare Bitcoin come alternativa alle banche controllate dallo Stato. Attraverso il suo programma Bitcoin for Youngsters in Ghana, ha insegnato a più di 3.000 studenti l&rsquo;indipendenza finanziaria. Ha fondato l&rsquo;Africa Bitcoin Conference, creando uno spazio dove attivisti e leader comunitari imparano come gli strumenti finanziari alternativi riducano la dipendenza dall&rsquo;infrastruttura autoritaria.</div><blockquote class="case-quote"><p>Da quando abbiamo iniziato a usare Bitcoin nel 2018, tutto è cambiato. Ora possiamo ricevere bitcoin, scambiarlo attraverso piattaforme locali e incassarlo &mdash; tutto senza destare sospetti.</p><cite>&#8212; Farida Nabourema, Attivista Togolese per i Diritti Umani</cite></blockquote>
+</div>
+<div class="case-card"><div class="case-header"><span class="case-country">Palestina</span><span class="case-org">Fadi Elsalameen</span></div><div class="case-body">Fadi Elsalameen è un avvocato palestinese ampiamente noto per aver esposto la corruzione all&rsquo;interno dell&rsquo;Autorità Palestinese. I palestinesi non controllano la propria valuta. Non esiste PayPal, nessun Venmo, nessun modo facile di ricevere denaro dall&rsquo;estero. Elsalameen si è rivolto a Bitcoin per ricevere supporto senza fare affidamento su intermediari che ritardano o bloccano le transazioni. Durante la violenza in corso in Cisgiordania e la guerra a Gaza, Bitcoin ha fornito accesso ai fondi quando i canali bancari convenzionali erano inaccessibili.</div><blockquote class="case-quote"><p>Questo è il modo in cui rivendichiamo il nostro futuro: un wallet alla volta.</p><cite>&#8212; Fadi Elsalameen</cite></blockquote>
+</div>
+</div></section>
+
+<section class="section" id="rischi-sfide">
+  <h2 class="section-title">Rischi e Sfide</h2>
+<p>Bitcoin è diventato uno strumento vitale per le organizzazioni non profit in tutto il mondo, ma non è privo di rischi. Comprendere in anticipo i rischi permette di fare scelte deliberate che meglio si adattano alla tolleranza al rischio e all&rsquo;ambiente di sicurezza.</p>
+<div class="risks-grid"><div class="risk-item"><div class="risk-title">Volatilità</div><div class="risk-body">Il valore di Bitcoin può cambiare rapidamente. Nel gennaio 2022, bitcoin veniva scambiato sopra i 47.000 dollari; entro novembre di quell&rsquo;anno, era sceso sotto i 16.000 dollari. Le organizzazioni possono gestire questa volatilità convertendo bitcoin in valuta locale subito dopo averlo ricevuto, oppure detenendone una parte come riserva.</div></div><div class="risk-item"><div class="risk-title">Questioni legali e di conformità</div><div class="risk-body">La regolamentazione di Bitcoin varia tra le giurisdizioni. A seconda di dove opera la tua organizzazione, il suo utilizzo potrebbe innescare obblighi di segnalazione, registrazione o fiscali. Consulta professionisti legali qualificati prima di adottare Bitcoin.</div></div><div class="risk-item"><div class="risk-title">Rischi di sicurezza</div><div class="risk-body">Con l&rsquo;auto-custodia viene la responsabilità. Chiavi private perse, frasi di recupero compromesse o attacchi di phishing possono recidere permanentemente l&rsquo;accesso ai fondi. Il ricambio del personale e la concentrazione dell&rsquo;accesso in un singolo individuo creano vulnerabilità. I wallet multisig distribuiscono il controllo.</div></div><div class="risk-item"><div class="risk-title">Rischi reputazionali</div><div class="risk-body">Bitcoin rimane incompreso in molti ambienti. Donatori o partner potrebbero associarlo alla speculazione o ad attività illecite. La comunicazione chiara aiuta. Diverse organizzazioni hanno scoperto che essere aperte riguardo all&rsquo;utilizzo di Bitcoin ha effettivamente attratto nuovi donatori dalla community Bitcoin.</div></div><div class="risk-item"><div class="risk-title">Sfide operative</div><div class="risk-body">Adottare Bitcoin cambia i flussi di lavoro interni. Le organizzazioni devono assegnare responsabilità, documentare le procedure e definire i controlli di accesso. La formazione del personale e la pianificazione delle contingenze sono essenziali.</div></div></div></section>
+
+<section class="section" id="consigli-pratiche">
+  <h2 class="section-title">Consigli e Buone Pratiche</h2>
+<p>Ogni organizzazione in questa guida ha iniziato nello stesso modo: nervosa, scettica e con una quantità molto piccola di bitcoin. La Fondazione Anti-Corruzione non ha spostato l&rsquo;intero tesoro su Bitcoin dall&rsquo;oggi al domani. Il schema è universale: si inizia in piccolo, si impara facendo e ci si espande quando si fidano degli strumenti.</p>
+<h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Bitcoin Best Practices 101</h3><div class="bp-grid"><div class="bp-item"><div class="bp-num">01</div><div class="bp-text"><strong>Testa e inizia in piccolo:</strong> Configura un wallet e ricevi una piccola quantità di prova. Pratica l&rsquo;invio di fondi e il ripristino dell&rsquo;accesso prima di gestire saldi significativi.</div></div><div class="bp-item"><div class="bp-num">02</div><div class="bp-text"><strong>Scegli un wallet:</strong> Comprendi le differenze tra soluzioni in auto-custodia e custodiali. Seleziona un wallet che corrisponda alla tua capacità tecnica e alle tue esigenze operative.</div></div><div class="bp-item"><div class="bp-num">03</div><div class="bp-text"><strong>Forma il personale:</strong> Assegna la custodia a un gruppo fidato. Insegna le basi di Bitcoin: wallet, frasi di recupero, pratiche di privacy. Designa almeno due persone che comprendano l&rsquo;intera configurazione.</div></div><div class="bp-item"><div class="bp-num">04</div><div class="bp-text"><strong>Costruisci la struttura interna:</strong> Decidi quando i fondi vengono conservati o convertiti. Documenta chi approva le transazioni e come la custodia è condivisa. Rivedi ogni trimestre.</div></div><div class="bp-item"><div class="bp-num">05</div><div class="bp-text"><strong>Separa le responsabilità:</strong> Non concentrare mai la custodia completa in una singola persona. Usa il multisig per distribuire la fiducia e il rischio di controparte.</div></div><div class="bp-item"><div class="bp-num">06</div><div class="bp-text"><strong>Testa gli exchange:</strong> Pratica l&rsquo;acquisto o la vendita di piccole quantità. Comprendi i tempi, le commissioni e l&rsquo;attrito prima di fare affidamento su qualsiasi piattaforma.</div></div><div class="bp-item"><div class="bp-num">07</div><div class="bp-text"><strong>Pianifica per le emergenze:</strong> Crea procedure di recupero per la perdita di dispositivi, il ricambio del personale o l&rsquo;accesso compromesso. Esegui il processo di recupero almeno una volta prima di averne bisogno.</div></div><div class="bp-item"><div class="bp-num">08</div><div class="bp-text"><strong>Scala gradualmente:</strong> Espandi l&rsquo;utilizzo solo dopo che la formazione, le politiche e le misure di sicurezza sono state messe in atto.</div></div></div><h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--text);margin:1.5rem 0 .8rem;">Privacy e Sicurezza Operativa</h3><div class="bp-grid"><div class="bp-item"><div class="bp-num">&bull;</div><div class="bp-text"><strong>Minimizza le informazioni identificative:</strong> Evita di registrare dati personali non necessari insieme alle transazioni.</div></div><div class="bp-item"><div class="bp-num">&bull;</div><div class="bp-text"><strong>Evita il riutilizzo degli indirizzi:</strong> Usa un nuovo indirizzo di ricezione per ogni pagamento. La maggior parte dei wallet lo fa automaticamente.</div></div><div class="bp-item"><div class="bp-num">&bull;</div><div class="bp-text"><strong>Tieni le frasi di recupero offline:</strong> Non conservare i backup in servizi cloud, bozze di email o app di note. Usa backup offline e cifrati su dispositivi sicuri o hardware wallet.</div></div><div class="bp-item"><div class="bp-num">&bull;</div><div class="bp-text"><strong>Limita l&rsquo;accesso:</strong> Condividi le chiavi private e i record sensibili strettamente su base need-to-know.</div></div><div class="bp-item"><div class="bp-num">&bull;</div><div class="bp-text"><strong>Pianifica la compromissione:</strong> Struttura la custodia in modo che un singolo incidente non esponga fondi o sostenitori.</div></div></div></section>
+
+<section class="section" id="strumenti-consigliati">
+  <h2 class="section-title">Strumenti Consigliati</h2>
+<p>L&rsquo;ecosistema Bitcoin include centinaia di strumenti. Gli strumenti elencati qui sono scelti con le esigenze delle organizzazioni non profit e della società civile in mente: ognuno è open-source, attivamente mantenuto, rispettoso della privacy e in auto-custodia.</p>
+<div class="tools-section-title">Exchange Peer-to-Peer (P2P)</div><div class="tools-grid"><div class="tool-card"><strong>Hodl Hodl</strong><p>Exchange Bitcoin P2P globale che non richiede né documento d&rsquo;identità né conto bancario. Utile in ambienti repressivi.</p></div>
+<div class="tool-card"><strong>LocalCoinSwap</strong><p>Exchange P2P globale che supporta bitcoin con una vasta gamma di metodi di pagamento. Richiede solo email e password.</p></div>
+<div class="tool-card"><strong>RoboSats</strong><p>Exchange Bitcoin P2P focalizzato sulla privacy che utilizza Lightning e opera su Tor di default. Non richiede account o registrazione.</p></div>
+<div class="tool-card"><strong>Bisq</strong><p>Exchange Bitcoin P2P basato su desktop senza registrazione richiesta. Funziona su Tor e utilizza crittografia end-to-end.</p></div>
+<div class="tool-card"><strong>Vexl</strong><p>Marketplace Bitcoin mobile peer-to-peer con modello web-of-trust. Connette gli utenti attraverso i contatti telefonici senza requisiti KYC.</p></div>
+</div><div class="tools-section-title">Hot Wallet</div><div class="tools-grid"><div class="tool-card"><strong>Muun</strong><p>Wallet Bitcoin mobile focalizzato sulla facilità d&rsquo;uso, costruito a Buenos Aires. Adatto per pagamenti veloci e a basso costo in auto-custodia.</p></div>
+<div class="tool-card"><strong>BlueWallet</strong><p>Wallet Bitcoin e Lightning per mobile e desktop con supporto multisig. Disponibile in più di 30 lingue, inclusi arabo, farsi e ucraino.</p></div>
+<div class="tool-card"><strong>AQUA</strong><p>Wallet mobile che supporta Bitcoin e Lightning con scambio integrato tra bitcoin e stablecoin. Progettato per attivisti latinoamericani.</p></div>
+<div class="tool-card"><strong>BULL Wallet</strong><p>Wallet Bitcoin e Lightning mobile che supporta funzionalità di privacy per rendere più difficile la sorveglianza finanziaria.</p></div>
+</div><div class="tools-section-title">Cold Wallet (Hardware)</div><div class="tools-grid"><div class="tool-card"><strong>COLDCARD</strong><p>Hardware wallet per la massima sicurezza, costruito in Canada. Offre uso air-gapped tramite scheda SD e funziona come chiave in un wallet multisig.</p></div>
+<div class="tool-card"><strong>Trezor</strong><p>Hardware wallet con supporto multisig. Uno dei wallet hardware originali, fondato nel 2014 a Praga.</p></div>
+<div class="tool-card"><strong>Bitkey</strong><p>Hardware wallet con multisig 2-di-3 integrato: una chiave sul telefono, una sull&rsquo;hardware e una per il recupero con l&rsquo;azienda.</p></div>
+<div class="tool-card"><strong>SeedSigner</strong><p>Hardware wallet assemblato da un Raspberry Pi Zero, disponibile per meno di 50 dollari. Praticamente invisibile a un checkpoint di frontiera.</p></div>
+</div></section>
+
+<section class="section" id="risorse-consigliate">
+  <h2 class="section-title">Risorse Consigliate</h2>
+<p>Iniziare con Bitcoin non significa imparare da soli. Un numero crescente di educatori si concentra nel fornire guida pratica per le organizzazioni non profit e i gruppi della società civile sotto pressione.</p>
+<div class="resource-card"><div class="resource-title">Tutorial Pratici &mdash; BTC Sessions</div><div class="resource-body">BTC Sessions, condotto da Ben Perrin, produce tutorial video passo-passo focalizzati sulla configurazione pratica: installazione di wallet, configurazione di strumenti ed evitare gli errori comuni. Il suo stile è paziente, chiaro e privo di gergo. I suoi tutorial YouTube sono un prezioso compagno visivo a questa guida.</div></div><div class="resource-card"><div class="resource-title">Formazioni Strutturate &mdash; HRF Become Unstoppable</div><div class="resource-body">HRF ospita sessioni di formazione live trimestrali attraverso la sua serie di webinar online Become Unstoppable. La serie è progettata specificamente per le organizzazioni non profit e i difensori dei diritti umani. Nel corso di tre giorni, i partecipanti imparano come ricevere, conservare e gestire bitcoin in modo sicuro.</div></div><div class="resource-card"><div class="resource-title">Consapevolezza Continua &mdash; HRF Financial Freedom Report</div><div class="resource-body">Il Financial Freedom Report di HRF è una newsletter settimanale che documenta la repressione finanziaria in tutto il mondo e condivide storie di resistenza pacifica attraverso Bitcoin. Funziona sia come sistema di allerta precoce che come canale di apprendimento.</div></div><div class="resource-card"><div class="resource-title">Finanziare la Tecnologia della Libertà &mdash; OpenSats</div><div class="resource-body">OpenSats è un&rsquo;organizzazione non profit che finanzia progetti open-source relativi a Bitcoin. Molti degli strumenti di privacy e sicurezza su cui le organizzazioni non profit fanno affidamento esistono grazie al supporto di organizzazioni come OpenSats.</div></div><div class="resource-card"><div class="resource-title">Approfondire &mdash; Letture Consigliate</div><div class="resource-body">Per chi vuole approfondire la storia della repressione finanziaria e l&rsquo;adozione globale di Bitcoin: <em>Broken Money</em> di Lyn Alden, <em>Check Your Financial Privilege</em> di Alex Gladstein, e il saggio di Alex Gladstein &laquo;Why Bitcoin Is Freedom Money&raquo; nel Journal of Democracy (ottobre 2025).</div></div></section>
+
+<section class="section" id="la-strada">
+  <h2 class="section-title">La Strada da Percorrere</h2>
+<p>Ogni anno, più regimi autoritari tentano di mettere a tacere il dissenso tagliando l&rsquo;accesso al denaro per chi si esprime. Ora, un numero crescente di organizzazioni non profit e attivisti sta scoprendo gli strumenti per resistere alla repressione finanziaria.</p>
+<p>In tutto il mondo, i dittatori congelano conti bancari e bloccano donazioni finché il lavoro si ferma. Un&rsquo;organizzazione che stava investigando la corruzione la settimana scorsa è invece costretta ad affannarsi per pagare gli stipendi. Evacuazioni che salvano vite vengono sospese perché un bonifico è bloccato in un limbo di conformità.</p>
+<p>Ma come ha mostrato questa guida, le organizzazioni che affrontano quella pressione stanno già usando Bitcoin in modi pratici. A Mosca, Caracas, Kabul e Lomé, le persone stanno costruendo un&rsquo;infrastruttura finanziaria che nessun dittatore controlla.</p>
+<p>Bitcoin offre alla società civile sotto pressione tirannica qualcosa di semplice ma potente: <strong>scelta</strong>. Scelta su come il denaro viene detenuto, su come si muove e su come le organizzazioni difendono la loro capacità di funzionare. Per la prima volta, l&rsquo;accesso finanziario non deve dipendere dal permesso &mdash; e questo cambia tutto.</p>
+<p>Bitcoin non è una soluzione a tutti i problemi, ma crea spazio per respirare e dà alle organizzazioni tempo, stabilità e la capacità di continuare a lavorare quando ogni altro sistema è progettato per usurarle.</p>
+<div style="background:linear-gradient(135deg,rgba(247,147,26,.09),rgba(247,147,26,.04));border:1px solid rgba(247,147,26,.35);border-radius:14px;padding:1.8rem 2rem;margin:2rem 0;max-width:640px;"><div style="font-family:var(--mono);font-size:.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;margin-bottom:.8rem;">// Il prossimo passo è tuo</div><p style="font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:.5rem;">Diventa inarrestabile.</p><p style="font-size:.9rem;color:var(--text2);line-height:1.7;margin:0;">A Lagos, Ramallah, Minsk e oltre, attivisti e organizzazioni non profit stanno silenziosamente costruendo resilienza finanziaria. Gli strumenti sono qui. La conoscenza si sta diffondendo. La scelta sta diventando reale.</p></div></section>
+
+  </article>
+</div>
+
+<a href="#" class="back-top" id="back-top">&#8593;</a>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://hrf.org" target="_blank" rel="noopener noreferrer">Fonte originale: hrf.org</a>
+    <a href="https://bitcoinreportschool.com" target="_blank" rel="noopener noreferrer">Bitcoin Report School</a>
+    <a href="letture.html">Tutte le letture</a>
+    <a href="index.html">Home</a>
+  </div>
+  <div class="footer-note">Traduzione italiana a scopo educativo &mdash; documento originale: &laquo;Bitcoin for Nonprofits&raquo; &mdash; Human Rights Foundation (hrf.org)</div>
+</footer>
+
+<script>
+const bar = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = pct + '%';
+});
+const bt = document.getElementById('back-top');
+window.addEventListener('scroll', () => bt.classList.toggle('visible', window.scrollY > 400));
+
+// TOC active
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.toc-nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const a = document.querySelector('.toc-nav a[href="#' + e.target.id + '"]');
+      if (a) a.classList.add('active');
+    }
+  });
+}, {threshold: 0.2});
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
