@@ -148,4 +148,11 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://bitcoinreportschool.com/rete-p2p-bitcoin.html</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
