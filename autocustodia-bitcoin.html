@@ -496,6 +496,100 @@ footer a:hover { color: var(--gold); }
 
 </div>
 
+<!-- BANNER COMPROBITCOIN -->
+<style>
+.cb-wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem 3rem; }
+.cb-note { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.65rem; color: #3a3830; font-style: italic; text-align: center; margin-top: 0.8rem; letter-spacing: 0.03em; }
+.cb-banner {
+  width: 100%; background: #0d0e12; border: 1px solid #1e2030;
+  border-radius: 14px; overflow: hidden; text-decoration: none;
+  display: block; position: relative; transition: border-color 0.25s, transform 0.25s;
+  cursor: pointer;
+}
+.cb-banner:hover { border-color: #f7931a; transform: translateY(-2px); }
+.cb-banner::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(247,147,26,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(247,147,26,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.cb-top {
+  background: rgba(247,147,26,0.06); border-bottom: 1px solid rgba(247,147,26,0.15);
+  padding: 0.5rem 1.2rem; display: flex; align-items: center;
+  justify-content: space-between; position: relative; z-index: 1;
+}
+.cb-tag { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.62rem; color: #f7931a; letter-spacing: 0.15em; text-transform: uppercase; }
+.cb-since { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.62rem; color: #3a3830; letter-spacing: 0.1em; }
+.cb-body { display: grid; grid-template-columns: 1fr auto; gap: 1.2rem; padding: 1.4rem 1.5rem; align-items: center; position: relative; z-index: 1; }
+.cb-name { font-family: var(--sans, 'Outfit', sans-serif); font-weight: 900; font-size: 1.6rem; letter-spacing: -0.01em; line-height: 1; margin-bottom: 0.2rem; }
+.cb-name .compro { color: #ddd8cc; }
+.cb-name .btc { color: #f7931a; }
+.cb-sub { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.68rem; color: #7a7870; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.cb-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.cb-badge { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.6rem; padding: 0.25rem 0.6rem; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid; }
+.cb-badge-g { color: #22d3a0; border-color: rgba(34,211,160,0.3); background: rgba(34,211,160,0.1); }
+.cb-badge-o { color: #f7931a; border-color: rgba(247,147,26,0.3); background: rgba(247,147,26,0.12); }
+.cb-methods { font-size: 0.75rem; color: #7a7870; line-height: 1.6; font-weight: 300; font-family: var(--sans, 'Outfit', sans-serif); }
+.cb-methods span { color: #ddd8cc; font-weight: 400; }
+.cb-methods small { color: #3a3830; font-size: 0.68rem; font-family: var(--mono, 'DM Mono', monospace); }
+.cb-ref { background: #13141a; border: 1px solid rgba(247,147,26,0.25); border-radius: 10px; padding: 1.2rem 1rem; text-align: center; min-width: 160px; }
+.cb-ref-label { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.58rem; color: #3a3830; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+.cb-ref-code { font-family: var(--mono, 'DM Mono', monospace); font-size: 1rem; font-weight: 500; color: #f7931a; background: rgba(247,147,26,0.08); border: 1px solid rgba(247,147,26,0.3); border-radius: 6px; padding: 0.4rem 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.8rem; display: block; }
+.cb-divider { height: 1px; background: #1e2030; margin: 0.6rem 0; }
+.cb-reward-label { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.58rem; color: #3a3830; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+.cb-reward { font-family: var(--sans, 'Outfit', sans-serif); font-weight: 900; font-size: 2rem; color: #22d3a0; line-height: 1; margin-bottom: 0.1rem; }
+.cb-reward-sub { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.62rem; color: #7a7870; line-height: 1.4; }
+.cb-reward-min { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.58rem; color: #3a3830; margin-top: 0.4rem; }
+.cb-bottom { border-top: 1px solid #1e2030; padding: 0.7rem 1.5rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; background: #13141a; }
+.cb-url { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.68rem; color: #7a7870; }
+.cb-url span { color: #f7931a; }
+.cb-arrow { font-family: var(--mono, 'DM Mono', monospace); font-size: 0.8rem; color: #3a3830; transition: color 0.2s, transform 0.2s; display: inline-block; }
+.cb-banner:hover .cb-arrow { color: #f7931a; transform: translateX(4px); }
+@media (max-width: 520px) {
+  .cb-body { grid-template-columns: 1fr; }
+  .cb-ref { min-width: 0; }
+  .cb-name { font-size: 1.3rem; }
+}
+</style>
+
+<div class="cb-wrap">
+  <a class="cb-banner" href="https://comprobitcoin.ch?referral=BTCREPORT10" target="_blank" rel="noopener noreferrer">
+    <div class="cb-top">
+      <span class="cb-tag">// acquisto bitcoin · no kyc · privacy</span>
+      <span class="cb-since">exchange since 2012</span>
+    </div>
+    <div class="cb-body">
+      <div>
+        <div class="cb-name"><span class="compro">compro</span><span class="btc">bitcoin</span><span class="compro">.ch</span></div>
+        <div class="cb-sub">comprobitcoin.ch</div>
+        <div class="cb-badges">
+          <span class="cb-badge cb-badge-g">No KYC</span>
+          <span class="cb-badge cb-badge-g">Privacy assicurata</span>
+          <span class="cb-badge cb-badge-o">Sicuro &amp; intuitivo</span>
+        </div>
+        <div class="cb-methods">
+          Acquisto in <span>contanti di persona</span>,
+          <span>contanti spediti in busta</span>,
+          <span>ricarica PostePay</span><br>
+          <small>Metodi elettronici disponibili — richiedono AML</small>
+        </div>
+      </div>
+      <div class="cb-ref">
+        <div class="cb-ref-label">Codice referral</div>
+        <span class="cb-ref-code">BTCREPORT10</span>
+        <div class="cb-divider"></div>
+        <div class="cb-reward-label">Con ordine minimo 100€ ricevi</div>
+        <div class="cb-reward">10€</div>
+        <div class="cb-reward-sub">extra in Bitcoin</div>
+        <div class="cb-reward-min">// primo acquisto</div>
+      </div>
+    </div>
+    <div class="cb-bottom">
+      <span class="cb-url">comprobitcoin.ch<span>?referral=BTCREPORT10</span></span>
+      <span class="cb-arrow">→</span>
+    </div>
+  </a>
+  <p class="cb-note">// link affiliato Bitcoin Report Italia — il servizio per te non cambia</p>
+</div>
 <!-- Donation -->
 <section class="donation-section">
   <div class="donation-inner">
