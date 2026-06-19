@@ -53,10 +53,23 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 /* ── PROGRESS BAR ─────────────────────────────────────────── */
 #reading-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--gold); z-index: 9999; transition: width .1s; pointer-events: none; }
 
-/* ── HOME BTN ──────────────────────────────────────────────── */
-.home-btn { position: fixed; top: 1rem; left: 1rem; z-index: 900; display: flex; align-items: center; gap: .4rem; background: rgba(7,8,10,.92); border: 1px solid var(--gold); border-radius: 6px; padding: .4rem .85rem; font-family: var(--mono); font-size: .68rem; color: var(--gold); text-decoration: none; letter-spacing: .05em; backdrop-filter: blur(8px); transition: background .2s, box-shadow .2s; }
-.home-btn:hover { background: rgba(247,147,26,.1); box-shadow: 0 0 12px rgba(247,147,26,.25); }
-[data-theme="light"] .home-btn { background: rgba(248,246,241,.92); }
+.nav-home-btn {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 0.72rem;
+  color: var(--text2, #7a7870);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border, #1e2030);
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-home-btn:hover {
+  color: var(--gold, #f7931a);
+  border-color: var(--gold, #f7931a);
+}
 
 /* ── THEME TOGGLE ──────────────────────────────────────────── */
 .theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
@@ -81,9 +94,10 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 @media(max-width: 860px) { .page-layout { grid-template-columns: 1fr; } }
 
 /* ── TOC SIDEBAR ─────────────────────────────────────────────── */
-.toc-sidebar { position: sticky; top: 5rem; padding-right: 2rem; }
+.toc-sidebar { position: sticky; top: 5rem; padding-right: 2rem; z-index: 10; }
 .toc-toggle { display: none; font-family: var(--mono); font-size: .65rem; color: var(--gold); background: none; border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .8rem; cursor: pointer; margin-bottom: .6rem; }
 @media(max-width: 860px) { .toc-toggle { display: block; } .toc-list { display: none; } .toc-list.open { display: flex; } }
+@media(max-width: 768px) { .toc-sidebar { display: none; } }
 .toc-label { font-family: var(--mono); font-size: .55rem; color: var(--text3); text-transform: uppercase; letter-spacing: .15em; margin-bottom: .8rem; }
 .toc-list { display: flex; flex-direction: column; gap: .2rem; }
 .toc-link { display: flex; gap: .6rem; align-items: flex-start; text-decoration: none; padding: .4rem .5rem; border-radius: 6px; transition: background .15s; }
@@ -180,10 +194,10 @@ footer a:hover { color: var(--gold); }
 
 <div id="reading-bar"></div>
 
-<a href="index.html" class="home-btn">&#8592; Home</a>
 <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">&#9788; Chiaro</button>
 
 <nav class="site-nav">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
   <span class="nav-cat">// guida pratica &middot; autocustodia</span>
 </nav>

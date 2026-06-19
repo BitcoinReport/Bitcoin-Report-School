@@ -34,8 +34,23 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 #progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:9999;width:0;transition:width .1s;pointer-events:none;}
 
 /* HOME BTN */
-.home-btn{position:fixed;top:1rem;left:1rem;z-index:9990;display:flex;align-items:center;gap:.4rem;background:rgba(7,8,10,.92);border:1px solid var(--gold);border-radius:6px;padding:.4rem .85rem;font-family:var(--mono);font-size:.68rem;color:var(--gold);text-decoration:none;letter-spacing:.05em;backdrop-filter:blur(8px);transition:all .2s;}
-.home-btn:hover{background:rgba(247,147,26,.1);box-shadow:0 0 12px rgba(247,147,26,.25);}
+.nav-home-btn {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 0.72rem;
+  color: var(--text2, #7a7870);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border, #1e2030);
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-home-btn:hover {
+  color: var(--gold, #f7931a);
+  border-color: var(--gold, #f7931a);
+}
 
 /* NAV */
 nav{border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,10,.96);backdrop-filter:blur(12px);z-index:200;}
@@ -238,8 +253,8 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
 </head>
 <body>
 <div id="progress-bar"></div>
-<a href="index.html" class="home-btn">&#8592; Home</a>
 <nav>
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
   <span class="nav-tag">// rete p2p &middot; configurazione nodo &middot; privacy</span>
 </nav>

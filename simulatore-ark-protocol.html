@@ -26,14 +26,23 @@ html { scroll-behavior:smooth; }
 body { background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.6; }
 
 /* HOME BTN */
-.home-btn {
-  position:fixed; top:1rem; left:1rem; z-index:999;
-  background:rgba(13,15,18,0.92); border:1px solid var(--border);
-  color:var(--text2); text-decoration:none; padding:0.5rem 1rem;
-  border-radius:8px; font-family:var(--mono); font-size:0.75rem;
-  backdrop-filter:blur(8px); transition:all 0.2s;
+.nav-home-btn {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 0.72rem;
+  color: var(--text2, #7a7870);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border, #1e2030);
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
-.home-btn:hover { color:var(--gold); border-color:rgba(247,147,26,0.4); }
+.nav-home-btn:hover {
+  color: var(--gold, #f7931a);
+  border-color: var(--gold, #f7931a);
+}
 
 /* NAV */
 .site-nav {
@@ -508,9 +517,8 @@ footer a { color:var(--gold); text-decoration:none; }
 </head>
 <body>
 
-<a class="home-btn" href="index.html">&#8592; Home</a>
-
 <nav class="site-nav">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <span class="nav-brand">// bitcoin report school</span>
   <span class="nav-tag">Ark Protocol</span>
 </nav>
@@ -1255,11 +1263,14 @@ footer a { color:var(--gold); text-decoration:none; }
           <div class="impl-card-title" style="color:var(--green);">&#129683; Bark &#8212; by Second</div>
           <ul>
             <li><strong>Linguaggio:</strong> Rust</li>
-            <li><strong>Wallet:</strong> Noah (mobile, React Native)</li>
-            <li><strong>ASP:</strong> <span class="mono">second.tech</span> &#8212; pubblico da giugno 2026</li>
-            <li><strong>SDK:</strong> Bark SDK con binding per 7 linguaggi</li>
-            <li><strong>Focus:</strong> developer toolkit, interoperabilit&#224; Lightning, pagamenti self-custodial scalabili</li>
-            <li><strong>Stato:</strong> mainnet attivo da giugno 2026 &#8212; sperimentale</li>
+            <li><strong>Wallet consumer:</strong> Noah (mobile), Arke (iOS), Satsigner (UTXO mgmt), Bark Wallet (Umbrel)</li>
+            <li><strong>Merchant:</strong> Plugin BTCPay Server &#8212; pagamenti Lightning self-custodial senza canali</li>
+            <li><strong>Lightning:</strong> Nativa via NWC &#8212; atomica, no swap</li>
+            <li><strong>ASP:</strong> <span class="mono">second.tech</span> &#8212; mainnet da giugno 2026</li>
+            <li><strong>SDK:</strong> Bark SDK in Rust con binding per 7 linguaggi</li>
+            <li><strong>Focus:</strong> pagamenti Bitcoin puri, interoperabilit&#224; Lightning nativa</li>
+            <li><strong>Funding:</strong> $5.1M da investitore privato, team di 11 persone, ex-Blockstream</li>
+            <li><strong>Stato:</strong> mainnet attivo da giugno 2026</li>
           </ul>
         </div>
       </div>
@@ -1320,6 +1331,38 @@ footer a { color:var(--gold); text-decoration:none; }
         <span class="final-rec rec-ark">Aspetta il round in-round</span>
         <p style="font-size:0.78rem;color:var(--text2);margin-top:0.5rem;line-height:1.5;">Elimina il rischio di collusione ASP+mittente per double-spend. Il VTXO in-round &#232; garantito dalla blockchain.</p>
       </div>
+      <div class="final-card" style="grid-column:1/-1;">
+        <div class="final-card-emoji">&#127978;</div>
+        <div class="final-card-title">Sei un merchant &#8212; BTCPay Server + Bark (o Arkade)</div>
+        <div class="final-card-desc">Vuoi accettare Bitcoin Lightning senza gestire canali. I clienti usano Phoenix, Muun, o qualsiasi wallet Lightning standard.</div>
+        <span class="final-rec rec-ark">Ark + BTCPay Plugin</span>
+        <p style="font-size:0.78rem;color:var(--text2);margin-top:0.5rem;line-height:1.5;">Installi il plugin Bark (o Arkade) su BTCPay Server. Il cliente paga con il suo wallet Lightning preferito. Tu ricevi in self-custody come VTXO senza aver mai aperto un canale. Nessuna liquidit&#224; in entrata da comprare, nessun routing da gestire. Ark e Lightning sono <strong style="color:var(--green);">complementari</strong>: il merchant usa Ark, il cliente usa Lightning, il plugin fa la traduzione invisibilmente.</p>
+      </div>
+    </div>
+
+    <!-- Ark e Lightning comparison -->
+    <div class="state-box" style="border-color:rgba(96,165,250,0.3);margin-bottom:1.5rem;">
+      <div class="state-box-title" style="color:var(--blue);">&#9670; Ark e Lightning &#8212; i trade-off opposti che si completano</div>
+      <p style="font-size:0.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem;">A bitcoin++ Vienna (maggio 2026), Rene Pickhardt ha presentato la tesi che Ark e Lightning non sono protocolli in competizione &#8212; sono layer con trade-off quasi opposti che si completano a vicenda. Ark risolve i problemi che Lightning lascia aperti, e viceversa.</p>
+      <div style="overflow-x:auto;">
+        <table class="comp-table" style="min-width:500px;">
+          <thead><tr><th>Caratteristica</th><th style="color:var(--gold);">Lightning</th><th style="color:var(--green);">Ark</th></tr></thead>
+          <tbody>
+            <tr><td>Onboarding nuovo utente</td><td class="cross">&#10007; Canale + liquidit&#224;</td><td class="check">&#10003; Deposita e usa subito</td></tr>
+            <tr><td>Gestione liquidit&#224;</td><td class="cross">&#10007; Manuale, complessa</td><td class="check">&#10003; Gestita dall'ASP</td></tr>
+            <tr><td>Finalit&#224; off-chain</td><td class="check">&#10003; Totale (no ASP)</td><td class="warn">&#8764; Richiede ASP per OOR</td></tr>
+            <tr><td>Throughput indipendente dalla blockchain</td><td class="check">&#10003; Illimitato</td><td class="warn">&#8764; Limitato dai round on-chain</td></tr>
+            <tr><td>Privacy pagamenti</td><td class="warn">Media</td><td class="check">&#10003; Alta (CoinJoin-like)</td></tr>
+            <tr><td>Interoperabilit&#224; ecosistema esistente</td><td class="check">&#10003; Nativa</td><td class="check">&#10003; Via NWC e swap</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.8rem;">La visione emergente &#232; uno stack a due layer: <strong style="color:var(--green);">Ark per l'onboarding e la gestione dei fondi</strong>, <strong style="color:var(--gold);">Lightning per il throughput e la finalit&#224;</strong>. I wallet come Noah usano gi&#224; questa architettura: Ark come base, Lightning come rete di settlement.</p>
+      <div style="margin-top:1rem;padding:0.8rem 1rem;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.2);border-radius:8px;">
+        <div style="font-family:var(--mono);font-size:0.62rem;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">// NWC &#8212; come Bark si connette all'ecosistema Lightning</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;">Bark supporta <strong style="color:var(--blue);">NWC (Nostr Wallet Connect)</strong> &#8212; il protocollo aperto che permette a qualsiasi app Lightning di usare un wallet esterno come sorgente di fondi. L'utente autorizza Zeus, Alby, o qualsiasi app NWC-compatibile a usare i suoi fondi Bark come backend Lightning &#8212; senza aprire canali, senza gestire liquidit&#224;, senza sapere che sotto c'&#232; Ark.</p>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;margin-top:0.5rem;">Dal punto di vista dell'app, i fondi Bark sembrano un normale nodo Lightning. Dal punto di vista dell'utente, &#232; la semplicit&#224; di Ark con la compatibilit&#224; di Lightning.</p>
+      </div>
     </div>
 
     <div class="state-box">
@@ -1333,22 +1376,25 @@ footer a { color:var(--gold); text-decoration:none; }
       <div style="font-family:var(--mono);font-size:0.72rem;color:var(--green);margin:1.2rem 0 0.5rem;letter-spacing:0.05em;">Bark &#8212; Second (<a href="https://second.tech" target="_blank" rel="noopener noreferrer" style="color:var(--green);">second.tech</a>)</div>
       <ul class="state-links">
         <li><strong style="color:var(--text);">Implementazione</strong> &#8212; Bark, scritto in Rust da Second (Belgio)</li>
-        <li><strong style="color:var(--text);">CEO</strong> &#8212; Steven Roose, ex Blockstream &#8212; co-fondatore con CTO Erik De Smedt</li>
-        <li><strong style="color:var(--text);">Lancio mainnet</strong> &#8212; giugno 2026 (questa settimana)</li>
-        <li><strong style="color:var(--text);">Server ASP</strong> &#8212; <span class="mono">captaind</span>, pubblicamente accessibile &rarr; <a href="https://second.tech" target="_blank" rel="noopener noreferrer">second.tech</a></li>
-        <li><strong style="color:var(--text);">Wallet mobile</strong> &#8212; Noah, React Native frontend con backend Rust (disponibile tramite <a href="https://second.tech" target="_blank" rel="noopener noreferrer">second.tech</a>)</li>
+        <li><strong style="color:var(--text);">Team</strong> &#8212; CEO Steven Roose (ex Blockstream), CTO Erik De Smedt &#8212; 11 persone, $5.1M funding</li>
+        <li><strong style="color:var(--text);">Lancio mainnet</strong> &#8212; giugno 2026</li>
+        <li><strong style="color:var(--text);">Server ASP</strong> &#8212; <span class="mono">captaind</span> &rarr; <a href="https://second.tech" target="_blank" rel="noopener noreferrer">second.tech</a></li>
+        <li><strong style="color:var(--green);">Wallet consumer:</strong></li>
+        <li style="padding-left:1rem;">&#8226; <strong>Noah</strong> &#8212; wallet mobile completo (alpha.noahwallet.io), React Native + backend Rust</li>
+        <li style="padding-left:1rem;">&#8226; <strong>Arke</strong> &#8212; wallet iOS nativo, design-focused (principi UX bitcoin.design)</li>
+        <li style="padding-left:1rem;">&#8226; <strong>Satsigner</strong> &#8212; UTXO management e multisig mobile in stile Sparrow</li>
+        <li style="padding-left:1rem;">&#8226; <strong>Bark Wallet</strong> &#8212; app Umbrel per Ark + Lightning + on-chain</li>
+        <li><strong style="color:var(--text);">Plugin BTCPay Server</strong> &#8212; pagamenti Lightning self-custodial per merchant, no canali</li>
+        <li><strong style="color:var(--text);">Lightning nativa</strong> &#8212; via NWC (Nostr Wallet Connect), atomica, no swap</li>
         <li><strong style="color:var(--text);">SDK</strong> &#8212; Bark SDK in Rust con binding per Kotlin, Swift, React Native, Flutter, Go, Python, WebAssembly</li>
-        <li><strong style="color:var(--text);">Daemon standalone</strong> &#8212; <span class="mono">Barkd</span>, wallet daemon con interfaccia REST e spec OpenAPI</li>
-        <li><strong style="color:var(--text);">Repository</strong> &rarr; <a href="https://gitlab.com/ark-bitcoin/bark" target="_blank" rel="noopener noreferrer">gitlab.com/ark-bitcoin/bark</a> (mirror su Codeberg)</li>
+        <li><strong style="color:var(--text);">Repository</strong> &rarr; <a href="https://gitlab.com/ark-bitcoin/bark" target="_blank" rel="noopener noreferrer">gitlab.com/ark-bitcoin/bark</a></li>
         <li><strong style="color:var(--text);">Annuncio mainnet</strong> &rarr; <a href="https://blog.second.tech/bark-now-on-bitcoin-mainnet/" target="_blank" rel="noopener noreferrer">blog.second.tech/bark-now-on-bitcoin-mainnet</a></li>
-        <li><strong style="color:var(--text);">Focus dichiarato</strong> &#8212; interoperabilit&#224; con Lightning Network, pagamenti self-custodial accessibili a sviluppatori e utenti comuni</li>
-        <li><strong style="color:var(--red);">Stato</strong> &#8212; mainnet attivo, ancora sperimentale: non usare con importi grandi</li>
-        <li><strong style="color:var(--text);">AMA live</strong> &#8212; Stacker News, 9 giugno 2026 ore 10:00 EST</li>
+        <li><strong style="color:var(--green);">Stato</strong> &#8212; mainnet attivo da giugno 2026</li>
       </ul>
       <div style="font-family:var(--mono);font-size:0.72rem;color:var(--text2);margin:1.2rem 0 0.5rem;letter-spacing:0.05em;">// protocollo</div>
       <ul class="state-links">
         <li><strong style="color:var(--text);">Specifiche protocollo</strong> &rarr; <a href="https://ark-protocol.org" target="_blank" rel="noopener noreferrer">ark-protocol.org</a></li>
-        <li><strong style="color:var(--red);">Stato generale</strong> &#8212; due implementazioni mainnet attive. Usare con cautela per importi grandi.</li>
+        <li><strong style="color:var(--green);">Stato generale</strong> &#8212; due implementazioni mainnet attive e funzionanti. Ark &#232; un protocollo nuovo &#8212; come sempre con Bitcoin L2, verificate l'implementazione specifica.</li>
       </ul>
     </div>
 

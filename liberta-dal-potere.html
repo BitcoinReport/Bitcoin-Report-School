@@ -288,6 +288,7 @@ body.light nav { background: rgba(250,250,248,0.93); }
 .sidebar {
   position: sticky;
   top: 80px;
+  z-index: 10;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   padding-right: 0.5rem;
@@ -380,6 +381,7 @@ body.light nav { background: rgba(250,250,248,0.93); }
 .toc-mobile-list li a:hover { color: var(--gold); }
 @media(max-width:900px){
   .sidebar { display: none; }
+  .toc-mobile { display: block; }
   .toc-mobile { display: block; }
 }
 
@@ -743,19 +745,32 @@ body.light .donation-text h2 {
   .references { padding: 1.4rem 1.2rem; }
   #back-top { bottom: 1.2rem; right: 1.2rem; }
 }
+.nav-home-btn {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 0.72rem;
+  color: var(--text2, #7a7870);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border, #1e2030);
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-home-btn:hover {
+  color: var(--gold, #f7931a);
+  border-color: var(--gold, #f7931a);
+}
 </style>
 </head>
 <body>
-<!-- __HOME_BTN_ADDED__ -->
-<style>#__home-btn:hover{background:rgba(247,147,26,0.1);box-shadow:0 0 12px rgba(247,147,26,0.25);}@media(max-width:768px){#__home-btn{top:0.6rem;left:0.6rem;font-size:0.62rem;padding:0.3rem 0.65rem;}}</style>
-<a id="__home-btn" href="index.html" style="position:fixed;top:1rem;left:1rem;z-index:9990;display:flex;align-items:center;gap:0.4rem;background:rgba(7,8,10,0.92);border:1px solid #f7931a;border-radius:6px;padding:0.4rem 0.85rem;font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:#f7931a;text-decoration:none;letter-spacing:0.05em;backdrop-filter:blur(8px);transition:background 0.2s,box-shadow 0.2s;">&#8592; Home</a>
-
-
 <!-- Progress bar -->
 <div id="progress-bar"></div>
 
 <!-- NAV -->
 <nav>
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <a href="index.html" class="nav-logo">&#x20BF; Bitcoin Report School</a>
   <div class="nav-right">
     <a href="index.html" class="nav-back">&#8592; Torna alla home</a>

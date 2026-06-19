@@ -377,6 +377,28 @@ input:checked + .toggle-slider:before{transform:translateX(18px);background:var(
   padding:1.5rem;text-align:center;color:var(--text2);font-size:0.88rem;line-height:1.7;
 }
 .assets-bark-note .big{font-size:2rem;margin-bottom:0.5rem;}
+.toast-notif{position:fixed;top:5rem;right:1rem;max-width:300px;padding:0.8rem 1rem;border-radius:10px;font-family:var(--mono);font-size:0.75rem;line-height:1.5;z-index:9999;opacity:0;transform:translateX(120%);transition:all 0.35s ease;pointer-events:none;}
+.toast-notif.show{opacity:1;transform:translateX(0);}
+.toast-notif.warn-toast{background:rgba(247,147,26,0.15);border:1px solid rgba(247,147,26,0.4);color:var(--gold);}
+.toast-notif.crit-toast{background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.5);color:var(--red);}
+.nwc-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9000;align-items:center;justify-content:center;}
+.nwc-modal.open{display:flex;}
+.nwc-modal-inner{background:var(--bg2);border:1px solid rgba(96,165,250,0.3);border-radius:16px;padding:1.8rem;max-width:440px;width:90%;position:relative;}
+.nwc-step{display:none;}
+.nwc-step.active{display:block;}
+.nwc-step-label{font-family:var(--mono);font-size:0.62rem;color:#60a5fa;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;}
+.nwc-string{font-family:var(--mono);font-size:0.65rem;color:var(--green);background:var(--bg3);border:1px solid rgba(34,211,160,0.2);border-radius:6px;padding:0.5rem 0.7rem;word-break:break-all;margin:0.8rem 0;}
+.nwc-apps{display:flex;gap:1rem;margin:1rem 0;align-items:center;}
+.nwc-app{background:var(--bg3);border:1px solid rgba(96,165,250,0.2);border-radius:8px;padding:0.5rem 0.8rem;font-family:var(--mono);font-size:0.7rem;color:#60a5fa;text-align:center;}
+.merchant-wrap{max-width:680px;margin:0 auto;padding:1.5rem;}
+.merchant-step{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1rem;}
+.merchant-step-num{font-family:var(--mono);font-size:0.62rem;color:var(--text3);letter-spacing:0.12em;margin-bottom:0.4rem;}
+.merchant-step-title{font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem;}
+.merchant-invoice{background:var(--bg3);border:1px solid rgba(96,165,250,0.25);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:0.72rem;color:#60a5fa;margin:0.8rem 0;text-align:center;}
+.merchant-pay-btn{background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.35);color:#60a5fa;border-radius:8px;padding:0.7rem 1.5rem;font-family:var(--mono);font-size:0.8rem;cursor:pointer;transition:all 0.2s;width:100%;margin-top:0.5rem;}
+.merchant-pay-btn:hover{background:rgba(96,165,250,0.18);}
+.merchant-result{display:none;margin-top:1rem;padding:1rem;border-radius:8px;background:rgba(34,211,160,0.06);border:1px solid rgba(34,211,160,0.25);}
+
 .assets-diagram{
   display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;
 }
@@ -570,19 +592,66 @@ footer a{color:var(--gold);text-decoration:none;}
     <div class="asp-card bark" onclick="selectASP('bark')">
       <span class="asp-card-badge">Second</span>
       <h2>Bark</h2>
-      <div class="asp-card-sub">second.tech &#183; mainnet giugno 2026</div>
+      <div class="asp-card-sub">second.tech &#183; &#10003; Mainnet giugno 2026</div>
       <ul>
-        <li>Focus interoperabilit&#224; Lightning</li>
-        <li>Bark SDK multi-linguaggio (7 binding)</li>
-        <li>Wallet Noah (React Native)</li>
-        <li>Daemon <span class="mono">Barkd</span> con REST API</li>
-        <li>ASP: <span class="mono">second.tech</span></li>
+        <li><strong>Wallet consumer:</strong> Noah (mobile), Arke (iOS), Satsigner, Bark Wallet (Umbrel)</li>
+        <li><strong>Merchant:</strong> Plugin BTCPay Server incluso</li>
+        <li><strong>Lightning:</strong> Nativa via NWC &#8212; atomica, no swap</li>
+        <li>Asset/stablecoin: &#10007; Bitcoin only</li>
+        <li>Filosofia: pagamenti Bitcoin puri, interop Lightning</li>
+        <li>Funding: $5.1M, team 11 persone, ex-Blockstream</li>
       </ul>
       <span class="asp-card-cta">Usa Bark &#8594;</span>
     </div>
   </div>
-  <div style="max-width:680px;margin:0 auto;padding:0 1.5rem 3rem;">
-    <div class="asp-info-box">
+  <div style="max-width:720px;margin:0 auto;padding:0 1.5rem 1.5rem;">
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <table style="width:100%;min-width:500px;border-collapse:collapse;font-family:var(--mono);font-size:0.72rem;">
+        <thead><tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left;padding:0.5rem 0.6rem;color:var(--text3);font-weight:400;"></th>
+          <th style="text-align:left;padding:0.5rem 0.6rem;color:var(--gold);">Arkade (Ark Labs)</th>
+          <th style="text-align:left;padding:0.5rem 0.6rem;color:var(--green);">Bark / Noah (Second)</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">Status</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">Mainnet</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--green);">&#10003; Mainnet (giugno 2026)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">Wallet</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">Arkade.money PWA</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">Noah (mobile), Arke (iOS), Bark Wallet (Umbrel)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">Lightning</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">Via Boltz swap</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--green);">&#10003; Nativa via NWC, atomica</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">Asset/stablecoin</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--gold);">&#10003; S&#236; (Arkade Assets)</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">&#10007; Bitcoin only</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">BTCPay plugin</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">S&#236; (Arkade)</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--green);">&#10003; S&#236; (Bark)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">Filosofia</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">Layer esecutivo programmabile</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">Pagamenti Bitcoin puri</td>
+          </tr>
+          <tr>
+            <td style="padding:0.45rem 0.6rem;color:var(--text3);">Funding</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">$7.7M (Draper, Tether, altri)</td>
+            <td style="padding:0.45rem 0.6rem;color:var(--text2);">$5.1M (investitore privato)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="asp-info-box" style="margin-top:1rem;">
       <strong>Arkade e Bark</strong> sono due implementazioni indipendenti dello stesso protocollo Ark &#8212; come Bitcoin Core e Bitcoin Knots per Bitcoin.
       Scegline una per iniziare la simulazione. Puoi cambiare in qualsiasi momento dal menu in alto.
     </div>
@@ -617,8 +686,10 @@ footer a{color:var(--gold);text-decoration:none;}
             <button class="action-btn" onclick="showScreen('receive')">&#128279; Ricevi</button>
             <button class="action-btn" onclick="openManage()">&#9881; Gestisci</button>
           </div>
-          <div style="margin-top:0.6rem;display:flex;gap:0.5rem;">
+          <div style="margin-top:0.6rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
             <button class="btn-secondary" style="font-size:0.7rem;padding:0.5rem;" onclick="openSummary()">&#128200; Riepilogo sessione</button>
+            <button id="nwcBtn" class="btn-secondary" style="font-size:0.7rem;padding:0.5rem;display:none;border-color:rgba(96,165,250,0.4);color:#60a5fa;" onclick="openNWC()">&#128279; Connetti app NWC</button>
+            <button class="btn-secondary" style="font-size:0.7rem;padding:0.5rem;" onclick="openMerchant()">&#127978; Modalit&#224; Merchant</button>
           </div>
         </div>
       </div>
@@ -1055,6 +1126,10 @@ function renderWallet() {
   // Assets tab
   var assetsTab = document.getElementById('walletTabAssets');
   if (assetsTab) assetsTab.style.display = S.asp === 'arkade' ? '' : 'none';
+
+  // NWC button (Bark only, show when has balance)
+  var nwcBtn = document.getElementById('nwcBtn');
+  if (nwcBtn) nwcBtn.style.display = (S.asp === 'bark' && S.balance > 0) ? '' : 'none';
 
   // VTXO list
   renderVTXOList();
@@ -1511,7 +1586,7 @@ function renderManage() {
     if (v.status !== 'expired') {
       btns += '<button class="mvtxo-btn renew" onclick="renewVTXO(' + v.id + ')">Rinnova ora</button>';
     } else {
-      btns += '<span style="font-size:0.75rem;color:var(--text3);">Contatta ASP o pubblica il branch</span>';
+      btns += '<button class="mvtxo-btn" onclick="simulateUnilateral(' + v.id + ')" style="border-color:rgba(248,113,113,0.35);color:var(--red);">&#9888; Uscita unilaterale</button>';
     }
     div.innerHTML =
       '<div class="mvtxo-row">' +
@@ -1559,6 +1634,27 @@ function advanceDays() {
   }
   renderManage();
   renderWallet();
+
+  // Toast notifications for expiring VTXOs
+  S.vtxos.forEach(function(v) {
+    if (v.status === 'expired') return;
+    var days = v.maxDays - (S.currentDay - v.createdDay);
+    if (days === 10 || (days > 0 && days <= 10 && days > 3)) {
+      showToast('warn-toast', '\u26A0\uFE0F VTXO da ' + v.amount.toFixed(4) + ' BTC scade in ' + days + ' giorni \u2014 rinnova o delega');
+    } else if (days > 0 && days <= 3) {
+      showToast('crit-toast', '\uD83D\uDD34 VTXO CRITICO: ' + v.amount.toFixed(4) + ' BTC scade in ' + days + ' giorni!');
+    }
+  });
+}
+
+function showToast(cls, msg) {
+  var t = document.getElementById('toastNotif');
+  if (!t) return;
+  t.className = 'toast-notif ' + cls;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function() { t.classList.remove('show'); }, 4000);
 }
 
 function renewVTXO(id) {
@@ -1636,6 +1732,213 @@ function switchWalletTab(tab, el) {
 
 // Init
 renderStatsPanel();
+
+// ===== NWC =====
+function openNWC() {
+  if (S.asp !== 'bark') return;
+  var modal = document.getElementById('nwcModal');
+  if (!modal) return;
+  // Reset to step 1
+  ['nwcStep1','nwcStep2','nwcStep3'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.className = 'nwc-step';
+  });
+  var s1 = document.getElementById('nwcStep1');
+  if(s1) s1.className = 'nwc-step active';
+  var strEl = document.getElementById('nwcString');
+  if(strEl) strEl.textContent = 'nostr+walletconnect://...generando...';
+  modal.classList.add('open');
+  setTimeout(function(){
+    var nwcKey = 'pubkey' + Math.random().toString(36).substring(2,10);
+    var str = 'nostr+walletconnect://' + nwcKey + '?relay=wss%3A%2F%2Frelay.nostr.net&secret=' + Math.random().toString(36).substring(2,18);
+    if(strEl) strEl.textContent = str;
+    var s2 = document.getElementById('nwcString2');
+    if(s2) s2.textContent = str;
+  }, 800);
+}
+function nwcNext(step) {
+  ['nwcStep1','nwcStep2','nwcStep3'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.className = 'nwc-step';
+  });
+  var el = document.getElementById('nwcStep' + step);
+  if(el) el.className = 'nwc-step active';
+  if(step === 3) {
+    var bal = S.balance.toFixed(5);
+    var z = document.getElementById('nwcZeusBalance'); if(z) z.textContent = bal + ' BTC';
+    var a = document.getElementById('nwcAlbyBalance'); if(a) a.textContent = bal + ' BTC';
+  }
+}
+function closeNWC() {
+  var modal = document.getElementById('nwcModal');
+  if(modal) modal.classList.remove('open');
+}
+
+// ===== MERCHANT =====
+var merchantAmt = 0.01;
+function openMerchant() {
+  merchantAmt = 0.01;
+  document.getElementById('merchantInvoiceAmount').textContent = merchantAmt.toFixed(5) + ' BTC';
+  document.getElementById('merchantAmtDisp').textContent = merchantAmt.toFixed(3);
+  var inv = 'lnbc' + Math.round(merchantAmt * 1e8) + 'n1p' + Math.random().toString(36).substring(2,14) + '...';
+  document.getElementById('merchantInvoiceStr').textContent = inv;
+  document.getElementById('merchantResult').style.display = 'none';
+  document.getElementById('merchantPayBtn').disabled = false;
+  document.getElementById('merchantPayBtn').textContent = '\uD83D\uDCF7 Simula pagamento Phoenix \u2192';
+  showScreen('merchant');
+}
+function updateMerchantAmount(val) {
+  merchantAmt = parseFloat(val);
+  document.getElementById('merchantInvoiceAmount').textContent = merchantAmt.toFixed(5) + ' BTC';
+  document.getElementById('merchantAmtDisp').textContent = merchantAmt.toFixed(3);
+  var inv = 'lnbc' + Math.round(merchantAmt * 1e8) + 'n1p' + Math.random().toString(36).substring(2,14) + '...';
+  document.getElementById('merchantInvoiceStr').textContent = inv;
+  document.getElementById('merchantResult').style.display = 'none';
+}
+function merchantSimulatePay() {
+  var btn = document.getElementById('merchantPayBtn');
+  btn.disabled = true;
+  btn.textContent = 'Elaborazione in corso...';
+  var steps = [
+    {delay:600,  text:'\u2714 Phoenix invia pagamento Lightning'},
+    {delay:1200, text:'\u2714 ASP (' + (S.asp === 'bark' ? 'Bark' : 'Arkade') + ') riceve il pagamento via LN'},
+    {delay:1900, text:'\u2714 ASP crea un VTXO a tuo favore off-chain'},
+    {delay:2600, text:'\u2714 Il VTXO entra nel prossimo round Ark'},
+    {delay:3200, text:'\u2714 Nessun canale aperto. Nessuna liquidit\u00e0 gestita.'}
+  ];
+  var container = document.getElementById('merchantFlowSteps');
+  container.innerHTML = '';
+  steps.forEach(function(s) {
+    setTimeout(function(){
+      var div = document.createElement('div');
+      div.style.cssText = 'animation:fadeIn 0.3s ease;';
+      div.textContent = s.text;
+      container.appendChild(div);
+    }, s.delay);
+  });
+  setTimeout(function(){
+    document.getElementById('merchantReceivedAmt').textContent = merchantAmt.toFixed(5) + ' BTC';
+    document.getElementById('merchantResult').style.display = '';
+    btn.textContent = '\u2713 Pagamento ricevuto';
+    // Add VTXO to wallet
+    S.vtxos.push({id:S.nextId++, amount:merchantAmt, createdDay:S.currentDay, maxDays:30, origin:'merchant', status:'safe'});
+    S.stats.deposits++;
+    renderWallet();
+  }, 3500);
+}
+
+// ===== UNILATERAL EXIT =====
+function simulateUnilateral(id) {
+  var v = S.vtxos.find(function(vv){ return vv.id === id; });
+  if(!v) return;
+  var txs = 3;
+  var feeSat = Math.round(v.amount * 1e8 * 0.0015);
+  var msg = 'Uscita unilaterale per ' + v.amount.toFixed(5) + ' BTC:\n';
+  msg += '  \u2022 ' + txs + ' transazioni on-chain da pubblicare\n';
+  msg += '  \u2022 Fee stimata: ~' + feeSat.toLocaleString() + ' sat\n';
+  msg += '  \u2022 Tempo attesa: ~30 min (3 conferme)\n';
+  msg += '  \u2022 I fondi torneranno in un UTXO on-chain a tuo controllo.';
+  alert(msg);
+  // Simulate: remove VTXO, recover funds on-chain
+  S.vtxos = S.vtxos.filter(function(vv){ return vv.id !== id; });
+  renderManage();
+  renderWallet();
+}
 </script>
+<!-- Toast notification -->
+<div id="toastNotif" class="toast-notif warn-toast"></div>
+
+<!-- NWC Modal -->
+<div id="nwcModal" class="nwc-modal" onclick="if(event.target===this)closeNWC()">
+  <div class="nwc-modal-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+      <div style="font-family:var(--mono);font-size:0.62rem;color:#60a5fa;letter-spacing:0.12em;text-transform:uppercase;">// NWC &#8212; Nostr Wallet Connect</div>
+      <button onclick="closeNWC()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:1.2rem;">&#10005;</button>
+    </div>
+    <div id="nwcStep1" class="nwc-step active">
+      <div class="nwc-step-label">Fase 1 di 3 &#8212; Generazione connection string</div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;">Il wallet Noah genera una stringa di connessione NWC che autorizza app esterne ad accedere ai tuoi fondi Bark come backend Lightning.</p>
+      <div class="nwc-string" id="nwcString">nostr+walletconnect://...</div>
+      <button class="merchant-pay-btn" onclick="nwcNext(2)" style="margin-top:1rem;">Genera connection string &#8594;</button>
+    </div>
+    <div id="nwcStep2" class="nwc-step">
+      <div class="nwc-step-label">Fase 2 di 3 &#8212; Scansione con app Lightning</div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;">Scansiona la stringa con Zeus, Alby, o qualsiasi app NWC-compatibile. Le app si connettono ai tuoi fondi Bark come se fossero un nodo Lightning.</p>
+      <div class="nwc-apps">
+        <div class="nwc-app">&#9889; Zeus</div>
+        <div class="nwc-app">&#128156; Alby</div>
+        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text3);">+ qualsiasi app NWC</div>
+      </div>
+      <div class="nwc-string" id="nwcString2"></div>
+      <button class="merchant-pay-btn" onclick="nwcNext(3)">Connetti app &#8594;</button>
+    </div>
+    <div id="nwcStep3" class="nwc-step">
+      <div class="nwc-step-label">Fase 3 di 3 &#8212; Connessione attiva</div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;">Zeus e Alby mostrano ora il tuo saldo Bark come saldo Lightning disponibile.</p>
+      <div style="margin:1rem 0;display:flex;gap:1rem;">
+        <div class="nwc-app" style="flex:1;">
+          <div style="color:#60a5fa;margin-bottom:0.3rem;">&#9889; Zeus</div>
+          <div style="color:var(--text);" id="nwcZeusBalance">0.00000 BTC</div>
+          <div style="color:var(--green);font-size:0.65rem;">via Bark / Noah</div>
+        </div>
+        <div class="nwc-app" style="flex:1;">
+          <div style="color:#60a5fa;margin-bottom:0.3rem;">&#128156; Alby</div>
+          <div style="color:var(--text);" id="nwcAlbyBalance">0.00000 BTC</div>
+          <div style="color:var(--green);font-size:0.65rem;">via Bark / Noah</div>
+        </div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text2);line-height:1.6;padding:0.7rem;background:rgba(34,211,160,0.06);border-radius:8px;border:1px solid rgba(34,211,160,0.15);">
+        Nessun canale aperto. Nessuna liquidit&#224; da gestire. Da Zeus o Alby, i tuoi fondi Bark si comportano esattamente come fondi su un nodo Lightning &#8212; la traduzione avviene in modo trasparente via NWC.
+      </div>
+      <button class="merchant-pay-btn" onclick="closeNWC()" style="margin-top:1rem;border-color:rgba(34,211,160,0.35);color:var(--green);">Chiudi &#10003;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN: MERCHANT ==================== -->
+<div class="screen" id="screen-merchant">
+  <div class="merchant-wrap">
+    <div class="flow-header">
+      <span class="flow-back" onclick="showScreen('wallet')">&#8592; Indietro</span>
+      <h2 class="flow-title">Modalit&#224; Merchant &#8212; Ricevi con BTCPay</h2>
+    </div>
+    <div class="info-panel" style="margin-bottom:1.2rem;">
+      <div class="info-panel-title">&#9670; Scenario</div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;">Sei un merchant con BTCPay Server. Hai installato il plugin Bark (o Arkade). Un cliente con Phoenix wallet vuole pagarti. Simula il flusso completo.</p>
+    </div>
+    <div class="merchant-step">
+      <div class="merchant-step-num">// STEP 1</div>
+      <div class="merchant-step-title">BTCPay Server genera una invoice Lightning</div>
+      <div class="merchant-invoice">
+        <div style="color:var(--text3);font-size:0.62rem;margin-bottom:0.4rem;">INVOICE</div>
+        <div id="merchantInvoiceAmount" style="font-size:1.1rem;color:var(--text);">0.01000 BTC</div>
+        <div style="font-size:0.65rem;color:var(--text3);margin-top:0.3rem;" id="merchantInvoiceStr">lnbc1000000n1p...</div>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.6rem;">
+        <label style="font-family:var(--mono);font-size:0.7rem;color:var(--text2);">Importo (BTC):</label>
+        <input type="range" min="0.001" max="0.1" step="0.001" value="0.01" oninput="updateMerchantAmount(this.value)" style="flex:1;">
+        <span style="font-family:var(--mono);font-size:0.7rem;color:var(--gold);" id="merchantAmtDisp">0.010</span>
+      </div>
+    </div>
+    <div class="merchant-step">
+      <div class="merchant-step-num">// STEP 2</div>
+      <div class="merchant-step-title">Cliente con Phoenix paga la invoice</div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;margin-bottom:0.8rem;">Il cliente ha Phoenix wallet, un wallet Lightning standard. Scansiona il QR e paga. Non sa che tu usi Ark.</p>
+      <button class="merchant-pay-btn" id="merchantPayBtn" onclick="merchantSimulatePay()">&#128247; Simula pagamento Phoenix &#8594;</button>
+      <div id="merchantResult" class="merchant-result">
+        <div style="font-family:var(--mono);font-size:0.62rem;color:var(--green);letter-spacing:0.1em;margin-bottom:0.6rem;">// PAGAMENTO RICEVUTO</div>
+        <div style="font-size:0.85rem;color:var(--text);">
+          <strong id="merchantReceivedAmt">0.01000 BTC</strong> ricevuti come VTXO
+        </div>
+        <div id="merchantFlowSteps" style="margin-top:0.8rem;font-size:0.78rem;color:var(--text2);line-height:2;"></div>
+      </div>
+    </div>
+    <div class="info-panel" style="background:rgba(34,211,160,0.04);border-color:rgba(34,211,160,0.2);">
+      <div class="info-panel-title" style="color:var(--green);">&#9670; Perch&#233; questo &#232; importante</div>
+      <p style="font-size:0.82rem;color:var(--text2);line-height:1.65;">Con il plugin BTCPay + Bark (o Arkade), un merchant pu&#242; accettare Bitcoin Lightning senza gestire l'infrastruttura dei canali. Il cliente usa il suo wallet Lightning preferito. Il merchant riceve in self-custody come VTXO. Ark fa da bridge tra i due &#8212; sia Arkade che Bark hanno un plugin BTCPay Server.</p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

@@ -37,9 +37,23 @@ body { background:var(--bg); color:var(--text); font-family:var(--sans); overflo
 body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.022) 2px,rgba(0,0,0,0.022) 4px); pointer-events:none; z-index:1000; }
 
 /* HOME BUTTON */
-.home-btn { position:fixed; top:1rem; left:1rem; z-index:9990; display:flex; align-items:center; gap:0.4rem; background:rgba(7,8,10,0.92); border:1px solid var(--gold); border-radius:6px; padding:0.4rem 0.85rem; font-family:var(--mono); font-size:0.68rem; color:var(--gold); text-decoration:none; letter-spacing:0.05em; backdrop-filter:blur(8px); transition:background 0.2s,box-shadow 0.2s; }
-.home-btn:hover { background:rgba(247,147,26,0.1); box-shadow:0 0 12px rgba(247,147,26,0.25); }
-@media(max-width:768px){ .home-btn { top:0.6rem; left:0.6rem; font-size:0.62rem; padding:0.3rem 0.65rem; } }
+.nav-home-btn {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 0.72rem;
+  color: var(--text2, #7a7870);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border, #1e2030);
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-home-btn:hover {
+  color: var(--gold, #f7931a);
+  border-color: var(--gold, #f7931a);
+}
 
 /* PROGRESS */
 #progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--gold); z-index:9999; width:0; transition:width 0.08s; pointer-events:none; }
@@ -54,8 +68,9 @@ body::before { content:''; position:fixed; inset:0; background:repeating-linear-
 @media(max-width:900px){ .page-wrap { grid-template-columns:1fr; } }
 
 /* SIDEBAR */
-.sidebar { padding:6rem 1.5rem 3rem 2rem; position:sticky; top:0; height:100vh; overflow-y:auto; border-right:1px solid var(--border); }
+.sidebar { padding:6rem 1.5rem 3rem 2rem; position:sticky; top:0; height:100vh; overflow-y:auto; border-right:1px solid var(--border); z-index:10; }
 @media(max-width:900px){ .sidebar { position:static; height:auto; border-right:none; border-bottom:1px solid var(--border); padding:1.5rem 1.5rem 1rem; } }
+@media(max-width:768px){ .sidebar { display:none; } }
 .toc-label { font-family:var(--mono); font-size:0.58rem; color:var(--text3); text-transform:uppercase; letter-spacing:0.18em; margin-bottom:1.2rem; display:block; }
 .toc-list { list-style:none; }
 .toc-list li { margin-bottom:0.1rem; }
@@ -144,8 +159,10 @@ footer { border-top:1px solid var(--border); padding:2rem; text-align:center; fo
 
 <div id="progress-bar"></div>
 
-<!-- HOME BUTTON -->
-<a class="home-btn" href="index.html">&#8592; Home</a>
+<nav style="border-bottom:1px solid var(--border);padding:0.7rem 1.5rem;display:flex;align-items:center;background:rgba(7,8,10,0.93);backdrop-filter:blur(14px);position:sticky;top:0;z-index:200;gap:1rem;">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
+  <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text3);">// bitcoin report school</span>
+</nav>
 
 <!-- BACK TO TOP -->
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593; Su</button>
