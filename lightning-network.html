@@ -6,14 +6,14 @@
 <!-- SEO -->
 <meta name="description" content="Simulatore interattivo della Lightning Network Bitcoin: apri canali di pagamento, esegui transazioni istantanee, comprendi HTLC, routing e swap onchain/offchain. In italiano, 100% offline.">
 <meta name="keywords" content="Lightning Network Bitcoin, canali di pagamento Bitcoin, HTLC, swap Bitcoin, pagamenti istantanei Bitcoin, micropagamenti, layer 2 Bitcoin, routing Lightning">
-<meta name="author" content="Bitcoin Report School">
+<meta name="author" content="Bitcoin Report Italia">
 <meta name="language" content="it">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Lightning Network Simulato — Pagamenti Bitcoin Istantanei">
 <meta property="og:description" content="Simulatore interattivo della Lightning Network: apri canali, esegui pagamenti istantanei, comprendi HTLC e swap onchain/offchain. In italiano, 100% offline.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bitcoinreportschool.com/lightning-network.html">
-<meta property="og:image" content="https://bitcoinreportschool.com/og-image.svg">
+<meta property="og:image" content="https://bitcoinreportschool.com/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lightning Network Simulato — Pagamenti Bitcoin Istantanei">
 <meta name="twitter:description" content="Simulatore Lightning Network: canali di pagamento, HTLC, routing e swap onchain/offchain. In italiano, 100% offline.">
@@ -400,6 +400,10 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
   .donation-qr-wrap { order: -1; }
 }
 </style>
+<meta property="og:site_name" content="Bitcoin Report School">
+<meta property="og:locale" content="it_IT">
+<meta name="twitter:site" content="@bitcoinsecondo">
+<meta name="twitter:image" content="https://bitcoinreportschool.com/og-image.jpg">
 </head>
 <body>
 <!-- __HOME_BTN_ADDED__ -->
@@ -1674,6 +1678,34 @@ window.addEventListener('load', () => {
   // Input listener for step 2
   document.getElementById('aliasInput').addEventListener('input', updatePreview);
 });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Lightning Network Simulato — Bitcoin Report School",
+  "description": "Simulatore interattivo della Lightning Network Bitcoin: apri canali di pagamento, instrada transazioni, comprendi routing e fee in tempo reale.",
+  "url": "https://bitcoinreportschool.com/lightning-network.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "inLanguage": "it",
+  "dateModified": "2026-06-21",
+  "author": {
+    "@type": "Person",
+    "name": "Mike",
+    "url": "https://www.instagram.com/bitcoin_report_italia"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bitcoin Report Italia",
+    "url": "https://bitcoinreportschool.com"
+  }
+}
 </script>
 </body>
 </html>

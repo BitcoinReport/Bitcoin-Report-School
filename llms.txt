@@ -1,0 +1,50 @@
+# Bitcoin Report School
+
+> Piattaforma italiana di educazione Bitcoin creata da Mike
+> (@bitcoin_report_italia). Copre self-custody, full node,
+> privacy on-chain, Lightning Network e sovranità finanziaria
+> nell'ottica cypherpunk e dell'economia austriaca.
+
+## Contenuti principali
+
+- [Guida al codice sorgente Bitcoin Core](https://bitcoinreportschool.com/guida_codice_bitcoin.html)
+- [Simulatore mining Bitcoin con SHA256 e albero di Merkle](https://bitcoinreportschool.com/simulatore_mining_bitcoin.html)
+- [Generatore chiavi Bitcoin con curva ellittica secp256k1](https://bitcoinreportschool.com/generatore_chiavi_bitcoin.html)
+- [Generatore seed phrase BIP39](https://bitcoinreportschool.com/generatore_seed_phrase.html)
+- [Lightning Network simulato — canali, routing, fee](https://bitcoinreportschool.com/lightning-network.html)
+- [Simulatore Ark Protocol — layer 2 senza canali, VTXO, ASP](https://bitcoinreportschool.com/simulatore-ark-protocol.html)
+- [Wallet Ark Simulato — Arkade e Bark](https://bitcoinreportschool.com/simulatore-wallet-ark.html)
+- [Curva ellittica secp256k1 interattiva](https://bitcoinreportschool.com/curva_ellittica.html)
+- [Script Playground Bitcoin — opcode, stack, P2PKH](https://bitcoinreportschool.com/script_playground_bitcoin.html)
+- [Glossario Bitcoin completo in italiano (150+ termini)](https://bitcoinreportschool.com/glossario_bitcoin.html)
+- [Guida autocustodia — seed phrase, hardware wallet, KYC-free](https://bitcoinreportschool.com/autocustodia-bitcoin.html)
+- [Rete P2P Bitcoin — configura il tuo nodo, privacy Tor](https://bitcoinreportschool.com/rete-p2p-bitcoin.html)
+- [Guida mining idroelettrico DIY](https://bitcoinreportschool.com/mining-idroelettrico-diy.html)
+- [Bitcoin per organizzazioni non profit (HRF)](https://bitcoinreportschool.com/guida-bitcoin-nonprofit.html)
+- [Enciclopedia versioni client Bitcoin (Core, Knots, btcd…)](https://bitcoinreportschool.com/versioni-client-bitcoin.html)
+- [Manifesto cypherpunk 2026](https://bitcoinreportschool.com/manifesto-cypherpunk-2026.html)
+- [Come liberarsi dal potere — economia austriaca, banche centrali](https://bitcoinreportschool.com/liberta-dal-potere.html)
+- [Propaganda per Procura — sistema di consenso e pensiero critico](https://bitcoinreportschool.com/propaganda-per-procura.html)
+
+## Tecnologie coperte
+
+Bitcoin Core, secp256k1, ECDSA, SHA256, BIP39, UTXO, Lightning Network,
+Ark Protocol, VTXO, ASP (Ark Service Provider), Arkade, Bark/Second,
+NWC (Nostr Wallet Connect), BTCPay Server, Taproot, Tor, full node,
+Sparrow Wallet, hardware wallet, seed phrase, autocustodia, CoinJoin.
+
+## Autore
+
+Mike — educatore Bitcoin italiano, consulente self-custody,
+hardware wallet, Sparrow Wallet, nodi Tor, P2P.
+Instagram: @bitcoin_report_italia
+Sito: https://bitcoinreportschool.com
+
+## Lingua
+
+Tutti i contenuti sono in italiano.
+
+## Licenza
+
+Contenuti educativi liberamente utilizzabili per scopi non commerciali
+con attribuzione a Bitcoin Report Italia.
