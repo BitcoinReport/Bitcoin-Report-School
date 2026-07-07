@@ -53,6 +53,73 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
 
+/* NAV HOME BTN */
+.nav-home-btn{font-family:var(--mono);font-size:0.72rem;color:var(--text2);text-decoration:none;padding:0.3rem 0.7rem;border:1px solid var(--border2);border-radius:5px;letter-spacing:0.05em;transition:color 0.2s,border-color 0.2s;white-space:nowrap;flex-shrink:0;}
+.nav-home-btn:hover{color:var(--gold);border-color:var(--gold);}
+
+/* FORMAT-CARDS 5 options */
+.format-cards-5{display:grid;grid-template-columns:repeat(5,1fr);gap:0.7rem;margin-bottom:1rem;}
+@media(max-width:900px){.format-cards-5{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:600px){.format-cards-5{grid-template-columns:repeat(2,1fr);}}
+.fc-compact .fc-title{font-size:2.6rem;}
+.fc-compact .fc-sub{font-size:0.72rem;}
+.fc-compact .fc-bits{font-size:0.65rem;}
+.fc-compact .fc-dice{font-size:0.68rem;}
+
+/* COMPAT WARNING */
+.compat-warn{display:none;background:rgba(247,147,26,0.08);border:1px solid rgba(247,147,26,0.45);border-radius:8px;padding:0.9rem 1.1rem;margin:0.6rem 0 0.9rem;font-size:0.82rem;color:var(--text2);line-height:1.65;}
+.compat-warn strong{color:var(--gold);}
+.compat-warn.visible{display:block;}
+
+/* CHECKSUM VISUAL */
+.cs-visual-box{background:var(--bg4);border:1px solid rgba(34,211,160,0.2);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;}
+.cs-visual-label{font-family:var(--mono);font-size:0.58rem;color:var(--green);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.5rem;}
+.cs-bit-row{font-family:var(--mono);font-size:0.6rem;word-break:break-all;line-height:1.9;overflow-x:auto;white-space:pre-wrap;}
+.cs-ent-bit{color:var(--text2);}
+.cs-cs-bit{color:var(--green);font-weight:700;}
+.cs-hex{color:var(--cyan);font-size:0.65rem;word-break:break-all;font-family:var(--mono);}
+.cs-concat-row{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.5rem;align-items:baseline;}
+.cs-concat-ent{color:var(--gold);font-family:var(--mono);font-size:0.6rem;}
+.cs-concat-cs{color:var(--green);font-family:var(--mono);font-size:0.6rem;font-weight:700;}
+.cs-concat-plus{color:var(--text3);font-size:0.75rem;}
+
+/* STEP 6 — SEED */
+.seed-hex-box{background:var(--bg);border:1px solid rgba(34,211,160,0.3);border-radius:8px;padding:1rem 1.2rem;margin-bottom:0.9rem;position:relative;}
+.seed-hex-val{font-family:var(--mono);font-size:0.65rem;color:var(--green);word-break:break-all;line-height:1.7;overflow-x:auto;}
+.seed-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+@media(max-width:680px){.seed-compare{grid-template-columns:1fr;}}
+.seed-compare-card{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:0.9rem 1rem;}
+.seed-compare-label{font-family:var(--mono);font-size:0.58rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.5rem;}
+.label-no-pass{color:var(--text3);}
+.label-with-pass{color:var(--gold);}
+.seed-compare-val{font-family:var(--mono);font-size:0.55rem;color:var(--text2);word-break:break-all;line-height:1.6;}
+.pbkdf2-box{background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-family:var(--mono);font-size:0.72rem;color:var(--text2);line-height:1.8;}
+.pbkdf2-box .pbkdf2-title{font-size:0.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.7rem;}
+.pbkdf2-box strong{color:var(--cyan);}
+.pbkdf2-box em{color:var(--gold);font-style:normal;}
+.seed-loading{font-family:var(--mono);font-size:0.8rem;color:var(--text3);padding:1rem 0;text-align:center;}
+.bip32-info-box{background:rgba(77,159,255,0.05);border:1px solid rgba(77,159,255,0.2);border-radius:8px;padding:1rem 1.2rem;margin-top:1.5rem;font-size:0.82rem;color:var(--text2);line-height:1.7;}
+.bip32-info-box strong{color:var(--blue);}
+.pass-input{width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:7px;padding:0.65rem 1rem;color:var(--text);font-family:var(--mono);font-size:0.85rem;outline:none;transition:border-color 0.2s;}
+.pass-input:focus{border-color:var(--gold);}
+.pass-input::placeholder{color:var(--text3);}
+
+/* ENTROPY SECURITY INTRO */
+.entropy-intro{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.8rem 1.8rem 1.5rem;margin-bottom:1.4rem;}
+.entropy-intro-title{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:#fff;margin-bottom:0.9rem;}
+.entropy-intro-title em{color:var(--gold);font-style:italic;}
+.entropy-intro p{font-size:0.88rem;color:var(--text2);line-height:1.8;margin-bottom:0.7rem;}
+.entropy-intro strong{color:var(--text);}
+.entropy-intro .big-number{font-family:var(--mono);font-size:0.82rem;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(247,147,26,0.3);border-radius:7px;padding:0.55rem 1rem;margin:0.7rem 0;word-break:break-all;letter-spacing:0.04em;}
+.entropy-intro hr{border:none;border-top:1px solid var(--border);margin:1rem 0;}
+.entropy-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+@media(max-width:640px){.entropy-compare{grid-template-columns:1fr;}}
+.entropy-compare table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.entropy-compare th{text-align:left;padding:0.3rem 0.6rem;color:var(--text3);font-weight:400;font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;border-bottom:1px solid var(--border);}
+.entropy-compare td{padding:0.3rem 0.6rem;color:var(--text2);border-bottom:1px solid var(--border);}
+.entropy-compare td:first-child{color:var(--gold);font-family:var(--mono);font-weight:600;}
+.ec-ok{color:var(--green) !important;}
+
 /* SECURITY WARNING */
 .sec-warning{
   background:linear-gradient(90deg,rgba(255,85,102,0.15),rgba(255,85,102,0.05));
@@ -560,9 +627,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 <meta name="twitter:image" content="https://bitcoinreportschool.com/og-image.jpg">
 </head>
 <body>
-<!-- __HOME_BTN_ADDED__ -->
-<style>#__home-btn:hover{background:rgba(247,147,26,0.1);box-shadow:0 0 12px rgba(247,147,26,0.25);}@media(max-width:768px){#__home-btn{top:0.6rem;left:0.6rem;font-size:0.62rem;padding:0.3rem 0.65rem;}}</style>
-<a id="__home-btn" href="index.html" style="position:fixed;top:1rem;left:1rem;z-index:9990;display:flex;align-items:center;gap:0.4rem;background:rgba(7,8,10,0.92);border:1px solid #f7931a;border-radius:6px;padding:0.4rem 0.85rem;font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:#f7931a;text-decoration:none;letter-spacing:0.05em;backdrop-filter:blur(8px);transition:background 0.2s,box-shadow 0.2s;">&#8592; Home</a>
+
 
 
 <!-- SECURITY WARNING -->
@@ -575,13 +640,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 
 <!-- NAV -->
 <nav class="site-nav">
-  <div class="nav-logo">&#8383; Bitcoin Report School <span>/ Generatore Seed Phrase</span></div>
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
+  <div class="nav-logo">&#8383; Bitcoin Report School <span>/ Seed BIP39</span></div>
   <div class="step-dots">
     <div class="sdot active" id="dot1">1</div><div class="sline"></div>
     <div class="sdot" id="dot2">2</div><div class="sline"></div>
     <div class="sdot" id="dot3">3</div><div class="sline"></div>
     <div class="sdot" id="dot4">4</div><div class="sline"></div>
-    <div class="sdot" id="dot5">5</div>
+    <div class="sdot" id="dot5">5</div><div class="sline"></div>
+    <div class="sdot" id="dot6">6</div>
   </div>
 </nav>
 
@@ -594,53 +661,143 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 
 <div class="main-wrap">
 
+<!-- ═══ INTRO: SICUREZZA DELL'ENTROPIA ═══ -->
+<div class="entropy-intro">
+  <div class="entropy-intro-title">Quanto &egrave; sicura una <em>seed phrase</em>?</div>
+  <p>Una seed phrase da 12 parole sembra poca cosa. Dodici parole inglesi comuni. Sembra quasi facile da indovinare.</p>
+  <p><strong>Non lo &egrave;.</strong></p>
+  <p>Una seed phrase da 12 parole &egrave; generata da <strong>128 bit di entropia</strong>. Questo significa che esistono 2<sup>128</sup> possibili combinazioni valide. Scritto per esteso:</p>
+  <div class="big-number">340.282.366.920.938.463.463.374.607.431.768.211.456</div>
+  <p>Per dare un&apos;idea concreta: si stima che nell&apos;universo osservabile ci siano circa 10<sup>80</sup> atomi. 2<sup>128</sup> &egrave; circa <strong>4 miliardi di miliardi di volte</strong> pi&ugrave; grande di quel numero. Un computer che provasse un miliardo di combinazioni al secondo impiegherebbe pi&ugrave; dell&apos;et&agrave; dell&apos;universo per coprire una frazione trascurabile dello spazio delle possibilit&agrave;.</p>
+  <p><strong>La seed da 12 parole &egrave; sicura per qualsiasi uso reale oggi e nel futuro prevedibile.</strong></p>
+  <hr>
+  <p>La seed da 24 parole usa <strong>256 bit di entropia</strong>: 2<sup>256</sup> combinazioni possibili. Un numero talmente grande che non esiste paragone fisico sensato per descriverlo &mdash; supera di ordini di grandezza il numero di atomi nell&apos;universo osservabile elevato a se stesso.</p>
+  <p><strong>La seed da 24 parole non aggiunge sicurezza pratica rispetto alle 12 parole</strong> &mdash; nessun computer esistente o immaginabile potr&agrave; mai violare nemmeno le 12. Le 24 parole esistono per chi vuole un margine teorico contro scenari futuri ipotetici (es. computer quantistici con capacit&agrave; enormemente superiori a quelle attuali) o semplicemente per preferenza personale.</p>
+  <table class="entropy-compare" style="margin-top:1rem;width:100%;border-collapse:collapse;font-size:0.78rem;">
+    <thead>
+      <tr>
+        <th style="text-align:left;padding:0.35rem 0.7rem;color:var(--text3);font-weight:400;font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;border-bottom:1px solid var(--border);"></th>
+        <th style="text-align:left;padding:0.35rem 0.7rem;color:var(--gold);font-family:var(--mono);font-size:0.72rem;border-bottom:1px solid var(--border);">12 parole</th>
+        <th style="text-align:left;padding:0.35rem 0.7rem;color:var(--text2);font-family:var(--mono);font-size:0.72rem;border-bottom:1px solid var(--border);">24 parole</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:0.3rem 0.7rem;color:var(--text3);font-family:var(--mono);font-size:0.7rem;border-bottom:1px solid var(--border);">Entropia</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--text2);border-bottom:1px solid var(--border);">128 bit</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--text2);border-bottom:1px solid var(--border);">256 bit</td>
+      </tr>
+      <tr>
+        <td style="padding:0.3rem 0.7rem;color:var(--text3);font-family:var(--mono);font-size:0.7rem;border-bottom:1px solid var(--border);">Combinazioni</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--text2);font-family:var(--mono);font-size:0.68rem;border-bottom:1px solid var(--border);">2<sup>128</sup></td>
+        <td style="padding:0.3rem 0.7rem;color:var(--text2);font-family:var(--mono);font-size:0.68rem;border-bottom:1px solid var(--border);">2<sup>256</sup></td>
+      </tr>
+      <tr>
+        <td style="padding:0.3rem 0.7rem;color:var(--text3);font-family:var(--mono);font-size:0.7rem;border-bottom:1px solid var(--border);">Sicurezza pratica oggi</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--green);border-bottom:1px solid var(--border);">&#10003; Pi&ugrave; che sufficiente</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--green);border-bottom:1px solid var(--border);">&#10003; Pi&ugrave; che sufficiente</td>
+      </tr>
+      <tr>
+        <td style="padding:0.3rem 0.7rem;color:var(--text3);font-family:var(--mono);font-size:0.7rem;">Uso consigliato</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--text2);">Uso quotidiano</td>
+        <td style="padding:0.3rem 0.7rem;color:var(--text2);">Preferenza personale / margine teorico</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <!-- ═══ STEP 1: SCEGLI IL FORMATO ═══ -->
 <div class="step-card active-step" id="card1">
   <div class="step-header" onclick="toggleStep(1)">
     <div class="step-num">1</div>
     <div class="step-titles">
-      <div class="step-title">Scegli il Formato — 12 o 24 Parole</div>
-      <div class="step-subtitle">La lunghezza determina i bit di entropia e il numero di dadi necessari.</div>
+      <div class="step-title">Scegli il Formato — 12, 15, 18, 21 o 24 Parole</div>
+      <div class="step-subtitle">La lunghezza determina i bit di entropia, il checksum e i dadi necessari.</div>
     </div>
     <div class="step-badge" id="badge1">IN CORSO</div>
   </div>
   <div class="step-body">
 
-    <button class="hint-btn" onclick="toggleHint('h1a')">&#128161; Perché esistono 12 e 24 parole?</button>
+    <button class="hint-btn" onclick="toggleHint('h1a')">&#128161; Quante parole? La tabella completa BIP39</button>
     <div class="hint-box" id="h1a">
-      <strong>12 parole = 128 bit di entropia.</strong> Ogni parola codifica 11 bit del numero casuale originale. 12 parole &times; 11 bit = 132 bit totali, di cui 128 sono entropia pura e 4 sono checksum di verifica.<br><br>
-      <strong>24 parole = 256 bit di entropia.</strong> 24 parole &times; 11 bit = 264 bit totali, di cui 256 entropia e 8 checksum.<br><br>
-      La differenza pratica: <strong>128 bit</strong> offrono 2<sup>128</sup> = 340 miliardi di miliardi di miliardi di miliardi di possibilit&agrave; — gi&agrave; impossibile da violare. <strong>256 bit</strong> elevano questo a 2<sup>256</sup>, lo stesso spazio delle chiavi private Bitcoin. Chi usa 24 parole lo fa per massima paranoia futura (resistenza ai computer quantistici).
+      La specifica BIP39 prevede <strong>cinque lunghezze</strong> di seed phrase. Ogni parola codifica 11 bit: la stringa totale &egrave; ENT + CS bit, divisa in gruppi da 11.
+      <table style="margin:0.8rem 0;width:100%;font-size:0.78rem;border-collapse:collapse;">
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+          <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--gold);font-family:var(--mono);">Parole</th>
+          <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--text2);">ENT (entropia)</th>
+          <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--red);">CS (checksum)</th>
+          <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--text2);">Dadi</th>
+          <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--green);">Supporto</th>
+        </tr>
+        <tr><td style="padding:0.25rem 0.5rem;font-family:var(--mono);color:var(--gold);">12</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">128 bit</td><td style="padding:0.25rem 0.5rem;color:var(--red);">4 bit</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">50</td><td style="padding:0.25rem 0.5rem;color:var(--green);">&#10003; Universale</td></tr>
+        <tr><td style="padding:0.25rem 0.5rem;font-family:var(--mono);color:var(--gold);">15</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">160 bit</td><td style="padding:0.25rem 0.5rem;color:var(--red);">5 bit</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">62</td><td style="padding:0.25rem 0.5rem;color:var(--text3);">&#9888; Limitato</td></tr>
+        <tr><td style="padding:0.25rem 0.5rem;font-family:var(--mono);color:var(--gold);">18</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">192 bit</td><td style="padding:0.25rem 0.5rem;color:var(--red);">6 bit</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">75</td><td style="padding:0.25rem 0.5rem;color:var(--text3);">&#9888; Limitato</td></tr>
+        <tr><td style="padding:0.25rem 0.5rem;font-family:var(--mono);color:var(--gold);">21</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">224 bit</td><td style="padding:0.25rem 0.5rem;color:var(--red);">7 bit</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">87</td><td style="padding:0.25rem 0.5rem;color:var(--text3);">&#9888; Limitato</td></tr>
+        <tr><td style="padding:0.25rem 0.5rem;font-family:var(--mono);color:var(--gold);">24</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">256 bit</td><td style="padding:0.25rem 0.5rem;color:var(--red);">8 bit</td><td style="padding:0.25rem 0.5rem;color:var(--text2);">99</td><td style="padding:0.25rem 0.5rem;color:var(--green);">&#10003; Universale</td></tr>
+      </table>
+      <strong>12 e 24 parole</strong> sono supportate da tutti i wallet moderni. Le altre lunghezze sono valide secondo la specifica ma hanno supporto limitato — incluse a scopo didattico per mostrare la tabella completa BIP39.
     </div>
 
     <button class="hint-btn" onclick="toggleHint('h1b')">&#127922; Perch&eacute; i dadi sono superiori al computer?</button>
     <div class="hint-box" id="h1b">
       Un computer genera numeri <strong>pseudo-casuali</strong>: usa algoritmi deterministici partendo da un seed iniziale (spesso il clock di sistema). Sebbene i PRNG crittografici moderni siano ottimi, si basano comunque su software che potrebbe essere compromesso o prevedibile.<br><br>
-      Un dado fisico genera casualit&agrave; <strong>vera ed fisica</strong> — la traiettoria del dado dipende da migliaia di variabili fisiche impossibili da misurare simultaneamente (turbolenza aria, attrito superficie, forza impresso, elasticit&agrave; del dado). Nessun hardware o software al mondo pu&ograve; riprodurre o prevedere il risultato.<br><br>
+      Un dado fisico genera casualit&agrave; <strong>vera e fisica</strong> — la traiettoria del dado dipende da migliaia di variabili fisiche impossibili da misurare simultaneamente (turbolenza aria, attrito superficie, forza impresso, elasticit&agrave; del dado). Nessun hardware o software al mondo pu&ograve; riprodurre o prevedere il risultato.<br><br>
       <em>log2(6) &asymp; 2.585 bit per lancio.</em> Ogni faccia del dado porta circa 2.585 bit di entropia. Per 128 bit servono &lceil;128 / 2.585&rceil; = 50 lanci; per 256 bit servono &lceil;256 / 2.585&rceil; = 99 lanci.
     </div>
 
     <div class="sec-div">Seleziona il formato</div>
 
-    <div class="format-cards">
-      <div class="format-card" id="fc12" onclick="selectFormat(12)">
-        <div class="fc-badge">Formato Standard</div>
+    <div class="format-cards-5">
+      <div class="format-card fc-compact" id="fc12" onclick="selectFormat(12)">
+        <div class="fc-badge">Standard &#10003;</div>
         <div class="fc-title">12</div>
-        <div class="fc-sub">parole — Wallet standard</div>
-        <div class="fc-bits">128 bit entropia</div>
-        <div class="fc-dice">&#127922; 50 lanci di dado necessari</div>
-        <div style="margin-top:0.7rem;font-size:0.75rem;color:var(--text2);">Usato da Electrum, Ledger, Trezor, Blue Wallet, Muun, Phoenix e quasi tutti i wallet moderni. Sicurezza sufficiente per qualsiasi quantit&agrave; di bitcoin.</div>
-        <div class="math-box" style="margin-top:0.6rem;">2<sup>128</sup> = 3.4 &times; 10<sup>38</sup> combinazioni</div>
+        <div class="fc-sub">parole</div>
+        <div class="fc-bits">ENT 128 bit / CS 4 bit</div>
+        <div class="fc-dice">&#127922; 50 lanci</div>
+        <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--green);">Supporto universale</div>
+        <div class="math-box" style="margin-top:0.5rem;font-size:0.65rem;">2<sup>128</sup> combinazioni</div>
       </div>
-      <div class="format-card" id="fc24" onclick="selectFormat(24)">
-        <div class="fc-badge">Formato Massima Sicurezza</div>
+      <div class="format-card fc-compact" id="fc15" onclick="selectFormat(15)">
+        <div class="fc-badge">BIP39 valido</div>
+        <div class="fc-title">15</div>
+        <div class="fc-sub">parole</div>
+        <div class="fc-bits">ENT 160 bit / CS 5 bit</div>
+        <div class="fc-dice">&#127922; 62 lanci</div>
+        <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--text3);">&#9888; Supporto limitato</div>
+        <div class="math-box" style="margin-top:0.5rem;font-size:0.65rem;">2<sup>160</sup> combinazioni</div>
+      </div>
+      <div class="format-card fc-compact" id="fc18" onclick="selectFormat(18)">
+        <div class="fc-badge">BIP39 valido</div>
+        <div class="fc-title">18</div>
+        <div class="fc-sub">parole</div>
+        <div class="fc-bits">ENT 192 bit / CS 6 bit</div>
+        <div class="fc-dice">&#127922; 75 lanci</div>
+        <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--text3);">&#9888; Supporto limitato</div>
+        <div class="math-box" style="margin-top:0.5rem;font-size:0.65rem;">2<sup>192</sup> combinazioni</div>
+      </div>
+      <div class="format-card fc-compact" id="fc21" onclick="selectFormat(21)">
+        <div class="fc-badge">BIP39 valido</div>
+        <div class="fc-title">21</div>
+        <div class="fc-sub">parole</div>
+        <div class="fc-bits">ENT 224 bit / CS 7 bit</div>
+        <div class="fc-dice">&#127922; 87 lanci</div>
+        <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--text3);">&#9888; Supporto limitato</div>
+        <div class="math-box" style="margin-top:0.5rem;font-size:0.65rem;">2<sup>224</sup> combinazioni</div>
+      </div>
+      <div class="format-card fc-compact" id="fc24" onclick="selectFormat(24)">
+        <div class="fc-badge">Max sicurezza &#10003;</div>
         <div class="fc-title">24</div>
-        <div class="fc-sub">parole — Sicurezza extra</div>
-        <div class="fc-bits">256 bit entropia</div>
-        <div class="fc-dice">&#127922; 99 lanci di dado necessari</div>
-        <div style="margin-top:0.7rem;font-size:0.75rem;color:var(--text2);">Preferito da alcuni hardware wallet (Coldcard, Foundation Passport) per massima sicurezza. Equivalente allo spazio delle chiavi private Bitcoin. Resistente anche a potenziali computer quantistici.</div>
-        <div class="math-box" style="margin-top:0.6rem;">2<sup>256</sup> = 1.1 &times; 10<sup>77</sup> combinazioni</div>
+        <div class="fc-sub">parole</div>
+        <div class="fc-bits">ENT 256 bit / CS 8 bit</div>
+        <div class="fc-dice">&#127922; 99 lanci</div>
+        <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--green);">Supporto universale</div>
+        <div class="math-box" style="margin-top:0.5rem;font-size:0.65rem;">2<sup>256</sup> combinazioni</div>
       </div>
+    </div>
+
+    <div class="compat-warn" id="compatWarn">
+      <strong>&#9888; Attenzione &mdash; Compatibilit&agrave; limitata.</strong>
+      Le seed phrase da <strong id="compatWords">15</strong> parole (ENT <strong id="compatEnt">160</strong> bit) sono valide secondo la specifica BIP39, ma sono supportate da pochi software e hardware wallet. Se il tuo wallet attuale non supporta questa lunghezza e hai bisogno di recuperare il backup su un altro dispositivo, potresti non trovare compatibilit&agrave;. <strong>Per uso reale usa sempre 12 o 24 parole.</strong> Questo strumento le include a scopo didattico per mostrare la tabella completa dello standard.
     </div>
 
     <div class="btn-row">
@@ -718,6 +875,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
         <div class="out-label">Numero in esadecimale (troncato ai bit necessari)</div>
         <div class="out-val" id="s3b-hex" style="font-size:0.65rem;word-break:break-all;"></div>
       </div>
+
+      <div class="cs-visual-box" id="s3b-mini-box" style="border-color:rgba(247,147,26,0.2);margin-top:0.8rem;">
+        <div class="cs-visual-label" style="color:var(--gold);">Esempio passo per passo con i tuoi dadi</div>
+        <div id="s3b-mini-content" style="font-family:var(--mono);font-size:0.72rem;color:var(--text2);line-height:1.95;"></div>
+      </div>
     </div>
 
     <!-- 3c: Bit di entropia -->
@@ -757,6 +919,53 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       <div class="out-box gold-box">
         <div class="out-label" id="s3f-label">132 bit totali (128 entropia + 4 checksum)</div>
         <div class="bit-string" id="s3f-all"></div>
+      </div>
+    </div>
+
+    <!-- 3g: Checksum visuale didattico -->
+    <div class="substep" style="border-color:rgba(34,211,160,0.2);">
+      <div class="substep-label" style="color:var(--green);"><span style="border-color:var(--green);color:var(--green);">G</span> Come nasce il checksum — visualizzazione</div>
+      <p style="font-size:0.82rem;color:var(--text2);margin-bottom:0.9rem;">Riepilogo visivo del processo: dall&apos;entropia al checksum alla concatenazione finale.</p>
+
+      <div class="cs-visual-box">
+        <div class="cs-visual-label">1. Entropia (prime 32 cifre mostrate)</div>
+        <div class="cs-bit-row cs-ent-bit" id="s3g-ent-preview"></div>
+        <div style="font-size:0.68rem;color:var(--text3);font-family:var(--mono);margin-top:0.3rem;" id="s3g-ent-note"></div>
+      </div>
+
+      <div class="cs-visual-box">
+        <div class="cs-visual-label">2. SHA256(entropia) &rarr; hash 256 bit</div>
+        <div class="cs-hex" id="s3g-sha-hex"></div>
+        <div style="font-size:0.73rem;color:var(--text2);margin-top:0.5rem;line-height:1.6;">Applichiamo SHA256 all&apos;entropia. Questo produce sempre 256 bit (64 caratteri hex) da qualsiasi input. Cambia anche un solo bit e l&apos;hash &egrave; completamente diverso.</div>
+      </div>
+
+      <div class="cs-visual-box" style="border-color:rgba(34,211,160,0.3);">
+        <div class="cs-visual-label">3. Primi <span id="s3g-cs-n">4</span> bit dell&apos;hash = checksum</div>
+        <div class="cs-bit-row">
+          <span class="cs-cs-bit" id="s3g-cs-bits"></span>
+          <span class="cs-ent-bit" id="s3g-cs-rest" style="opacity:0.3;"></span>
+        </div>
+        <div style="font-size:0.73rem;color:var(--green);margin-top:0.4rem;font-family:var(--mono);" id="s3g-cs-explain"></div>
+      </div>
+
+      <div class="cs-visual-box" style="border-color:rgba(34,211,160,0.15);">
+        <div class="cs-visual-label">3b. Come si leggono i bit dell&apos;hash — Hex &rarr; Binario</div>
+        <div id="s3g-hex-conv-content"></div>
+      </div>
+
+      <div class="cs-visual-box">
+        <div class="cs-visual-label">4. Concatenazione finale: ENT + CS</div>
+        <div style="font-size:0.73rem;color:var(--text2);margin-bottom:0.5rem;line-height:1.65;" id="s3g-concat-desc"></div>
+        <div class="cs-concat-row">
+          <span class="cs-concat-ent" id="s3g-concat-ent-sample"></span>
+          <span class="cs-concat-plus">+</span>
+          <span class="cs-concat-cs" id="s3g-concat-cs-sample"></span>
+          <span class="cs-concat-plus" style="color:var(--text3);font-size:0.65rem;" id="s3g-concat-note"></span>
+        </div>
+        <div style="margin-top:0.6rem;font-family:var(--mono);font-size:0.62rem;color:var(--text3);display:flex;gap:1.5rem;">
+          <span><span style="color:var(--gold);">&#9632;</span> Bit entropia</span>
+          <span><span style="color:var(--green);">&#9632;</span> Bit checksum</span>
+        </div>
       </div>
     </div>
 
@@ -857,6 +1066,110 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       <p>Il protocollo BIP39 prevede una <strong>passphrase opzionale</strong> (chiamata anche "25&ordf; parola" o "extension word"). Si tratta di una parola o frase libera scelta dall&apos;utente che viene aggiunta matematicamente al processo di derivazione del seed.<br><br>
       La passphrase <strong>non</strong> fa parte della seed phrase in s&eacute;, e nessun wallet la memorizza: deve essere ricordata separatamente. Se usata, il wallet senza passphrase e quello con passphrase derivano wallet completamente diversi dallo stesso set di 12/24 parole. Alcune persone usano un wallet "esca" senza passphrase (con pochi fondi) e un wallet reale con passphrase.<br><br>
       <strong>Attenzione:</strong> se perdi la passphrase, perdi l&apos;accesso ai fondi nel wallet con passphrase. &Egrave; una protezione aggiuntiva che aumenta anche il rischio di perdita irreversibile.</p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="goToStep6()">Calcola il Seed 512 bit &#8594;</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="restartAll()">&#8635; Ricomincia da capo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 6: DA MNEMONIC A SEED 512 BIT ═══ -->
+<div class="step-card" id="card6">
+  <div class="step-header" onclick="toggleStep(6)">
+    <div class="step-num">6</div>
+    <div class="step-titles">
+      <div class="step-title">Dal Mnemonic al Seed: la Parte 2 del BIP39</div>
+      <div class="step-subtitle">PBKDF2-HMAC-SHA512 &bull; 2048 iterazioni &bull; 512 bit di output</div>
+    </div>
+    <div class="step-badge" id="badge6">IN ATTESA</div>
+  </div>
+  <div class="step-body">
+
+    <p style="font-size:0.88rem;color:var(--text2);line-height:1.75;margin-bottom:1rem;">
+      Le parole che hai generato sono la tua <strong style="color:var(--text);">mnemonic phrase</strong>. Ma il wallet Bitcoin non le usa direttamente: le converte in una sequenza di <strong style="color:var(--green);">512 bit</strong> chiamata <em>seed</em>. Questo seed &egrave; il vero punto di partenza da cui deriva ogni chiave del tuo wallet.
+    </p>
+    <p style="font-size:0.88rem;color:var(--text2);line-height:1.75;margin-bottom:1.4rem;">
+      La spec BIP39 definisce esattamente come fare questa conversione usando <strong style="color:var(--cyan);">PBKDF2-HMAC-SHA512</strong>, ripetuta <strong style="color:var(--gold);">2048 volte</strong>. Quello che vedi qui sotto &egrave; esattamente quello che succede dentro il tuo hardware wallet ogni volta che lo accendi con la tua seed phrase.
+    </p>
+
+    <!-- SEZIONE A: Passphrase -->
+    <div class="sec-div">A &mdash; La Passphrase (25&ordf; parola)</div>
+
+    <label style="font-family:var(--mono);font-size:0.68rem;color:var(--text2);display:block;margin-bottom:0.5rem;">
+      Passphrase opzionale (la tua 25&ordf; parola)
+    </label>
+    <input type="text" id="s6-passphrase" class="pass-input" placeholder="Lascia vuoto per seed senza passphrase..." oninput="s6PassphraseChange()" autocomplete="off" spellcheck="false">
+
+    <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.9rem;margin-bottom:0.5rem;">
+      La passphrase &egrave; opzionale. Se lasci il campo vuoto, il seed viene calcolato senza di essa &mdash; come fa la maggior parte dei wallet per default. Se inserisci una passphrase, il seed cambia <em>completamente</em>. Stesso mnemonic, wallet completamente diverso. Questo si chiama <strong style="color:var(--purple);">plausible deniability</strong>: puoi rivelare le parole senza rivelare il tuo wallet reale.
+    </p>
+    <div class="out-box red-box" style="font-size:0.82rem;color:#ffb3bb;line-height:1.65;padding:0.8rem 1rem;">
+      <strong style="color:var(--red);">&#9888; Attenzione:</strong> la passphrase non &egrave; recuperabile. Se la dimentichi, perdi l&apos;accesso al wallet che la usa. Non esiste backup se non quello che fai tu.
+    </div>
+
+    <!-- SEZIONE B: PBKDF2 -->
+    <div class="sec-div">B &mdash; Il Meccanismo PBKDF2</div>
+
+    <div class="pbkdf2-box">
+      <div class="pbkdf2-title">// Ricetta della funzione</div>
+      PBKDF2-HMAC-SHA512(<br>
+      &nbsp;&nbsp;password&nbsp; = <em id="s6-pbkdf2-pw">"[mnemonic separato da spazi]"</em>,<br>
+      &nbsp;&nbsp;salt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = <strong>"mnemonic"</strong> + <em id="s6-pbkdf2-salt">""</em>,<br>
+      &nbsp;&nbsp;iterazioni = <strong>2048</strong>,<br>
+      &nbsp;&nbsp;lunghezza&nbsp; = <strong>64 byte = 512 bit</strong><br>
+      )
+    </div>
+    <ul style="font-size:0.82rem;color:var(--text2);line-height:1.8;padding-left:1.2rem;margin-bottom:0.5rem;">
+      <li><strong style="color:var(--text);">password</strong>: le tue parole separate da spazio, normalizzate NFKD</li>
+      <li><strong style="color:var(--text);">salt</strong>: la stringa fissa <code style="color:var(--cyan);">"mnemonic"</code> + la tua passphrase (vuota = solo "mnemonic")</li>
+      <li><strong style="color:var(--text);">2048 iterazioni</strong>: la funzione viene ripetuta internamente 2048 volte &mdash; rallenta il brute-force di 2048&times;</li>
+      <li><strong style="color:var(--text);">64 byte di output</strong>: il risultato &egrave; sempre 512 bit, qualunque sia la lunghezza dell&apos;input</li>
+    </ul>
+
+    <!-- SEZIONE C: Output -->
+    <div class="sec-div">C &mdash; Il Seed 512 bit</div>
+
+    <div id="s6-loading" class="seed-loading" style="display:none;">&#8987; Calcolo in corso (2048 iterazioni PBKDF2)...</div>
+
+    <div id="s6-output" style="display:none;">
+      <div class="seed-hex-box">
+        <div class="out-label">Seed Hex (128 caratteri)
+          <button class="copy-btn" onclick="copySeed6()">&#128203; COPIA</button>
+        </div>
+        <div class="seed-hex-val" id="s6-hex"></div>
+      </div>
+      <div class="out-box" style="margin-bottom:0.7rem;">
+        <div class="out-label">Lunghezza</div>
+        <div class="out-val green" id="s6-bitcount">512 bit / 64 byte</div>
+      </div>
+
+      <div id="s6-compare-wrap" style="display:none;">
+        <p style="font-size:0.82rem;color:var(--text2);margin-bottom:0.7rem;margin-top:0.5rem;">
+          Stesso mnemonic &rarr; <strong style="color:var(--gold);">due wallet completamente diversi</strong>. Il sistema non pu&ograve; sapere quale dei due &egrave; il tuo wallet reale.
+        </p>
+        <div class="seed-compare">
+          <div class="seed-compare-card">
+            <div class="seed-compare-label label-no-pass">// Wallet SENZA passphrase</div>
+            <div class="seed-compare-val" id="s6-hex-nopass"></div>
+          </div>
+          <div class="seed-compare-card" style="border-color:rgba(247,147,26,0.4);">
+            <div class="seed-compare-label label-with-pass">// Wallet CON passphrase</div>
+            <div class="seed-compare-val" id="s6-hex-withpass"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEZIONE D: BIP32 -->
+    <div class="sec-div">D &mdash; Il Collegamento con BIP32</div>
+
+    <div class="bip32-info-box">
+      Questo seed a 512 bit &egrave; l&apos;input per il passo successivo: <strong>BIP32</strong>. Il wallet prende questo seed, applica HMAC-SHA512 con la chiave fissa <code style="color:var(--cyan);">"Bitcoin seed"</code>, e ottiene la <strong>master private key</strong> (256 bit) e il <strong>master chain code</strong> (256 bit). Da questi due valori deriva ogni indirizzo Bitcoin del tuo wallet, all&apos;infinito, in modo deterministico.<br><br>
+      Questo &egrave; il motivo per cui 12 o 24 parole sono sufficienti per gestire milioni di indirizzi Bitcoin: tutto deriva matematicamente da un&apos;unica radice.
     </div>
 
     <div class="btn-row">
@@ -1191,7 +1504,7 @@ function toggleStep(n) {
 }
 
 function activateStep(n) {
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     const card = document.getElementById('card' + i);
     const badge = document.getElementById('badge' + i);
     const dot = document.getElementById('dot' + i);
@@ -1230,16 +1543,32 @@ function toggleHint(id) {
 // ═══════════════════════════════════════
 // STEP 1 — FORMATO
 // ═══════════════════════════════════════
+function getEntBits(wc){ return wc===12?128:wc===15?160:wc===18?192:wc===21?224:256; }
+function getDiceCount(wc){ return wc===12?50:wc===15?62:wc===18?75:wc===21?87:99; }
+
 function selectFormat(n) {
   state.wordCount = n;
-  state.diceCount = n === 12 ? 50 : 99;
-  document.getElementById('fc12').classList.toggle('selected', n === 12);
-  document.getElementById('fc24').classList.toggle('selected', n === 24);
+  state.diceCount = getDiceCount(n);
+  var ids=['fc12','fc15','fc18','fc21','fc24'];
+  var vals=[12,15,18,21,24];
+  for(var k=0;k<ids.length;k++){
+    var el=document.getElementById(ids[k]);
+    if(el) el.classList.toggle('selected', vals[k]===n);
+  }
+  // compatibility warning
+  var warn=document.getElementById('compatWarn');
+  if(n===15||n===18||n===21){
+    warn.classList.add('visible');
+    document.getElementById('compatWords').textContent=n;
+    document.getElementById('compatEnt').textContent=getEntBits(n);
+  } else {
+    warn.classList.remove('visible');
+  }
 }
 
 function confirmFormat() {
   if (!state.wordCount) {
-    alert('Seleziona prima un formato: 12 o 24 parole.');
+    alert('Seleziona prima un formato: 12, 15, 18, 21 o 24 parole.');
     return;
   }
   buildDiceGrid();
@@ -1254,7 +1583,7 @@ function buildDiceGrid() {
   const grid = document.getElementById('diceGrid');
   grid.innerHTML = '';
   state.diceRolls = new Array(state.diceCount).fill(0);
-  const cols = state.diceCount === 50 ? 10 : 11;
+  var colMap={50:10,62:10,75:10,87:10,99:11}; const cols=colMap[state.diceCount]||10;
   grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
   for (let i = 0; i < state.diceCount; i++) {
     const cell = document.createElement('div');
@@ -1381,7 +1710,7 @@ function renderBitString(bits, csStart) {
 }
 
 function buildStep3() {
-  const targetBits = state.wordCount === 12 ? 128 : 256;
+  const targetBits = getEntBits(state.wordCount);
   const csLen = targetBits / 32;
 
   // 3a
@@ -1417,6 +1746,81 @@ function buildStep3() {
   state.allBits = state.entropyBits + state.checksumBits;
   document.getElementById('s3f-label').textContent = state.allBits.length + ' bit totali (' + targetBits + ' entropia + ' + csLen + ' checksum)';
   document.getElementById('s3f-all').innerHTML = renderBitString(state.allBits, targetBits);
+
+  // 3g visual checksum
+  var previewLen = Math.min(32, targetBits);
+  var entPreview = state.entropyBits.slice(0, previewLen);
+  var entHtml = '';
+  for(var pi=0; pi<entPreview.length; pi++){
+    var b=entPreview[pi]; entHtml+='<span style="color:'+(b==='1'?'var(--gold)':'var(--text3)')+'">'+b+'</span>';
+    if((pi+1)%8===0 && pi<entPreview.length-1) entHtml+=' ';
+  }
+  document.getElementById('s3g-ent-preview').innerHTML = entHtml;
+  document.getElementById('s3g-ent-note').textContent = '(mostrati i primi '+previewLen+' bit su '+targetBits+' totali)';
+  document.getElementById('s3g-sha-hex').textContent = state.hashHex;
+  document.getElementById('s3g-cs-n').textContent = csLen;
+  var csFullBin = Array.from(sha256(new Uint8Array(function(){var b=[];for(var i=0;i<state.entropyBits.length;i+=8)b.push(parseInt(state.entropyBits.slice(i,i+8),2));return b;}()))).map(function(b){return b.toString(2).padStart(8,'0');}).join('');
+  document.getElementById('s3g-cs-bits').textContent = csFullBin.slice(0, csLen);
+  document.getElementById('s3g-cs-rest').textContent = ' ' + csFullBin.slice(csLen, 32);
+  document.getElementById('s3g-cs-explain').textContent = "Questi " + csLen + " bit iniziali dell’hash SHA256 sono il tuo checksum.";
+  document.getElementById('s3g-concat-desc').textContent = "La stringa finale ha " + state.allBits.length + " bit: i " + targetBits + " dell’entropia (bianco/oro) piu’ i " + csLen + " del checksum (verde).";
+  document.getElementById('s3g-concat-ent-sample').textContent = state.entropyBits.slice(0,16) + '...' + state.entropyBits.slice(-8);
+  document.getElementById('s3g-concat-cs-sample').textContent = state.checksumBits;
+  document.getElementById('s3g-concat-note').textContent = '= '+state.allBits.length+' bit totali';
+
+  // Fix 3: base-6 mini-example with first 3 actual dice values
+  var exDice = state.diceRolls.slice(0, 3);
+  var exNorm = exDice.map(function(d){ return d - 1; });
+  var exDecimal = exNorm.reduce(function(acc, d, i){ return acc + d * Math.pow(6, exNorm.length - 1 - i); }, 0);
+  var exHex = Math.round(exDecimal).toString(16);
+  var calcParts = exNorm.map(function(d, i){ return d + '&times;6<sup>' + (exNorm.length - 1 - i) + '</sup>'; });
+  var valParts = exNorm.map(function(d, i){ return String(Math.round(d * Math.pow(6, exNorm.length - 1 - i))); });
+  var miniHtml = '<strong style="color:var(--gold);">Esempio con i tuoi primi 3 dadi:</strong><br>'
+    + 'Dadi: <span style="color:var(--text);">' + exDice.join(', ') + '</span>&emsp;'
+    + 'Normalizzati (0-5): <span style="color:var(--gold);">' + exNorm.join(', ') + '</span><br>'
+    + 'Numero in base 6: <span style="color:var(--cyan);">' + exNorm.join('') + '</span><sub style="font-size:0.58rem;color:var(--text3);">(base 6)</sub><br>'
+    + 'Calcolo: ' + calcParts.join(' + ') + ' = ' + valParts.join(' + ') + ' = <strong style="color:var(--cyan);">' + Math.round(exDecimal) + '</strong><sub style="font-size:0.58rem;color:var(--text3);">(dec)</sub><br>'
+    + 'In esadecimale: <strong style="color:var(--green);">' + exHex + '</strong><br>'
+    + '<span style="color:var(--text3);">Con tutti i ' + state.diceRolls.length + ' dadi la stessa logica produce il numero grande mostrato sopra.</span>';
+  document.getElementById('s3b-mini-content').innerHTML = miniHtml;
+
+  // Fix 2: hex-to-binary explanation (dynamic, using real hash)
+  var hexCount = Math.ceil(csLen / 4);
+  var hashPrefix = state.hashHex.slice(0, hexCount);
+  var hexConvHtml = '<div style="font-size:0.72rem;color:var(--text2);margin-bottom:0.6rem;line-height:1.65;">'
+    + 'L\'hash SHA256 e\' una stringa esadecimale: ogni cifra hex = 4 bit in binario. '
+    + 'Per il checksum di ' + csLen + ' bit '
+    + (csLen <= 4 ? 'basta la <strong style="color:var(--cyan);">prima cifra hex</strong>.' : 'servono le <strong style="color:var(--cyan);">prime ' + hexCount + ' cifre hex</strong>.')
+    + '</div>'
+    + '<div style="font-size:0.65rem;color:var(--text3);font-family:var(--mono);margin-bottom:0.4rem;">Hash: <span style="color:var(--cyan);">'
+    + '<strong style="color:var(--gold);font-size:0.75rem;">' + hashPrefix + '</strong>'
+    + state.hashHex.slice(hexCount, hexCount + 6) + '...' + '</span></div>'
+    + '<table style="font-family:var(--mono);font-size:0.7rem;border-collapse:collapse;margin:0.4rem 0;">'
+    + '<tr><th style="padding:0.2rem 0.8rem 0.2rem 0;color:var(--text3);font-weight:400;text-align:left;">Hex</th>'
+    + '<th style="padding:0.2rem 0.8rem;color:var(--text3);font-weight:400;text-align:left;">Binario</th>'
+    + '<th style="padding:0.2rem 0;color:var(--text3);font-weight:400;text-align:left;">Note</th></tr>';
+  var bitsSoFar = 0;
+  for (var hi = 0; hi < hashPrefix.length; hi++) {
+    var hexCh = hashPrefix[hi];
+    var bin4 = parseInt(hexCh, 16).toString(2).padStart(4, '0');
+    var binHtml = '';
+    for (var bi = 0; bi < 4; bi++) {
+      var bitIdx = bitsSoFar + bi;
+      var isCs = bitIdx < csLen;
+      binHtml += '<span style="color:' + (isCs ? 'var(--green)' : 'var(--text3)') + ';font-weight:' + (isCs ? '700' : '400') + ';">' + bin4[bi] + '</span>';
+    }
+    var noteStr = bitsSoFar < csLen ? (bitsSoFar + 4 <= csLen ? 'tutti ' + 4 + ' bit = checksum' : 'primi ' + (csLen - bitsSoFar) + ' bit = checksum') : 'non usati';
+    hexConvHtml += '<tr>'
+      + '<td style="padding:0.2rem 0.8rem 0.2rem 0;color:var(--gold);font-size:0.8rem;">' + hexCh + '</td>'
+      + '<td style="padding:0.2rem 0.8rem;">' + binHtml + '</td>'
+      + '<td style="padding:0.2rem 0;color:var(--text3);font-size:0.62rem;">' + noteStr + '</td>'
+      + '</tr>';
+    bitsSoFar += 4;
+  }
+  hexConvHtml += '</table>'
+    + '<div style="font-size:0.7rem;color:var(--green);font-family:var(--mono);margin-top:0.5rem;">'
+    + '&#10003; Checksum = <strong>' + state.checksumBits + '</strong> (' + csLen + ' bit)</div>';
+  document.getElementById('s3g-hex-conv-content').innerHTML = hexConvHtml;
 }
 
 function confirmEntropy() {
@@ -1510,10 +1914,86 @@ function restartAll() {
   state.hashHex = '';
   state.indices = [];
   state.words = [];
-  document.getElementById('fc12').classList.remove('selected');
-  document.getElementById('fc24').classList.remove('selected');
+  ['fc12','fc15','fc18','fc21','fc24'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.classList.remove('selected');
+  });
+  var warn=document.getElementById('compatWarn'); if(warn) warn.classList.remove('visible');
+  var s6out=document.getElementById('s6-output'); if(s6out) s6out.style.display='none';
+  var s6pass=document.getElementById('s6-passphrase'); if(s6pass) s6pass.value='';
   activateStep(1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════
+// STEP 6 — MNEMONIC TO SEED (BIP39 Part 2)
+// ═══════════════════════════════════════
+async function mnemonicToSeed(mnemonic, passphrase) {
+  var enc = new TextEncoder();
+  var pw = enc.encode(mnemonic.normalize('NFKD'));
+  var salt = enc.encode(('mnemonic' + (passphrase||'')).normalize('NFKD'));
+  var key = await crypto.subtle.importKey('raw', pw, { name: 'PBKDF2' }, false, ['deriveBits']);
+  var buf = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: salt, iterations: 2048, hash: 'SHA-512' }, key, 512);
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+}
+
+var s6DebounceTimer = null;
+function s6PassphraseChange() {
+  clearTimeout(s6DebounceTimer);
+  s6DebounceTimer = setTimeout(function(){ buildStep6(); }, 300);
+}
+
+function goToStep6() {
+  buildStep6();
+  activateStep(6);
+}
+
+async function buildStep6() {
+  if (!state.words || state.words.length === 0) return;
+  var mnemonic = state.words.join(' ');
+  var passphrase = (document.getElementById('s6-passphrase')||{value:''}).value||'';
+
+  // Update PBKDF2 recipe display
+  var pwEl=document.getElementById('s6-pbkdf2-pw');
+  var saltEl=document.getElementById('s6-pbkdf2-salt');
+  if(pwEl) pwEl.textContent = '"' + mnemonic.slice(0,40) + (mnemonic.length>40?'...':'') + '"';
+  if(saltEl) saltEl.textContent = passphrase ? '"' + passphrase + '"' : '""';
+
+  var loadEl=document.getElementById('s6-loading');
+  var outEl=document.getElementById('s6-output');
+  if(loadEl) loadEl.style.display='block';
+  if(outEl) outEl.style.display='none';
+
+  try {
+    var seedHex = await mnemonicToSeed(mnemonic, passphrase);
+    var hexEl=document.getElementById('s6-hex');
+    if(hexEl) hexEl.textContent = seedHex;
+    var bcEl=document.getElementById('s6-bitcount');
+    if(bcEl) bcEl.textContent = (seedHex.length/2*8)+' bit / '+(seedHex.length/2)+' byte';
+    var cmpWrap=document.getElementById('s6-compare-wrap');
+    if(passphrase && cmpWrap) {
+      cmpWrap.style.display='block';
+      var seedNoPass = await mnemonicToSeed(mnemonic, '');
+      var npEl=document.getElementById('s6-hex-nopass');
+      var wpEl=document.getElementById('s6-hex-withpass');
+      if(npEl) npEl.textContent = seedNoPass;
+      if(wpEl) wpEl.textContent = seedHex;
+    } else if(cmpWrap) {
+      cmpWrap.style.display='none';
+    }
+    if(loadEl) loadEl.style.display='none';
+    if(outEl) outEl.style.display='block';
+  } catch(e) {
+    if(loadEl) loadEl.style.display='none';
+    console.error('PBKDF2 error', e);
+  }
+}
+
+function copySeed6() {
+  var hexEl=document.getElementById('s6-hex');
+  if(!hexEl) return;
+  navigator.clipboard.writeText(hexEl.textContent).then(function(){
+    alert('Seed hex copiato negli appunti.');
+  });
 }
 
 // Init
