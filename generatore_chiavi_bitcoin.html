@@ -530,6 +530,37 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
     .donation-qr-wrap { order: -1; }
   }
 
+
+  /* ── Nav home btn ── */
+  .nav-home-btn{font-family:var(--mono);font-size:0.72rem;color:var(--text2);text-decoration:none;padding:0.3rem 0.7rem;border:1px solid var(--border2);border-radius:5px;transition:border-color 0.2s,color 0.2s;white-space:nowrap;}
+  .nav-home-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* ── BIP39 import banner ── */
+  .bip39-banner{background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.2);border-radius:10px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;}
+  .bip39-banner h3{margin:0 0 0.6rem;font-size:0.92rem;color:var(--gold);font-family:var(--mono);}
+  .bip39-input{width:100%;box-sizing:border-box;background:var(--bg2);border:1px solid var(--border2);border-radius:6px;color:var(--text1);font-family:var(--mono);font-size:0.67rem;padding:0.55rem;resize:vertical;min-height:54px;transition:border-color 0.2s;}
+  .bip39-input:focus{outline:none;border-color:var(--gold);}
+  .bip39-err{color:var(--red);font-size:0.74rem;margin-top:0.35rem;display:none;}
+  .step-card.bypassed{opacity:0.55;pointer-events:none;}
+  .step-card.bypassed .step-badge{background:rgba(34,211,160,0.08);color:var(--green) !important;border-color:rgba(34,211,160,0.3) !important;}
+
+  /* ── BIP32 step card ── */
+  .bip32-row{display:flex;flex-direction:column;gap:0.6rem;}
+  .bip32-hash-anim{font-family:var(--mono);font-size:0.68rem;color:var(--text3);margin:0.4rem 0;min-height:1.2rem;}
+
+  /* ── Xkeys (extended keys) ── */
+  .xkey-section{margin-top:1.2rem;}
+  .xkey-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:0.6rem;}
+  @media(max-width:600px){.xkey-grid{grid-template-columns:1fr;}}
+  .xkey-box{background:var(--bg2);border:1px solid var(--border2);border-radius:7px;padding:0.65rem 0.8rem;}
+  .xkey-label{font-size:0.67rem;color:var(--text3);margin-bottom:0.3rem;font-family:var(--mono);letter-spacing:0.04em;}
+  .xkey-val{font-family:var(--mono);font-size:0.61rem;color:var(--green);word-break:break-all;cursor:pointer;line-height:1.4;}
+  .xkey-val:hover{color:var(--gold);}
+
+  /* ── SVG derivation tree ── */
+  .tree-wrap{overflow-x:auto;margin:1rem 0 0.5rem;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:1rem 0.5rem;}
+  .tree-tooltip{position:fixed;pointer-events:none;display:none;background:rgba(7,8,10,0.96);border:1px solid var(--gold);border-radius:6px;padding:0.5rem 0.8rem;font-family:var(--mono);font-size:0.69rem;color:var(--text1);z-index:300;max-width:280px;line-height:1.5;}
+
   </style>
 <meta property="og:site_name" content="Bitcoin Report School">
 <meta property="og:locale" content="it_IT">
@@ -537,9 +568,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 <meta name="twitter:image" content="https://bitcoinreportschool.com/og-image.jpg">
 </head>
 <body>
-<!-- __HOME_BTN_ADDED__ -->
-<style>#__home-btn:hover{background:rgba(247,147,26,0.1);box-shadow:0 0 12px rgba(247,147,26,0.25);}@media(max-width:768px){#__home-btn{top:0.6rem;left:0.6rem;font-size:0.62rem;padding:0.3rem 0.65rem;}}</style>
-<a id="__home-btn" href="index.html" style="position:fixed;top:1rem;left:1rem;z-index:9990;display:flex;align-items:center;gap:0.4rem;background:rgba(7,8,10,0.92);border:1px solid #f7931a;border-radius:6px;padding:0.4rem 0.85rem;font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:#f7931a;text-decoration:none;letter-spacing:0.05em;backdrop-filter:blur(8px);transition:background 0.2s,box-shadow 0.2s;">&#8592; Home</a>
+<!-- home btn in navbar -->
 
 
 <!-- SECURITY WARNING -->
@@ -553,9 +582,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 
 <!-- NAV -->
 <nav class="site-nav">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <div class="nav-logo">₿ Bitcoin Report School <span>/ Generatore Chiavi</span></div>
   <div class="step-dots">
     <div class="sdot active" id="dot1">1</div><div class="sline"></div>
+    <div class="sdot" id="dotBip32" title="Master Key BIP32">B</div><div class="sline"></div>
     <div class="sdot" id="dot2">2</div><div class="sline"></div>
     <div class="sdot" id="dot3">3</div><div class="sline"></div>
     <div class="sdot" id="dot4">4</div><div class="sline"></div>
@@ -571,6 +602,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 </div>
 
 <div class="main-wrap">
+
+<!-- BIP39 SEED IMPORT BANNER -->
+<div class="bip39-banner" id="bip39Banner">
+  <h3>&#128273; Hai gi&#224; una Seed Phrase BIP39?</h3>
+  <p style="margin:0 0 0.6rem;font-size:0.8rem;color:var(--text2);">
+    Se hai un seed BIP39 (128 caratteri hex, ottenuto dal <a href="generatore_seed_phrase.html" target="_blank" rel="noopener" style="color:var(--gold);">Generatore Seed Phrase</a>),
+    incollalo qui per derivare direttamente la Master Key BIP32 — saltando la generazione casuale.
+  </p>
+  <textarea id="bip39SeedInput" class="bip39-input" rows="2"
+    placeholder="Incolla qui i 128 caratteri hex del seed BIP39 (es: 5eb00bb0...)"></textarea>
+  <div class="bip39-err" id="bip39Err"></div>
+  <div style="margin-top:0.6rem;">
+    <button class="btn btn-gold" onclick="importBip39Seed()" style="font-size:0.78rem;padding:0.45rem 1rem;">
+      &#9654; Importa ed esegui
+    </button>
+    <span style="font-size:0.72rem;color:var(--text3);margin-left:0.8rem;">oppure genera una chiave casuale qui sotto</span>
+  </div>
+</div>
 
 <!-- ═══ STEP 1: ENTROPIA + CHIAVE PRIVATA ═══ -->
 <div class="step-card active-step" id="card1">
@@ -620,6 +669,53 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
     </div>
   </div>
 </div>
+
+<!-- ═══ STEP BIP32: SEED → MASTER KEY ═══ -->
+<div class="step-card" id="cardBip32">
+  <div class="step-header" onclick="toggleStepBip32()">
+    <div class="step-num" style="font-size:0.75rem;">BIP32</div>
+    <div class="step-titles">
+      <div class="step-title">Seed &#8594; Master Key (BIP32)</div>
+      <div class="step-subtitle">HMAC-SHA512("Bitcoin seed", seed) &#8594; chiave privata master + chain code.</div>
+    </div>
+    <div class="step-badge" id="badgeBip32">IN ATTESA</div>
+  </div>
+  <div class="step-body" id="bodyBip32" style="display:none;">
+    <button class="hint-btn" onclick="toggleHint('hBip32')">&#128161; Come funziona BIP32?</button>
+    <div class="hint-box" id="hBip32">
+      <strong>BIP32 — Hierarchical Deterministic Wallets.</strong><br>
+      Il tuo seed (64 byte) viene passato a <strong>HMAC-SHA512</strong> con chiave fissa <code>"Bitcoin seed"</code>.
+      I primi 32 byte del risultato diventano la <em>chiave privata master</em>,
+      gli ultimi 32 byte diventano il <em>chain code</em> (entropia extra per derivare chiavi figlie).<br><br>
+      Formula: <code>IL || IR = HMAC-SHA512(Key="Bitcoin seed", Data=Seed)</code><br>
+      Master private key = <code>IL</code> (deve essere &lt; ordine curva)<br>
+      Master chain code = <code>IR</code>
+    </div>
+
+    <div class="sec-div">HMAC-SHA512("Bitcoin seed", seed_bytes)</div>
+
+    <div class="bip32-row">
+      <div class="out-box">
+        <div class="out-label">Seed in input (hex) <span id="bip32SeedLen" style="color:var(--text3);font-size:0.68rem;"></span></div>
+        <div class="out-val" id="bip32SeedPreview" style="font-size:0.67rem;color:var(--text3);word-break:break-all;">—</div>
+      </div>
+      <div class="bip32-hash-anim" id="bip32Status">Calcolo HMAC-SHA512 in corso...</div>
+      <div class="out-box highlight">
+        <div class="out-label">Master Private Key (IL — primi 32 byte) <button class="copy-btn" onclick="copyText('bip32MasterPriv')">copia</button></div>
+        <div class="out-val green" id="bip32MasterPriv" style="font-size:0.68rem;word-break:break-all;">—</div>
+      </div>
+      <div class="out-box">
+        <div class="out-label">Master Chain Code (IR — ultimi 32 byte) <button class="copy-btn" onclick="copyText('bip32ChainCode')">copia</button></div>
+        <div class="out-val" id="bip32ChainCode" style="font-size:0.68rem;word-break:break-all;color:var(--gold);">—</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="confirmStepBip32()">Continua alla Chiave Pubblica &#8594;</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- ═══ STEP 2: CURVA ELLITTICA + CHIAVE PUBBLICA ═══ -->
 <div class="step-card" id="card2">
@@ -699,7 +795,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       <button class="script-tab" onclick="setScriptType('p2pkh',this)">P2PKH — Legacy 1…</button>
       <button class="script-tab" onclick="setScriptType('p2sh',this)">P2SH — 3…</button>
       <button class="script-tab" onclick="setScriptType('p2wpkh',this)">P2WPKH — bc1q…</button>
-      <button class="script-tab" onclick="setScriptType('p2tr',this)">P2TR — bc1p… (Taproot)</button>
+      <button class="script-tab" onclick="setScriptType('p2tr',this)">P2TR — bc1p&#8230; (Taproot)</button>
+      <button class="script-tab" onclick="setScriptType('p2wsh',this)">P2WSH — bc1q&#8230; (62)</button>
     </div>
 
     <div id="scriptExplain" class="hint-box open" style="margin-bottom:1rem;"></div>
@@ -805,6 +902,48 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       </div>
     </div>
 
+
+    <div class="xkey-section" id="xkeySection">
+      <div class="sec-div">Extended Keys — xpub / xprv (BIP32 Master)</div>
+      <div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.6rem;">
+        Chiavi estese serializzate secondo BIP32. Usate dai wallet per derivare infinite chiavi figlie
+        senza esporre la chiave privata master. Condividi solo <strong>xpub/ypub/zpub</strong> con terzi.
+      </div>
+      <div class="xkey-grid">
+        <div class="xkey-box">
+          <div class="xkey-label">xprv (BIP44 Legacy — versione 0x0488ADE4)</div>
+          <div class="xkey-val" id="xkeyXprv" onclick="copyText('xkeyXprv')">—</div>
+        </div>
+        <div class="xkey-box">
+          <div class="xkey-label">xpub (BIP44 Legacy — versione 0x0488B21E)</div>
+          <div class="xkey-val" id="xkeyXpub" onclick="copyText('xkeyXpub')">—</div>
+        </div>
+        <div class="xkey-box">
+          <div class="xkey-label">yprv (BIP49 Nested SegWit — versione 0x049D7878)</div>
+          <div class="xkey-val" id="xkeyYprv" onclick="copyText('xkeyYprv')">—</div>
+        </div>
+        <div class="xkey-box">
+          <div class="xkey-label">ypub (BIP49 Nested SegWit — versione 0x049D7CB2)</div>
+          <div class="xkey-val" id="xkeyYpub" onclick="copyText('xkeyYpub')">—</div>
+        </div>
+        <div class="xkey-box">
+          <div class="xkey-label">zprv (BIP84 Native SegWit — versione 0x04B2430C)</div>
+          <div class="xkey-val" id="xkeyZprv" onclick="copyText('xkeyZprv')">—</div>
+        </div>
+        <div class="xkey-box">
+          <div class="xkey-label">zpub (BIP84 Native SegWit — versione 0x04B24746)</div>
+          <div class="xkey-val" id="xkeyZpub" onclick="copyText('xkeyZpub')">—</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tree-wrap">
+      <svg id="derivTree" width="700" height="180" viewBox="0 0 700 180"
+           onmouseleave="hideDTreeTip()"></svg>
+    </div>
+    <div class="tree-tooltip" id="dtreeTip"></div>
+
     <div class="sec-div">20 indirizzi derivati</div>
 
     <div style="overflow-x:auto;">
@@ -852,8 +991,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
         <div>
           <div class="out-box"><div class="out-label">Indirizzo Legacy (P2PKH — 1…)</div><div class="out-val gold" id="f-legacy">—</div></div>
           <div class="out-box"><div class="out-label">Indirizzo Nested SegWit (P2SH-P2WPKH — 3…)</div><div class="out-val" style="color:var(--gold2)" id="f-nested">—</div></div>
-          <div class="out-box"><div class="out-label">Indirizzo Native SegWit (P2WPKH — bc1q…)</div><div class="out-val green" id="f-segwit">—</div></div>
-          <div class="out-box"><div class="out-label">Indirizzo Taproot (P2TR — bc1p…)</div><div class="out-val purple" id="f-taproot">—</div></div>
+          <div class="out-box"><div class="out-label">Indirizzo Native SegWit (P2WPKH — bc1q&#8230;)</div><div class="out-val green" id="f-segwit">—</div></div>
+          <div class="out-box"><div class="out-label">Indirizzo P2WSH (bc1q&#8230; 62 car.)</div><div class="out-val green" id="f-p2wsh">—</div></div>
+          <div class="out-box"><div class="out-label">Indirizzo Taproot (P2TR — bc1p&#8230;)</div><div class="out-val purple" id="f-taproot">—</div></div>
           <div class="out-box"><div class="out-label">Derivation Path usato</div><div class="out-val gold" id="f-path">—</div></div>
         </div>
       </div>
@@ -1155,7 +1295,7 @@ function drawCurve(px,py){
     if(y2>=0){
       const yn=Math.sqrt(y2);
       const cx=(xn+6)/12*W;
-      const cy=H/2-(py%2===0n?1:-1)*yn/6*H/2.2;
+      const cy=H/2-(py%2n===0n?1:-1)*yn/6*H/2.2;
       ctx.fillStyle='#22d3a0';
       ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fill();
       ctx.strokeStyle='rgba(34,211,160,0.3)';ctx.lineWidth=8;
@@ -1229,7 +1369,7 @@ function confirmStep1(){
     document.getElementById('pubX').textContent=x;
     document.getElementById('pubY').textContent=y;
     drawCurve(x,state.pubPt[1]);
-    activateStep(2);
+    activateBip32Step(privHex);
   }
 
   // Fallback sul main thread (usato se il Worker non è disponibile)
@@ -1337,6 +1477,12 @@ const scriptInfo={
     explain:'<strong>P2WPKH (2017) — Native SegWit.</strong> Formato Bech32 — indirizzi "bc1q…". I dati witness sono separati dal resto della transazione (SegWit = Segregated Witness). Fee tipicamente 30-40% inferiori a Legacy. Non compatibile con wallet molto vecchi. Standard consigliato fino al 2021.',
     script:'OP_0 &lt;20-byte-pubKeyHash&gt;'
   },
+  'p2wsh':{
+    label:'P2WSH — Native SegWit (bc1q… 62 car.)',
+    cls:'bech32',
+    explain:'<strong>P2WSH (Pay-to-Witness-Script-Hash).</strong> Simile a P2WPKH: SHA256 (32 byte) invece di HASH160 (20 byte). Indirizzo bc1q... di 62 caratteri (vs 42 di P2WPKH). Usato per multisig native SegWit e script complessi. scriptPubKey = OP_0 &lt;32-byte-SHA256(redeemScript)&gt;.',
+    script:'OP_0 &lt;32-byte-SHA256(redeemScript)&gt;'
+  },
   'p2tr':{
     label:'P2TR — Taproot (bc1p…)',
     cls:'taproot',
@@ -1382,20 +1528,26 @@ function setScriptType(type,btn){
     addr=p2trAddress(pubBytes);
     document.getElementById('currentAddr').className='out-val taproot';
     document.getElementById('currentAddr').style.color='var(--purple)';
+  } else if(type==='p2wsh'){
+    // P2WSH single-key: redeemScript = <33-byte-pubkey> OP_CHECKSIG
+    var rs=new Uint8Array([0x21].concat(Array.from(pubBytes)).concat([0xac]));
+    addr=p2wshAddress(rs);
+    document.getElementById('currentAddr').className='out-val bech32';
+    document.getElementById('currentAddr').style.color='var(--green)';
   }
 
   document.getElementById('currentAddr').textContent=addr;
   document.getElementById('scriptPubKey').textContent=info.script;
 
   const addrBox=document.getElementById('addrBox');
-  const colors={ip:'var(--border2)',p2pk:'rgba(247,147,26,0.3)',p2pkh:'rgba(247,147,26,0.3)',p2sh:'rgba(255,195,90,0.3)',p2wpkh:'rgba(34,211,160,0.3)',p2tr:'rgba(167,139,250,0.3)'};
+  const colors={ip:'var(--border2)',p2pk:'rgba(247,147,26,0.3)',p2pkh:'rgba(247,147,26,0.3)',p2sh:'rgba(255,195,90,0.3)',p2wpkh:'rgba(34,211,160,0.3)',p2tr:'rgba(167,139,250,0.3)',p2wsh:'rgba(34,211,160,0.3)'};
   addrBox.style.borderColor=colors[type]||'var(--border2)';
 }
 
 function confirmStep3(){
   completeStep(3);
   // Auto-seleziona il tipo HD corrispondente allo script scelto nello step 3
-  const scriptToHD={ip:'bip44',p2pk:'bip44',p2pkh:'bip44',p2sh:'bip49',p2wpkh:'bip84',p2tr:'bip86'};
+  const scriptToHD={ip:'bip44',p2pk:'bip44',p2pkh:'bip44',p2sh:'bip49',p2wpkh:'bip84',p2tr:'bip86',p2wsh:'bip48'};
   const autoHD=scriptToHD[state.scriptType]||'bip44';
   currentHDType=autoHD;
   const tabs=document.querySelectorAll('#card4 .script-tab');
@@ -1403,6 +1555,7 @@ function confirmStep3(){
   tabs.forEach((t,i)=>{t.classList.toggle('active',hdOrder[i]===autoHD);});
   setHDType(autoHD,null);
   activateStep(4);
+  computeXKeys();
 }
 
 // ═══════════════════════════════════════
@@ -1431,6 +1584,7 @@ function setHDType(type,btn){
   document.getElementById('scripttype-seg').style.display=isBip48?'':'none';
   if(isBip48)buildCosignerKeys();
   rebuildAddresses();
+  drawDerivTree();
 }
 
 function buildCosignerKeys(){
@@ -1499,6 +1653,7 @@ function rebuildAddresses(){
     fullPath=`m/${ht.purpose}/0'/${account}'/${chain}/0...19`;
   }
   document.getElementById('fullPath').textContent=fullPath;
+  drawDerivTree();
 
   const tbody=document.getElementById('addrBody');
   tbody.innerHTML='';
@@ -1544,6 +1699,9 @@ function buildFinalSummary(){
   document.getElementById('f-nested').textContent=p2shP2wpkhAddress(pub);
   document.getElementById('f-segwit').textContent=p2wpkhAddress(pubBytes);
   document.getElementById('f-taproot').textContent=p2trAddress(pubBytes);
+  var p2wshRs=new Uint8Array([0x21].concat(Array.from(pubBytes)).concat([0xac]));
+  var fP2wsh=document.getElementById('f-p2wsh');
+  if(fP2wsh)fP2wsh.textContent=p2wshAddress(p2wshRs);
   document.getElementById('f-path').textContent=document.getElementById('fullPath').textContent;
 }
 
@@ -1595,6 +1753,19 @@ function resetAll(){
     document.getElementById('dot'+i).className='sdot'+(i===1?' active':'');
   }
   document.getElementById('card1').classList.add('active-step');
+  document.getElementById('card1').classList.remove('bypassed');
+  var cbr=document.getElementById('cardBip32');
+  if(cbr){cbr.classList.remove('active-step','completed');}
+  var bbr=document.getElementById('badgeBip32');
+  if(bbr)bbr.textContent='IN ATTESA';
+  var dbr=document.getElementById('dotBip32');
+  if(dbr)dbr.className='sdot';
+  document.getElementById('bip32MasterPriv').textContent='—';
+  document.getElementById('bip32ChainCode').textContent='—';
+  document.getElementById('bip32Status').textContent='';
+  state.bip39Seed=null;state.masterPrivHex=null;state.chainCode=null;
+  if(document.getElementById('bip39SeedInput'))document.getElementById('bip39SeedInput').value='';
+  if(document.getElementById('bip39Err'))document.getElementById('bip39Err').style.display='none';
   document.getElementById('finalCard').classList.remove('visible');
   document.getElementById('privHex').textContent='—';
   document.getElementById('privWIF').textContent='—';
@@ -1610,6 +1781,239 @@ function resetAll(){
   ctx.clearRect(0,0,320,240);
   drawCurve(null,null);
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+
+// ═══════════════════════════════════════
+// BIP39 IMPORT
+// ═══════════════════════════════════════
+function importBip39Seed(){
+  var input=document.getElementById('bip39SeedInput').value.trim().toLowerCase();
+  var errEl=document.getElementById('bip39Err');
+  if(!/^[0-9a-f]{128}$/.test(input)){
+    errEl.textContent='Il seed deve essere esattamente 128 caratteri esadecimali (0-9, a-f).';
+    errEl.style.display='block';
+    return;
+  }
+  errEl.style.display='none';
+  state.bip39Seed=input;
+  state.privHex=input.slice(0,64);
+  var card1=document.getElementById('card1');
+  card1.classList.add('bypassed');
+  card1.classList.remove('active-step');
+  document.getElementById('badge1').textContent='Importato da BIP39';
+  document.getElementById('dot1').className='sdot done';
+  activateBip32Step(null);
+}
+
+// ═══════════════════════════════════════
+// BIP32 STEP
+// ═══════════════════════════════════════
+function toggleStepBip32(){
+  var b=document.getElementById('bodyBip32');
+  if(b)b.style.display=(b.style.display==='none'?'block':'none');
+}
+
+function activateBip32Step(privHex){
+  var card=document.getElementById('cardBip32');
+  card.classList.add('active-step');
+  var body=document.getElementById('bodyBip32');
+  if(body)body.style.display='block';
+  document.getElementById('badgeBip32').textContent='IN CORSO';
+  document.getElementById('dot1').className='sdot done';
+  document.getElementById('dotBip32').className='sdot active';
+  var dots=['dot2','dot3','dot4','dot5'];
+  dots.forEach(function(id){var d=document.getElementById(id);if(d)d.className='sdot';});
+  setTimeout(function(){card.scrollIntoView({behavior:'smooth',block:'start'});},100);
+  var seed=state.bip39Seed||state.privHex;
+  document.getElementById('bip32SeedPreview').textContent=seed?seed.slice(0,32)+'...':'—';
+  document.getElementById('bip32SeedLen').textContent=seed?'('+seed.length+' caratteri hex / '+(seed.length/2)+' byte)':'';
+  document.getElementById('bip32Status').textContent='Calcolo HMAC-SHA512...';
+  document.getElementById('bip32Status').style.color='var(--text3)';
+  computeBip32MasterKey(seed);
+}
+
+async function computeBip32MasterKey(seedHex){
+  try{
+    if(!seedHex){throw new Error('Nessun seed disponibile');}
+    var seedBytes=hexToBytes(seedHex);
+    var keyBytes=new TextEncoder().encode('Bitcoin seed');
+    var cryptoKey=await crypto.subtle.importKey('raw',keyBytes,{name:'HMAC',hash:'SHA-512'},false,['sign']);
+    var sig=await crypto.subtle.sign('HMAC',cryptoKey,seedBytes);
+    var result=new Uint8Array(sig);
+    var masterPrivHex=bytesToHex(result.slice(0,32));
+    var chainCodeHex=bytesToHex(result.slice(32,64));
+    state.masterPrivHex=masterPrivHex;
+    state.chainCode=chainCodeHex;
+    // Update privHex to master private key
+    state.privHex=masterPrivHex;
+    document.getElementById('bip32MasterPriv').textContent=masterPrivHex;
+    document.getElementById('bip32ChainCode').textContent=chainCodeHex;
+    document.getElementById('bip32Status').textContent='Master Key derivata con successo.';
+    document.getElementById('bip32Status').style.color='var(--green)';
+  }catch(e){
+    document.getElementById('bip32Status').textContent='Errore: '+e.message;
+    document.getElementById('bip32Status').style.color='var(--red)';
+  }
+}
+
+function confirmStepBip32(){
+  if(!state.privHex){alert('Attendere il completamento del calcolo HMAC-SHA512.');return;}
+  // Recompute public key from master private key
+  var pub=privToPub(state.privHex);
+  if(!pub){alert('Chiave privata master non valida — riprova.');return;}
+  state.pubComp=pub.compressed;
+  state.pubUncomp=pub.uncompressed;
+  state.pubPt=[BigInt('0x'+pub.x),BigInt('0x'+pub.y)];
+  document.getElementById('pubUncomp').textContent=pub.uncompressed;
+  document.getElementById('pubComp').textContent=pub.compressed;
+  document.getElementById('pubX').textContent=pub.x;
+  document.getElementById('pubY').textContent=pub.y;
+  drawCurve(pub.x,state.pubPt[1]);
+  // Complete BIP32 step
+  var card=document.getElementById('cardBip32');
+  card.classList.remove('active-step');
+  card.classList.add('completed');
+  document.getElementById('badgeBip32').textContent='✓ COMPLETATO';
+  document.getElementById('dotBip32').className='sdot done';
+  activateStep(2);
+}
+
+// ═══════════════════════════════════════
+// EXTENDED KEYS (BIP32 SERIALIZATION)
+// ═══════════════════════════════════════
+function serializeExtKey(version,depth,parentFP,childNum,chainCodeBytes,keyBytes){
+  var data=new Uint8Array(78);
+  data[0]=(version>>>24)&0xff;data[1]=(version>>>16)&0xff;data[2]=(version>>>8)&0xff;data[3]=version&0xff;
+  data[4]=depth&0xff;
+  data[5]=(parentFP>>>24)&0xff;data[6]=(parentFP>>>16)&0xff;data[7]=(parentFP>>>8)&0xff;data[8]=parentFP&0xff;
+  data[9]=(childNum>>>24)&0xff;data[10]=(childNum>>>16)&0xff;data[11]=(childNum>>>8)&0xff;data[12]=childNum&0xff;
+  data.set(chainCodeBytes,13);
+  data.set(keyBytes,45);
+  return base58check(data);
+}
+
+function computeXKeys(){
+  if(!state.chainCode||!state.privHex)return;
+  try{
+    var ccBytes=hexToBytes(state.chainCode);
+    var privKeyBytes=new Uint8Array([0x00].concat(Array.from(hexToBytes(state.privHex))));
+    var pub=privToPub(state.privHex);
+    if(!pub)return;
+    var pubBytes=hexToBytes(pub.compressed);
+    var xprv=serializeExtKey(0x0488ADE4,0,0,0,ccBytes,privKeyBytes);
+    var xpub=serializeExtKey(0x0488B21E,0,0,0,ccBytes,pubBytes);
+    var yprv=serializeExtKey(0x049D7878,0,0,0,ccBytes,privKeyBytes);
+    var ypub=serializeExtKey(0x049D7CB2,0,0,0,ccBytes,pubBytes);
+    var zprv=serializeExtKey(0x04B2430C,0,0,0,ccBytes,privKeyBytes);
+    var zpub=serializeExtKey(0x04B24746,0,0,0,ccBytes,pubBytes);
+    document.getElementById('xkeyXprv').textContent=xprv;
+    document.getElementById('xkeyXpub').textContent=xpub;
+    document.getElementById('xkeyYprv').textContent=yprv;
+    document.getElementById('xkeyYpub').textContent=ypub;
+    document.getElementById('xkeyZprv').textContent=zprv;
+    document.getElementById('xkeyZpub').textContent=zpub;
+  }catch(e){
+    ['xkeyXprv','xkeyXpub','xkeyYprv','xkeyYpub','xkeyZprv','xkeyZpub'].forEach(function(id){
+      var el=document.getElementById(id);if(el)el.textContent='(errore)';
+    });
+  }
+}
+
+// ═══════════════════════════════════════
+// SVG DERIVATION TREE (MOD 5)
+// ═══════════════════════════════════════
+var dtreeTipEl=null;
+function hideDTreeTip(){
+  if(!dtreeTipEl)dtreeTipEl=document.getElementById('dtreeTip');
+  if(dtreeTipEl)dtreeTipEl.style.display='none';
+}
+function showDTreeTip(evt,html){
+  if(!dtreeTipEl)dtreeTipEl=document.getElementById('dtreeTip');
+  if(!dtreeTipEl)return;
+  dtreeTipEl.innerHTML=html;
+  dtreeTipEl.style.display='block';
+  var x=evt.clientX+14,y=evt.clientY-10;
+  if(x+290>window.innerWidth)x=evt.clientX-300;
+  dtreeTipEl.style.left=x+'px';dtreeTipEl.style.top=y+'px';
+}
+
+function drawDerivTree(){
+  var svg=document.getElementById('derivTree');
+  if(!svg)return;
+  var ht=hdTypes[currentHDType]||hdTypes['bip44'];
+  var purpose=ht.purpose||"44'";
+  var account=(document.getElementById('accountInput')?document.getElementById('accountInput').value:'0')||'0';
+  var isBip48=(currentHDType==='bip48');
+  var chain=isBip48?"0'":(document.getElementById('chainInput')?document.getElementById('chainInput').value:'0')||'0';
+
+  var tips={
+    'm':{title:'m (Root)',body:'Nodo radice del wallet HD.<br>Corrisponde alla Master Key derivata da HMAC-SHA512.'},
+    'purpose':{title:'m/'+purpose,body:'Purpose (BIP43): definisce lo standard.<br>'+purpose.replace("'","'")+' = hardened. Non modificabile.'},
+    'coin':{title:"m/"+purpose+"/0'",body:"Coin Type (BIP44). 0' = Bitcoin Mainnet.<br>Ogni criptovaluta ha il suo numero."},
+    'account':{title:"m/"+purpose+"/0'/"+account+"'",body:"Account "+account+" (hardened).<br>Separa fondi diversi sullo stesso wallet."},
+    'chain':{title:"m/"+purpose+"/0'/"+account+"'/"+chain,body:"Chain: 0=esterno (ricezione), 1=interno (cambio).<br>Deriva indirizzi pubblici."},
+    'leaf0':{title:".../.../0",body:"Indirizzo #0. Primo indirizzo di ricezione."},
+    'leaf1':{title:".../.../1",body:"Indirizzo #1."},
+    'leafN':{title:".../.../...",body:"Indirizzi 2-19 (20 totali).<br>Ogni foglia = una coppia chiave privata/pubblica."}
+  };
+
+  var NS='http://www.w3.org/2000/svg';
+  var W=700,H=180;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+
+  var gold='#f7931a',green='#22d3a0',text1='#e8e8e8',text3='#606060',border='#1c2030';
+
+  function node(x,y,lbl,tipKey,color){
+    var g=document.createElementNS(NS,'g');
+    g.style.cursor='pointer';
+    var rx=36,ry=16;
+    var el=document.createElementNS(NS,'ellipse');
+    el.setAttribute('cx',x);el.setAttribute('cy',y);
+    el.setAttribute('rx',rx);el.setAttribute('ry',ry);
+    el.setAttribute('fill','#101318');el.setAttribute('stroke',color||gold);el.setAttribute('stroke-width','1.2');
+    var t=document.createElementNS(NS,'text');
+    t.setAttribute('x',x);t.setAttribute('y',y+4);
+    t.setAttribute('text-anchor','middle');t.setAttribute('font-family','monospace');
+    t.setAttribute('font-size','10');t.setAttribute('fill',color||gold);
+    t.textContent=lbl;
+    g.appendChild(el);g.appendChild(t);
+    if(tipKey&&tips[tipKey]){
+      g.addEventListener('mousemove',function(ev){showDTreeTip(ev,'<strong>'+tips[tipKey].title+'</strong><br>'+tips[tipKey].body);});
+      g.addEventListener('mouseleave',hideDTreeTip);
+      g.addEventListener('click',function(ev){showDTreeTip(ev,'<strong>'+tips[tipKey].title+'</strong><br>'+tips[tipKey].body);});
+    }
+    svg.appendChild(g);
+    return{x:x,y:y,rx:rx,ry:ry};
+  }
+
+  function line(x1,y1,x2,y2,color){
+    var l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);
+    l.setAttribute('stroke',color||border);l.setAttribute('stroke-width','1');
+    svg.insertBefore(l,svg.firstChild);
+  }
+
+  var nodes={
+    m:node(40,90,'m','m',gold),
+    purpose:node(145,90,purpose,'purpose',gold),
+    coin:node(260,90,"0'","coin",text3),
+    account:node(380,90,account+"'","account",green),
+    chain:node(480,90,chain,"chain",text3),
+    leaf0:node(580,50,'0','leaf0',green),
+    leaf1:node(590,90,'1','leaf1',green),
+    leafN:node(590,130,'...','leafN',text3)
+  };
+
+  line(nodes.m.x+nodes.m.rx,nodes.m.y,nodes.purpose.x-nodes.purpose.rx,nodes.purpose.y);
+  line(nodes.purpose.x+nodes.purpose.rx,nodes.purpose.y,nodes.coin.x-nodes.coin.rx,nodes.coin.y);
+  line(nodes.coin.x+nodes.coin.rx,nodes.coin.y,nodes.account.x-nodes.account.rx,nodes.account.y);
+  line(nodes.account.x+nodes.account.rx,nodes.account.y,nodes.chain.x-nodes.chain.rx,nodes.chain.y);
+  line(nodes.chain.x+nodes.chain.rx,nodes.chain.y,nodes.leaf0.x-nodes.leaf0.rx,nodes.leaf0.y);
+  line(nodes.chain.x+nodes.chain.rx,nodes.chain.y,nodes.leaf1.x-nodes.leaf1.rx,nodes.leaf1.y);
+  line(nodes.chain.x+nodes.chain.rx,nodes.chain.y,nodes.leafN.x-nodes.leafN.rx,nodes.leafN.y);
 }
 
 // Init
