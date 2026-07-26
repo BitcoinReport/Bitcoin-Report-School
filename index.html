@@ -804,7 +804,39 @@ nav {
 #__home-btn:hover { background: rgba(247,147,26,0.1); box-shadow: 0 0 12px rgba(247,147,26,0.25); }
 @media(max-width:768px){ #__home-btn { top:0.6rem; left:0.6rem; font-size:0.62rem; padding:0.3rem 0.65rem; } }
 
-  </style>
+  
+/* === 3 MAIN SECTIONS CARDS === */
+.main-sections{padding:2.5rem 2rem 3rem;max-width:1100px;margin:0 auto;}
+.main-sections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+@media(max-width:820px){.main-sections-grid{grid-template-columns:1fr;}}
+.main-section-card{display:flex;flex-direction:column;background:#0e0f12;border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:2rem 1.8rem;text-decoration:none;color:#e8e8e8;transition:transform 0.18s,border-color 0.18s,background 0.18s;position:relative;overflow:hidden;}
+.main-section-card:hover{transform:translateY(-3px);}
+.ms-symbol{font-family:var(--mono,'DM Mono',monospace);font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1;}
+.ms-title{font-family:var(--cond,'Barlow Condensed',sans-serif);font-weight:900;font-size:2rem;text-transform:uppercase;letter-spacing:0.04em;line-height:1;margin-bottom:0.3rem;}
+.ms-count{font-family:var(--mono,'DM Mono',monospace);font-size:0.62rem;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1rem;}
+.ms-desc{font-size:0.82rem;color:#a0a0a0;line-height:1.65;flex:1;margin-bottom:1.4rem;}
+.ms-cta{font-family:var(--mono,'DM Mono',monospace);font-size:0.72rem;font-weight:700;letter-spacing:0.06em;padding:0.55rem 1rem;border-radius:6px;display:inline-block;transition:opacity 0.15s;}
+.main-section-card:hover .ms-cta{opacity:0.85;}
+
+/* GOLD — Strumenti */
+.main-section-gold{border-color:rgba(247,147,26,0.25);}
+.main-section-gold:hover{border-color:rgba(247,147,26,0.5);background:rgba(247,147,26,0.03);}
+.main-section-gold .ms-symbol{color:#f7931a;}
+.main-section-gold .ms-cta{background:rgba(247,147,26,0.12);color:#f7931a;border:1px solid rgba(247,147,26,0.3);}
+
+/* GREEN — Letture */
+.main-section-green{border-color:rgba(34,211,160,0.2);}
+.main-section-green:hover{border-color:rgba(34,211,160,0.45);background:rgba(34,211,160,0.025);}
+.main-section-green .ms-symbol{color:#22d3a0;}
+.main-section-green .ms-cta{background:rgba(34,211,160,0.1);color:#22d3a0;border:1px solid rgba(34,211,160,0.25);}
+
+/* GREY — Guide */
+.main-section-grey{border-color:rgba(160,160,160,0.15);}
+.main-section-grey:hover{border-color:rgba(160,160,160,0.35);background:rgba(160,160,160,0.025);}
+.main-section-grey .ms-symbol{color:#a0a0a0;}
+.main-section-grey .ms-cta{background:rgba(160,160,160,0.08);color:#a0a0a0;border:1px solid rgba(160,160,160,0.2);}
+
+</style>
 <meta property="og:site_name" content="Bitcoin Report School">
 <meta property="og:locale" content="it_IT">
 <meta name="twitter:site" content="@bitcoinsecondo">
@@ -841,7 +873,7 @@ nav {
         <span class="hero-stat-label">Strumenti interattivi</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-val">7</span>
+        <span class="hero-stat-val">8</span>
         <span class="hero-stat-label">Letture</span>
       </div>
       <div class="hero-stat">
@@ -864,527 +896,41 @@ nav {
   </div>
 </div>
 
-<!-- TOOLS -->
-<div class="section-divider">
-  <span class="section-divider-label">// strumenti didattici interattivi</span>
-</div>
+<!-- TRE SEZIONI PRINCIPALI -->
+<section class="main-sections">
+  <div class="main-sections-grid">
 
-<section class="tools-section">
-  <div class="tools-grid">
-
-    <!-- TOOL 1: Codice Spiegato -->
-    <a class="tool-card" href="guida_codice_bitcoin.html">
-      <div class="card-bg-icon">⛓</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">⛓️</span>
-        <div class="card-title">Bitcoin Core<br>Codice Spiegato</div>
-        <div class="card-desc">
-          Esplora il codice sorgente di Bitcoin Core riga per riga.
-          Clicca su ogni riga e leggi la spiegazione in italiano semplice —
-          senza dover sapere programmare. Blockchain, transazioni, wallet, rete P2P.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Blockchain</span>
-          <span class="card-pill gold">Transazioni</span>
-          <span class="card-pill gold">Wallet</span>
-          <span class="card-pill gold">Rete P2P</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
+    <!-- STRUMENTI -->
+    <a class="main-section-card main-section-gold" href="strumenti.html">
+      <div class="ms-symbol">{ }</div>
+      <div class="ms-title">Strumenti</div>
+      <div class="ms-count">13 strumenti interattivi</div>
+      <p class="ms-desc">Generatori, simulatori e visualizzatori interattivi. Impara Bitcoin costruendo — seed phrase, chiavi, curva ellittica, script, mempool, Lightning, privacy on-chain.</p>
+      <div class="ms-cta">Esplora gli strumenti &rarr;</div>
     </a>
 
-    <!-- TOOL 2: Mining Simulator -->
-    <a class="tool-card" href="simulatore_mining_bitcoin.html">
-      <div class="card-bg-icon">⛏</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">⛏️</span>
-        <div class="card-title">Simulatore<br>Mining Bitcoin</div>
-        <div class="card-desc">
-          Mina un blocco Bitcoin passo dopo passo: seleziona le transazioni dalla mempool,
-          costruisci il Merkle Root, e trova il nonce vincente cambiando l'hash in tempo reale.
-          SHA-256 vero, calcolato nel tuo browser.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Mempool</span>
-          <span class="card-pill gold">Merkle Root</span>
-          <span class="card-pill gold">Proof of Work</span>
-          <span class="card-pill gold">SHA-256</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
+    <!-- LETTURE -->
+    <a class="main-section-card main-section-green" href="letture.html">
+      <div class="ms-symbol">// _</div>
+      <div class="ms-title">Letture</div>
+      <div class="ms-count">Analisi &middot; Manifesti &middot; Approfondimenti</div>
+      <p class="ms-desc">Euro Digitale, autocustodia, propaganda monetaria, cypherpunk, governance di Bitcoin. Testi da leggere, non da consumare.</p>
+      <div class="ms-cta">Vai alle letture &rarr;</div>
     </a>
 
-    <!-- TOOL 3: Simulatore Transazione Bitcoin -->
-    <a class="tool-card" href="simulatore_transazione_bitcoin.html">
-      <div class="card-bg-icon">🔏</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">🔏</span>
-        <div class="card-title">Simulatore<br>Transazione Bitcoin</div>
-        <div class="card-desc">
-          Segui ogni byte di una TX reale: chiavi secp256k1, firma ECDSA, serializzazione,
-          broadcast e mining. Wizard a 7 step con crittografia vera eseguita nel browser.
-          Supporta P2PKH, P2WPKH, P2SH-P2WPKH e P2TR.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">secp256k1</span>
-          <span class="card-pill gold">ECDSA</span>
-          <span class="card-pill gold">SegWit</span>
-          <span class="card-pill gold">Taproot</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-
-    <!-- TOOL: Generatore Chiavi -->
-    <a class="tool-card" href="generatore_chiavi_bitcoin.html">
-      <div class="card-bg-icon">🔑</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">🔑</span>
-        <div class="card-title">Generatore<br>Chiavi Bitcoin</div>
-        <div class="card-desc">
-          Da un numero casuale al tuo indirizzo Bitcoin. Curva ellittica secp256k1,
-          chiavi private e pubbliche, tutti i formati storici e moderni (P2PK, Legacy, SegWit, Taproot,
-          IP-based), HD wallet con derivation path, multisig BIP48 — tutto simulato nel browser.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">secp256k1</span>
-          <span class="card-pill gold">HD Wallet</span>
-          <span class="card-pill gold">Taproot</span>
-          <span class="card-pill gold">Multisig</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- TOOL 5: Generatore Seed Phrase BIP39 -->
-    <a class="tool-card" href="generatore_seed_phrase.html">
-      <div class="card-bg-icon">🌱</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">🌱</span>
-        <div class="card-title">Generatore<br>Seed Phrase BIP39</div>
-        <div class="card-desc">
-          Da bit di entropia a frase mnemonica. Scegli 12 o 24 parole, comprendi la checksum,
-          calcola il seed con PBKDF2 e scopri come nasce un HD wallet — tutto spiegato passo per passo
-          con la wordlist ufficiale BIP39.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">BIP39</span>
-          <span class="card-pill gold">Entropia</span>
-          <span class="card-pill gold">PBKDF2</span>
-          <span class="card-pill gold">HD Wallet</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- TOOL 6: Lightning Network -->
-    <a class="tool-card" href="lightning-network.html">
-      <div class="card-bg-icon">⚡</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">⚡</span>
-        <div class="card-title">Lightning Network<br>Visualizzato</div>
-        <div class="card-desc">
-          Apri canali 2-di-2 on-chain, bilancia la liquidità e invia pagamenti hop-per-hop.
-          Dijkstra per il routing, animazione HTLC e spiegazione completa della funding transaction multisig.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Canali</span>
-          <span class="card-pill gold">HTLC</span>
-          <span class="card-pill gold">Routing</span>
-          <span class="card-pill gold">2-di-2</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- TOOL 7: Glossario Bitcoin -->
-    <a class="tool-card" href="glossario_bitcoin.html">
-      <div class="card-bg-icon">📖</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">📖</span>
-        <div class="card-title">Glossario<br>Bitcoin Interattivo</div>
-        <div class="card-desc">
-          150+ termini Bitcoin spiegati in italiano semplice, con analogia del mondo reale.
-          Rete interattiva D3.js a categorie: Crittografia, Lightning, Mining, Wallet,
-          Economia, Sicurezza e molto altro.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">D3.js</span>
-          <span class="card-pill gold">13 categorie</span>
-          <span class="card-pill gold">150+ termini</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- CURVA ELLITTICA -->
-    <a class="tool-card" href="curva_ellittica.html">
-      <div class="card-bg-icon">📐</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">📐</span>
-        <div class="card-title">Curva Ellittica<br>secp256k1</div>
-        <div class="card-desc">
-          Esplora la matematica dietro ogni chiave Bitcoin: dalla geometria
-          delle curve ellittiche reali fino alla firma digitale ECDSA, passo
-          dopo passo con visualizzazioni interattive.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">secp256k1</span>
-          <span class="card-pill gold">ECDSA</span>
-          <span class="card-pill gold">Firma</span>
-          <span class="card-pill gold">Crittografia</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <a class="tool-card" href="script_playground_bitcoin.html">
-      <div class="card-bg-icon">📜</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">📜</span>
-        <div class="card-title">Script<br>Playground Bitcoin</div>
-        <div class="card-desc">
-          Esegui script Bitcoin opcode per opcode e guarda lo stack in tempo reale — da P2PK a Taproot, dai hash puzzle al multisig.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Script</span>
-          <span class="card-pill gold">Opcodes</span>
-          <span class="card-pill gold">Stack</span>
-          <span class="card-pill gold">Taproot</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- TOOL: Rete P2P Bitcoin -->
-    <a class="tool-card" href="rete-p2p-bitcoin.html">
-      <div class="card-bg-icon">&#127760;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#127760;</span>
-        <div class="card-title">Rete P2P<br>Bitcoin</div>
-        <div class="card-desc">
-          Configura il tuo nodo passo per passo e vedi le conseguenze sulla tua privacy. Clearnet vs Tor, Dandelion++, eclipse attack, broadcast delle transazioni &mdash; con i comandi reali da eseguire sul tuo nodo.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Nodi</span>
-          <span class="card-pill gold">Tor</span>
-          <span class="card-pill gold">Dandelion++</span>
-          <span class="card-pill gold">Privacy</span>
-          <span class="card-pill gold">bitcoin.conf</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- TOOL: Simulatore Ark Protocol -->
-    <a class="tool-card" href="simulatore-ark-protocol.html">
-      <div class="card-bg-icon">&#127754;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#127754;</span>
-        <div class="card-title">Simulatore Ark<br>Protocol</div>
-        <div class="card-desc">
-          Capisci come funziona Ark &mdash; il layer 2 Bitcoin senza canali. VTXO, round, delegati, scadenza, rinnovo e privacy: tutto quello che devi sapere per usare Arkade wallet in modo consapevole.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Ark</span>
-          <span class="card-pill gold">VTXO</span>
-          <span class="card-pill gold">Layer 2</span>
-          <span class="card-pill gold">Arkade</span>
-          <span class="card-pill gold">Privacy</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-    <!-- TOOL: Wallet Ark Simulato -->
-    <a class="tool-card" href="simulatore-wallet-ark.html">
-      <div class="card-bg-icon">&#129693;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#129693;</span>
-        <div class="card-title">Wallet Ark<br>Simulato</div>
-        <div class="card-desc">
-          Usa un wallet Ark interattivo: deposita, scegli tra Arkade e Bark, invia pagamenti Ark/Lightning/on-chain, gestisci scadenza e rinnovo dei tuoi VTXO con o senza delegati.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Ark</span>
-          <span class="card-pill gold">Wallet</span>
-          <span class="card-pill gold">VTXO</span>
-          <span class="card-pill gold">Arkade</span>
-          <span class="card-pill gold">Bark</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-    </a>
-
-
-    <a class="tool-card" href="simulatore-resilienza-bitcoin.html">
-      <div class="card-bg-icon">&#127760;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#127760;</span>
-        <div class="card-title">Simulatore<br>Resilienza Bitcoin</div>
-        <div class="card-desc">
-          Prova tu stesso a spegnere Bitcoin, vietarlo per legge, fare il 51%,
-          cambiare le regole o censurare una transazione. Con dati reali
-          e conseguenze simulate &mdash; per capire perch&#233; &egrave; praticamente impossibile.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Resilienza</span>
-          <span class="card-pill gold">Nodi</span>
-          <span class="card-pill gold">Mining</span>
-          <span class="card-pill gold">Consenso</span>
-          <span class="card-pill gold">Attacchi</span>
-        </div>
-        <span class="card-arrow">&#8594;</span>
-      </div>
-    </a>
-
-    <!-- TOOL: Quale Script Scelgo -->
-    <a class="tool-card" href="quale-script-scelgo.html">
-      <div class="card-bg-icon">&#128195;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#128195;</span>
-        <div class="card-title">Quale Script<br>Scelgo?</div>
-        <div class="card-desc">
-          Confronto interattivo dei 7 script Bitcoin: P2PK, P2PKH, P2MS, P2SH, P2WPKH, P2WSH, P2TR.
-          Anatomia dei byte, pro/contro, simulatore transazione stile block explorer,
-          matrice privacy e tabella fee &mdash; tutto in un&#8217;unica pagina.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Script</span>
-          <span class="card-pill gold">SegWit</span>
-          <span class="card-pill gold">Taproot</span>
-          <span class="card-pill gold">Privacy</span>
-        </div>
-        <span class="card-arrow">&#8594;</span>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- SEZIONE 2: SOVRANITÀ TECNICA -->
-<div class="section-divider">
-  <span class="section-divider-label">// sovranit&#224; tecnica &middot; guide pratiche</span>
-</div>
-
-<section class="tools-section">
-  <div class="tools-grid">
-
-    <!-- Mining Idroelettrico DIY -->
-    <a class="tool-card" href="mining-idroelettrico-diy.html">
-      <div class="card-bg-icon">&#128167;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#128167;&#9889;</span>
-        <div class="card-title">Mining Idroelettrico<br>DIY &mdash; Guida Completa</div>
-        <div class="card-desc">
-          Come costruire un piccolo impianto di mining alimentato da energia idroelettrica
-          con materiale di recupero. Dall&#8217;analisi del sito alla turbina fai-da-te,
-          fino alla configurazione del miner &mdash; energia gratuita, bitcoin sovrani.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">DIY</span>
-          <span class="card-pill gold">Idroelettrico</span>
-          <span class="card-pill gold">Off-grid</span>
-          <span class="card-pill gold">Mining</span>
-        </div>
-        <span class="card-arrow">&#8594;</span>
-      </div>
-    </a>
-
-    <!-- Versioni Client Bitcoin -->
-    <a class="tool-card" href="versioni-client-bitcoin.html">
-      <div class="card-bg-icon">&#128190;</div>
-      <div class="card-top">
-        <div class="card-tag">Disponibile ora</div>
-        <span class="card-icon">&#128190;</span>
-        <div class="card-title">Enciclopedia<br>dei Client Bitcoin</div>
-        <div class="card-desc">
-          Dalla versione 0.1 di Satoshi (2009) a Bitcoin Core 31.0, Bitcoin Knots e ProductionReady.
-          Timeline interattiva con filtri, confronto versioni, punteggio cypherpunk e sezione su chi finanzia lo sviluppo.
-        </div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-tags">
-          <span class="card-pill gold">Bitcoin Core</span>
-          <span class="card-pill gold">Bitcoin Knots</span>
-          <span class="card-pill gold">Storia</span>
-          <span class="card-pill gold">Timeline</span>
-        </div>
-        <span class="card-arrow">&#8594;</span>
-      </div>
+    <!-- GUIDE -->
+    <a class="main-section-card main-section-grey" href="guide.html">
+      <div class="ms-symbol">&gt;_</div>
+      <div class="ms-title">Guide</div>
+      <div class="ms-count">Risorse tecniche approfondite</div>
+      <p class="ms-desc">Versioni dei client Bitcoin a confronto, mining idroelettrico DIY, sovranit&agrave; tecnica. Per chi vuole andare pi&ugrave; in fondo.</p>
+      <div class="ms-cta">Apri le guide &rarr;</div>
     </a>
 
   </div>
 </section>
 
-<!-- LETTURE -->
-<div class="section-divider">
-  <span class="section-divider-label">// letture &middot; approfondimenti</span>
-</div>
 
-<section class="approfondimenti-section">
-  <div class="tools-header">
-    <h2>Letture</h2>
-    <p>Manifesto, guide pratiche e analisi critiche per capire Bitcoin &mdash; non solo usarlo.</p>
-  </div>
-
-  <a class="read-card" href="euro-digitale-prigione-monetaria.html">
-    <div class="read-card-tag">// Analisi &middot; Nuovo 2026</div>
-    <div class="read-card-icon">&#8364;</div>
-    <div class="read-card-title">L&rsquo;Euro che non hai scelto</div>
-    <div class="read-card-desc">
-      Anatomia dell&rsquo;Euro Digitale CBDC: programmabilit&agrave;, waterfall, identit&agrave; digitale convergente. E perch&eacute; Bitcoin &egrave; l&rsquo;unica risposta che il sistema non pu&ograve; assorbire.
-    </div>
-    <div class="read-card-footer">
-      <div class="read-card-pills">
-        <span class="read-pill">CBDC</span>
-        <span class="read-pill">Sovranit&agrave;</span>
-        <span class="read-pill">Analisi</span>
-      </div>
-      <span class="read-card-arrow">&rarr;</span>
-    </div>
-  </a>
-
-  <a class="read-card" href="bitcoin-non-si-spegne.html">
-    <div class="read-card-tag">// Ricerca Tecnica &middot; Nuovo 2026</div>
-    <div class="read-card-icon">&#128225;</div>
-    <div class="read-card-title">Bitcoin Non Si Spegne</div>
-    <div class="read-card-desc">
-      Anatomia della resilienza: perch&eacute; Bitcoin sopravvive a blackout, censura e disconnessione. Blockstream Satellite, reti mesh LoRa, radio HF, SMS/USSD, mining off-grid. Con dati e specifiche tecniche.
-    </div>
-    <div class="read-card-footer">
-      <div class="read-card-pills">
-        <span class="read-pill">Ricerca Tecnica</span>
-        <span class="read-pill">13 capitoli</span>
-        <span class="read-pill">~35 min</span>
-      </div>
-      <span class="read-card-arrow">&rarr;</span>
-    </div>
-  </a>
-
-  <a class="read-card" href="manifesto-cypherpunk-2026.html">
-    <div class="read-card-tag">// Manifesto &middot; Nuovo 2026</div>
-    <div class="read-card-icon">&#9876;</div>
-    <div class="read-card-title">In un Mondo Sempre Pi&ugrave; Totalitario,<br>Noi Scriviamo Codice</div>
-    <div class="read-card-desc">
-      Manifesto cypherpunk per il ventunesimo secolo. Palantir, CBDC, eIDAS, sorveglianza biometrica &mdash; e la risposta tecnica che gi&agrave; esiste. La resistenza non &egrave; una manifestazione. &Egrave; matematica.
-    </div>
-    <div class="read-card-footer">
-      <div class="read-card-pills">
-        <span class="read-pill">Manifesto</span>
-        <span class="read-pill">9 capitoli</span>
-        <span class="read-pill">~30 min</span>
-      </div>
-      <span class="read-card-arrow">&rarr;</span>
-    </div>
-  </a>
-
-  <a class="read-card" href="manifesto.html" style="margin-top:1rem">
-    <div class="read-card-tag">// Manifesto &middot; Da leggere prima di tutto il resto</div>
-    <div class="read-card-icon">&#9876;</div>
-    <div class="read-card-title">La Strada Comoda<br>porta sempre alla stessa Gabbia</div>
-    <div class="read-card-desc">
-      Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio.
-      La storia della cattura di internet &egrave; la chiave per capire cosa rischia di succedere con Bitcoin &mdash; e perch&eacute; quella storia non deve ripetersi.
-    </div>
-    <div class="read-card-footer">
-      <div class="read-card-pills">
-        <span class="read-pill">Manifesto</span>
-        <span class="read-pill">10 capitoli</span>
-        <span class="read-pill">~15 min</span>
-      </div>
-      <span class="read-card-arrow">&rarr;</span>
-    </div>
-  </a>
-
-  <a class="read-card" href="autocustodia-bitcoin.html" style="margin-top:1rem">
-    <div class="read-card-tag">// Guida pratica &middot; Autocustodia</div>
-    <div class="read-card-icon">&#128273;</div>
-    <div class="read-card-title">Bitcoin &egrave; tuo.<br>Se sai tenerlo.</div>
-    <div class="read-card-desc">
-      La guida completa all&#8217;autocustodia: wallet, hardware wallet, seed phrase e acquisto senza KYC.
-      Da zero alla sovranit&#224; finanziaria reale &mdash; senza lasciare bitcoin su exchange.
-    </div>
-    <div class="read-card-footer">
-      <div class="read-card-pills">
-        <span class="read-pill">Autocustodia</span>
-        <span class="read-pill">Hardware Wallet</span>
-        <span class="read-pill">KYC-free</span>
-      </div>
-      <span class="read-card-arrow">&rarr;</span>
-    </div>
-  </a>
-
-  <a class="read-card" href="avvicinarsi-bitcoin.html" style="margin-top:1rem">
-    <div class="read-card-tag">// Guida &middot; Per chi inizia</div>
-    <div class="read-card-icon">&#129517;</div>
-    <div class="read-card-title">Bitcoin: Come Avvicinarsi<br>Senza Farsi del Male</div>
-    <div class="read-card-desc">
-      Il percorso che nessuno ti spiega. Dalla mentalit&#224; giusta alla custodia autonoma,
-      dagli errori comuni alla privacy. Per chi vuole iniziare senza sbagliare.
-    </div>
-    <div class="read-card-footer">
-      <div class="read-card-pills">
-        <span class="read-pill">Principianti</span>
-        <span class="read-pill">Custodia</span>
-        <span class="read-pill">Privacy</span>
-      </div>
-      <span class="read-card-arrow">&rarr;</span>
-    </div>
-  </a>
-
-  <div style="margin-top:1.5rem;text-align:center;">
-    <a href="letture.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.72rem;color:var(--gold);text-decoration:none;border:1px solid rgba(247,147,26,0.3);border-radius:6px;padding:0.6rem 1.2rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(247,147,26,0.3)'">Vedi tutte le letture (8) &rarr;</a>
-  </div>
-  <div style="margin-top:1rem;text-align:center;">
-    <a href="guida-bitcoin-nonprofit.html" style="display:inline-flex;align-items:center;gap:0.45rem;font-family:var(--mono);font-size:0.68rem;color:var(--text2);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">&#128196; Leggi la guida: Bitcoin per le ONG (HRF, traduzione italiana) &rarr;</a>
-  </div>
-</section>
 
 <!-- CONSULENZE -->
 <div class="section-divider">
@@ -1422,7 +968,7 @@ nav {
     <div class="manifesto-tag">// perché questo progetto esiste</div>
     <div class="manifesto-quote">
       La moneta è sempre stata uno strumento di <em>potere</em>.<br>
-      Bitcoin è la prima volta nella storia che <em>chiunque</em> può capirla davvero.
+      Bitcoin è il primo strumento nella storia che <em>chiunque</em> può verificare da solo.
     </div>
     <p class="manifesto-body">
       Bitcoin non è solo tecnologia. È la separazione tra moneta e stato —
