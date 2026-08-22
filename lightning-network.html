@@ -399,6 +399,100 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
   .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .donation-qr-wrap { order: -1; }
 }
+
+/* ── UPGRADE 5: LN vs On-chain compare ── */
+.ln-compare-wrap { max-width: 700px; margin: 0 auto 1rem; padding: 0 1.2rem; }
+details.ln-compare-details { background: rgba(247,147,26,0.04); border: 1px solid rgba(247,147,26,0.18); border-radius: 10px; overflow: hidden; }
+details.ln-compare-details summary { padding: 0.85rem 1.2rem; font-family: var(--mono); font-size: 0.72rem; color: var(--gold); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+details.ln-compare-details summary::-webkit-details-marker { display: none; }
+.ln-compare-body { padding: 0 0.8rem 1rem; overflow-x: auto; }
+.ln-compare-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; min-width: 380px; }
+.ln-compare-table th { font-family: var(--mono); font-size: 0.62rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 0.8rem; text-align: left; border-bottom: 1px solid var(--text3); background: var(--bg2); }
+.ln-compare-table th:nth-child(2) { color: var(--gold); }
+.ln-compare-table th:nth-child(3) { color: var(--green); }
+.ln-compare-table td { padding: 0.5rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text2); line-height: 1.4; vertical-align: middle; }
+.ln-compare-table tr:last-child td { border-bottom: none; }
+.ln-compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+.lnc-yes { color: var(--green); font-weight: 600; }
+.lnc-no  { color: var(--red);   font-weight: 600; }
+
+/* ── UPGRADE 1: Commitment TX / Penalty ── */
+details.commitment-box { background: rgba(167,139,250,0.04); border: 1px solid rgba(167,139,250,0.2); border-radius: 10px; overflow: hidden; margin: 1.1rem 0; }
+details.commitment-box summary { padding: 0.85rem 1.2rem; font-family: var(--mono); font-size: 0.7rem; color: var(--purple); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+details.commitment-box summary::-webkit-details-marker { display: none; }
+.commitment-body { padding: 0.3rem 1.2rem 1.2rem; font-size: 0.82rem; color: var(--text2); line-height: 1.75; }
+.commitment-body ul { margin: 0.5rem 0 0.5rem 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.commitment-body li { line-height: 1.65; }
+.commitment-body strong { color: var(--text); }
+.penalty-timeline { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem; margin-top: 1rem; }
+.pt-scenario { border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.76rem; color: var(--text2); line-height: 1.6; }
+.pt-scenario .pt-label { font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 0.35rem; }
+.pt-coop  { background: rgba(34,211,160,0.07);  border: 1px solid rgba(34,211,160,0.25); }
+.pt-coop  .pt-label { color: var(--green); }
+.pt-force { background: rgba(247,147,26,0.07);  border: 1px solid rgba(247,147,26,0.25); }
+.pt-force .pt-label { color: var(--gold); }
+.pt-fraud { background: rgba(255,85,102,0.07);  border: 1px solid rgba(255,85,102,0.25); }
+.pt-fraud .pt-label { color: var(--red); }
+@media(max-width:600px){ .penalty-timeline { grid-template-columns: 1fr; } }
+
+/* ── UPGRADE 2: Inbound liquidity mini-sim ── */
+.inbound-box { background: var(--bg2); border: 1px solid rgba(77,159,255,0.2); border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem; }
+.inbound-box h4 { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--text); margin-bottom: 0.5rem; }
+.inbound-box > p { font-size: 0.83rem; color: var(--text2); line-height: 1.7; margin-bottom: 0.6rem; }
+.inbound-list { font-size: 0.83rem; color: var(--text2); margin: 0 0 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.inbound-sim { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 0.9rem; }
+.isim-col-lbl { font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600; }
+.isim-col-lbl.lbl-loc { color: var(--gold); }
+.isim-col-lbl.lbl-rem { color: var(--green); }
+.isim-bar-wrap { background: var(--bg4); border-radius: 6px; height: 20px; overflow: hidden; margin-bottom: 0.35rem; }
+.isim-bar-fill { height: 100%; border-radius: 6px; transition: width 0.5s ease; }
+.isim-bar-fill.loc { background: var(--gold); }
+.isim-bar-fill.rem { background: var(--green); }
+.isim-bar-val { font-family: var(--mono); font-size: 0.72rem; }
+.isim-bar-val.loc { color: var(--gold); }
+.isim-bar-val.rem { color: var(--green); }
+.isim-slider-row { margin-top: 1rem; }
+.isim-slider-lbl { font-family: var(--mono); font-size: 0.65rem; color: var(--text2); margin-bottom: 0.4rem; }
+@media(max-width:500px){ .inbound-sim { grid-template-columns: 1fr; } }
+
+/* ── UPGRADE 3a: Invoice BOLT11 ── */
+.invoice-box { background: rgba(77,159,255,0.04); border: 1px solid rgba(77,159,255,0.2); border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.1rem; }
+.inv-title { font-family: var(--mono); font-size: 0.63rem; color: var(--blue); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.8rem; }
+.invoice-raw { background: var(--bg); border: 1px solid var(--text3); border-radius: 6px; padding: 0.6rem 0.9rem; font-family: var(--mono); font-size: 0.63rem; color: var(--text2); word-break: break-all; margin-bottom: 0.9rem; line-height: 1.7; }
+.invoice-raw .inv-prefix { color: var(--blue); }
+.invoice-raw .inv-amount { color: var(--gold); }
+.invoice-raw .inv-rest   { color: var(--text3); }
+.invoice-fields { display: flex; flex-direction: column; gap: 0.4rem; }
+.inv-row { display: flex; gap: 0.6rem; font-size: 0.8rem; align-items: baseline; flex-wrap: wrap; }
+.inv-row .inv-key { font-family: var(--mono); font-size: 0.63rem; color: var(--gold); min-width: 130px; flex-shrink: 0; }
+.inv-row .inv-val { color: var(--green); font-family: var(--mono); font-size: 0.72rem; }
+
+/* ── UPGRADE 3b: Onion Routing ── */
+.onion-box { background: rgba(167,139,250,0.04); border: 1px solid rgba(167,139,250,0.18); border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.1rem; }
+.on-title { font-family: var(--mono); font-size: 0.63rem; color: var(--purple); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.55rem; }
+.onion-box p { font-size: 0.82rem; color: var(--text2); line-height: 1.72; margin-bottom: 0.6rem; }
+.onion-box ul { font-size: 0.82rem; color: var(--text2); margin: 0 0 0.8rem 1.1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.onion-box strong { color: var(--text); }
+.onion-layers-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 0.9rem; }
+.onion-diagram { position: relative; width: 320px; height: 106px; }
+.ol { position: absolute; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.6rem; text-align: center; padding: 0 0.5rem; }
+.ol1 { inset: 0;          background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.35); color: var(--purple); }
+.ol2 { inset: 11px 22px;  background: rgba(77,159,255,0.12);  border: 1px solid rgba(77,159,255,0.3);  color: var(--blue); }
+.ol3 { inset: 22px 44px;  background: rgba(247,147,26,0.10);  border: 1px solid rgba(247,147,26,0.3);  color: var(--gold); }
+.ol4 { inset: 33px 66px;  background: rgba(34,211,160,0.12);  border: 1px solid rgba(34,211,160,0.3);  color: var(--green); font-size: 0.55rem; }
+.onion-legend { display: flex; gap: 1rem; margin-top: 0.65rem; flex-wrap: wrap; justify-content: center; }
+.onion-leg-item { font-family: var(--mono); font-size: 0.6rem; color: var(--text2); display: flex; align-items: center; gap: 0.35rem; }
+.onion-leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── UPGRADE 4: Watchtower ── */
+details.watchtower-box { background: rgba(255,85,102,0.05); border: 1px solid rgba(255,85,102,0.25); border-radius: 10px; overflow: hidden; margin-top: 1.1rem; display: none; }
+details.watchtower-box.on { display: block; }
+details.watchtower-box summary { padding: 0.85rem 1.2rem; font-family: var(--mono); font-size: 0.7rem; color: var(--red); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+details.watchtower-box summary::-webkit-details-marker { display: none; }
+.watchtower-body { padding: 0.2rem 1.2rem 1.2rem; font-size: 0.82rem; color: var(--text2); line-height: 1.75; }
+.watchtower-body ul { margin: 0.6rem 0 0 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.watchtower-body li { line-height: 1.65; }
+.watchtower-body strong { color: var(--text); }
 </style>
 <meta property="og:site_name" content="Bitcoin Report School">
 <meta property="og:locale" content="it_IT">
@@ -430,6 +524,56 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
   <p>Apri canali, bilancia la liquidità e invia pagamenti istantanei attraverso la rete —
      tutto nel browser, con Dijkstra reale, animazioni hop-per-hop e la spiegazione completa
      di come funziona un canale 2-di-2 on-chain.</p>
+</div>
+
+<!-- UPGRADE 5: LN VS ON-CHAIN TABLE -->
+<div class="ln-compare-wrap">
+  <details class="ln-compare-details">
+    <summary>&#9660; LN vs On-chain &mdash; quando usare cosa?</summary>
+    <div class="ln-compare-body">
+      <table class="ln-compare-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>On-chain</th>
+            <th>Lightning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Importi grandi (&gt; 0.1 BTC)</td>
+            <td><span class="lnc-yes">&#10003; Preferibile</span></td>
+            <td><span class="lnc-no">&#10007; Rischio liquidit&agrave;</span></td>
+          </tr>
+          <tr>
+            <td>Micropagamenti (&lt; 10.000 sat)</td>
+            <td><span class="lnc-no">&#10007; Fee proibitive</span></td>
+            <td><span class="lnc-yes">&#10003; Ideale</span></td>
+          </tr>
+          <tr>
+            <td>Merchant &mdash; pagamenti frequenti</td>
+            <td><span class="lnc-no">&#10007; Lento (10 min)</span></td>
+            <td><span class="lnc-yes">&#10003; Istantaneo</span></td>
+          </tr>
+          <tr>
+            <td>Privacy massima</td>
+            <td><span class="lnc-no">&#10007; Tutto pubblico</span></td>
+            <td><span class="lnc-yes">&#10003; Onion routing</span></td>
+          </tr>
+          <tr>
+            <td>Cold storage / HODLing</td>
+            <td><span class="lnc-yes">&#10003; Unico modo</span></td>
+            <td><span class="lnc-no">&#10007; Fondi &ldquo;caldi&rdquo;</span></td>
+          </tr>
+          <tr>
+            <td>Primi passi / utente base</td>
+            <td><span class="lnc-yes">&#10003; Pi&ugrave; semplice</span></td>
+            <td><span class="lnc-no">&#10007; Canali, liquidit&agrave;</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
 </div>
 
 <!-- STEP INDICATOR -->
@@ -494,7 +638,13 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
       Solo quando il canale si chiude viene pubblicata una transazione on-chain con il saldo finale.<br><br>
       Lo <span class="hl">spessore dei canali</span> indica la capacità. Il <span class="hl2">colore del gradiente</span>
       mostra la distribuzione della liquidità: <span class="hl">oro</span> = liquidità verso il nodo A,
-      <span class="hl2">verde</span> = liquidità verso il nodo B.
+      <span class="hl2">verde</span> = liquidità verso il nodo B.<br><br>
+      <strong>Tre dettagli tecnici chiave:</strong>
+      <ul style="margin:0.5rem 0 0 1.1rem;display:flex;flex-direction:column;gap:0.35rem;">
+        <li><span class="hl">Il canale è un UTXO</span>: la funding TX crea un output multisig 2-di-2 sulla blockchain. Tutto ciò che avviene dopo è <em>off-chain</em> — la blockchain non vede nulla fino alla chiusura del canale.</li>
+        <li><span class="hl">Aggiornamento saldo</span>: ogni pagamento aggiorna le commitment TX firmate da entrambi, senza pubblicare nulla on-chain. La firma reciproca garantisce che nessuno possa imbrogliare sull&rsquo;ultimo saldo.</li>
+        <li><span class="hl2">Atomic</span>: gli HTLC garantiscono che un pagamento avvenga <em>completamente</em> oppure non avvenga affatto — non esistono pagamenti a metà strada lungo un percorso multi-hop.</li>
+      </ul>
     </div>
 
     <div class="btn-row">
@@ -613,8 +763,37 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
         </div>
       </div>
 
+      <!-- UPGRADE 1: COMMITMENT TX + PENALTY -->
+      <details class="commitment-box">
+        <summary>&#9660; Come si chiude un canale? Commitment Transaction e Penalty</summary>
+        <div class="commitment-body">
+          <p>Ogni volta che i due peer si scambiano un pagamento, firmano una nuova <strong>Commitment Transaction</strong>
+          che rispecchia il saldo aggiornato — ma non la pubblicano on-chain. Quella vecchia è &ldquo;revocata&rdquo;
+          tramite una chiave di revoca, ma tecnicamente è ancora valida finché non viene sostituita.</p>
+          <ul>
+            <li><strong>Chiusura cooperativa</strong>: entrambi i nodi si accordano, pubblicano l&rsquo;ultima TX, i fondi tornano on-chain immediatamente senza timelock.</li>
+            <li><strong>Force close</strong>: un nodo pubblica l&rsquo;ultima commitment TX senza l&rsquo;accordo dell&rsquo;altro. I fondi dell&rsquo;iniziatore sono bloccati per un <em>timelock</em> (es. 144 blocchi &asymp; 1 giorno) — l&rsquo;altro nodo ottiene i suoi subito.</li>
+            <li><strong>Penalty (breach remedy)</strong>: se un nodo tenta di pubblicare una commitment TX vecchia per rubare fondi, l&rsquo;altro dispone di una <em>breach remedy transaction</em> pre-firmata che si &ldquo;sblocca&rdquo; grazie alla chiave di revoca &mdash; e prende <em>tutti</em> i fondi del canale come penalità.</li>
+          </ul>
+          <div class="penalty-timeline">
+            <div class="pt-scenario pt-coop">
+              <div class="pt-label">&#10003; Cooperativa</div>
+              Entrambi firmano la TX finale. I fondi tornano on-chain immediatamente, nessun timelock. Caso ideale.
+            </div>
+            <div class="pt-scenario pt-force">
+              <div class="pt-label">&#9651; Force Close</div>
+              Un nodo pubblica unilateralmente. I suoi fondi sono bloccati ~144 blocchi. Il peer ottiene i suoi subito.
+            </div>
+            <div class="pt-scenario pt-fraud">
+              <div class="pt-label">&#10007; Fraud Attempt</div>
+              Nodo pubblica TX vecchia: il peer usa la <em>breach remedy</em> e ottiene <strong>tutti</strong> i fondi del canale come penalità.
+            </div>
+          </div>
+        </div>
+      </details>
+
       <div class="btn-row">
-        <button class="btn btn-green" onclick="confirmOpenChannel()">🔒 Blocca fondi & Apri canale</button>
+        <button class="btn btn-green" onclick="confirmOpenChannel()">&#128274; Blocca fondi &amp; Apri canale</button>
         <button class="btn btn-outline" onclick="closeChPanel()">Annulla</button>
       </div>
     </div>
@@ -655,10 +834,38 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
 
     <div class="msg" id="step4Msg"></div>
 
+    <!-- UPGRADE 2: INBOUND LIQUIDITY MINI-SIM -->
+    <div class="inbound-box">
+      <h4>Liquidit&agrave; in entrata &mdash; il problema reale</h4>
+      <p>Quando apri un canale con 1&nbsp;M sat, <em>tutti</em> i sat sono tuoi (liquidit&agrave; locale = capacit&agrave; di invio). Liquidit&agrave; remota = 0: non puoi ricevere neanche 1 sat.</p>
+      <ul class="inbound-list">
+        <li>Per ricevere devi prima <strong>spendere</strong> alcuni sat &rarr; la liquidit&agrave; remota cresce man mano che invii.</li>
+        <li>In alternativa: <strong>rebalancing</strong> (pagamento circolare) o aprire un canale dove &egrave; l&rsquo;altro nodo a finanziare (<em>inbound channel</em>).</li>
+        <li>Per questo i merchant Lightning devono <strong>acquistare liquidit&agrave; in entrata</strong> da provider come ACINQ (Lightning Pool) o aprire canali con exchange grandi.</li>
+      </ul>
+      <p style="font-size:0.8rem;color:var(--text2);">Trascina lo slider per simulare i pagamenti inviati e osserva come cambia la liquidit&agrave;:</p>
+      <div class="isim-slider-row">
+        <div class="isim-slider-lbl">Sat spesi (inviati): <span id="isimSpent" style="color:var(--gold);">0 sat</span></div>
+        <input type="range" id="isimSlider" min="0" max="900000" step="10000" value="0" oninput="updateIsim()">
+      </div>
+      <div class="inbound-sim">
+        <div>
+          <div class="isim-col-lbl lbl-loc">Locale (invio)</div>
+          <div class="isim-bar-wrap"><div class="isim-bar-fill loc" id="isimBarLoc" style="width:100%"></div></div>
+          <div class="isim-bar-val loc" id="isimValLoc">1.000.000 sat</div>
+        </div>
+        <div>
+          <div class="isim-col-lbl lbl-rem">Remota (ricezione)</div>
+          <div class="isim-bar-wrap"><div class="isim-bar-fill rem" id="isimBarRem" style="width:0%"></div></div>
+          <div class="isim-bar-val rem" id="isimValRem">0 sat</div>
+        </div>
+      </div>
+    </div>
+
     <div class="btn-row">
-      <button class="btn btn-outline" onclick="goStep(3)">← Indietro</button>
-      <button class="btn btn-outline" id="btnRebalance" onclick="doRebalance()">⟳ Simula Riequilibrio</button>
-      <button class="btn btn-primary" onclick="goStep(5)">Invia pagamento →</button>
+      <button class="btn btn-outline" onclick="goStep(3)">&#8592; Indietro</button>
+      <button class="btn btn-outline" id="btnRebalance" onclick="doRebalance()">&#8635; Simula Riequilibrio</button>
+      <button class="btn btn-primary" onclick="goStep(5)">Invia pagamento &#8594;</button>
     </div>
   </div>
 
@@ -690,6 +897,47 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
       <div class="rb-fees">Fee totale: <span id="routeFees">—</span> sat &nbsp;·&nbsp; Hops: <span id="routeHops">—</span></div>
     </div>
 
+    <!-- UPGRADE 3a: INVOICE BOLT11 -->
+    <div class="invoice-box" id="invoiceBox" style="display:none;">
+      <div class="inv-title">// BOLT11 &mdash; Invoice Lightning decodificata</div>
+      <div class="invoice-raw">
+        <span class="inv-prefix">lnbc</span><span class="inv-amount">500u</span><span class="inv-rest">1p3qhk7xpp5a3f8c2d9e1f4b7c8a2d1e3f5b9c4d7e2a1b8c5d3f6a9e4b2c7d8e1f0qqcqzpgxqyz5vqsp5k2m9n4p7q1r8s5t3u6v9w2x5y8z1a4b7c2d5e8f1g4h7j2k5m8n1q9rzjqwykfqmjkspe2e30fscpve2e0fscpve2e3zcsp...</span>
+      </div>
+      <div class="invoice-fields">
+        <div class="inv-row"><span class="inv-key">Rete</span><span class="inv-val">Bitcoin mainnet (lnbc)</span></div>
+        <div class="inv-row"><span class="inv-key">Importo</span><span class="inv-val">50.000 sat (500 &micro;BTC)</span></div>
+        <div class="inv-row"><span class="inv-key">Destinatario</span><span class="inv-val" id="invDest">ACINQ (035e4...3f2a)</span></div>
+        <div class="inv-row"><span class="inv-key">Payment hash</span><span class="inv-val">a3f8c2d9e1f4b7c8... (H del preimage segreto R)</span></div>
+        <div class="inv-row"><span class="inv-key">Scadenza</span><span class="inv-val">3600 secondi (1 ora)</span></div>
+        <div class="inv-row"><span class="inv-key">Descrizione</span><span class="inv-val">Pagamento di test &mdash; Bitcoin Report School</span></div>
+      </div>
+    </div>
+
+    <!-- UPGRADE 3b: ONION ROUTING -->
+    <div class="onion-box" id="onionBox" style="display:none;">
+      <div class="on-title">// Onion Routing &mdash; perch&eacute; nessun nodo vede tutto il percorso</div>
+      <p>Il mittente costruisce un <strong>&ldquo;cipolla&rdquo; di cifrature</strong>: ogni strato è leggibile solo dal nodo destinatario di quel hop. Il primo hop vede solo &ldquo;vai al secondo&rdquo;; il secondo vede solo &ldquo;vai al terzo&rdquo;; il destinatario finale vede solo &ldquo;sei l&rsquo;ultimo&rdquo;.</p>
+      <ul>
+        <li><strong>Ogni nodo conosce solo</strong> il precedente e il successivo &mdash; mai l&rsquo;intera rotta.</li>
+        <li><strong>Differenza con on-chain</strong>: le TX Bitcoin sono pubbliche e visibili a tutti; qui il percorso è cifrato end-to-end con crittografia Sphinx.</li>
+        <li>Il <strong>destinatario non conosce il mittente</strong> (a meno di metadata fuori banda), garantendo privacy bidirezionale.</li>
+      </ul>
+      <div class="onion-layers-wrap">
+        <div class="onion-diagram">
+          <div class="ol ol1">Tu &#8594; [cifrato] &#8594; [cifrato] &#8594; ACINQ</div>
+          <div class="ol ol2">[cifrato] &#8594; [cifrato] &#8594; ACINQ</div>
+          <div class="ol ol3">[cifrato] &#8594; ACINQ</div>
+          <div class="ol ol4">ACINQ</div>
+        </div>
+        <div class="onion-legend">
+          <div class="onion-leg-item"><div class="onion-leg-dot" style="background:rgba(167,139,250,0.8)"></div>Layer 1 (visibile a te)</div>
+          <div class="onion-leg-item"><div class="onion-leg-dot" style="background:rgba(77,159,255,0.8)"></div>Layer 2 (hop 1)</div>
+          <div class="onion-leg-item"><div class="onion-leg-dot" style="background:rgba(247,147,26,0.8)"></div>Layer 3 (hop 2)</div>
+          <div class="onion-leg-item"><div class="onion-leg-dot" style="background:rgba(34,211,160,0.8)"></div>Layer 4 (destinatario)</div>
+        </div>
+      </div>
+    </div>
+
     <!-- HTLC PANEL -->
     <div class="htlc-box" id="htlcBox">
       <div class="htlc-title">// HTLC — Hash Time-Lock Contract</div>
@@ -714,10 +962,25 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 17px;
     </div>
 
     <div class="btn-row">
-      <button class="btn btn-outline" onclick="goStep(4)">← Indietro</button>
-      <button class="btn btn-primary" id="btnSendPay" onclick="sendPayment()" disabled>⚡ Invia pagamento</button>
+      <button class="btn btn-outline" onclick="goStep(4)">&#8592; Indietro</button>
+      <button class="btn btn-primary" id="btnSendPay" onclick="sendPayment()" disabled>&#9889; Invia pagamento</button>
       <button class="btn btn-outline" id="btnNewPay" onclick="newPayment()" style="display:none">+ Nuovo pagamento</button>
     </div>
+
+    <!-- UPGRADE 4: WATCHTOWER -->
+    <details class="watchtower-box" id="watchtowerBox">
+      <summary>&#9888;&#65039; Problema: devi stare online per difendere il canale</summary>
+      <div class="watchtower-body">
+        <p>Se il tuo peer tenta un <strong>force close fraudolento</strong> (pubblicando una commitment TX vecchia) mentre sei offline, non puoi rispondere con la breach remedy in tempo — e potresti perdere i fondi.</p>
+        <p>La soluzione sono i <strong>Watchtower</strong>:</p>
+        <ul>
+          <li>Nodi di terze parti che <strong>monitorano la blockchain</strong> per tuo conto, 24/7, anche quando sei offline.</li>
+          <li>Se rilevano un tentativo di frode, inviano automaticamente la breach remedy transaction per tuo conto.</li>
+          <li>Implementati in <strong>LND</strong> (con Neutrino), <strong>CLN</strong> e <strong>LDK</strong>. Alcuni sono gratuiti, altri a pagamento.</li>
+          <li><strong>Non possono accedere ai tuoi fondi</strong>: ricevono solo la breach remedy pre-firmata da te — non le tue chiavi private.</li>
+        </ul>
+      </div>
+    </details>
   </div>
 
 </div><!-- end wizard-wrap -->
@@ -1311,6 +1574,23 @@ function initStep4() {
   document.getElementById('canvasHint').textContent = '// i tuoi canali sono evidenziati';
   highlightNodes = ['user', ...userChannels.map(c => c.peer)];
   highlightChannels = userChannels.map(c => c.id);
+  // Reset inbound sim
+  var sl = document.getElementById('isimSlider');
+  if (sl) { sl.value = 0; updateIsim(); }
+}
+
+function updateIsim() {
+  var CAP = 1000000;
+  var spent = parseInt(document.getElementById('isimSlider').value) || 0;
+  var loc = CAP - spent;
+  var rem = spent;
+  var pctLoc = Math.round(loc / CAP * 100);
+  var pctRem = 100 - pctLoc;
+  document.getElementById('isimBarLoc').style.width = pctLoc + '%';
+  document.getElementById('isimBarRem').style.width = pctRem + '%';
+  document.getElementById('isimValLoc').textContent = fmtSat(loc) + ' sat';
+  document.getElementById('isimValRem').textContent = fmtSat(rem) + ' sat';
+  document.getElementById('isimSpent').textContent  = fmtSat(spent) + ' sat';
 }
 
 function renderLiqChs() {
@@ -1410,6 +1690,9 @@ function initStep5() {
   document.getElementById('btnNewPay').style.display = 'none';
   document.getElementById('routeBox').classList.remove('on');
   document.getElementById('htlcBox').classList.remove('on');
+  document.getElementById('invoiceBox').style.display = 'none';
+  document.getElementById('onionBox').style.display   = 'none';
+  document.getElementById('watchtowerBox').classList.remove('on');
   clearMsg('step5Msg');
   document.getElementById('canvasHint').textContent = '// clicca un nodo per scegliere la destinazione';
   // Reset HTLC steps
@@ -1546,6 +1829,12 @@ function findRoute() {
   document.getElementById('routeFees').textContent = result.totalFee;
   document.getElementById('routeHops').textContent = result.path.length - 1;
   document.getElementById('routeBox').classList.add('on');
+  // Show invoice and onion routing boxes before HTLC
+  var destNode = step5Dest && NODES[step5Dest] ? NODES[step5Dest].alias : 'Destinatario';
+  var invDestEl = document.getElementById('invDest');
+  if (invDestEl) invDestEl.textContent = destNode + ' (pubkey troncata)';
+  document.getElementById('invoiceBox').style.display = 'block';
+  document.getElementById('onionBox').style.display   = 'block';
   document.getElementById('htlcBox').classList.add('on');
   document.getElementById('btnSendPay').disabled = false;
   clearMsg('step5Msg');
@@ -1627,8 +1916,9 @@ function sendPayment() {
     payAnimating = false;
     highlightNodes = [];
     highlightChannels = [];
-    showMsg('step5Msg', 'success', '⚡ Pagamento completato! ' + fmtSat(amount) + ' sat inviati a ' + NODES[step5Dest].alias + ' in millisecondi, senza pubblicare nulla on-chain.');
+    showMsg('step5Msg', 'success', '&#9889; Pagamento completato! ' + fmtSat(amount) + ' sat inviati a ' + NODES[step5Dest].alias + ' in millisecondi, senza pubblicare nulla on-chain.');
     document.getElementById('btnNewPay').style.display = 'inline-flex';
+    document.getElementById('watchtowerBox').classList.add('on');
   }
 }
 
@@ -1646,6 +1936,9 @@ function newPayment() {
   renderDestGrid();
   document.getElementById('routeBox').classList.remove('on');
   document.getElementById('htlcBox').classList.remove('on');
+  document.getElementById('invoiceBox').style.display = 'none';
+  document.getElementById('onionBox').style.display   = 'none';
+  document.getElementById('watchtowerBox').classList.remove('on');
   document.getElementById('btnSendPay').disabled = true;
   document.getElementById('btnFindRoute').disabled = true;
   document.getElementById('btnNewPay').style.display = 'none';
