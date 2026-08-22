@@ -561,6 +561,80 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
   .tree-wrap{overflow-x:auto;margin:1rem 0 0.5rem;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:1rem 0.5rem;}
   .tree-tooltip{position:fixed;pointer-events:none;display:none;background:rgba(7,8,10,0.96);border:1px solid var(--gold);border-radius:6px;padding:0.5rem 0.8rem;font-family:var(--mono);font-size:0.69rem;color:var(--text1);z-index:300;max-width:280px;line-height:1.5;}
 
+/* ── BIP Architecture Box ── */
+.bip-arch-box {
+  background: rgba(247,147,26,0.04);
+  border: 1px solid rgba(247,147,26,0.18);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  margin: 1.4rem 0;
+}
+.bip-arch-title {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+.bip-arch-intro {
+  color: var(--text2);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+.bip-arch-table-wrap { overflow-x: auto; }
+.bip-arch-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.bip-arch-table th {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: left;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.bip-arch-table td {
+  padding: 0.55rem 0.8rem;
+  color: var(--text2);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  line-height: 1.6;
+}
+.bip-arch-table tr:last-child td { border-bottom: none; }
+.bip-tag {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.bip-tag-ext { color: var(--green); }
+.bip-arch-note {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.83rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.bip-arch-note code {
+  font-family: var(--mono);
+  color: var(--gold);
+  font-size: 0.8rem;
+}
+.bip-arch-table td code {
+  font-family: var(--mono);
+  color: var(--gold);
+  font-size: 0.78rem;
+}
   </style>
 <meta property="og:site_name" content="Bitcoin Report School">
 <meta property="og:locale" content="it_IT">
@@ -832,6 +906,53 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
     <div class="hint-box" id="h4">
       <strong>HD = Hierarchical Deterministic.</strong> Da un singolo seed (la tua frase di 12/24 parole), si derivano matematicamente infinite chiavi private e pubbliche seguendo un percorso (<em>derivation path</em>). <em>m/44'/0'/0'/0/0</em> significa: master → purpose 44 (hardened) → coin 0 (Bitcoin, hardened) → account 0 (hardened) → esterno (0) → indirizzo 0. Il simbolo <em>'</em> (hardened) significa che quella derivazione usa un'operazione extra sicura che impedisce di risalire alla chiave padre anche conoscendo la chiave figlia.
     </div>
+
+<!-- BLOCCO ARCHITETTURA BIP -->
+<div class="bip-arch-box">
+  <div class="bip-arch-title">&#128274; Perch&eacute; si parla sempre di BIP39/BIP44 insieme?</div>
+  <p class="bip-arch-intro">Questi standard lavorano su livelli diversi ma complementari. Senza tutti e tre, un wallet non saprebbe n&eacute; come generare il seed n&eacute; dove posizionare gli indirizzi nell&rsquo;albero per ritrovarli.</p>
+
+  <div class="bip-arch-table-wrap">
+    <table class="bip-arch-table">
+      <thead>
+        <tr>
+          <th>Standard</th>
+          <th>Ruolo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bip-tag">BIP39</td>
+          <td>Trasforma l&rsquo;entropia in 12/24 parole leggibili e genera il Seed principale (512 bit).</td>
+        </tr>
+        <tr>
+          <td class="bip-tag">BIP32</td>
+          <td>Permette la derivazione gerarchica deterministica (HD): da un unico Seed si derivano infinite chiavi figlie in modo ripetibile.</td>
+        </tr>
+        <tr>
+          <td class="bip-tag">BIP44</td>
+          <td>Introduce lo schema strutturato a 5 livelli (<code>purpose / coin / account / change / index</code>) e definisce gli indirizzi Legacy (purpose&nbsp;44&rsquo;).</td>
+        </tr>
+        <tr>
+          <td class="bip-tag bip-tag-ext">BIP49</td>
+          <td>Stessa architettura BIP44, solo il campo <code>purpose&rsquo;</code> cambia a <strong>49&rsquo;</strong> per indicare indirizzi Nested SegWit (iniziano per 3).</td>
+        </tr>
+        <tr>
+          <td class="bip-tag bip-tag-ext">BIP84</td>
+          <td>Stessa architettura BIP44, <code>purpose&rsquo;</code> = <strong>84&rsquo;</strong> per Native SegWit (iniziano per bc1q).</td>
+        </tr>
+        <tr>
+          <td class="bip-tag bip-tag-ext">BIP86</td>
+          <td>Stessa architettura BIP44, <code>purpose&rsquo;</code> = <strong>86&rsquo;</strong> per Taproot (iniziano per bc1p).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bip-arch-note">
+    <strong>Il campo <code>purpose&rsquo;</code> &egrave; l&rsquo;unica differenza.</strong> BIP49, BIP84 e BIP86 non hanno reinventato nulla: usano esattamente la struttura a 5 livelli di BIP44, cambiando solo quel numero per dire al wallet quale tipo di indirizzo calcolare. Per questo nel gergo comune si dice &ldquo;struttura BIP44&rdquo; anche riferendosi ai wallet SegWit o Taproot: l&rsquo;architettura &egrave; la stessa.
+  </div>
+</div>
 
     <div class="sec-div">Scegli il tipo di wallet e derivation path</div>
 
