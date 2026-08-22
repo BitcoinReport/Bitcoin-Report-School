@@ -474,12 +474,12 @@ details.commitment-box summary::-webkit-details-marker { display: none; }
 .onion-box ul { font-size: 0.82rem; color: var(--text2); margin: 0 0 0.8rem 1.1rem; display: flex; flex-direction: column; gap: 0.3rem; }
 .onion-box strong { color: var(--text); }
 .onion-layers-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 0.9rem; }
-.onion-diagram { position: relative; width: 320px; height: 106px; }
-.ol { position: absolute; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.6rem; text-align: center; padding: 0 0.5rem; }
-.ol1 { inset: 0;          background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.35); color: var(--purple); }
-.ol2 { inset: 11px 22px;  background: rgba(77,159,255,0.12);  border: 1px solid rgba(77,159,255,0.3);  color: var(--blue); }
-.ol3 { inset: 22px 44px;  background: rgba(247,147,26,0.10);  border: 1px solid rgba(247,147,26,0.3);  color: var(--gold); }
-.ol4 { inset: 33px 66px;  background: rgba(34,211,160,0.12);  border: 1px solid rgba(34,211,160,0.3);  color: var(--green); font-size: 0.55rem; }
+.onion-diagram { display: flex; flex-direction: column; gap: 0; width: 100%; max-width: 520px; }
+.ol { border-radius: 10px; font-family: var(--mono); font-size: 0.72rem; padding: 0.55rem 1rem; line-height: 1.45; }
+.ol1 { background: rgba(167,139,250,0.10); border: 1px solid rgba(167,139,250,0.35); color: var(--purple); margin: 0; }
+.ol2 { background: rgba(77,159,255,0.10);  border: 1px solid rgba(77,159,255,0.3);   color: var(--blue);   margin: 4px 0 0 1.5rem; }
+.ol3 { background: rgba(247,147,26,0.10);  border: 1px solid rgba(247,147,26,0.3);   color: var(--gold);   margin: 4px 0 0 3rem; }
+.ol4 { background: rgba(34,211,160,0.10);  border: 1px solid rgba(34,211,160,0.3);   color: var(--green);  margin: 4px 0 0 4.5rem; }
 .onion-legend { display: flex; gap: 1rem; margin-top: 0.65rem; flex-wrap: wrap; justify-content: center; }
 .onion-leg-item { font-family: var(--mono); font-size: 0.6rem; color: var(--text2); display: flex; align-items: center; gap: 0.35rem; }
 .onion-leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
@@ -924,10 +924,10 @@ details.watchtower-box summary::-webkit-details-marker { display: none; }
       </ul>
       <div class="onion-layers-wrap">
         <div class="onion-diagram">
-          <div class="ol ol1">Tu &#8594; [cifrato] &#8594; [cifrato] &#8594; ACINQ</div>
-          <div class="ol ol2">[cifrato] &#8594; [cifrato] &#8594; ACINQ</div>
-          <div class="ol ol3">[cifrato] &#8594; ACINQ</div>
-          <div class="ol ol4">ACINQ</div>
+          <div class="ol ol1">&#x1F9C5; Layer 1 &mdash; Tu vedi: Tu &#8594; [cifrato] &#8594; [cifrato] &#8594; ACINQ</div>
+          <div class="ol ol2">&#x1F512; Layer 2 &mdash; Hop 1 vede: [vai al nodo successivo] &#8594; [cifrato] &#8594; ACINQ</div>
+          <div class="ol ol3">&#x1F512; Layer 3 &mdash; Hop 2 vede: [vai ad ACINQ] &#8594; ACINQ</div>
+          <div class="ol ol4">&#x2705; Layer 4 &mdash; ACINQ vede solo: sei il destinatario finale</div>
         </div>
         <div class="onion-legend">
           <div class="onion-leg-item"><div class="onion-leg-dot" style="background:rgba(167,139,250,0.8)"></div>Layer 1 (visibile a te)</div>
