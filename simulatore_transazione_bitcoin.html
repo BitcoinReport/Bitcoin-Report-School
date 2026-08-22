@@ -259,6 +259,146 @@ nav{border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;align
 @media(max-width:768px){.donation-inner{grid-template-columns:1fr;gap:2.5rem;}.donation-qr-wrap{order:-1;}}
 footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:var(--mono);font-size:0.65rem;color:var(--text3);}
 
+/* ── UPGRADE STYLES ── */
+details.utxo-lifecycle{background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.18);border-radius:10px;overflow:hidden;margin:0.8rem 0;}
+details.utxo-lifecycle summary{padding:0.75rem 1rem;font-family:var(--mono);font-size:0.7rem;color:var(--gold);cursor:pointer;list-style:none;display:flex;align-items:center;gap:0.5rem;user-select:none;}
+details.utxo-lifecycle summary::-webkit-details-marker{display:none;}
+.utxo-lc-body{padding:0.4rem 1rem 1rem;}
+.utxo-lc-flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:0.6rem 0 0.8rem;}
+.utxo-lc-box{border-radius:7px;padding:0.5rem 0.75rem;text-align:center;font-family:var(--mono);font-size:0.63rem;line-height:1.5;flex:1;min-width:80px;}
+.utxo-lc-arr{color:var(--text3);padding:0 0.3rem;font-size:0.9rem;display:flex;align-items:center;}
+.utxo-lc-note{font-size:0.75rem;color:var(--text2);line-height:1.65;margin-top:0.6rem;border-top:1px solid var(--border);padding-top:0.6rem;}
+details.rbf-box{background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.18);border-radius:10px;overflow:hidden;margin:0.8rem 0;}
+details.rbf-box summary{padding:0.75rem 1rem;font-family:var(--mono);font-size:0.7rem;color:var(--gold);cursor:pointer;list-style:none;display:flex;align-items:center;gap:0.5rem;user-select:none;}
+details.rbf-box summary::-webkit-details-marker{display:none;}
+.rbf-body{padding:0.3rem 1rem 1rem;font-size:0.82rem;color:var(--text2);line-height:1.72;}
+.rbf-body strong{color:var(--text);}
+.rbf-body ul{margin:0.4rem 0 0.7rem 1.1rem;display:flex;flex-direction:column;gap:0.3rem;}
+.rbf-section-title{font-family:var(--mono);font-size:0.63rem;text-transform:uppercase;letter-spacing:0.12em;margin:0.8rem 0 0.3rem;}
+.rbf-diagrams{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin:0.7rem 0;}
+.rbf-diag{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.85rem;font-family:var(--mono);font-size:0.62rem;line-height:1.7;}
+.rbf-diag .rbd-title{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;}
+@media(max-width:560px){.rbf-diagrams{grid-template-columns:1fr;}}
+details.hex-decode-box{background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.2);border-radius:10px;overflow:hidden;margin:0.8rem 0;}
+details.hex-decode-box summary{padding:0.75rem 1rem;font-family:var(--mono);font-size:0.7rem;color:#c084fc;cursor:pointer;list-style:none;display:flex;align-items:center;gap:0.5rem;user-select:none;}
+details.hex-decode-box summary::-webkit-details-marker{display:none;}
+.hex-decode-body{padding:0.3rem 1rem 1rem;overflow-x:auto;}
+.hex-decode-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:0.62rem;min-width:340px;}
+.hex-decode-table th{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);padding:0.4rem 0.6rem;border-bottom:1px solid var(--border);text-align:left;background:var(--bg);}
+.hex-decode-table td{padding:0.4rem 0.6rem;border-bottom:1px solid rgba(30,30,46,0.5);color:var(--text2);vertical-align:top;line-height:1.5;}
+.hex-decode-table tr:last-child td{border-bottom:none;}
+.script-lock-box{background:rgba(34,211,160,0.04);border:1px solid rgba(34,211,160,0.18);border-radius:10px;padding:1rem 1.2rem;margin:0.8rem 0;}
+.script-lock-title{font-family:var(--mono);font-size:0.63rem;color:var(--green);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.7rem;}
+.script-lock-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0.7rem;align-items:start;margin-bottom:0.8rem;}
+.slc{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:0.65rem 0.85rem;font-family:var(--mono);font-size:0.62rem;}
+.slc-title{font-size:0.56rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:0.4rem;}
+.slc-code{color:var(--cyan);line-height:1.65;}
+.slc-arr{font-size:0.85rem;color:var(--gold);display:flex;align-items:center;justify-content:center;padding-top:1.1rem;}
+.script-result{background:var(--green-dim);border:1px solid rgba(34,211,160,0.3);border-radius:6px;padding:0.5rem 0.9rem;font-family:var(--mono);font-size:0.7rem;color:var(--green);text-align:center;}
+.script-lock-note{font-size:0.78rem;color:var(--text2);margin-top:0.7rem;line-height:1.65;}
+@media(max-width:560px){.script-lock-grid{grid-template-columns:1fr;}.slc-arr{transform:rotate(90deg);justify-content:flex-start;padding-top:0;}}
+details.coinbase-box{background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.18);border-radius:10px;overflow:hidden;margin:0.8rem 0;}
+details.coinbase-box summary{padding:0.75rem 1rem;font-family:var(--mono);font-size:0.7rem;color:var(--gold);cursor:pointer;list-style:none;display:flex;align-items:center;gap:0.5rem;user-select:none;}
+details.coinbase-box summary::-webkit-details-marker{display:none;}
+.coinbase-body{padding:0.3rem 1rem 1rem;font-size:0.82rem;color:var(--text2);line-height:1.72;}
+.coinbase-body strong{color:var(--text);}
+.coinbase-body ul{margin:0.4rem 0 0.7rem 1.1rem;display:flex;flex-direction:column;gap:0.3rem;}
+.halving-timeline{display:flex;flex-direction:column;gap:0.45rem;margin-top:0.9rem;}
+.halving-row{display:flex;align-items:center;gap:0.7rem;}
+.halving-year{font-family:var(--mono);font-size:0.62rem;color:var(--text3);min-width:36px;text-align:right;}
+.halving-bar-wrap{flex:1;background:var(--bg);border-radius:4px;height:18px;overflow:hidden;border:1px solid var(--border);}
+.halving-bar{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:0.45rem;transition:width 0.5s;}
+.halving-amt{font-family:var(--mono);font-size:0.6rem;color:#000;font-weight:700;}
+.halving-row.cur .halving-year{color:var(--gold);font-weight:700;}
+.halving-row.cur .halving-bar-wrap{border-color:var(--gold);box-shadow:0 0 8px rgba(247,147,26,0.3);}
+details.reorg-box{background:rgba(255,85,102,0.04);border:1px solid rgba(255,85,102,0.2);border-radius:10px;overflow:hidden;margin:0.8rem 0;}
+details.reorg-box summary{padding:0.75rem 1rem;font-family:var(--mono);font-size:0.7rem;color:var(--red);cursor:pointer;list-style:none;display:flex;align-items:center;gap:0.5rem;user-select:none;}
+details.reorg-box summary::-webkit-details-marker{display:none;}
+.reorg-body{padding:0.3rem 1rem 1rem;font-size:0.82rem;color:var(--text2);line-height:1.72;}
+.reorg-body strong{color:var(--text);}
+.reorg-body ul{margin:0.4rem 0 0.7rem 1.1rem;display:flex;flex-direction:column;gap:0.3rem;}
+.reorg-chains{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin:0.7rem 0;}
+.rc{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:0.65rem 0.85rem;font-family:var(--mono);font-size:0.62rem;}
+.rc-title{font-size:0.56rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:0.4rem;}
+.rc-blocks{display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap;}
+.rc-blk{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:0.18rem 0.45rem;font-size:0.58rem;white-space:nowrap;}
+.rc-blk.win{border-color:var(--green);color:var(--green);}
+.rc-blk.hl{border-color:var(--gold);color:var(--gold);}
+.rc-blk.lose{border-color:var(--red);color:var(--red);text-decoration:line-through;}
+@media(max-width:560px){.reorg-chains{grid-template-columns:1fr;}}
+/* --- RBF sub-classes --- */
+.rbf-intro{font-size:0.72rem;color:var(--text2);margin-bottom:0.8rem;}
+.rbf-methods{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.5rem;}
+@media(max-width:600px){.rbf-methods{grid-template-columns:1fr;}}
+.rbf-method{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.8rem;}
+.rbf-method-title{font-family:var(--mono);font-size:0.68rem;color:var(--text);font-weight:600;margin-bottom:0.4rem;}
+.rbf-method-desc{font-size:0.7rem;color:var(--text2);margin-bottom:0.6rem;line-height:1.5;}
+.rbf-flow{display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;margin:0.5rem 0;}
+.rbf-flow-box{background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:0.35rem 0.6rem;font-family:var(--mono);font-size:0.6rem;text-align:center;}
+.rbf-flow-arr{color:var(--text3);font-size:0.75rem;}
+.rbf-cpfp-calc{font-family:var(--mono);font-size:0.62rem;color:var(--cyan);background:rgba(34,211,160,0.06);border-radius:4px;padding:0.35rem 0.6rem;margin:0.4rem 0;}
+.rbf-note{font-size:0.65rem;color:var(--text3);margin-top:0.35rem;line-height:1.5;}
+.rbf-badge{border-radius:4px;padding:0.08rem 0.4rem;font-size:0.6rem;margin-left:0.4rem;font-family:var(--mono);}
+.rbf-result{display:none;background:var(--bg2);border:1px solid rgba(34,211,160,0.3);border-radius:6px;padding:0.6rem 0.8rem;font-family:var(--mono);font-size:0.65rem;line-height:1.6;margin-top:0.6rem;}
+/* --- hex-decode table --- */
+.hex-decode-body{padding:0.8rem 1rem;}
+.hex-decode-table{width:100%;border-collapse:collapse;font-size:0.68rem;font-family:var(--mono);}
+.hex-decode-table th{text-align:left;color:var(--text3);border-bottom:1px solid var(--border);padding:0.3rem 0.5rem;}
+.hex-decode-table td{padding:0.3rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+/* --- script-lock sub-classes --- */
+details.script-lock-box summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:0.7rem;color:var(--green);}
+details.script-lock-box summary::-webkit-details-marker{display:none;}
+.script-lock-body{padding:0.8rem 0;}
+.script-lock-intro{font-size:0.72rem;color:var(--text2);margin-bottom:0.9rem;line-height:1.5;}
+.script-lock-cols{display:flex;align-items:flex-start;gap:0.6rem;flex-wrap:wrap;margin-bottom:0.9rem;}
+.script-lock-col{flex:1;min-width:120px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.7rem;}
+.script-lock-col-title{font-family:var(--mono);font-size:0.68rem;font-weight:600;margin-bottom:0.2rem;}
+.script-lock-col-sub{font-size:0.6rem;color:var(--text3);margin-bottom:0.4rem;}
+.script-lock-col-note{font-size:0.62rem;color:var(--text3);margin-top:0.35rem;line-height:1.4;}
+.script-code{font-family:var(--mono);font-size:0.62rem;background:var(--bg2);border-radius:4px;padding:0.3rem 0.5rem;line-height:1.6;white-space:pre-wrap;}
+.script-lock-plus,.script-lock-eq{font-size:1.2rem;color:var(--text3);padding:0 0.2rem;align-self:center;}
+.script-lock-types{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.7rem;}
+.script-lock-type-title{font-family:var(--mono);font-size:0.68rem;color:var(--text3);margin-bottom:0.5rem;}
+.script-types-row{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.script-type-box{background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:0.4rem 0.7rem;flex:1;min-width:90px;}
+.stype-name{font-family:var(--mono);font-size:0.65rem;color:var(--cyan);font-weight:600;}
+.stype-desc{font-size:0.6rem;color:var(--text3);margin-top:0.15rem;}
+/* --- coinbase sub-classes --- */
+.coinbase-body{padding:0.8rem 1rem;}
+.coinbase-intro{font-size:0.72rem;color:var(--text2);margin-bottom:0.8rem;line-height:1.5;}
+.coinbase-struct{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.8rem;margin-bottom:0.9rem;}
+.coinbase-struct-title{font-family:var(--mono);font-size:0.68rem;color:var(--text3);margin-bottom:0.5rem;}
+.coinbase-struct-row{display:flex;gap:0.6rem;font-family:var(--mono);font-size:0.65rem;padding:0.25rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.cbs-key{min-width:80px;opacity:0.7;}
+.cbs-val{color:var(--text);}
+.halving-title{font-family:var(--mono);font-size:0.68rem;color:var(--text3);margin-bottom:0.5rem;}
+.ht-row{display:flex;align-items:center;gap:0.5rem;}
+.ht-epoch{font-family:var(--mono);font-size:0.62rem;color:var(--text3);width:48px;flex-shrink:0;}
+.ht-epoch.active{color:var(--gold);font-weight:600;}
+.ht-block{font-family:var(--mono);font-size:0.6rem;color:var(--text3);width:110px;flex-shrink:0;}
+.ht-reward{font-family:var(--mono);font-size:0.65rem;color:var(--text2);width:90px;flex-shrink:0;}
+.ht-reward.active{color:var(--gold);}
+.ht-bar{flex:1;background:var(--bg3);border-radius:3px;height:10px;overflow:hidden;}
+.ht-fill{height:100%;border-radius:3px;}
+.coinbase-note{font-size:0.68rem;color:var(--text2);margin-top:0.9rem;line-height:1.5;background:rgba(247,147,26,0.06);border-radius:6px;padding:0.6rem 0.8rem;}
+/* --- reorg sub-classes --- */
+.reorg-body{padding:0.8rem 1rem;}
+.reorg-intro{font-size:0.72rem;color:var(--text2);margin-bottom:0.8rem;line-height:1.5;}
+.reorg-chain{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.8rem;margin-bottom:0.8rem;}
+.reorg-chain-title{font-family:var(--mono);font-size:0.65rem;color:var(--text3);margin-bottom:0.5rem;}
+.reorg-chain-row{display:flex;align-items:center;gap:0.3rem;flex-wrap:wrap;}
+.reorg-blk{background:var(--bg2);border:1px solid rgba(34,211,160,0.3);border-radius:5px;padding:0.3rem 0.5rem;font-family:var(--mono);font-size:0.58rem;text-align:center;color:var(--green);}
+.reorg-blk.confirmed{border-color:var(--gold);color:var(--gold);}
+.reorg-blk.attack{border-color:rgba(248,113,113,0.5);color:#f87171;}
+.reorg-arr{color:var(--text3);font-size:0.75rem;}
+.reorg-cost{background:rgba(255,85,102,0.05);border:1px solid rgba(255,85,102,0.18);border-radius:8px;padding:0.7rem;margin-bottom:0.7rem;}
+.reorg-cost-title{font-family:var(--mono);font-size:0.65rem;color:#f87171;margin-bottom:0.4rem;}
+.reorg-cost-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:0.62rem;padding:0.2rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.rcost-label{color:var(--text3);}
+.rcost-val{color:var(--text);}
+.reorg-btn-row{display:flex;align-items:flex-start;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.7rem;}
+.reorg-result{display:none;font-family:var(--mono);font-size:0.65rem;line-height:1.6;flex:1;background:var(--bg3);border-radius:6px;padding:0.5rem 0.7rem;}
+.reorg-rule{font-size:0.7rem;color:var(--text2);background:rgba(34,211,160,0.06);border-radius:6px;padding:0.6rem 0.8rem;line-height:1.5;}
 </style>
 <meta name="robots" content="index, follow">
 <meta name="language" content="it">
@@ -940,6 +1080,33 @@ function renderS2(){
     <div class="step-subtitle">Il wallet di Mario scansiona la blockchain e trova i suoi UTXO disponibili. Seleziona quello da usare come input.</div>
   </div>
   <div class="info-box"><span class="info-box-icon">&#128176;</span><strong>Non hai un saldo</strong> — hai "banconote digitali" (UTXO). Ogni UTXO pu&#242; essere speso una sola volta. Se il valore &#232; maggiore di quanto vuoi inviare, ricevi il resto come nuovo UTXO.</div>
+  <details class="utxo-lifecycle">
+    <summary>&#9660; Ciclo di vita di un UTXO &mdash; dalla creazione alla distruzione</summary>
+    <div class="utxo-lc-body">
+      <div class="utxo-lc-flow">
+        <div class="utxo-lc-box" style="background:rgba(34,211,160,0.08);border:1px solid rgba(34,211,160,0.3);color:var(--green)">
+          <div style="font-weight:700;margin-bottom:0.2rem">CREATO</div>
+          <div style="color:var(--text2)">Una TX ha un output che punta al tuo indirizzo</div>
+        </div>
+        <div class="utxo-lc-arr">&#8594;</div>
+        <div class="utxo-lc-box" style="background:rgba(247,147,26,0.08);border:1px solid rgba(247,147,26,0.3);color:var(--gold)">
+          <div style="font-weight:700;margin-bottom:0.2rem">UTXO SET</div>
+          <div style="color:var(--text2)">Ogni nodo full tiene in RAM tutti gli UTXO non spesi (~10 GB attuale)</div>
+        </div>
+        <div class="utxo-lc-arr">&#8594;</div>
+        <div class="utxo-lc-box" style="background:rgba(77,159,255,0.08);border:1px solid rgba(77,159,255,0.3);color:var(--cyan)">
+          <div style="font-weight:700;margin-bottom:0.2rem">SELEZIONATO</div>
+          <div style="color:var(--text2)">Il wallet lo sceglie come input per una nuova TX</div>
+        </div>
+        <div class="utxo-lc-arr">&#8594;</div>
+        <div class="utxo-lc-box" style="background:rgba(255,85,102,0.08);border:1px solid rgba(255,85,102,0.3);color:var(--red)">
+          <div style="font-weight:700;margin-bottom:0.2rem">SPESO</div>
+          <div style="color:var(--text2)">Rimosso dall&rsquo;UTXO set per sempre &mdash; non esiste pi&#249;</div>
+        </div>
+      </div>
+      <div class="utxo-lc-note">Il <strong>&ldquo;saldo&rdquo;</strong> del tuo wallet &#232; la somma di tutti i tuoi UTXO non spesi. Non esiste un campo <em>saldo</em> nella blockchain &mdash; ogni nodo lo calcola sommando gli UTXO che appartengono ai tuoi indirizzi.</div>
+    </div>
+  </details>
   <div class="hex-label">UTXO disponibili nel wallet di Mario</div>
   <div class="utxo-list" id="utxo-list">
     ${STATE.utxos.map((u,i)=>`
@@ -997,6 +1164,30 @@ function renderS3(){
   </div>
   <div class="hex-label">Transazione serializzata (non firmata)</div>
   <div class="hex-block" id="tx-hex-block">${txHex}</div>
+  <details class="hex-decode-box">
+    <summary>&#9660; Decodifica la transazione campo per campo</summary>
+    <div class="hex-decode-body">
+      ${STATE.txType==='p2tr'?
+        '<div style="font-family:var(--mono);font-size:0.75rem;color:var(--text2);padding:0.5rem 0">La decodifica campo per campo per Taproot &#232; pi&#249; complessa (annex, control block, script path) &mdash; mostriamo la struttura semplificata P2TR: Version | Marker+Flag | Input | Output | Witness (solo signature Schnorr 64 byte) | Locktime.</div>'
+        :
+        '<table class="hex-decode-table"><thead><tr><th>Campo</th><th>Byte</th><th>Colore</th><th>Significato</th></tr></thead><tbody>' +
+        '<tr><td style="color:var(--green)">Version</td><td>4 LE</td><td style="color:var(--green)">&#9646; verde</td><td><code>02000000</code> = versione 2</td></tr>' +
+        '<tr><td style="color:#c084fc">Marker + Flag</td><td>2</td><td style="color:#c084fc">&#9646; viola</td><td><code>0001</code> = SegWit attivo (BIP141)</td></tr>' +
+        '<tr><td style="color:var(--cyan)">Input count</td><td>varint</td><td style="color:var(--cyan)">&#9646; ciano</td><td><code>01</code> = un input</td></tr>' +
+        '<tr><td style="color:var(--cyan)">Input: TXID</td><td>32 LE</td><td style="color:var(--cyan)">&#9646; ciano</td><td>Hash della TX precedente (little-endian)</td></tr>' +
+        '<tr><td style="color:var(--cyan)">Input: vout</td><td>4 LE</td><td style="color:var(--cyan)">&#9646; ciano</td><td>Indice dell&rsquo;output speso</td></tr>' +
+        '<tr><td style="color:var(--cyan)">Input: scriptSig</td><td>varint+data</td><td style="color:var(--cyan)">&#9646; ciano</td><td><code>00</code> = vuoto (SegWit: la firma va nel witness)</td></tr>' +
+        '<tr><td style="color:var(--cyan)">Input: nSequence</td><td>4</td><td style="color:var(--cyan)">&#9646; ciano</td><td><code>fdffffff</code> = RBF attivo (BIP125)</td></tr>' +
+        '<tr><td style="color:var(--gold)">Output count</td><td>varint</td><td style="color:var(--gold)">&#9646; oro</td><td><code>02</code> = due output</td></tr>' +
+        '<tr><td style="color:var(--gold)">Output 1: value</td><td>8 LE</td><td style="color:var(--gold)">&#9646; oro</td><td>Importo a Christine in satoshi (little-endian)</td></tr>' +
+        '<tr><td style="color:var(--gold)">Output 2: value</td><td>8 LE</td><td style="color:var(--gold)">&#9646; oro</td><td>Change a Mario in satoshi</td></tr>' +
+        '<tr><td style="color:var(--yellow)">scriptPubKey</td><td>varint+data</td><td style="color:var(--yellow)">&#9646; giallo</td><td>Script di blocco dell&rsquo;output (P2WPKH: OP_0 + hash160)</td></tr>' +
+        '<tr><td style="color:#c084fc">Witness</td><td>stack</td><td style="color:#c084fc">&#9646; viola</td><td>Non presente nella non-firmata &mdash; appare in Step 4 (firma DER + pubkey)</td></tr>' +
+        '<tr><td style="color:var(--text3)">Locktime</td><td>4 LE</td><td style="color:var(--text3)">&#9646; grigio</td><td><code>00000000</code> = nessun locktime</td></tr>' +
+        '</tbody></table>'
+      }
+    </div>
+  </details>
   <div class="summary-box">
     <div class="summary-title">// Riepilogo transazione</div>
     <div class="summary-row"><span class="summary-key">Importo a Christine</span><span class="summary-val green">${satsToDisplay(STATE.amountSat)}</span></div>
@@ -1006,6 +1197,37 @@ function renderS3(){
     <div class="summary-row"><span class="summary-key">Dimensione stimata</span><span class="summary-val">${STATE.vbytes} vbyte</span></div>
   </div>
   <div class="hint-box"><div class="hint-icon">&#128161;</div><div>La fee &#232; la mancia al miner. Maggiore &#232; la fee, pi&#249; velocemente la tua transazione verr&#224; inclusa in un blocco.</div></div>
+  <details class="rbf-box">
+    <summary>&#9660; RBF e CPFP &mdash; come accelerare una TX bloccata</summary>
+    <div class="rbf-body">
+      <div class="rbf-intro">Se la mempool si intasa e la tua transazione non viene confermata, hai due opzioni:</div>
+      <div class="rbf-methods">
+        <div class="rbf-method">
+          <div class="rbf-method-title">&#9654; RBF &mdash; Replace-By-Fee <span class="rbf-badge" style="background:rgba(247,147,26,0.18);color:var(--gold)">BIP125</span></div>
+          <div class="rbf-method-desc">Sostituisci la TX originale con una nuova identica ma con fee pi&#249; alta. Funziona solo se la TX originale ha <code>nSequence &lt; 0xFFFFFFFE</code> (segnale opt-in RBF). I miner sostituiscono la TX nella loro mempool.</div>
+          <div class="rbf-flow">
+            <div class="rbf-flow-box" style="border-color:rgba(247,147,26,0.4)">TX originale<br><span style="color:var(--gold)">1 sat/vB</span><br>bloccata</div>
+            <div class="rbf-flow-arr">&#8594; RBF &#8594;</div>
+            <div class="rbf-flow-box" style="border-color:rgba(34,211,160,0.4)">TX sostitutiva<br><span style="color:var(--green)">20 sat/vB</span><br>confermata</div>
+          </div>
+          <div class="rbf-note">&#9888; Il destinatario vede sparire la TX! Non usare RBF dopo che hai comunicato il TXID a Christine.</div>
+          <button class="btn-secondary" style="margin-top:0.5rem" onclick="simRBF()">Simula RBF sulla TX corrente</button>
+          <div id="rbf-result" class="rbf-result"></div>
+        </div>
+        <div class="rbf-method">
+          <div class="rbf-method-title">&#9654; CPFP &mdash; Child-Pays-For-Parent <span class="rbf-badge" style="background:rgba(34,211,160,0.18);color:var(--green)">sempre valido</span></div>
+          <div class="rbf-method-desc">Crea una nuova TX che spende l&rsquo;output della TX bloccata, impostando una fee altissima. I miner sono incentivati a confermare prima la TX padre (necessaria per validare il figlio).</div>
+          <div class="rbf-flow">
+            <div class="rbf-flow-box" style="border-color:rgba(247,147,26,0.4)">TX padre<br><span style="color:var(--gold)">1 sat/vB</span><br>bloccata</div>
+            <div class="rbf-flow-arr">&#8594; spende output &#8594;</div>
+            <div class="rbf-flow-box" style="border-color:rgba(34,211,160,0.4)">TX figlio<br><span style="color:var(--green)">50 sat/vB</span><br>fee media =</div>
+          </div>
+          <div class="rbf-cpfp-calc">Fee combinata effettiva: <code>(fee_padre + fee_figlio) / (vbyte_padre + vbyte_figlio)</code></div>
+          <div class="rbf-note">&#10003; CPFP funziona anche se la TX padre NON &#232; opt-in RBF. Utile quando sei il destinatario e vuoi accelerare.</div>
+        </div>
+      </div>
+    </div>
+  </details>
   ${nav(3,'Avanti: Firma ECDSA &#8594;')}`;
 }
 
@@ -1116,6 +1338,43 @@ function renderS5(){
     <div class="prop-arrow">&#8594;</div>
     <div class="prop-node"><div class="prop-circle active">&#128268;</div><div class="prop-label">Rete</div></div>
   </div>
+  <details class="script-lock-box">
+    <summary>&#9660; Script locking e unlocking &mdash; come Bitcoin prova che puoi spendere</summary>
+    <div class="script-lock-body">
+      <div class="script-lock-intro">Ogni UTXO ha uno <strong>scriptPubKey</strong> (script di blocco) che specifica CHI pu&#242; spenderlo. Per spendere, devi fornire uno <strong>scriptSig / witness</strong> (script di sblocco) che soddisfi le condizioni.</div>
+      <div class="script-lock-cols">
+        <div class="script-lock-col">
+          <div class="script-lock-col-title" style="color:var(--gold)">&#128274; scriptPubKey (lock)</div>
+          <div class="script-lock-col-sub">Creato da chi ti ha pagato</div>
+          <div class="script-code">OP_0 &lt;hash160(pubkey)&gt;</div>
+          <div class="script-lock-col-note">P2WPKH &mdash; paga al hash della tua chiave pubblica. Solo chi conosce la chiave privata pu&#242; sbloccare.</div>
+        </div>
+        <div class="script-lock-plus">+</div>
+        <div class="script-lock-col">
+          <div class="script-lock-col-title" style="color:var(--green)">&#128275; Witness (unlock)</div>
+          <div class="script-lock-col-sub">Fornito da chi spende</div>
+          <div class="script-code">&lt;signature DER&gt;<br>&lt;pubkey 33B&gt;</div>
+          <div class="script-lock-col-note">SegWit: firma + chiave pubblica nel witness separato dal tx body.</div>
+        </div>
+        <div class="script-lock-eq">&#8658;</div>
+        <div class="script-lock-col">
+          <div class="script-lock-col-title" style="color:var(--cyan)">&#9989; Verifica del nodo</div>
+          <div class="script-lock-col-sub">Script eseguito dallo stack</div>
+          <div class="script-code">OP_DUP OP_HASH160<br>&lt;pubKeyHash&gt;<br>OP_EQUALVERIFY<br>OP_CHECKSIG</div>
+          <div class="script-lock-col-note">Se firma valida e hash coincide: UTXO speso.</div>
+        </div>
+      </div>
+      <div class="script-lock-types">
+        <div class="script-lock-type-title">Tipi di script pi&#249; comuni</div>
+        <div class="script-types-row">
+          <div class="script-type-box"><div class="stype-name">P2PKH</div><div class="stype-desc">Pay-to-PubKey-Hash (legacy, indirizzi 1...)</div></div>
+          <div class="script-type-box"><div class="stype-name">P2WPKH</div><div class="stype-desc">SegWit v0 nativo (indirizzi bc1q...)</div></div>
+          <div class="script-type-box"><div class="stype-name">P2TR</div><div class="stype-desc">Taproot &mdash; Schnorr + MAST (indirizzi bc1p...)</div></div>
+          <div class="script-type-box"><div class="stype-name">P2SH</div><div class="stype-desc">Pay-to-Script-Hash (multisig, 3...)</div></div>
+        </div>
+      </div>
+    </div>
+  </details>
   <div class="hex-label">Checklist validazione di ogni nodo</div>
   <div class="checklist">
     <div class="check-item"><div class="check-icon">&#9989;</div>Struttura transazione valida (formato corretto)</div>
@@ -1161,6 +1420,28 @@ function renderS6(){
   <div class="info-box green">
     <span class="info-box-icon">&#9989;</span><strong>Blocco trovato!</strong> La transazione di Mario ha <strong>1 conferma</strong>. Con ogni nuovo blocco aggiunto sopra aumentano le conferme.
   </div>
+  <details class="coinbase-box">
+    <summary>&#9660; Coinbase TX e Halving &mdash; come nascono i nuovi bitcoin</summary>
+    <div class="coinbase-body">
+      <div class="coinbase-intro">Il <strong>primo output di ogni blocco</strong> &#232; la <em>Coinbase Transaction</em>: una TX speciale senza input che crea bitcoin dal nulla &mdash; l&rsquo;unico modo legittimo di farlo.</div>
+      <div class="coinbase-struct">
+        <div class="coinbase-struct-title">Struttura Coinbase TX</div>
+        <div class="coinbase-struct-row" style="color:var(--gold)"><span class="cbs-key">Input</span><span class="cbs-val">Coinbase (nessun UTXO precedente, dati arbitrari del miner)</span></div>
+        <div class="coinbase-struct-row" style="color:var(--green)"><span class="cbs-key">Output 1</span><span class="cbs-val">Ricompensa blocco (3.125 BTC oggi) &#8594; indirizzo miner</span></div>
+        <div class="coinbase-struct-row" style="color:var(--cyan)"><span class="cbs-key">Output 2</span><span class="cbs-val">Fee aggregate di tutte le TX nel blocco &#8594; stesso miner</span></div>
+        <div class="coinbase-struct-row" style="color:var(--text3)"><span class="cbs-key">Locktime</span><span class="cbs-val">Maturit&#224;: la coinbase non pu&#242; essere spesa per 100 blocchi</span></div>
+      </div>
+      <div class="halving-title">&#9608; Halving &mdash; la tabella di emissione</div>
+      <div class="halving-timeline">
+        <div class="ht-row"><div class="ht-epoch active">2024</div><div class="ht-block">Blocco 840.000</div><div class="ht-reward active">3.125 BTC</div><div class="ht-bar"><div class="ht-fill" style="width:50%;background:var(--gold)"></div></div></div>
+        <div class="ht-row"><div class="ht-epoch">2028</div><div class="ht-block">Blocco 1.050.000</div><div class="ht-reward">1.5625 BTC</div><div class="ht-bar"><div class="ht-fill" style="width:25%;background:#c084fc"></div></div></div>
+        <div class="ht-row"><div class="ht-epoch">2032</div><div class="ht-block">Blocco 1.260.000</div><div class="ht-reward">0.78125 BTC</div><div class="ht-bar"><div class="ht-fill" style="width:12%;background:#818cf8"></div></div></div>
+        <div class="ht-row"><div class="ht-epoch">2036</div><div class="ht-block">Blocco 1.470.000</div><div class="ht-reward">0.390625 BTC</div><div class="ht-bar"><div class="ht-fill" style="width:6%;background:#6366f1"></div></div></div>
+        <div class="ht-row"><div class="ht-epoch">&hellip;2140</div><div class="ht-block">Blocco 6.930.000</div><div class="ht-reward">0 BTC</div><div class="ht-bar"><div class="ht-fill" style="width:1%;background:var(--text3)"></div></div></div>
+      </div>
+      <div class="coinbase-note">Supply massima: <strong>21.000.000 BTC</strong> (circa 2140). Dopo l&rsquo;ultimo halving, i miner saranno ricompensati <em>solo</em> dalle fee &mdash; ecco perch&#233; un mercato attivo delle fee &#232; essenziale per la sicurezza a lungo termine.</div>
+    </div>
+  </details>
   <div class="checklist">
     <div class="check-item"><div class="check-icon">1&#65039;&#8419;</div>1 conferma — transazione inclusa nel blocco</div>
     <div class="check-item"><div class="check-icon">6&#65039;&#8419;</div>6 conferme — considerata irreversibile dalla quasi totalit&#224; dei wallet</div>
@@ -1212,6 +1493,58 @@ function renderS7(){
     &#9711; Christine: ${c.addr.slice(0,20)}... &nbsp;&#8594;&nbsp; ${satsToDisplay(STATE.amountSat)}<br>
     &#9711; Mario (change): ${m.addr.slice(0,20)}... &nbsp;&#8594;&nbsp; ${satsToDisplay(STATE.restSat)}
   </div>
+  <details class="reorg-box">
+    <summary>&#9660; Finalit&#224; e Reorg &mdash; quando una TX pu&#242; essere invertita?</summary>
+    <div class="reorg-body">
+      <div class="reorg-intro">Bitcoin non ha finalit&#224; assoluta &mdash; ha finalit&#224; <em>probabilistica</em>. Ogni blocco aggiunto sopra la tua TX rende un attacco reorg esponenzialmente pi&#249; costoso.</div>
+      <div class="reorg-chain">
+        <div class="reorg-chain-title">Catena principale (6 conferme)</div>
+        <div class="reorg-chain-row" id="reorgChain">
+          <div class="reorg-blk confirmed" title="TX inclusa qui">Blocco<br>A</div>
+          <div class="reorg-arr">&#8250;</div>
+          <div class="reorg-blk">B</div>
+          <div class="reorg-arr">&#8250;</div>
+          <div class="reorg-blk">C</div>
+          <div class="reorg-arr">&#8250;</div>
+          <div class="reorg-blk">D</div>
+          <div class="reorg-arr">&#8250;</div>
+          <div class="reorg-blk">E</div>
+          <div class="reorg-arr">&#8250;</div>
+          <div class="reorg-blk">F</div>
+        </div>
+        <div id="reorgAttackRow" style="display:none">
+          <div class="reorg-chain-title" style="color:#f87171;margin-top:0.8rem">Catena alternativa dell&rsquo;attaccante (reorg simulato)</div>
+          <div class="reorg-chain-row">
+            <div class="reorg-blk attack" title="Blocco alternativo">A'</div>
+            <div class="reorg-arr">&#8250;</div>
+            <div class="reorg-blk attack">B'</div>
+            <div class="reorg-arr">&#8250;</div>
+            <div class="reorg-blk attack">C'</div>
+            <div class="reorg-arr">&#8250;</div>
+            <div class="reorg-blk attack">D'</div>
+            <div class="reorg-arr">&#8250;</div>
+            <div class="reorg-blk attack">E'</div>
+            <div class="reorg-arr">&#8250;</div>
+            <div class="reorg-blk attack">F'</div>
+            <div class="reorg-arr">&#8250;</div>
+            <div class="reorg-blk attack" style="opacity:0.5">G'</div>
+          </div>
+        </div>
+      </div>
+      <div class="reorg-cost">
+        <div class="reorg-cost-title">Costo di un reorg a 6 blocchi (~51% hashrate)</div>
+        <div class="reorg-cost-row"><span class="rcost-label">Hashrate totale Bitcoin</span><span class="rcost-val">~700 EH/s</span></div>
+        <div class="reorg-cost-row"><span class="rcost-label">51% = ~350 EH/s</span><span class="rcost-val">circa 350.000 ASIC S21 XP</span></div>
+        <div class="reorg-cost-row"><span class="rcost-label">Costo stimato 1 ora</span><span class="rcost-val" style="color:#f87171">~2 milioni di USD</span></div>
+        <div class="reorg-cost-row"><span class="rcost-label">Miner onesti perdono</span><span class="rcost-val" style="color:var(--green)">la loro catena pi&#249; lunga &#8658; attaccante perde BTC</span></div>
+      </div>
+      <div class="reorg-btn-row">
+        <button class="btn-secondary" onclick="simReorg()">&#9888; Simula tentativo di reorg</button>
+        <div id="reorgResult" class="reorg-result"></div>
+      </div>
+      <div class="reorg-rule">Regola fondamentale: <strong>6 conferme</strong> = sicurezza sufficiente per il 99.99% delle transazioni. Per importi molto grandi (scambi OTC), attendere 100+ conferme.</div>
+    </div>
+  </details>
   ${nav(7)}
   <div style="margin-top:1.5rem;text-align:center">
     <button class="btn-next" onclick="STATE.sig=null;init();goStep(1)" style="background:var(--bg3);color:var(--gold);border:1px solid var(--gold)">&#8635; Ripeti con nuove chiavi</button>
@@ -1295,6 +1628,43 @@ function simBadSig(){
 }
 function toggleError(id){
   const el=document.getElementById(id);if(el)el.classList.toggle('open');
+}
+
+function simRBF(){
+  const el=document.getElementById('rbf-result');if(!el)return;
+  const oldFee=STATE.feeSat;
+  const oldRate=(STATE.feeSat/STATE.vbytes).toFixed(1);
+  const newFee=Math.round(STATE.feeSat*4);
+  const newRate=(newFee/STATE.vbytes).toFixed(1);
+  el.style.display='block';
+  el.classList.add('show');
+  el.innerHTML='<strong>RBF attivato!</strong><br>'
+    +'TX originale: TXID <span style="color:var(--text3);font-family:var(--mono);font-size:0.65rem">'+STATE.txid.slice(0,16)+'...</span> | '
+    +'fee '+satsToDisplay(oldFee)+' ('+oldRate+' sat/vB)<br>'
+    +'<span style="color:var(--green)">&#9658; TX sostitutiva: fee '+satsToDisplay(newFee)+' ('+newRate+' sat/vB) &mdash; '+
+    'broadcasting... <strong>accettata dalla mempool</strong></span><br>'
+    +'<span style="color:var(--text3);font-size:0.7rem">Il TXID cambia perch&#233; la fee &#232; diversa. Christine non vede pi&#249; la TX originale.</span>';
+}
+
+function simReorg(){
+  const attackRow=document.getElementById('reorgAttackRow');
+  const result=document.getElementById('reorgResult');
+  if(!attackRow||!result)return;
+  attackRow.style.display='block';
+  result.style.display='block';
+  result.classList.add('show');
+  let dots='',count=0;
+  const interval=setInterval(function(){
+    count++;
+    dots=count<=3?'<span style="color:#f87171">&#9608; Attaccante costruisce catena alternativa'+'.'.repeat(count)+'</span>':
+      count<=5?'<span style="color:var(--gold)">&#9661; Catena alternativa: 5/6 blocchi raggiunti...</span>':
+      '<span style="color:var(--green)">&#9989; Catena onesta vince: 7 blocchi vs 6. Reorg FALLITO &mdash; costo attaccante: ~2M USD sprecati.</span>';
+    result.innerHTML=dots;
+    if(count>=6){
+      clearInterval(interval);
+      attackRow.style.display='none';
+    }
+  },900);
 }
 
 // Progress bar + scroll
