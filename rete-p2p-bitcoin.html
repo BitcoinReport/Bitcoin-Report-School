@@ -317,7 +317,36 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
           <div class="nc-desc">Verifica tutta la blockchain ma mantiene solo gli UTXO recenti (~10 GB). Non pu&ograve; servire blocchi storici ad altri nodi.</div>
           <div class="nc-ex">es: Bitcoin Core con prune=550</div>
         </div>
+        <div class="node-card" data-type="archival" onclick="selectNodeType('archival')">
+          <div class="nc-top"><span class="nc-name">Archival Node</span><span class="nc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+          <div class="nc-desc">Scarica, verifica e conserva tutta la blockchain con indice completo delle transazioni (<code style="font-family:var(--mono);font-size:.85em">txindex=1</code>). Permette di interrogare qualsiasi transazione storica per TXID, non solo quelle relative al proprio wallet. Richiesto da block explorer, Fulcrum/Electrs, BTCPay Server.</div>
+          <div class="nc-ex">es: Bitcoin Core con txindex=1 (configurazione per self-hosted Electrum server)</div>
+        </div>
       </div>
+      <details style="background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.15);border-radius:10px;padding:1.1rem 1.3rem;margin:1rem 0;">
+        <summary style="cursor:pointer;list-style:none;font-family:var(--mono);font-size:.68rem;color:var(--gold);user-select:none;">&#9660; Quanti nodi esistono oggi? &mdash; distribuzione della rete Bitcoin</summary>
+        <div style="margin-top:.9rem;">
+          <div style="font-size:.75rem;color:var(--text2);line-height:1.6;margin-bottom:.9rem;">Distribuzione attuale della rete Bitcoin (dati approssimativi, agosto 2026):</div>
+          <div style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.9rem;font-family:var(--mono);font-size:.68rem;color:var(--text2);">
+            <div>Nodi raggiungibili (porta aperta): <strong style="color:var(--text)">~21.000</strong></div>
+            <div>Nodi totali stimati (inclusi non raggiungibili): <strong style="color:var(--text)">~60.000&ndash;100.000</strong></div>
+            <div>Nodi Tor: <strong style="color:var(--green)">~40%</strong> dei raggiungibili</div>
+            <div>Distribuzione geografica: <strong style="color:var(--text)">USA, Germania, Francia, Paesi Bassi, Canada</strong></div>
+          </div>
+          <div style="margin-bottom:.5rem;font-family:var(--mono);font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;">Distribuzione per tipo</div>
+          <div style="display:flex;height:18px;border-radius:5px;overflow:hidden;margin-bottom:.4rem;">
+            <div style="width:70%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;color:#000;font-weight:700;">Full Node 70%</div>
+            <div style="width:25%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;color:#000;font-weight:700;">Pruned 25%</div>
+            <div style="width:5%;background:var(--text3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.55rem;color:#000;font-weight:700;">5%</div>
+          </div>
+          <div style="display:flex;gap:1rem;font-family:var(--mono);font-size:.6rem;color:var(--text3);margin-bottom:.8rem;">
+            <span><span style="color:var(--green)">&#9646;</span> Full Node</span>
+            <span><span style="color:var(--gold)">&#9646;</span> Pruned</span>
+            <span><span style="color:var(--text3)">&#9646;</span> SPV</span>
+          </div>
+          <div style="font-family:var(--mono);font-size:.63rem;color:var(--text3);line-height:1.6;">Fonte: bitnodes.io &mdash; i dati cambiano continuamente. Ogni nodo che aggiungi alla rete aumenta la sua resilienza e decentralizzazione.</div>
+        </div>
+      </details>
       <div class="info-note">        <a href="guida_codice_bitcoin.html" class="tool-link">&#8594; Esplora il codice che gestisce i peer in Bitcoin Core</a>      </div>
 <button class="cmd-toggle" onclick="toggleCmd('cmd1')"><span>Come si fa sul tuo nodo ▼</span><span class="cmd-arrow">&#9660;</span></button>
 <div class="cmd-block" id="cmd1"><span class="cmd-comment"># Verificare il tipo di nodo attuale</span>
@@ -330,7 +359,16 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
 <span class="cmd-comment">bitcoin-cli getblockcount</span>
 <span class="cmd-comment"></span>
 <span class="cmd-comment"># Verificare lo spazio usato dalla blockchain</span>
-<span class="cmd-comment">bitcoin-cli getblockchaininfo | grep size_on_disk</span></div>
+<span class="cmd-comment">bitcoin-cli getblockchaininfo | grep size_on_disk</span>
+<span class="cmd-comment"></span>
+<span class="cmd-comment"># Abilitare txindex (Archival Node - aggiungere a bitcoin.conf e riavviare)</span>
+<span class="cmd-comment">txindex=1</span>
+<span class="cmd-comment"></span>
+<span class="cmd-comment"># Verificare se txindex e abilitato</span>
+<span class="cmd-comment">bitcoin-cli getindexinfo</span>
+<span class="cmd-comment"></span>
+<span class="cmd-comment"># Interrogare una transazione qualsiasi per TXID (richiede txindex=1)</span>
+<span class="cmd-comment">bitcoin-cli getrawtransaction "txid" true</span></div>
       <div class="step-nav">
         <button class="btn-next" onclick="goStep(2)">Avanti: Connettivit&agrave; &#8594;</button>
       </div>
@@ -358,6 +396,34 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
           <div class="oc-desc">Rete anonima alternativa a Tor, progettata per comunicazioni P2P. Minor latenza per certi scenari. Community pi&ugrave; piccola.</div>
         </div>
       </div>
+      <details style="background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.15);border-radius:10px;padding:1.1rem 1.3rem;margin:1rem 0;">
+        <summary style="cursor:pointer;list-style:none;font-family:var(--mono);font-size:.68rem;color:var(--gold);user-select:none;">&#9660; Come funziona la connessione tra due nodi? &mdash; protocollo handshake P2P</summary>
+        <div style="margin-top:.9rem;">
+          <div style="font-size:.75rem;color:var(--text2);line-height:1.6;margin-bottom:1rem;">Sequenza handshake P2P &mdash; messaggi reali del protocollo Bitcoin:</div>
+          <div style="font-family:var(--mono);font-size:.62rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;overflow-x:auto;line-height:1.9;white-space:pre;color:var(--text2);">Tuo nodo                         Peer remoto
+   |                                  |
+   |&mdash;&mdash;&mdash; version &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&gt;  |  (versione protocollo, height, servizi, IP)
+   |  &lt;&mdash;&mdash;&mdash; version &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |  (risponde con i propri dati)
+   |&mdash;&mdash;&mdash; verack &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&gt;  |  (conferma ricezione)
+   |  &lt;&mdash;&mdash;&mdash; verack &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;  |  (handshake completato)
+   |                                  |
+   |&mdash;&mdash;&mdash; getaddr &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&gt;  |  (richiede lista peer conosciuti)
+   |  &lt;&mdash;&mdash;&mdash; addr &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;  |  (lista di indirizzi IP:porta)
+   |                                  |
+   |&mdash;&mdash;&mdash; ping &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&gt;  |  (keepalive, include nonce)
+   |  &lt;&mdash;&mdash;&mdash; pong &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;  |  (risposta con stesso nonce)</div>
+          <div style="margin-top:.9rem;display:flex;flex-direction:column;gap:.4rem;">
+            <div style="font-family:var(--mono);font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;">Messaggi principali del protocollo P2P</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">version</code> / <code style="color:var(--gold);font-family:var(--mono)">verack</code> &mdash; handshake iniziale, scambio di capacit&agrave;</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">inv</code> &mdash; &ldquo;ho qualcosa di nuovo&rdquo; (block hash o txid)</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">getdata</code> &mdash; &ldquo;mandami quello specifico blocco/transazione&rdquo;</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">tx</code> / <code style="color:var(--gold);font-family:var(--mono)">block</code> &mdash; transazione o blocco completo</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">getblocks</code> / <code style="color:var(--gold);font-family:var(--mono)">getheaders</code> &mdash; sincronizzazione blockchain</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">ping</code> / <code style="color:var(--gold);font-family:var(--mono)">pong</code> &mdash; keepalive e misurazione latenza</div>
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;"><code style="color:var(--gold);font-family:var(--mono)">addr</code> / <code style="color:var(--gold);font-family:var(--mono)">getaddr</code> &mdash; scoperta di nuovi peer</div>
+          </div>
+        </div>
+      </details>
       <div id="net-info-tor" class="info-note green" style="display:none;margin-top:.6rem"><strong>Perch&eacute; scegliere Tor:</strong> Tor &egrave; la scelta raccomandata nella pratica. Ha milioni di utenti e migliaia di relay attivi &mdash; il tuo traffico si mescola con quello di molte altre persone, aumentando l&rsquo;anonimato reale. In Bitcoin, la grande maggioranza dei nodi che supportano connessioni anonime usa Tor, quindi hai pi&ugrave; peer disponibili e connessioni pi&ugrave; stabili.</div>
       <div id="net-info-i2p" class="info-note" style="display:none;margin-top:.6rem;background:rgba(167,139,250,0.06);border-color:rgba(167,139,250,0.25)"><strong>Su I2P nella pratica:</strong> I2P &egrave; architetturalmente superiore a Tor: usa routing completamente distribuito senza directory server centrali, tunnel unidirezionali separati per traffico in entrata e in uscita, e ogni nodo partecipa al routing degli altri. Tuttavia nella pratica offre meno anonimato di Tor perch&eacute; la sua rete &egrave; molto pi&ugrave; piccola &mdash; meno utenti significa meno traffico con cui mescolarsi. In Bitcoin, pochissimi nodi supportano I2P rispetto a Tor, quindi avrai meno peer disponibili. Scelta interessante in combinazione con Tor, non come sostituto.</div>
 <button class="cmd-toggle" onclick="toggleCmd('cmd2')"><span>Come si fa sul tuo nodo ▼</span><span class="cmd-arrow">&#9660;</span></button>
@@ -404,6 +470,42 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
           <div class="oc-desc">Il nodo si connette SOLO ai peer specificati. Massimo controllo, minima diversit&agrave;. Vulnerabile se tutti i peer fidati diventano irraggiungibili.</div>
         </div>
       </div>
+      <details style="background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.15);border-radius:10px;padding:1.1rem 1.3rem;margin:1rem 0;">
+        <summary style="cursor:pointer;list-style:none;font-family:var(--mono);font-size:.68rem;color:var(--gold);user-select:none;">&#9660; Come trova nuovi peer il tuo nodo? &mdash; meccanismi di peer discovery</summary>
+        <div style="margin-top:.9rem;display:flex;flex-direction:column;gap:.7rem;">
+          <div style="display:flex;align-items:flex-start;gap:.9rem;">
+            <div style="flex-shrink:0;width:24px;height:24px;background:rgba(247,147,26,0.15);border:1px solid rgba(247,147,26,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.62rem;color:var(--gold);font-weight:700;">1</div>
+            <div>
+              <div style="font-family:var(--mono);font-size:.7rem;color:var(--text);margin-bottom:.2rem;">DNS Seeds</div>
+              <div style="font-size:.72rem;color:var(--text2);line-height:1.6;">Al primo avvio, Bitcoin Core interroga DNS seed hardcoded come <code style="font-family:var(--mono);color:var(--green)">seed.bitcoin.sipa.be</code> che restituiscono IP di nodi attivi. Lista hard-coded nel codice sorgente di Bitcoin Core.</div>
+            </div>
+          </div>
+          <div style="margin-left:12px;width:1px;height:12px;background:var(--border);"></div>
+          <div style="display:flex;align-items:flex-start;gap:.9rem;">
+            <div style="flex-shrink:0;width:24px;height:24px;background:rgba(247,147,26,0.15);border:1px solid rgba(247,147,26,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.62rem;color:var(--gold);font-weight:700;">2</div>
+            <div>
+              <div style="font-family:var(--mono);font-size:.7rem;color:var(--text);margin-bottom:.2rem;">addr / addrv2 gossip</div>
+              <div style="font-size:.72rem;color:var(--text2);line-height:1.6;">I peer condividono liste di indirizzi che conoscono. Nel tempo il nodo costruisce un database locale (<code style="font-family:var(--mono);color:var(--green)">peers.dat</code>) con migliaia di indirizzi visti.</div>
+            </div>
+          </div>
+          <div style="margin-left:12px;width:1px;height:12px;background:var(--border);"></div>
+          <div style="display:flex;align-items:flex-start;gap:.9rem;">
+            <div style="flex-shrink:0;width:24px;height:24px;background:rgba(247,147,26,0.15);border:1px solid rgba(247,147,26,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.62rem;color:var(--gold);font-weight:700;">3</div>
+            <div>
+              <div style="font-family:var(--mono);font-size:.7rem;color:var(--text);margin-bottom:.2rem;">peers.dat (database locale)</div>
+              <div style="font-size:.72rem;color:var(--text2);line-height:1.6;">Dalla seconda esecuzione in poi, il nodo usa il database locale salvato nelle sessioni precedenti. Contiene <em>anchor peers</em> &mdash; connessioni affidabili dell&rsquo;ultima sessione.</div>
+            </div>
+          </div>
+          <div style="margin-left:12px;width:1px;height:12px;background:var(--border);"></div>
+          <div style="display:flex;align-items:flex-start;gap:.9rem;">
+            <div style="flex-shrink:0;width:24px;height:24px;background:rgba(34,211,160,0.15);border:1px solid rgba(34,211,160,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.62rem;color:var(--green);font-weight:700;">4</div>
+            <div>
+              <div style="font-family:var(--mono);font-size:.7rem;color:var(--text);margin-bottom:.2rem;">addnode manuale</div>
+              <div style="font-size:.72rem;color:var(--text2);line-height:1.6;">L&rsquo;operatore aggiunge esplicitamente peer fidati via <code style="font-family:var(--mono);color:var(--green)">bitcoin.conf</code> o <code style="font-family:var(--mono);color:var(--green)">bitcoin-cli addnode</code>. Massimo controllo, complementare agli altri meccanismi.</div>
+            </div>
+          </div>
+        </div>
+      </details>
       <div class="eclipse-box">
         <div class="eclipse-title">&#9888; Eclipse Attack</div>
         <div class="eclipse-desc">Un eclipse attack isola il tuo nodo riempiendo tutti i tuoi slot di connessione con nodi controllati dallo stesso attore. Bitcoin Core si difende con slot riservati, rotazione periodica dei peer, e anchor peer mantenuti tra i riavvii.</div>
@@ -470,6 +572,27 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
         <a href="simulatore_transazione_bitcoin.html" class="tool-link">&#8594; Simulatore Transazione</a> &nbsp;&middot;&nbsp;
         <a href="generatore_chiavi_bitcoin.html" class="tool-link">&#8594; Generatore Chiavi</a>
       </div>
+      <details style="background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.15);border-radius:10px;padding:1.1rem 1.3rem;margin:1rem 0;">
+        <summary style="cursor:pointer;list-style:none;font-family:var(--mono);font-size:.68rem;color:var(--gold);user-select:none;">&#9660; Cosa succede esattamente quando invii una transazione? &mdash; messaggi P2P reali</summary>
+        <div style="margin-top:.9rem;">
+          <div style="font-size:.75rem;color:var(--text2);line-height:1.6;margin-bottom:.9rem;">Sequenza di messaggi P2P per la propagazione di una TX:</div>
+          <div style="font-family:var(--mono);font-size:.58rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;overflow-x:auto;line-height:1.9;white-space:pre;color:var(--text2);">Tuo nodo          Nodo A          Nodo B          Nodo C
+   |                  |               |               |
+   |&mdash; inv (txid) &mdash;&gt; |               |               |
+   |                  |&mdash; getdata &mdash;&mdash;&gt; |               |
+   |  &lt;&mdash; tx (completa)|               |               |
+   |                  |               |               |
+   |                  |&mdash; inv (txid) &mdash;&gt;|               |
+   |                  |               |&mdash; getdata &mdash;&mdash;&gt;|
+   |                  |               |&lt;&mdash; tx (completa)|
+   |                  |               |               |
+   |                  |               |&mdash; inv (txid) &mdash;&gt;  (propagazione)</div>
+          <div style="margin-top:.9rem;display:flex;flex-direction:column;gap:.4rem;">
+            <div style="font-size:.72rem;color:var(--text2);line-height:1.6;">Bitcoin non invia le transazioni a tutti i peer immediatamente: prima invia solo il <code style="font-family:var(--mono);color:var(--gold)">txid</code> tramite <code style="font-family:var(--mono);color:var(--gold)">inv</code>, poi il peer che lo vuole fa <code style="font-family:var(--mono);color:var(--gold)">getdata</code>, e solo allora riceve la TX completa. Questo riduce la banda: se un peer riceve lo stesso <code style="font-family:var(--mono);color:var(--gold)">inv</code> da pi&ugrave; fonti, richiede la TX a uno solo.</div>
+            <div style="font-size:.7rem;color:var(--text3);line-height:1.6;background:rgba(127,183,195,0.07);border-left:2px solid rgba(103,232,249,0.3);border-radius:0 6px 6px 0;padding:.5rem .8rem;margin-top:.3rem;">Con <strong style="color:var(--green)">Dandelion++</strong> la fase stem usa solo connessioni scelte casualmente, senza broadcast <code style="font-family:var(--mono)">inv</code> ad altri peer durante quella fase &mdash; per questo l&rsquo;origine &egrave; non tracciabile.</div>
+          </div>
+        </div>
+      </details>
 <button class="cmd-toggle" onclick="toggleCmd('cmd4')"><span>Come si fa sul tuo nodo ▼</span><span class="cmd-arrow">&#9660;</span></button>
 <div class="cmd-block" id="cmd4"><span class="cmd-comment"># Trasmettere una transazione firmata (hex raw)</span>
 <span class="cmd-comment">bitcoin-cli sendrawtransaction "hex_della_transazione"</span>
@@ -565,7 +688,13 @@ footer a{color:var(--text3);text-decoration:none;}footer a:hover{color:var(--gol
         <div class="know-row"><span class="know-key">Correla IP e tx</span><span class="know-val partial" id="k-surv-ip">Parziale</span></div>
         <div class="know-row"><span class="know-key">Deduce il wallet software</span><span class="know-val partial" id="k-surv-software">Parziale</span></div>
         <div class="know-row"><span class="know-key">Traccia i tuoi UTXO</span><span class="know-val partial" id="k-surv-utxo">Parziale</span></div>
+        <div class="know-row"><span class="know-key">Fingerprint wallet</span><span class="know-val partial" id="k-surv-fingerprint">Parziale</span></div>
       </div>
+
+      <details style="background:rgba(247,147,26,0.04);border:1px solid rgba(247,147,26,0.15);border-radius:8px;padding:.7rem .9rem;margin:.8rem 0;font-size:.65rem;">
+        <summary style="cursor:pointer;list-style:none;font-family:var(--mono);font-size:.62rem;color:var(--text3);user-select:none;">&#9660; Cos&#39;e&#39; il fingerprinting P2P?</summary>
+        <div style="margin-top:.6rem;font-size:.68rem;color:var(--text2);line-height:1.6;">I nodi di sorveglianza identificano il wallet software dall&rsquo;ordine dei messaggi P2P, dai flag <code style="font-family:var(--mono);color:var(--gold)">services</code> nel messaggio <code style="font-family:var(--mono);color:var(--gold)">version</code>, dal user-agent string, e dal timing delle transazioni. Bitcoin Core trasmette con user-agent <code style="font-family:var(--mono);color:var(--gold)">/Satoshi:XX.X/</code> &mdash; visibile a tutti i peer in clearnet.</div>
+      </details>
 
       <!-- bitcoin.conf live -->
       <div class="conf-box">
@@ -735,15 +864,18 @@ function knowsData() {
     peerAddr:   isSpv ? 'yes' : 'no',
     peerUsing:  'partial',
     peerTx:     (broadPriv || dandelion) ? 'no' : 'yes',
-    survIp:     (torOn && broadPriv) ? 'no' : torOn ? 'partial' : 'yes',
-    survSoftware: isSpv ? 'yes' : 'partial',
-    survUtxo:   isSpv ? 'yes' : 'partial'
+    survIp:          (torOn && broadPriv) ? 'no' : torOn ? 'partial' : 'yes',
+    survSoftware:    isSpv ? 'yes' : 'partial',
+    survUtxo:        isSpv ? 'yes' : 'partial',
+    survFingerprint: (torOn && state.broadcast === 'tordandelion') ? 'difficult' :
+                     (torOn || state.broadcast === 'dandelion' || state.broadcast === 'tordandelion') ? 'partial' : 'yes'
   };
 }
 
 function valLabel(v) {
   if (v === 'yes') return {text:'Visibile', cls:'yes'};
   if (v === 'no') return {text:'Nascosto', cls:'no'};
+  if (v === 'difficult') return {text:'Difficile', cls:'no'};
   return {text:'Parziale', cls:'partial'};
 }
 
@@ -775,6 +907,7 @@ function updatePrivacyPanel() {
   setKnow('k-surv-ip', kd.survIp);
   setKnow('k-surv-software', kd.survSoftware);
   setKnow('k-surv-utxo', kd.survUtxo);
+  setKnow('k-surv-fingerprint', kd.survFingerprint);
 
   updateConf();
   updateViz();
@@ -815,6 +948,11 @@ function generateConf() {
     lines.push('');
     lines.push('# Indicizza tutte le transazioni per TXID');
     lines.push('# Possibile solo su full node con blockchain completa');
+    lines.push('# txindex=1  (decommenta per abilitare)');
+  }
+  if (state.nodeType === 'archival') {
+    lines.push('');
+    lines.push('# Archival Node: indice completo di tutte le transazioni');
     lines.push('txindex=1');
   }
   return lines.join('\n');
@@ -924,8 +1062,8 @@ function initViz() {
 
   /* Draw user node */
   const userNode = vizNodes[0];
-  const uColor = {spv:'#888880',full:'#f7931a',pruned:'#fbbf24'}[state.nodeType] || '#f7931a';
-  const uR = {spv:14,full:20,pruned:17}[state.nodeType] || 20;
+  const uColor = {spv:'#888880',full:'#f7931a',pruned:'#fbbf24',archival:'#22d3a0'}[state.nodeType] || '#f7931a';
+  const uR = {spv:14,full:20,pruned:17,archival:22}[state.nodeType] || 20;
 
   g.append('circle').attr('cx',userNode.cx).attr('cy',userNode.cy).attr('r',uR+12)
     .attr('fill','url(#glow-gold)');
@@ -1134,7 +1272,7 @@ function buildSummary() {
   const conf = generateConf();
   document.getElementById('final-conf-pre').textContent = conf;
   const labels = {
-    nodeType:{spv:'SPV / Light wallet',full:'Full Node',pruned:'Full Node Pruned'},
+    nodeType:{spv:'SPV / Light wallet',full:'Full Node',pruned:'Full Node Pruned',archival:'Archival Node'},
     network:{clearnet:'Clearnet (IP visibile)',tor:'Tor only',hybrid:'Clearnet + Tor (ibrido)',i2p:'I2P'},
     peers:{random:'Peer casuali dalla rete',addnode:'Peer fidati + casuali',connect:'Solo peer fidati'},
     broadcast:{direct:'Broadcast diretto (clearnet)',tor:'Broadcast via Tor',dandelion:'Dandelion++',tordandelion:'Tor + Dandelion++'}
