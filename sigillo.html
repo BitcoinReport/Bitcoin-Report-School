@@ -172,6 +172,19 @@ footer a:hover { color: var(--gold); }
 /* ── Signing Key Link ── */
 .signing-key-link { display: block; font-family: var(--mono); font-size: 0.62rem; color: var(--text3); text-decoration: none; margin-top: 0.5rem; letter-spacing: 0.04em; transition: color 0.2s; }
 .signing-key-link:hover { color: var(--gold); }
+
+/* ── Features v0.4.0 ── */
+.features-section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 2rem; border-top: 1px solid var(--border); }
+.features-eyebrow { font-family: var(--mono); font-size: 0.6rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.6rem; opacity: 0.8; }
+.features-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); margin: 0 0 1.5rem; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.feat-card { display: flex; gap: 1rem; align-items: flex-start; background: rgba(34,211,160,0.04); border: 1px solid rgba(34,211,160,0.12); border-radius: 10px; padding: 1rem 1.2rem; }
+.feat-card-muted { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); }
+.feat-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+.feat-name { font-weight: 600; font-size: 0.88rem; color: var(--text); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem; }
+.feat-desc { font-size: 0.78rem; color: var(--text2); line-height: 1.5; }
+.feat-desc code { font-family: var(--mono); font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.1em 0.35em; border-radius: 3px; }
+.feat-tag { font-family: var(--mono); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); border: 1px solid rgba(247,147,26,0.4); border-radius: 4px; padding: 0.1em 0.4em; }
 </style>
 </head>
 <body>
@@ -190,16 +203,51 @@ footer a:hover { color: var(--gold); }
   <div class="hero-eyebrow">// strumenti &middot; privacy &middot; crittografia</div>
   <h1>Sigillo</h1>
   <p class="hero-subtitle">Crittografia OpenPGP per tutti &mdash; senza terminali, senza configurazioni.</p>
-  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti pubblici, cifratura e decifratura di messaggi e immagini &mdash; il tutto senza mai aprire un terminale. Distribuita sotto licenza GPLv3.</p>
+  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti, cifratura di testo, immagini e video &mdash; il tutto senza mai aprire un terminale. Supporta pi&ugrave; identit&agrave; e l&rsquo;import di chiavi esistenti. Distribuita sotto licenza GPLv3.</p>
   <div class="badge-row">
     <span class="badge badge-green">GPLv3</span>
-    <span class="badge badge-gold">v0.3.0</span>
+    <span class="badge badge-gold">v0.4.0</span>
     <span class="badge badge-grey">Tauri / Rust</span>
   </div>
   <a class="hero-github" href="https://github.com/BitcoinReport/sigillo" target="_blank" rel="noopener">&#8594; Codice sorgente su GitHub</a>
 </header>
 
 <!-- CHIAVI PGP -->
+<section class="features-section">
+  <div class="features-eyebrow">// novit&agrave; &middot; v0.4.0</div>
+  <h2 class="features-title">Cosa c&rsquo;&egrave; di nuovo</h2>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">&#9654;</div>
+      <div class="feat-body">
+        <div class="feat-name">Supporto video</div>
+        <div class="feat-desc">Cifra e decifra anche file <code>.mov</code> e <code>.mp4</code>, oltre a testo, immagini JPEG, PNG e HEIC.</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">&#9906;</div>
+      <div class="feat-body">
+        <div class="feat-name">Multi-account</div>
+        <div class="feat-desc">Gestisci pi&ugrave; identit&agrave; e coppie di chiavi simultaneamente. Passa da un account all&rsquo;altro senza uscire dall&rsquo;app.</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">&#128273;</div>
+      <div class="feat-body">
+        <div class="feat-name">Import chiave esterna</div>
+        <div class="feat-desc">Importa una chiave privata OpenPGP gi&agrave; esistente. Porti la tua identit&agrave; senza doverla ricreare.</div>
+      </div>
+    </div>
+    <div class="feat-card feat-card-muted">
+      <div class="feat-icon">&#9203;</div>
+      <div class="feat-body">
+        <div class="feat-name">Time-lock <span class="feat-tag">Sperimentale</span></div>
+        <div class="feat-desc">Blocco soft basato sul numero di blocco Bitcoin. Non &egrave; una garanzia crittografica &mdash; &egrave; un vincolo applicativo attivabile nelle impostazioni avanzate.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="keys-section" id="chiave-pubblica">
   <div class="keys-eyebrow">// crittografia &middot; contatti &middot; verifica</div>
   <h2 class="keys-title">Chiavi PGP</h2>
@@ -238,7 +286,7 @@ footer a:hover { color: var(--gold); }
 
 <!-- DOWNLOAD -->
 <section class="page-section" id="download">
-  <div class="section-eyebrow">// download &middot; v0.3.0 &middot; verifica firma</div>
+  <div class="section-eyebrow">// download &middot; v0.4.0 &middot; verifica firma</div>
   <h2 class="section-title">Download</h2>
   <p class="section-intro">Ogni pacchetto &egrave; firmato con la mia chiave PGP. Prima di installare, verifica la firma con il file <code style="font-family:var(--mono);color:var(--gold);font-size:.85em">.asc</code> corrispondente.</p>
 
@@ -249,9 +297,9 @@ footer a:hover { color: var(--gold); }
       <div class="dl-title">macOS</div>
       <div class="dl-sub">Pacchetto .dmg universale</div>
       <div class="dl-btns">
-        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/Sigillo-0.3.0-macOS.dmg">&#11015; Scarica .dmg</a>
-        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/Sigillo-0.3.0-macOS.dmg.asc">&#9112; Firma .asc</a>
-        <a href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
+        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-macOS.dmg">&#11015; Scarica .dmg</a>
+        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-macOS.dmg.asc">&#9112; Firma .asc</a>
+        <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
       </div>
     </div>
     <!-- Windows -->
@@ -260,9 +308,9 @@ footer a:hover { color: var(--gold); }
       <div class="dl-title">Windows</div>
       <div class="dl-sub">Installer .msi</div>
       <div class="dl-btns">
-        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/Sigillo-0.3.0-Windows.msi">&#11015; Scarica .msi</a>
-        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/Sigillo-0.3.0-Windows.msi.asc">&#9112; Firma .asc</a>
-        <a href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
+        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Windows.msi">&#11015; Scarica .msi</a>
+        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Windows.msi.asc">&#9112; Firma .asc</a>
+        <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
       </div>
     </div>
     <!-- Linux -->
@@ -271,9 +319,9 @@ footer a:hover { color: var(--gold); }
       <div class="dl-title">Linux</div>
       <div class="dl-sub">AppImage &mdash; nessuna installazione richiesta</div>
       <div class="dl-btns">
-        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/Sigillo-0.3.0-Linux.AppImage">&#11015; Scarica .AppImage</a>
-        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/Sigillo-0.3.0-Linux.AppImage.asc">&#9112; Firma .asc</a>
-        <a href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
+        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Linux.AppImage">&#11015; Scarica .AppImage</a>
+        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Linux.AppImage.asc">&#9112; Firma .asc</a>
+        <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
       </div>
     </div>
   </div>
@@ -288,8 +336,8 @@ footer a:hover { color: var(--gold); }
 <pre class="verify-code"># 1. Importa la chiave pubblica
 gpg --import SIGNING-KEY.asc
 
-# 2. Verifica la firma (esempio macOS)
-gpg --verify Sigillo-0.3.0-macOS.dmg.asc Sigillo-0.3.0-macOS.dmg
+# 2. Verifica la firma (sostituisci con il file scaricato)
+gpg --verify Sigillo-macOS.dmg.asc Sigillo-macOS.dmg
 
 # Output atteso:
 # Good signature from "Mike - Bitcoin Report Italia"
@@ -302,13 +350,13 @@ gpg --verify Sigillo-0.3.0-macOS.dmg.asc Sigillo-0.3.0-macOS.dmg
       <div class="vd-body">
 <pre class="verify-code">1. Scarica e installa Gpg4win da https://gpg4win.org
 2. Apri Kleopatra &#8594; File &#8594; Importa &#8594; seleziona SIGNING-KEY.asc
-3. Clic destro su Sigillo-0.3.0-Windows.msi &#8594; "Verifica firma" &#8594; seleziona il file .asc
+3. Clic destro su Sigillo-Windows.msi &#8594; "Verifica firma" &#8594; seleziona il file .asc
 4. Risultato atteso: "Firma valida di Mike - Bitcoin Report Italia"</pre>
       </div>
     </details>
 
     <div class="verify-signing-key">
-      Chiave di firma inclusa nella release: <a href="https://github.com/BitcoinReport/sigillo/releases/download/v0.3.0/SIGNING-KEY.asc">Scarica SIGNING-KEY.asc</a>
+      Chiave di firma inclusa nella release: <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc">Scarica SIGNING-KEY.asc</a>
     </div>
   </div>
 </section>
