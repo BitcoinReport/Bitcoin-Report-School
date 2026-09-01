@@ -2,148 +2,365 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Guide Tecniche Bitcoin | Bitcoin Report School</title>
-<meta name="description" content="Guide approfondite su Bitcoin: client a confronto, mining idroelettrico DIY, sovranit&#224; tecnica. Risorse per chi vuole andare oltre la superficie.">
-<meta property="og:title" content="Guide Tecniche Bitcoin | Bitcoin Report School">
-<meta property="og:description" content="Client Bitcoin a confronto, mining DIY, sovranit&#224; tecnica. Per chi vuole capire in profondit&#224;.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BitPost &mdash; Compra su Amazon con i tuoi sats &mdash; Bitcoin Report School</title>
+<meta name="description" content="Guida pratica a BitPost: come comprare su Amazon pagando in Bitcoin, senza KYC e senza exchange centralizzati. Buyer, Bitworker, wallet multisig, privacy.">
+<meta name="author" content="Mike &mdash; Bitcoin Report Italia">
+<link rel="canonical" href="https://bitcoinreportschool.com/guida-bitpost.html">
+<meta property="og:title" content="BitPost &mdash; Compra su Amazon con i tuoi sats">
+<meta property="og:description" content="Guida pratica per principianti: acquisti su Amazon pagando in Bitcoin, no KYC, no exchange centralizzati.">
 <meta property="og:type" content="website">
-<link rel="canonical" href="https://bitcoinreportschool.com/guide.html">
+<meta property="og:url" content="https://bitcoinreportschool.com/guida-bitpost.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#07080a;--bg2:#0e0f12;--bg3:#161820;
-  --gold:#f7931a;--green:#22d3a0;
-  --text:#e8e8e8;--text2:#a0a0a0;--text3:#606060;
-  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
-  --sans:'Inter',sans-serif;--mono:'DM Mono',monospace;--cond:'Barlow Condensed',sans-serif;
+:root {
+  --bg: #07080a;
+  --bg2: #0d0e14;
+  --bg3: #13141c;
+  --gold: #f7931a;
+  --gold-dim: rgba(247,147,26,0.10);
+  --gold-dim2: rgba(247,147,26,0.05);
+  --green: #22d3a0;
+  --red: #f87171;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e4dc;
+  --text2: #9a9790;
+  --text3: #4a4844;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Playfair Display', serif;
+  --cond: 'Barlow Condensed', 'Outfit', sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;overflow-x:hidden;}
-
-.site-nav{display:flex;align-items:center;gap:1rem;padding:0.85rem 1.5rem;border-bottom:1px solid var(--border);background:rgba(7,8,10,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
-.nav-home-btn{font-family:var(--mono);font-size:0.72rem;color:var(--text2);text-decoration:none;padding:0.3rem 0.7rem;border:1px solid var(--border2);border-radius:5px;transition:border-color 0.2s,color 0.2s;white-space:nowrap;}
-.nav-home-btn:hover{border-color:var(--gold);color:var(--gold);}
-.nav-label{font-family:var(--mono);font-size:0.7rem;color:var(--text3);letter-spacing:0.08em;}
-
-.page-hero{padding:4rem 2rem 3rem;max-width:900px;margin:0 auto;}
-.page-hero-eyebrow{font-family:var(--mono);font-size:0.65rem;color:var(--green);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1rem;}
-.page-hero h1{font-family:var(--cond);font-weight:900;font-size:clamp(2rem,5vw,3.2rem);text-transform:uppercase;letter-spacing:0.03em;line-height:1.05;margin-bottom:0.9rem;}
-.page-hero h1 span{color:var(--gold);}
-.page-hero-sub{color:var(--text2);font-size:0.95rem;max-width:620px;line-height:1.75;}
-.hero-divider{height:1px;background:var(--border);margin:2.5rem auto;max-width:1100px;}
-
-.guide-section{padding:0 2rem 3rem;max-width:1100px;margin:0 auto;}
-.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.2rem;}
-
-.guide-card{display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:12px;background:var(--bg2);transition:border-color 0.18s,transform 0.15s,background 0.18s;padding:1.8rem 1.8rem 1.4rem;}
-.guide-card:hover{border-color:rgba(247,147,26,0.4);background:rgba(247,147,26,0.02);transform:translateY(-3px);}
-.guide-card-label{font-family:var(--mono);font-size:0.6rem;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.7rem;}
-.guide-card-title{font-family:var(--cond);font-weight:900;font-size:1.4rem;line-height:1.15;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.02em;}
-.guide-card-desc{font-size:0.8rem;color:var(--text2);line-height:1.65;margin-bottom:1.1rem;}
-.guide-card-tags{font-family:var(--mono);font-size:0.6rem;color:var(--text3);letter-spacing:0.04em;margin-bottom:1rem;}
-.guide-card-cta{font-family:var(--mono);font-size:0.7rem;color:var(--gold);display:inline-flex;align-items:center;gap:0.4rem;transition:gap 0.15s;}
-.guide-card:hover .guide-card-cta{gap:0.7rem;}
-
-.guide-card-soon{border-style:dashed;border-color:rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);cursor:default;}
-.guide-card-soon:hover{transform:none;border-color:rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);}
-.guide-card-soon .guide-card-label{color:var(--text3);}
-.guide-card-soon .guide-card-title{color:var(--text3);}
-.guide-card-soon .guide-card-desc{color:var(--text3);}
-.soon-badge{display:inline-block;font-family:var(--mono);font-size:0.58rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text3);padding:0.2rem 0.6rem;border-radius:20px;letter-spacing:0.1em;text-transform:uppercase;}
-
-footer{padding:2.5rem 1.5rem;text-align:center;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text3);}
-footer a{color:var(--text3);text-decoration:none;margin:0 0.5rem;}
-footer a:hover{color:var(--gold);}
-
-.donation-section{background:linear-gradient(135deg,#0f0a00,#1a0f00 50%,#0a0a0a);border-top:1px solid #3a2500;padding:5rem 2rem;}
-.donation-inner{max-width:820px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
-@media(max-width:680px){.donation-inner{grid-template-columns:1fr;gap:2.5rem;}.donation-qr-wrap{order:-1;}}
-.donation-text h2{font-family:var(--sans,'Inter',sans-serif);font-weight:700;font-size:1.8rem;color:#f7931a;margin-bottom:1rem;}
-.donation-text p{color:#8a8780;font-size:.88rem;line-height:1.75;margin-bottom:1rem;}
-.donation-manifesto{background:rgba(247,147,26,.06);border-left:3px solid #f7931a;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;font-size:.82rem;font-style:italic;color:#8a8780;line-height:1.65;}
-.donation-manifesto strong{color:#f7931a;font-style:normal;}
-.donation-qr-wrap{display:flex;flex-direction:column;align-items:center;gap:1.4rem;}
-.qr-frame{padding:1rem;background:#fff;border-radius:14px;box-shadow:0 0 0 1px rgba(247,147,26,.3),0 0 40px rgba(247,147,26,.1),0 20px 60px rgba(0,0,0,.6);display:inline-block;position:relative;transition:transform .3s;}
-.qr-frame:hover{transform:translateY(-4px) scale(1.02);}
-.qr-frame img{display:block;width:190px;height:190px;border-radius:4px;}
-.qr-badge{position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);background:#f7931a;color:#000;font-family:var(--mono,'DM Mono',monospace);font-weight:700;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;white-space:nowrap;}
-.qr-label{text-align:center;font-family:var(--mono,'DM Mono',monospace);font-size:.65rem;color:#4a4844;}
-
+[data-theme="light"] {
+  --bg: #f8f6f1; --bg2: #eeeae2; --bg3: #e4e0d8;
+  --text: #1a1814; --text2: #5a5650; --text3: #a0a090;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --gold-dim: rgba(247,147,26,0.12); --gold-dim2: rgba(247,147,26,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); transition: background .3s, color .3s; }
+#reading-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--gold); z-index: 9999; transition: width .1s; pointer-events: none; }
+.nav-home-btn { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 5px; letter-spacing: 0.05em; transition: color 0.2s, border-color 0.2s; white-space: nowrap; flex-shrink: 0; }
+.nav-home-btn:hover { color: var(--gold); border-color: var(--gold); }
+.theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; gap: 1rem; }
+.nav-logo { font-family: var(--mono); font-size: .82rem; color: var(--gold); text-decoration: none; letter-spacing: .08em; }
+.nav-cat { font-family: var(--mono); font-size: .6rem; color: var(--text3); }
+/* HERO */
+.hero { padding: 4rem 2rem 3rem; max-width: 860px; margin: 0 auto; }
+.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--green); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1.2rem; opacity: .85; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem,5vw,3.4rem); font-weight: 700; color: var(--text); line-height: 1.12; margin-bottom: .7rem; }
+.hero-intro { font-size: .92rem; color: var(--text2); line-height: 1.85; max-width: 680px; margin-bottom: 1.4rem; }
+.hero-intro + .hero-intro { margin-top: -.6rem; }
+.badge-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.badge { font-family: var(--mono); font-size: .62rem; padding: .25rem .7rem; border-radius: 20px; letter-spacing: .06em; }
+.badge-green { background: rgba(34,211,160,.12); color: var(--green); border: 1px solid rgba(34,211,160,.3); }
+.badge-gold { background: rgba(247,147,26,.12); color: var(--gold); border: 1px solid rgba(247,147,26,.3); }
+.badge-grey { background: rgba(255,255,255,.06); color: var(--text3); border: 1px solid var(--border2); }
+.btn-pdf { display: inline-flex; align-items: center; gap: .6rem; background: var(--gold); color: #07080a; font-family: var(--mono); font-size: .82rem; font-weight: 600; letter-spacing: .05em; padding: .9rem 2rem; border-radius: 8px; text-decoration: none; transition: opacity .2s, transform .15s; }
+.btn-pdf:hover { opacity: .88; transform: translateY(-2px); }
+.hero-cta { margin-bottom: 2rem; }
+/* SECTIONS */
+.page-section { max-width: 860px; margin: 0 auto; padding: 2.8rem 2rem; border-top: 1px solid var(--border); }
+.sec-eyebrow { font-family: var(--mono); font-size: .6rem; color: var(--gold); text-transform: uppercase; letter-spacing: .2em; margin-bottom: .5rem; opacity: .85; }
+.sec-title { font-family: var(--cond); font-weight: 900; font-size: clamp(1.2rem,2.5vw,1.7rem); text-transform: uppercase; letter-spacing: .03em; color: var(--text); margin-bottom: 1.2rem; }
+.sec-text { font-size: .88rem; color: var(--text2); line-height: 1.85; margin-bottom: 1rem; }
+.sec-text strong { color: var(--text); font-weight: 600; }
+.sec-list { padding-left: 1.4rem; margin-bottom: 1rem; }
+.sec-list li { font-size: .88rem; color: var(--text2); line-height: 1.85; margin-bottom: .35rem; }
+.sec-list li strong { color: var(--text); }
+/* GLOSSARIO TABLE */
+.gloss-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-bottom: 1rem; }
+.gloss-table th { font-family: var(--mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); padding: .7rem 1rem; text-align: left; border-bottom: 1px solid rgba(247,147,26,.25); }
+.gloss-table td { padding: .65rem 1rem; vertical-align: top; border-bottom: 1px solid var(--border); color: var(--text2); line-height: 1.65; }
+.gloss-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.gloss-table td:first-child { font-family: var(--mono); font-size: .75rem; color: var(--text); white-space: nowrap; }
+.gloss-table em { font-style: italic; color: var(--text3); }
+/* WARNING BOX */
+.box-warning { background: rgba(239,68,68,.06); border-left: 3px solid var(--red); border-radius: 0 8px 8px 0; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+.box-warning-title { font-family: var(--mono); font-size: .72rem; color: var(--red); font-weight: 600; letter-spacing: .06em; margin-bottom: .6rem; }
+.box-warning p, .box-warning li { font-size: .84rem; color: var(--text2); line-height: 1.8; }
+.box-warning ul { padding-left: 1.3rem; margin-top: .5rem; }
+.box-warning strong { color: var(--text); }
+/* REFERRAL BOX */
+.box-referral { background: rgba(247,147,26,.07); border: 1px solid rgba(247,147,26,.3); border-radius: 10px; padding: 1.2rem 1.6rem; margin: 1.2rem 0; display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.referral-label { font-family: var(--mono); font-size: .62rem; color: var(--gold); text-transform: uppercase; letter-spacing: .12em; margin-bottom: .4rem; }
+.referral-code { font-family: var(--mono); font-size: 1.5rem; font-weight: 600; color: var(--gold); letter-spacing: .15em; }
+.referral-desc { font-size: .8rem; color: var(--text2); line-height: 1.6; }
+/* PRIVACY BOX */
+.box-privacy { background: rgba(34,211,160,.06); border-left: 3px solid var(--green); border-radius: 0 8px 8px 0; padding: 1rem 1.4rem; margin: 1rem 0; }
+.box-privacy-title { font-family: var(--mono); font-size: .62rem; color: var(--green); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+.box-privacy p { font-size: .84rem; color: var(--text2); line-height: 1.8; }
+/* NOTE BOX */
+.box-note { background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: .9rem 1.2rem; margin: .8rem 0; font-size: .82rem; color: var(--text3); line-height: 1.7; }
+.box-note strong { color: var(--text2); }
+/* COSTS TABLE */
+.costs-table { width: 100%; border-collapse: collapse; font-size: .84rem; margin: 1rem 0; }
+.costs-table td { padding: .7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text2); line-height: 1.6; vertical-align: top; }
+.costs-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.costs-table td:first-child { font-family: var(--mono); font-size: .76rem; color: var(--text); white-space: nowrap; padding-right: 1.5rem; }
+/* STEPS */
+.steps-list { counter-reset: step; padding-left: 0; list-style: none; margin-bottom: 1rem; }
+.steps-list li { counter-increment: step; display: flex; gap: 1rem; align-items: flex-start; margin-bottom: .8rem; font-size: .88rem; color: var(--text2); line-height: 1.8; }
+.steps-list li::before { content: counter(step); display: flex; align-items: center; justify-content: center; min-width: 1.5rem; height: 1.5rem; background: rgba(247,147,26,.12); border: 1px solid rgba(247,147,26,.3); border-radius: 50%; font-family: var(--mono); font-size: .65rem; color: var(--gold); flex-shrink: 0; margin-top: .15rem; }
+.steps-list li strong { color: var(--text); }
+/* CONTACTS */
+.contacts-list { list-style: none; padding: 0; }
+.contacts-list li { font-size: .88rem; color: var(--text2); padding: .5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: .8rem; align-items: baseline; }
+.contacts-list li:last-child { border-bottom: none; }
+.contacts-list a { color: var(--gold); text-decoration: none; font-family: var(--mono); font-size: .8rem; }
+.contacts-list a:hover { text-decoration: underline; }
+.contacts-label { font-family: var(--mono); font-size: .6rem; color: var(--text3); min-width: 90px; }
+/* FINE PRINT */
+.fine-print { font-size: .72rem; color: var(--text3); line-height: 1.7; margin-top: 1.5rem; font-style: italic; }
+/* DONATION */
+.donation-section { background: linear-gradient(135deg, #0f0a00, #1a0f00 50%, #0a0a0a); border-top: 1px solid #3a2500; padding: 5rem 2rem; }
+.donation-inner { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media(max-width: 680px) { .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; } .donation-qr-wrap { order: -1; } }
+.donation-text h2 { font-family: var(--sans); font-weight: 700; font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem; }
+.donation-text p { color: #8a8780; font-size: .88rem; line-height: 1.75; margin-bottom: 1rem; }
+.donation-manifesto { background: rgba(247,147,26,.06); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: .9rem 1.1rem; font-size: .82rem; font-style: italic; color: #8a8780; line-height: 1.65; }
+.donation-manifesto strong { color: var(--gold); font-style: normal; }
+.donation-qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+.qr-frame { background: #fff; border-radius: 12px; padding: 1rem; display: inline-flex; }
+.qr-frame img { display: block; width: 160px; height: 160px; image-rendering: pixelated; }
+.btc-address { font-family: var(--mono); font-size: .58rem; color: #8a8780; word-break: break-all; max-width: 220px; text-align: center; line-height: 1.7; }
+/* FOOTER / BACK TOP */
+footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); line-height: 1.8; }
+footer a { color: var(--text3); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+.back-top { position: fixed; bottom: 2rem; right: 1.2rem; background: var(--bg3); border: 1px solid var(--border2); color: var(--text2); text-decoration: none; padding: .5rem .7rem; border-radius: 6px; font-size: 1.1rem; opacity: 0; transition: opacity .25s; z-index: 700; }
+.back-top.visible { opacity: 1; }
 </style>
 </head>
 <body>
+<div id="reading-bar"></div>
+<button class="theme-btn" onclick="toggleTheme()" aria-label="Cambia tema">&#9681;</button>
 
 <nav class="site-nav">
   <a href="index.html" class="nav-home-btn">&#8592; Home</a>
-  <span class="nav-label">// guide tecniche</span>
+  <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
+  <span class="nav-cat">// guide &middot; acquisti privacy &middot; bitcoin</span>
 </nav>
 
-<div class="page-hero">
-  <div class="page-hero-eyebrow">// risorse tecniche &middot; sovranit&agrave; digitale</div>
-  <h1>Guide e <span>Approfondimenti</span></h1>
-  <p class="page-hero-sub">Risorse tecniche per chi vuole capire Bitcoin in profondit&agrave; &mdash; dai client alle infrastrutture, dal nodo al mining.</p>
-</div>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">// guide &middot; acquisti privacy &middot; bitcoin</div>
+  <h1>BitPost &mdash; Compra su Amazon<br>con i tuoi sats</h1>
+  <p class="hero-intro">Hai mai pensato di fare acquisti su Amazon senza usare la carta di credito collegata al tuo nome, senza lasciare tracce bancarie, accumulando o spendendo bitcoin in modo pratico e immediato? Esiste uno strumento che permette di farlo davvero &mdash; si chiama BitPost, ed &egrave; un marketplace peer-to-peer no-KYC dove puoi comprare pagando in bitcoin o guadagnarne completando ordini per altri.</p>
+  <p class="hero-intro">Ho scritto questa guida per chi parte da zero: nessun gergo dato per scontato, nessun passaggio saltato. Segui i passi nell&rsquo;ordine e in meno di un&rsquo;ora sei operativo.</p>
+  <div class="badge-row">
+    <span class="badge badge-green">No KYC</span>
+    <span class="badge badge-gold">Peer-to-peer</span>
+    <span class="badge badge-grey">Aggiornata agosto 2026</span>
+  </div>
+  <div class="hero-cta">
+    <a class="btn-pdf" href="manuale-bitpost.pdf" download>&#11015; Scarica la guida completa (PDF)</a>
+  </div>
+</header>
 
-<div class="hero-divider"></div>
+<!-- GLOSSARIO -->
+<section class="page-section">
+  <div class="sec-eyebrow">// glossario</div>
+  <h2 class="sec-title">Prima di iniziare: un glossario in 60 secondi</h2>
+  <p class="sec-text">Se non hai mai usato Bitcoin, queste parole torneranno spesso. Tenile a mente.</p>
+  <table class="gloss-table">
+    <thead>
+      <tr><th>Termine</th><th>Cosa significa</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>KYC</td><td><em>Know Your Customer</em> &mdash; la procedura con cui banche ed exchange ti chiedono documento d&rsquo;identit&agrave;, selfie, dati personali prima di farti operare. BitPost non lo richiede.</td></tr>
+      <tr><td>Sats (satoshi)</td><td>La pi&ugrave; piccola unit&agrave; di Bitcoin (1 BTC = 100.000.000 sats). Su BitPost si guadagnano e si spendono in sats.</td></tr>
+      <tr><td>Wallet non-custodial</td><td>Un portafoglio di cui <em>solo tu</em> hai le chiavi. Nessuna piattaforma &mdash; nemmeno BitPost &mdash; pu&ograve; muovere i tuoi fondi senza il tuo consenso.</td></tr>
+      <tr><td>Seed phrase</td><td>12 parole che rappresentano l&rsquo;accesso al tuo wallet. Chi le possiede controlla i fondi: vanno protette come una password bancaria, mai come un dettaglio secondario.</td></tr>
+      <tr><td>Multisig (multi-firma)</td><td>Un wallet che richiede pi&ugrave; chiavi per essere sbloccato &mdash; in questo caso quelle di Buyer e Bitworker. Garantisce che nessuna delle due parti possa fregare l&rsquo;altra da sola.</td></tr>
+      <tr><td>Buyer</td><td>Chi vuole comprare un prodotto e paga in Bitcoin.</td></tr>
+      <tr><td>Bitworker</td><td>Chi completa l&rsquo;acquisto per conto del Buyer (con la propria carta/account) e riceve Bitcoin in cambio.</td></tr>
+    </tbody>
+  </table>
+</section>
 
-<section class="guide-section">
-  <div class="guide-grid">
+<!-- SEZIONE 1 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 1</div>
+  <h2 class="sec-title">Cos&rsquo;&egrave; BitPost, in due frasi</h2>
+  <p class="sec-text">BitPost &egrave; il primo marketplace <strong>peer-to-peer, no-KYC e non-custodial</strong> che ti permette di comprare su Amazon pagando in Bitcoin, senza mai passare da un exchange centralizzato o fornire un documento d&rsquo;identit&agrave;. Tu crei una richiesta d&rsquo;acquisto, un altro utente (il Bitworker) la completa con i suoi mezzi e riceve Bitcoin in cambio &mdash; un vero scambio persona-a-persona.</p>
+  <p class="sec-text"><strong>Per chi &egrave; pensato:</strong></p>
+  <ul class="sec-list">
+    <li>Chi vuole comprare online senza lasciare la solita scia di dati (banca, indirizzo, abitudini d&rsquo;acquisto tutte collegate al proprio nome)</li>
+    <li>Chi ha gi&agrave; dei sats e vuole finalmente spenderli su qualcosa di concreto, in anonimato</li>
+    <li>Chi vuole avvicinarsi a Bitcoin senza comprarlo su un exchange centralizzato &mdash; puoi accumularne semplicemente completando ordini per altri (ruolo Bitworker)</li>
+  </ul>
+  <div class="box-note"><strong>Nota:</strong> BitPost non richiede alcun documento d&rsquo;identit&agrave; in fase di registrazione &mdash; di conseguenza non esiste un vero limite d&rsquo;et&agrave; verificato per creare un account. Al momento gli acquisti sono limitati alla piattaforma Amazon (altri e-commerce verificati arriveranno in futuro).</div>
+</section>
 
-    <a class="guide-card" href="versioni-client-bitcoin.html">
-      <div class="guide-card-label">// client &middot; consenso &middot; politica</div>
-      <div class="guide-card-title">Versioni Client Bitcoin a confronto</div>
-      <div class="guide-card-desc">Bitcoin Core, Knots, ProductionReady, BIP-110 client e fork eCash: architettura, differenze, policy e perch&eacute; la scelta del client &egrave; una scelta politica.</div>
-      <div class="guide-card-tags">Bitcoin Core &middot; Knots &middot; Client &middot; Consenso</div>
-      <div class="guide-card-cta">Leggi la guida &rarr;</div>
-    </a>
-
-    <a class="guide-card" href="mining-idroelettrico-diy.html">
-      <div class="guide-card-label">// mining &middot; energia &middot; diy</div>
-      <div class="guide-card-title">Mining Idroelettrico DIY</div>
-      <div class="guide-card-desc">Come costruire un sistema di mining su surplus solare o idroelettrico. Hardware, configurazione Braiins OS+, Home Assistant, calcolo ROI. Sovranit&agrave; tecnica dal basso.</div>
-      <div class="guide-card-tags">Mining &middot; Solar &middot; Braiins &middot; DIY</div>
-      <div class="guide-card-cta">Leggi la guida &rarr;</div>
-    </a>
-
-    <a class="guide-card" href="guida-bitpost.html">
-      <div class="guide-card-label">// acquisti privacy &middot; bitcoin &middot; no-kyc</div>
-      <div class="guide-card-title">BitPost &mdash; Compra su Amazon con i tuoi sats</div>
-      <div class="guide-card-desc">Guida pratica per principianti: come comprare su Amazon pagando in bitcoin, senza KYC e senza exchange centralizzati. Ruolo Buyer, ruolo Bitworker, wallet multisig, privacy e reputazione.</div>
-      <div class="guide-card-tags">BitPost &middot; Acquisti &middot; Privacy &middot; Sats</div>
-      <div class="guide-card-cta">Leggi la guida &rarr;</div>
-    </a>
-
-    <a class="guide-card" href="guida-bitcoin-nonprofit.html">
-      <div class="guide-card-label">// non-profit &middot; adozione &middot; pratica</div>
-      <div class="guide-card-title">Bitcoin per Non-profit e ONLUS</div>
-      <div class="guide-card-desc">Guida pratica all&rsquo;adozione di Bitcoin per organizzazioni non-profit: come ricevere donazioni in bitcoin, custodia, rendicontazione e considerazioni legali. Traduzione italiana della guida ufficiale.</div>
-      <div class="guide-card-tags">Non-profit &middot; Donazioni &middot; Custodia &middot; ONLUS</div>
-      <div class="guide-card-cta">Leggi la guida &rarr;</div>
-    </a>
-
-    <div class="guide-card guide-card-soon">
-      <div class="guide-card-label">// prossimamente</div>
-      <div class="guide-card-title">Nodo Bitcoin Sovrano</div>
-      <div class="guide-card-desc">Come installare e configurare un nodo Bitcoin completo. RoninDojo, Umbrel, nodo bare-metal. Verifica il tuo saldo senza fidarti di nessuno.</div>
-      <div class="guide-card-tags">Nodo &middot; Bitcoin Core &middot; Privacy &middot; Self-host</div>
-      <span class="soon-badge">In arrivo</span>
-    </div>
-
-    <div class="guide-card guide-card-soon">
-      <div class="guide-card-label">// prossimamente</div>
-      <div class="guide-card-title">Cold Storage: la guida definitiva</div>
-      <div class="guide-card-desc">Hardware wallet, air-gap, multisig, seed backup fisico. Tutto quello che serve per conservare bitcoin in modo sicuro a lungo termine.</div>
-      <div class="guide-card-tags">Cold Storage &middot; Multisig &middot; Backup &middot; Sicurezza</div>
-      <span class="soon-badge">In arrivo</span>
-    </div>
-
+<!-- SEZIONE 2 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 2</div>
+  <h2 class="sec-title">Registrazione: il primo passo</h2>
+  <p class="sec-text">La registrazione &egrave; volutamente minimale.</p>
+  <ol class="steps-list">
+    <li>Vai su <strong>bitpost.shop</strong> e clicca su &ldquo;Enter the marketplace&rdquo;</li>
+    <li>Inserisci solo il tuo <strong>indirizzo email</strong> &mdash; non serve nessun altro dato per registrarti</li>
+    <li>Riceverai un <strong>codice di accesso via email</strong>: non esiste una password tradizionale, ogni login avviene inserendo l&rsquo;indirizzo email e il codice ricevuto</li>
+    <li>Al termine della registrazione ti verranno mostrate <strong>12 parole (seed phrase)</strong></li>
+  </ol>
+  <div class="box-warning">
+    <div class="box-warning-title">&#9888; Le 12 parole: la cosa pi&ugrave; importante di tutta questa guida</div>
+    <p>Segnale su carta, non su uno screenshot o su un file digitale, e conservale in un posto sicuro. Servono a due cose:</p>
+    <ul>
+      <li><strong>Recuperare l&rsquo;account</strong> se cambi dispositivo o browser</li>
+      <li><strong>Generare la chiave privata</strong> con cui vengono creati i wallet multisig usati per pagare o ricevere Bitcoin negli scambi</li>
+    </ul>
+    <p style="margin-top:.7rem">Se le perdi, rischi di non poter pi&ugrave; accedere all&rsquo;account o recuperare fondi coinvolti in uno scambio attivo. Nessuno &mdash; nemmeno il supporto BitPost &mdash; pu&ograve; recuperarle al posto tuo.</p>
   </div>
 </section>
 
-<!-- Donation -->
+<!-- SEZIONE 3 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 3</div>
+  <h2 class="sec-title">Come comprare (ruolo Buyer)</h2>
+  <p class="sec-text">Immagina di voler comprare un paio di cuffie su Amazon.</p>
+  <ol class="steps-list">
+    <li><strong>Crea una richiesta d&rsquo;acquisto</strong>: incolli il link del prodotto Amazon nella piattaforma, scegli la quantit&agrave; (un solo prodotto per richiesta &mdash; se vuoi comprare due articoli diversi, servono due richieste separate)</li>
+    <li><strong>Scegli la commissione</strong>: puoi modulare il compenso per il Bitworker tra -5% e +8% rispetto al prezzo dell&rsquo;articolo &mdash; pi&ugrave; alto lo imposti, pi&ugrave; velocemente qualcuno prender&agrave; in carico il tuo ordine</li>
+    <li>La richiesta finisce nell&rsquo;<strong>order book</strong>, visibile a tutti i Bitworker registrati</li>
+    <li>Quando un Bitworker accetta la richiesta, <strong>depositi i Bitcoin</strong> (valore dell&rsquo;articolo + fee scelta + commissione BitPost) in un <strong>wallet multisig</strong> condiviso tra te e il Bitworker &mdash; i fondi restano bloccati l&igrave;, non nelle mani di nessuno</li>
+    <li>Il Bitworker acquista il prodotto e te lo fa spedire all&rsquo;indirizzo o al locker che hai indicato</li>
+    <li>Una volta ricevuto l&rsquo;articolo, <strong>sblocchi i fondi</strong> a favore del Bitworker confermando la buona riuscita dello scambio</li>
+  </ol>
+  <p class="sec-text"><strong>Costo minimo di un articolo acquistabile:</strong> 2 &euro;.</p>
+  <div class="box-privacy">
+    <div class="box-privacy-title">// consiglio privacy</div>
+    <p>Se disponibile nella tua zona, valuta la spedizione verso un <strong>locker/punto di ritiro</strong> invece dell&rsquo;indirizzo di casa &mdash; riduce ulteriormente i dati collegati al tuo nome. Un altro vantaggio del locker: il nome che indichi per il ritiro <strong>non deve necessariamente essere il tuo nome reale</strong>, un ulteriore livello di privacy rispetto alla spedizione a domicilio.</p>
+  </div>
+</section>
+
+<!-- SEZIONE 4 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 4</div>
+  <h2 class="sec-title">Come guadagnare Bitcoin (ruolo Bitworker)</h2>
+  <p class="sec-text">Questo &egrave; il modo in cui puoi <strong>accumulare sats senza comprarli su un exchange</strong>: completando ordini per altri.</p>
+  <ol class="steps-list">
+    <li>Sfogli l&rsquo;<strong>order book</strong> delle richieste aperte dai Buyer</li>
+    <li>Scegli una richiesta compatibile con la tua valuta/carta e la prendi in carico</li>
+    <li>Acquisti l&rsquo;articolo su Amazon con il tuo metodo di pagamento abituale, facendolo spedire all&rsquo;indirizzo indicato dal Buyer</li>
+    <li>Fornisci la prova dell&rsquo;acquisto (codice di ritiro o conferma di consegna)</li>
+    <li>Quando il Buyer conferma la ricezione, i fondi nel wallet multisig vengono sbloccati a tuo favore</li>
+  </ol>
+  <div class="box-note"><strong>Nota sulla valuta:</strong> l&rsquo;opzione <em>&ldquo;Only users with the same currency&rdquo;</em> &egrave; attiva di default e ti mostra solo richieste nella tua valuta locale, evitandoti costi di cambio.</div>
+  <div class="box-note" style="margin-top:.6rem"><strong>Puoi gestire pi&ugrave; ordini insieme?</strong> S&igrave; &mdash; quanti dipende dal tuo livello di reputazione (vedi Sezione 7).</div>
+</section>
+
+<!-- SEZIONE 5 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 5</div>
+  <h2 class="sec-title">Le due modalit&agrave; di acquisto</h2>
+  <p class="sec-text">BitPost distingue tra:</p>
+  <ul class="sec-list">
+    <li><strong>Link da piattaforme verificate (Amazon via API)</strong>: prezzo, quantit&agrave; e sicurezza dell&rsquo;articolo sono verificati automaticamente dalla piattaforma. &Egrave; la modalit&agrave; consigliata per chi inizia.</li>
+    <li><strong>Link da piattaforme NON verificate</strong>: qualunque e-commerce, ma il Buyer deve inserire manualmente prezzo e costi di spedizione, e il Bitworker deve verificarli con attenzione. In caso di frode accertata, l&rsquo;account responsabile perde punti reputazione.</li>
+  </ul>
+  <div class="box-note"><strong>Nota:</strong> la modalit&agrave; con piattaforme non verificate non &egrave; ancora attiva. Al momento gli acquisti sono possibili solo su Amazon; l&rsquo;apertura ad altri e-commerce &egrave; prevista in una fase successiva.</div>
+</section>
+
+<!-- SEZIONE 6 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 6</div>
+  <h2 class="sec-title">Quanto costa usare BitPost</h2>
+  <table class="costs-table">
+    <tbody>
+      <tr><td>Commissione piattaforma</td><td>8% sullo scambio, ripartita tra Buyer e Bitworker secondo l&rsquo;accordo</td></tr>
+      <tr><td>Fee variabile Buyer&rarr;Bitworker</td><td>Da -5% a +8%, decisa dal Buyer al momento della richiesta</td></tr>
+      <tr><td>Spese di spedizione</td><td>Sempre a carico del Buyer, pagate al Bitworker</td></tr>
+      <tr><td>Eventuali dazi doganali</td><td>A carico del Buyer, da calcolare e aggiungere al pagamento</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SEZIONE 7 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 7</div>
+  <h2 class="sec-title">Reputazione, esperienza e punti</h2>
+  <p class="sec-text">BitPost tiene traccia di tre indicatori per ogni utente:</p>
+  <ul class="sec-list">
+    <li><strong>Reputazione (%):</strong> sale dello 0,1% per ogni scambio completato con successo, scende fino al 10% per tentativi di truffa accertati.</li>
+    <li><strong>Esperienza:</strong> cresce con il numero di scambi completati.</li>
+    <li><strong>Trade Points:</strong> misurano la rapidit&agrave; di risposta ed esecuzione.</li>
+  </ul>
+  <p class="sec-text"><strong>Programma referral:</strong> puoi invitare altri utenti con un link personale e accumulare Bitpost Points, utilizzabili per sconti o vantaggi sulla piattaforma.</p>
+  <div class="box-referral">
+    <div>
+      <div class="referral-label">// codice referral</div>
+      <div class="referral-code">EdbztsT964</div>
+    </div>
+    <div class="referral-desc">Vuoi supportare questo lavoro di divulgazione? Se ti registri usando questo codice, sostieni direttamente Bitcoin Report Italia &mdash; a costo zero per te.</div>
+  </div>
+</section>
+
+<!-- SEZIONE 8 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 8</div>
+  <h2 class="sec-title">Se qualcosa va storto: resi e dispute</h2>
+  <ul class="sec-list">
+    <li><strong>Reso entro 14 giorni:</strong> puoi richiederlo al Bitworker, ma il Bitworker non &egrave; obbligato ad accettarlo, salvo che l&rsquo;errore sia oggettivamente suo.</li>
+    <li><strong>Con &ldquo;opzione regalo&rdquo; su Amazon:</strong> se l&rsquo;acquisto &egrave; stato fatto con l&rsquo;opzione gift, puoi gestire il reso direttamente con Amazon, senza coinvolgere il Bitworker.</li>
+    <li><strong>Reso &ldquo;Anti-Scam&rdquo; di BitPost:</strong> disponibile con una fee aggiuntiva del 2,5%, prevede controlli della piattaforma e monitoraggio fino alla restituzione.</li>
+    <li><strong>In caso di controversia:</strong> BitPost pu&ograve; richiedere al Bitworker l&rsquo;email originale dell&rsquo;ordine in formato .eml per verificarne l&rsquo;autenticit&agrave;.</li>
+  </ul>
+</section>
+
+<!-- SEZIONE 9 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 9</div>
+  <h2 class="sec-title">Attenzione: la regola dei 30 giorni</h2>
+  <p class="sec-text">Se i fondi restano fermi in un wallet multisig oltre 30 giorni, BitPost prevede questa redistribuzione: <strong>20%</strong> va alla parte che ha collaborato per sbloccare i fondi, <strong>80%</strong> finisce nelle casse di BitPost.</p>
+  <div class="box-warning">
+    <div class="box-warning-title">&#9888; Non lasciare uno scambio in sospeso</div>
+    <p>Completalo o richiedi assistenza in tempo. I fondi bloccati per pi&ugrave; di 30 giorni vengono redistribuiti automaticamente secondo la regola sopra.</p>
+  </div>
+</section>
+
+<!-- SEZIONE 10 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 10</div>
+  <h2 class="sec-title">Cosa NON puoi comprare</h2>
+  <p class="sec-text">Le richieste d&rsquo;acquisto non sono ammesse per alcolici, armi, droghe e qualsiasi oggetto che costituisca di per s&eacute; reato. Le violazioni comportano la cancellazione automatica dell&rsquo;account, senza preavviso.</p>
+</section>
+
+<!-- SEZIONE 11 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 11</div>
+  <h2 class="sec-title">Riepilogo: i tuoi primi passi su BitPost</h2>
+  <ol class="steps-list">
+    <li>Registrati con la tua email su <strong>bitpost.shop</strong></li>
+    <li>Ricevi e <strong>metti al sicuro le 12 parole</strong> (su carta, mai in digitale)</li>
+    <li>Scegli il tuo ruolo: <strong>Buyer</strong> se vuoi comprare in privacy, <strong>Bitworker</strong> se vuoi accumulare sats completando ordini</li>
+    <li>Se sei Buyer: incolla il link Amazon, imposta la fee, deposita i fondi nel wallet multisig quando un Bitworker accetta</li>
+    <li>Se sei Bitworker: sfoglia l&rsquo;order book, prendi in carico una richiesta compatibile, acquista e spedisci, fornisci le prove richieste</li>
+    <li>Conferma sempre la buona riuscita dello scambio per sbloccare i fondi &mdash; non lasciare nulla in sospeso</li>
+  </ol>
+</section>
+
+<!-- CONTATTI -->
+<section class="page-section">
+  <div class="sec-eyebrow">// serve aiuto?</div>
+  <h2 class="sec-title">Contatti BitPost</h2>
+  <ul class="contacts-list">
+    <li><span class="contacts-label">Supporto</span><a href="mailto:info@bitpost.it">info@bitpost.it</a></li>
+    <li><span class="contacts-label">Telegram Italia</span><a href="https://t.me/bitpostp2p_italia">t.me/bitpostp2p_italia</a></li>
+    <li><span class="contacts-label">Telegram globale</span><a href="https://t.me/bitpostP2P_Official">t.me/bitpostP2P_Official</a></li>
+    <li><span class="contacts-label">X (Twitter)</span><a href="https://x.com/bitpostP2P">@bitpostP2P</a></li>
+    <li><span class="contacts-label">Blog</span><a href="https://bitblog.bitpost.shop">bitblog.bitpost.shop</a></li>
+  </ul>
+  <p class="fine-print">Questa guida descrive il funzionamento della piattaforma sulla base dei Termini &amp; Condizioni e delle FAQ pubblicate su bitpost.shop (agosto 2026). In caso di dubbio, fai sempre riferimento ai Termini &amp; Condizioni ufficiali della piattaforma.</p>
+</section>
+
 <section class="donation-section">
   <div class="donation-inner">
     <div class="donation-text">
@@ -164,12 +381,33 @@ footer a:hover{color:var(--gold);}
   </div>
 </section>
 
+
 <footer>
-  <a href="index.html">Home</a>
-  <a href="letture.html">Letture</a>
-  <a href="strumenti.html">Strumenti</a>
-  &middot; &copy; 2026 Bitcoin Report School &middot; Open Source MIT
+  <p>&copy; 2026 Bitcoin Report School &mdash;
+  <a href="index.html">Home</a> &middot;
+  <a href="guide.html">Guide</a> &middot;
+  <a href="glossario_bitcoin.html">Glossario</a>
+  </p>
+  <p style="margin-top:.4rem;font-size:.6rem">Nessun tracker. Nessun cookie. Solo contenuto.</p>
 </footer>
 
+<a href="#" class="back-top" id="back-top">&#8679;</a>
+
+<script>
+function toggleTheme(){
+  const d=document.documentElement;
+  const cur=d.getAttribute('data-theme');
+  if(cur==='light'){d.removeAttribute('data-theme');localStorage.removeItem('theme');}
+  else{d.setAttribute('data-theme','light');localStorage.setItem('theme','light');}
+}
+(function(){
+  if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');
+})();
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  const bar=document.getElementById('reading-bar');if(bar)bar.style.width=p+'%';
+  const bt=document.getElementById('back-top');if(bt){if(window.scrollY>400)bt.classList.add('visible');else bt.classList.remove('visible');}
+});
+</script>
 </body>
 </html>
