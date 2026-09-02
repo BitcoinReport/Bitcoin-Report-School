@@ -695,12 +695,7 @@ function s6EncryptSign(){
   var payload=msg+'::SIG::'+_s6.sig+'::BY::'+sender;
   var b64=safeEncode(payload);
   var lines=b64.match(/.{1,64}/g)||[b64];
-  var armor='-----BEGIN PGP MESSAGE-----
-
-'+lines.join('
-')+'
-
------END PGP MESSAGE-----';
+  var armor='-----BEGIN PGP MESSAGE-----\n\n'+lines.join('\n')+'\n\n-----END PGP MESSAGE-----';
   _s6.armor=armor;
   var box=document.getElementById('s6-armor-box');
   box.textContent=armor;
@@ -712,14 +707,9 @@ function s6Decrypt(){
   var priv=document.getElementById('s6-priv-in').value.trim();
   var res=document.getElementById('s6-dec-result');
   if(!armor){res.innerHTML='<div class="status-err">Nessun messaggio da decifrare.</div>';res.style.display='block';return;}
-  var match=armor.match(/-----BEGIN PGP MESSAGE-----\s*
-
-([\s\S]+?)
-
------END PGP MESSAGE-----/);
+  var match=armor.match(/-----BEGIN PGP MESSAGE-----[\s\S]*?\n\n([\s\S]+?)\n\n-----END PGP MESSAGE-----/);
   if(!match){res.innerHTML='<div class="status-err">Formato non riconosciuto. Assicurati di incollare il blocco completo.</div>';res.style.display='block';return;}
-  var b64=match[1].replace(/
-/g,'');
+  var b64=match[1].replace(/\n/g,'');
   var payload=safeDecode(b64);
   if(!payload){res.innerHTML='<div class="status-err">Errore di decodifica.</div>';res.style.display='block';return;}
   var parts=payload.split('::SIG::');
