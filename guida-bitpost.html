@@ -127,8 +127,9 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .donation-manifesto { background: rgba(247,147,26,.06); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: .9rem 1.1rem; font-size: .82rem; font-style: italic; color: #8a8780; line-height: 1.65; }
 .donation-manifesto strong { color: var(--gold); font-style: normal; }
 .donation-qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
-.qr-frame { background: #fff; border-radius: 12px; padding: 1rem; display: inline-flex; }
+.qr-frame { background: #fff; border-radius: 14px; padding: 1rem; display: inline-block; position: relative; box-shadow: 0 0 0 1px rgba(247,147,26,.3), 0 0 40px rgba(247,147,26,.1), 0 20px 60px rgba(0,0,0,.6); }
 .qr-frame img { display: block; width: 160px; height: 160px; image-rendering: pixelated; }
+.qr-badge { position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; font-family: var(--mono); font-weight: 700; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 20px; white-space: nowrap; }
 .btc-address { font-family: var(--mono); font-size: .58rem; color: #8a8780; word-break: break-all; max-width: 220px; text-align: center; line-height: 1.7; }
 /* FOOTER / BACK TOP */
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); line-height: 1.8; }
