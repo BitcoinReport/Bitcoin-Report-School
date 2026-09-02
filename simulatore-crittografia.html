@@ -678,7 +678,7 @@ function s6CopyPub(){
 }
 function safeEncode(str){
   try{return btoa(unescape(encodeURIComponent(str)));}
-  catch(e){return btoa(str.replace(/[^ -ÿ]/g,'?'));}
+  catch(e){return btoa(str.replace(/[^\x00-\xFF]/g,'?'));}
 }
 function safeDecode(b64){
   try{return decodeURIComponent(escape(atob(b64)));}
