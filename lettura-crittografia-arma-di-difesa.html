@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sigillo &mdash; Crittografia OpenPGP per tutti &mdash; Bitcoin Report School</title>
-<meta name="description" content="Sigillo: app desktop open source per cifrare messaggi e file con OpenPGP senza terminali. Scarica per macOS, Windows e Linux. Verifica la firma PGP.">
+<title>La Crittografia come Arma di Difesa &mdash; Bitcoin Report School</title>
+<meta name="description" content="Da Zimmermann a PGP, dal Clipper Chip al Manifesto Cypherpunk: come la matematica &egrave; diventata il campo di battaglia tra potere e libert&agrave; individuale. Storia della crittografia moderna.">
 <meta name="author" content="Mike &mdash; Bitcoin Report Italia">
-<link rel="canonical" href="https://bitcoinreportschool.com/sigillo.html">
-<meta property="og:title" content="Sigillo &mdash; Crittografia OpenPGP per tutti">
-<meta property="og:description" content="App desktop open source per cifrare messaggi e file con OpenPGP &mdash; senza terminali, senza configurazioni.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://bitcoinreportschool.com/sigillo.html">
+<link rel="canonical" href="https://bitcoinreportschool.com/lettura-crittografia-arma-di-difesa.html">
+<meta property="og:title" content="La Crittografia come Arma di Difesa &mdash; Bitcoin Report School">
+<meta property="og:description" content="Da Zimmermann a PGP, dal Clipper Chip al Manifesto Cypherpunk: la storia della crittografia come campo di battaglia tra potere e libert&agrave;.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bitcoinreportschool.com/lettura-crittografia-arma-di-difesa.html">
+<meta property="article:author" content="Mike &mdash; Bitcoin Report Italia">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -24,7 +25,6 @@
   --gold-dim2: rgba(247,147,26,0.05);
   --green: #22d3a0;
   --red: #f87171;
-  --cyan: #67e8f9;
   --border: rgba(255,255,255,0.07);
   --border2: rgba(255,255,255,0.12);
   --text: #e8e4dc;
@@ -50,77 +50,98 @@
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); transition: background .3s, color .3s; }
 
+/* ── PROGRESS BAR ─────────────────────────────────────────── */
 #reading-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--gold); z-index: 9999; transition: width .1s; pointer-events: none; }
 
-.nav-home-btn { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 5px; letter-spacing: 0.05em; transition: color 0.2s, border-color 0.2s; white-space: nowrap; flex-shrink: 0; }
-.nav-home-btn:hover { color: var(--gold); border-color: var(--gold); }
+.nav-home-btn {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 0.72rem;
+  color: var(--text2, #7a7870);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border, #1e2030);
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-home-btn:hover {
+  color: var(--gold, #f7931a);
+  border-color: var(--gold, #f7931a);
+}
+
+/* ── THEME TOGGLE ──────────────────────────────────────────── */
 .theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
 .theme-btn:hover { border-color: var(--gold); color: var(--gold); }
-.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; gap: 1rem; }
+
+/* ── NAV ────────────────────────────────────────────────────── */
+.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; }
 .nav-logo { font-family: var(--mono); font-size: .82rem; color: var(--gold); text-decoration: none; letter-spacing: .08em; }
 .nav-cat { font-family: var(--mono); font-size: .6rem; color: var(--text3); }
 
-/* HERO */
+/* ── HERO ────────────────────────────────────────────────────── */
 .hero { padding: 4rem 2rem 3rem; max-width: 860px; margin: 0 auto; }
-.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--green); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1.2rem; opacity: .85; }
-.hero h1 { font-family: var(--serif); font-size: clamp(2rem,5vw,3.4rem); font-weight: 700; color: var(--text); line-height: 1.12; margin-bottom: .7rem; }
-.hero-subtitle { font-size: 1.05rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.4rem; max-width: 640px; font-weight: 300; }
-.hero-desc { font-size: .9rem; color: var(--text2); line-height: 1.8; max-width: 640px; margin-bottom: 1.4rem; }
-.badge-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
-.badge { font-family: var(--mono); font-size: .62rem; padding: .25rem .7rem; border-radius: 20px; letter-spacing: .06em; }
-.badge-green { background: rgba(34,211,160,.12); color: var(--green); border: 1px solid rgba(34,211,160,.3); }
-.badge-gold { background: rgba(247,147,26,.12); color: var(--gold); border: 1px solid rgba(247,147,26,.3); }
-.badge-grey { background: rgba(255,255,255,.06); color: var(--text3); border: 1px solid var(--border2); }
-.hero-github { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--mono); font-size: .72rem; color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(34,211,160,.3); padding-bottom: .1rem; transition: border-color .2s; }
-.hero-github:hover { border-color: var(--green); }
+.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1.2rem; opacity: .85; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; color: var(--text); line-height: 1.12; margin-bottom: .7rem; }
+.hero-subtitle { font-size: 1.05rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.4rem; max-width: 600px; font-weight: 300; }
+.hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--mono); font-size: .62rem; color: var(--text3); margin-bottom: 1.8rem; }
+.hero-meta span { display: flex; align-items: center; gap: .3rem; }
+.hero-epigraph { border-left: 3px solid var(--gold); padding: .9rem 1.2rem; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--text2); line-height: 1.7; background: var(--gold-dim2); border-radius: 0 8px 8px 0; max-width: 560px; }
 
-/* SECTION LAYOUT */
-.page-section { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--border); }
-.section-eyebrow { font-family: var(--mono); font-size: .6rem; color: var(--green); text-transform: uppercase; letter-spacing: .2em; margin-bottom: .8rem; opacity: .8; }
-.section-title { font-family: var(--serif); font-size: clamp(1.4rem,3vw,2rem); font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 1.2rem; }
-.section-intro { font-size: .9rem; color: var(--text2); line-height: 1.8; max-width: 680px; margin-bottom: 1.8rem; }
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page-layout { display: grid; grid-template-columns: 220px 1fr; gap: 0; max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem 4rem; align-items: start; }
+@media(max-width: 860px) { .page-layout { grid-template-columns: 1fr; } }
 
-/* FINGERPRINT BOX */
-.fingerprint-box { background: var(--bg2); border: 1px solid rgba(247,147,26,.25); border-radius: 10px; padding: 1.4rem 1.8rem; margin-bottom: 1.4rem; }
-.fp-label { font-family: var(--mono); font-size: .58rem; color: var(--text3); text-transform: uppercase; letter-spacing: .15em; margin-bottom: .6rem; }
-.fp-value { font-family: var(--mono); font-size: clamp(.7rem,1.8vw,.88rem); color: var(--gold); letter-spacing: .08em; line-height: 1.7; word-break: break-all; }
+/* ── TOC SIDEBAR ─────────────────────────────────────────────── */
+.toc-sidebar { position: sticky; top: 5rem; padding-right: 2rem; z-index: 10; }
+.toc-toggle { display: none; font-family: var(--mono); font-size: .65rem; color: var(--gold); background: none; border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .8rem; cursor: pointer; margin-bottom: .6rem; }
+@media(max-width: 860px) { .toc-toggle { display: block; } .toc-list { display: none; } .toc-list.open { display: flex; } }
+@media(max-width: 768px) { .toc-sidebar { display: none; } }
+.toc-label { font-family: var(--mono); font-size: .55rem; color: var(--text3); text-transform: uppercase; letter-spacing: .15em; margin-bottom: .8rem; }
+.toc-list { display: flex; flex-direction: column; gap: .2rem; }
+.toc-link { display: flex; gap: .6rem; align-items: flex-start; text-decoration: none; padding: .4rem .5rem; border-radius: 6px; transition: background .15s; }
+.toc-link:hover { background: var(--gold-dim); }
+.toc-link.active { background: var(--gold-dim); }
+.toc-num { font-family: var(--mono); font-size: .55rem; color: var(--gold); opacity: .6; padding-top: .1rem; flex-shrink: 0; }
+.toc-text { font-size: .72rem; color: var(--text2); line-height: 1.4; }
+.toc-link.active .toc-text { color: var(--gold); }
 
-/* BUTTONS */
-.btn-row { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: .9rem; }
-.btn-primary { display: inline-flex; align-items: center; gap: .4rem; background: var(--gold); color: #000; font-family: var(--mono); font-size: .72rem; font-weight: 600; padding: .7rem 1.4rem; border-radius: 7px; text-decoration: none; letter-spacing: .05em; transition: opacity .2s; border: none; cursor: pointer; }
-.btn-primary:hover { opacity: .88; }
-.btn-outline { display: inline-flex; align-items: center; gap: .4rem; background: transparent; color: var(--gold); font-family: var(--mono); font-size: .72rem; padding: .7rem 1.4rem; border-radius: 7px; text-decoration: none; letter-spacing: .05em; border: 1px solid rgba(247,147,26,.5); transition: border-color .2s, background .2s; }
-.btn-outline:hover { border-color: var(--gold); background: rgba(247,147,26,.07); }
-.verify-note { font-family: var(--mono); font-size: .62rem; color: var(--text3); margin-top: .3rem; }
+/* ── ARTICLE BODY ────────────────────────────────────────────── */
+.article-body { min-width: 0; }
+.chapter { position: relative; padding: 3rem 0 1rem; }
+.chapter-num-bg { position: absolute; top: 1.5rem; right: 0; font-family: var(--serif); font-size: 8rem; font-weight: 700; color: var(--gold); opacity: .045; line-height: 1; pointer-events: none; user-select: none; }
+.chapter-label { font-family: var(--mono); font-size: .58rem; color: var(--gold); text-transform: uppercase; letter-spacing: .18em; opacity: .75; display: block; margin-bottom: .5rem; }
+.chapter-title { font-family: var(--serif); font-size: clamp(1.25rem, 2.5vw, 1.65rem); font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 1.8rem; }
+.chapter-body { max-width: 680px; }
+.chapter-body p { font-family: var(--serif); font-size: clamp(1rem, 1.8vw, 1.05rem); line-height: 1.85; color: var(--text); margin-bottom: 1.3rem; }
+.chapter-body strong { color: var(--text); font-weight: 600; font-family: var(--sans); }
+.chapter-body em { font-style: italic; }
+.content-list { list-style: none; padding-left: 1rem; margin-bottom: 1.3rem; }
+.content-list li { font-family: var(--serif); font-size: 1rem; line-height: 1.8; color: var(--text); margin-bottom: .6rem; padding-left: 1.1rem; position: relative; }
+.content-list li::before { content: '&mdash;'; position: absolute; left: 0; color: var(--gold); opacity: .7; }
+.inline-link { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(247,147,26,.35); transition: border-color .2s; }
+.inline-link:hover { border-color: var(--gold); }
 
-/* DOWNLOAD CARDS */
-.dl-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 2rem; }
-@media(max-width:720px) { .dl-grid { grid-template-columns: 1fr; } }
-.dl-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem 1.4rem; display: flex; flex-direction: column; gap: .8rem; }
-.dl-card:hover { border-color: var(--border2); }
-.dl-icon { font-size: 2rem; }
-.dl-title { font-family: var(--sans); font-weight: 700; font-size: 1.05rem; color: var(--text); }
-.dl-sub { font-family: var(--mono); font-size: .62rem; color: var(--text3); }
-.dl-btns { display: flex; flex-direction: column; gap: .5rem; margin-top: auto; }
-.dl-btn-p { display: flex; align-items: center; justify-content: center; gap: .4rem; background: var(--gold); color: #000; font-family: var(--mono); font-size: .68rem; font-weight: 600; padding: .6rem 1rem; border-radius: 6px; text-decoration: none; transition: opacity .2s; text-align: center; }
-.dl-btn-p:hover { opacity: .88; }
-.dl-btn-s { display: flex; align-items: center; justify-content: center; gap: .4rem; background: transparent; color: var(--text3); font-family: var(--mono); font-size: .65rem; padding: .5rem 1rem; border-radius: 6px; text-decoration: none; border: 1px solid var(--border2); transition: border-color .2s, color .2s; text-align: center; }
-.dl-btn-s:hover { border-color: var(--text2); color: var(--text2); }
+/* ── BLOCKQUOTE ──────────────────────────────────────────────── */
+.pull-quote { border-left: 3px solid var(--gold); padding: 1rem 1.4rem; margin: 1.8rem 0; font-family: var(--serif); font-style: italic; font-size: 1.1rem; line-height: 1.75; color: var(--text); background: var(--gold-dim2); border-radius: 0 10px 10px 0; }
+.pull-quote cite { display: block; margin-top: .6rem; font-family: var(--mono); font-size: .62rem; font-style: normal; color: var(--text3); }
 
-/* VERIFY BOX */
-.verify-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem 1.6rem; }
-.verify-box-title { font-family: var(--mono); font-size: .65rem; color: var(--green); text-transform: uppercase; letter-spacing: .15em; margin-bottom: 1.1rem; }
-.verify-details { margin-bottom: .8rem; }
-.verify-details summary { cursor: pointer; list-style: none; font-family: var(--mono); font-size: .7rem; color: var(--text2); padding: .5rem 0; border-bottom: 1px solid var(--border); }
-.verify-details summary::-webkit-details-marker { display: none; }
-.verify-details[open] summary { color: var(--green); border-color: rgba(34,211,160,.2); }
-.verify-details .vd-body { padding: .8rem 0 0; }
-pre.verify-code { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: .9rem 1rem; font-family: var(--mono); font-size: .65rem; color: var(--cyan); line-height: 1.7; overflow-x: auto; white-space: pre; }
-.verify-signing-key { margin-top: 1.2rem; font-family: var(--mono); font-size: .7rem; }
-.verify-signing-key a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(247,147,26,.3); }
-.verify-signing-key a:hover { border-color: var(--gold); }
+/* ── CHAPTER DIVIDER ─────────────────────────────────────────── */
+.chapter-divider { display: flex; align-items: center; max-width: 680px; margin: 1rem 0; }
+.chapter-divider span { flex: 1; height: 1px; background: var(--border); }
 
-/* DONATION */
+/* ── LEGGI ANCHE ─────────────────────────────────────────────── */
+.leggi-anche-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; margin: 2rem 0 1rem; }
+.la-title { font-family: var(--mono); font-size: .6rem; color: var(--text3); text-transform: uppercase; letter-spacing: .14em; margin-bottom: .9rem; }
+.la-links { display: flex; flex-direction: column; gap: .7rem; }
+.la-link { display: flex; gap: .9rem; align-items: flex-start; text-decoration: none; padding: .7rem .8rem; border-radius: 8px; background: var(--bg3); border: 1px solid var(--border); transition: border-color .2s, background .2s; }
+.la-link:hover { border-color: var(--gold); background: var(--gold-dim2); }
+.la-icon { font-size: 1.3rem; flex-shrink: 0; padding-top: .05rem; }
+.la-link-title { font-family: var(--sans); font-size: .85rem; font-weight: 600; color: var(--gold); margin-bottom: .2rem; }
+.la-link-desc { font-family: var(--sans); font-size: .78rem; color: var(--text2); line-height: 1.5; }
+
+/* ── DONATION ────────────────────────────────────────────────── */
 .donation-section { background: linear-gradient(135deg, #0f0a00, #1a0f00 50%, #0a0a0a); border-top: 1px solid #3a2500; padding: 5rem 2rem; }
 .donation-inner { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 @media(max-width: 680px) { .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; } .donation-qr-wrap { order: -1; } }
@@ -135,242 +156,346 @@ pre.verify-code { background: var(--bg3); border: 1px solid var(--border); borde
 .qr-badge { position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; font-family: var(--mono); font-weight: 700; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 20px; white-space: nowrap; }
 .qr-label { text-align: center; font-family: var(--mono); font-size: .65rem; color: #4a4844; }
 
-/* BACK TO TOP & FOOTER */
+/* ── BACK TO TOP ──────────────────────────────────────────────── */
 .back-top { position: fixed; bottom: 2rem; right: 1.5rem; background: var(--bg2); border: 1px solid var(--border2); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: .9rem; color: var(--text2); text-decoration: none; z-index: 500; opacity: 0; pointer-events: none; transition: opacity .3s, border-color .2s; }
 .back-top.visible { opacity: 1; pointer-events: all; }
 .back-top:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); }
 footer a { color: var(--text3); text-decoration: none; }
 footer a:hover { color: var(--gold); }
 
-/* ── Keys Section ── */
-.keys-section { max-width: 820px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--border); }
-.keys-eyebrow { font-family: var(--mono); font-size: 0.6rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.6rem; opacity: 0.8; }
-.keys-title { font-family: var(--sans); font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 1.4rem; color: var(--text); }
-.key-box { border-radius: 12px; padding: 1.6rem 1.8rem; margin-bottom: 1.2rem; }
-.key-box-contact { background: linear-gradient(135deg, #020d0a, #001009 50%, #0a0a0a); border: 1px solid rgba(34,211,160,0.25); }
-.key-box-sign { background: linear-gradient(135deg, #0d0a02, #120e00 50%, #0a0a0a); border: 1px solid rgba(247,147,26,0.25); }
-.key-box-label { font-family: var(--mono); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 0.5rem; opacity: 0.7; }
-.key-box-contact .key-box-label { color: var(--green); }
-.key-box-sign .key-box-label { color: var(--gold); }
-.key-box-title { font-family: var(--sans); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--text); }
-.key-box-desc { font-size: 0.87rem; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
-.fingerprint-box { background: rgba(0,0,0,0.35); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
-.fp-label { font-family: var(--mono); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text3); }
-.fp-value { font-family: var(--mono); font-size: 0.88rem; color: var(--gold); letter-spacing: 0.06em; word-break: break-all; }
-.key-box-contact .fp-value { color: var(--green); }
-.key-box-btns { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
-.btn-key { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 7px; padding: 0.65rem 1.2rem; font-family: var(--mono); font-size: 0.72rem; text-decoration: none; letter-spacing: 0.04em; transition: all 0.2s; }
-.btn-key-primary { background: rgba(247,147,26,0.12); border: 1px solid rgba(247,147,26,0.4); color: var(--gold); }
-.btn-key-primary:hover { background: rgba(247,147,26,0.22); }
-.key-box-contact .btn-key-primary { background: rgba(34,211,160,0.12); border-color: rgba(34,211,160,0.4); color: var(--green); }
-.key-box-contact .btn-key-primary:hover { background: rgba(34,211,160,0.22); }
-.btn-key-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text2); }
-.btn-key-secondary:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
-.key-box-note { font-family: var(--mono); font-size: 0.6rem; color: var(--text3); letter-spacing: 0.06em; }
-
-/* ── Signing Key Link ── */
-.signing-key-link { display: block; font-family: var(--mono); font-size: 0.62rem; color: var(--text3); text-decoration: none; margin-top: 0.5rem; letter-spacing: 0.04em; transition: color 0.2s; }
-.signing-key-link:hover { color: var(--gold); }
-
-/* ── Features v0.5.0 ── */
-.features-section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 2rem; border-top: 1px solid var(--border); }
-.features-eyebrow { font-family: var(--mono); font-size: 0.6rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.6rem; opacity: 0.8; }
-.features-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); margin: 0 0 1.5rem; }
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
-.feat-card { display: flex; gap: 1rem; align-items: flex-start; background: rgba(34,211,160,0.04); border: 1px solid rgba(34,211,160,0.12); border-radius: 10px; padding: 1rem 1.2rem; }
-.feat-card-muted { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); }
-.feat-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
-.feat-name { font-weight: 600; font-size: 0.88rem; color: var(--text); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem; }
-.feat-desc { font-size: 0.78rem; color: var(--text2); line-height: 1.5; }
-.feat-desc code { font-family: var(--mono); font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.1em 0.35em; border-radius: 3px; }
-.feat-tag { font-family: var(--mono); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); border: 1px solid rgba(247,147,26,0.4); border-radius: 4px; padding: 0.1em 0.4em; }
-.features-stability { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); letter-spacing: 0.04em; margin-top: 1rem; opacity: 0.7; }
+/* ── Analogy Box ── */
+.analogy-box { background: rgba(34,211,160,0.05); border: 1px solid rgba(34,211,160,0.2); border-radius: 10px; padding: 1.3rem 1.5rem; margin: 1.4rem 0; font-size: 0.9rem; line-height: 1.8; }
+.analogy-box strong { color: var(--green); }
+/* ── Timeline Box ── */
+.timeline-box { border-left: 3px solid var(--gold); padding-left: 1.5rem; margin: 1.4rem 0; }
+.timeline-item { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: flex-start; }
+.timeline-year { font-family: var(--mono); font-size: 0.72rem; color: var(--gold); font-weight: 700; white-space: nowrap; min-width: 3.5rem; padding-top: 0.15rem; }
+.timeline-text { color: var(--text2); font-size: 0.88rem; line-height: 1.65; }
+/* ── Warning Box ── */
+.warning-box { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.25); border-left: 4px solid rgba(239,68,68,0.6); border-radius: 0 10px 10px 0; padding: 1.3rem 1.5rem; margin: 1.4rem 0; }
+.warning-box-title { font-family: var(--mono); font-size: 0.65rem; color: rgba(239,68,68,0.85); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.8rem; }
+.warning-box ul { margin: 0; padding-left: 1.2rem; }
+.warning-box li { color: var(--text2); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.4rem; }
+/* ── Manifesto Excerpt ── */
+.manifesto-excerpt { border-left: 4px solid var(--gold); background: rgba(247,147,26,0.04); padding: 1.4rem 1.8rem; margin: 1.6rem 0; border-radius: 0 10px 10px 0; }
+.manifesto-excerpt p { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; line-height: 1.85; color: var(--text); font-style: italic; }
+/* ── Examples Box (3 card affiancate) ── */
+.examples-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.4rem 0; }
+.example-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; }
+.example-card-label { font-family: var(--mono); font-size: 0.58rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+.example-card-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.4rem; }
+.example-card-text { font-size: 0.82rem; color: var(--text2); line-height: 1.65; }
 </style>
+<meta name="robots" content="index, follow">
+<meta name="language" content="it">
+<meta property="og:site_name" content="Bitcoin Report School">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://bitcoinreportschool.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@bitcoinsecondo">
+<meta name="twitter:title" content="La Crittografia come Arma di Difesa &mdash; Bitcoin Report School">
+<meta name="twitter:description" content="Da Zimmermann a PGP, dal Clipper Chip al Manifesto Cypherpunk: la storia della crittografia come campo di battaglia tra potere e libert&agrave;.">
+<meta name="twitter:image" content="https://bitcoinreportschool.com/og-image.jpg">
 </head>
 <body>
 
 <div id="reading-bar"></div>
-<button class="theme-btn" onclick="toggleTheme()" aria-label="Cambia tema">&#9681;</button>
+
+<button class="theme-btn" onclick="toggleTheme()" id="theme-btn">&#9788; Chiaro</button>
 
 <nav class="site-nav">
   <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
-  <span class="nav-cat">// strumenti &middot; privacy &middot; crittografia</span>
+  <span class="nav-cat">// crittografia &middot; storia &middot; cypherpunk</span>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
-  <div class="hero-eyebrow">// strumenti &middot; privacy &middot; crittografia</div>
-  <h1>Sigillo</h1>
-  <p class="hero-subtitle">Crittografia OpenPGP per tutti &mdash; senza terminali, senza configurazioni.</p>
-  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti, cifratura di testo, immagini, GIF animate e video &mdash; il tutto senza mai aprire un terminale. Supporta pi&ugrave; identit&agrave; e l&rsquo;import di chiavi esistenti. Distribuita sotto licenza GPLv3.</p>
-  <div class="badge-row">
-    <span class="badge badge-green">GPLv3</span>
-    <span class="badge badge-gold">v0.5.0</span>
-    <span class="badge badge-grey">Tauri / Rust</span>
+  <div class="hero-eyebrow">// crittografia &middot; storia &middot; cypherpunk &middot; difesa</div>
+  <h1>La Crittografia come Arma di Difesa</h1>
+  <p class="hero-subtitle">Da Zimmermann a PGP, dal Clipper Chip al Manifesto Cypherpunk: come la matematica &egrave; diventata il campo di battaglia tra potere e libert&agrave; individuale</p>
+  <div class="hero-meta">
+    <span>&#9997; di Mike &mdash; Bitcoin Report Italia</span>
+    <span>&#128337; ~12 minuti di lettura</span>
+    <span>&#128209; 7 capitoli</span>
   </div>
-  <a class="hero-github" href="https://github.com/BitcoinReport/sigillo" target="_blank" rel="noopener">&#8594; Codice sorgente su GitHub</a>
-  <a class="hero-github" href="simulatore-crittografia.html" style="margin-top:.5rem">&#8594; Capire la crittografia asimmetrica</a>
-  <p style="font-family:var(--mono);font-size:0.72rem;color:var(--text2);margin-top:0.8rem;">
-    Vuoi capire perch&eacute; la crittografia &egrave; uno strumento politico?
-    <a href="lettura-crittografia-arma-di-difesa.html" style="color:var(--green);text-decoration:none;">
-      Leggi: La crittografia come arma di difesa &rarr;
-    </a>
-  </p>
+  <blockquote class="hero-epigraph">
+    &laquo;La privacy non si ottiene pregando il potente di concedercela. Si costruisce con la matematica.&raquo;
+    <cite>&mdash; Eric Hughes, 1993</cite>
+  </blockquote>
 </header>
 
-<!-- CHIAVI PGP -->
-<section class="features-section">
-  <div class="features-eyebrow">// novit&agrave; &middot; v0.5.0</div>
-  <h2 class="features-title">Cosa c&rsquo;&egrave; di nuovo</h2>
-  <div class="features-grid">
-    <div class="feat-card">
-      <div class="feat-icon">&#9654;</div>
-      <div class="feat-body">
-        <div class="feat-name">Supporto multimediale</div>
-        <div class="feat-desc">Cifra e decifra testo, immagini (JPEG, PNG, HEIC), GIF animate e video <code>.mov</code> e <code>.mp4</code>.</div>
-      </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">&#9906;</div>
-      <div class="feat-body">
-        <div class="feat-name">Multi-account</div>
-        <div class="feat-desc">Gestisci pi&ugrave; identit&agrave; e coppie di chiavi simultaneamente. Passa da un account all&rsquo;altro senza uscire dall&rsquo;app.</div>
-      </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">&#128273;</div>
-      <div class="feat-body">
-        <div class="feat-name">Import chiave esterna</div>
-        <div class="feat-desc">Importa una chiave privata OpenPGP gi&agrave; esistente &mdash; da GPG Suite, Kleopatra o riga di comando. Porti la tua identit&agrave; senza doverla ricreare.</div>
-      </div>
-    </div>
-    <div class="feat-card feat-card-muted">
-      <div class="feat-icon">&#9203;</div>
-      <div class="feat-body">
-        <div class="feat-name">Time-lock <span class="feat-tag">Sperimentale</span></div>
-        <div class="feat-desc">Blocco soft basato sul numero di blocco Bitcoin. Non &egrave; una garanzia crittografica &mdash; &egrave; un vincolo applicativo attivabile nelle impostazioni avanzate.</div>
-      </div>
-    </div>
+<div class="page-layout">
+
+  <!-- TOC sidebar -->
+  <aside class="toc-sidebar">
+    <button class="toc-toggle" onclick="document.getElementById('toc-list').classList.toggle('open')">&#9776; Indice capitoli</button>
+    <div class="toc-label">Indice</div>
+    <nav class="toc-list" id="toc-list">
+<a href="#cap1" class="toc-link" data-cap="1"><span class="toc-num">01</span><span class="toc-text">Ogni messaggio passa da qualcun altro</span></a>
+<a href="#cap2" class="toc-link" data-cap="2"><span class="toc-num">02</span><span class="toc-text">Quando cifrare era un privilegio di Stato</span></a>
+<a href="#cap3" class="toc-link" data-cap="3"><span class="toc-num">03</span><span class="toc-text">La rivoluzione: Diffie, Hellman e la chiave pubblica</span></a>
+<a href="#cap4" class="toc-link" data-cap="4"><span class="toc-num">04</span><span class="toc-text">Phil Zimmermann e la guerra a PGP</span></a>
+<a href="#cap5" class="toc-link" data-cap="5"><span class="toc-num">05</span><span class="toc-text">Il Clipper Chip: lo Stato vuole la backdoor</span></a>
+<a href="#cap6" class="toc-link" data-cap="6"><span class="toc-num">06</span><span class="toc-text">Il Manifesto Cypherpunk</span></a>
+<a href="#cap7" class="toc-link" data-cap="7"><span class="toc-num">07</span><span class="toc-text">La battaglia continua</span></a>
+    </nav>
+  </aside>
+
+  <!-- Article -->
+  <main class="article-body">
+
+<section class="chapter" id="cap1">
+  <div class="chapter-num-bg">01</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 1</span>
+    <h2 class="chapter-title">Ogni messaggio passa da qualcun altro</h2>
   </div>
-  <p class="features-stability">&#10003; Migliorata la stabilit&agrave; su alcune configurazioni Linux durante la visualizzazione di contenuti multimediali decifrati.</p>
+  <div class="chapter-body">
+
+<p>C&rsquo;&egrave; un problema fondamentale nel modo in cui comunichiamo oggi, e la maggior parte delle persone non ci pensa mai. Ogni messaggio che invii &mdash; una mail, un messaggio su WhatsApp, una ricerca sul browser &mdash; non viaggia direttamente dal tuo dispositivo a quello del destinatario. Passa attraverso server terzi. Server di aziende private, spesso americane, che per legge possono essere obbligate a consegnare quei dati a governi e agenzie di intelligence.</p>
+
+<p>Il problema non &egrave; nuovo. La corrispondenza privata &egrave; sempre stata vulnerabile a chi controllava le infrastrutture di trasporto &mdash; che fossero messaggeri reali, uffici postali o cavi telegrafici. Quello che &egrave; cambiato &egrave; la scala: oggi la sorveglianza non richiede di aprire singole buste. Richiede solo l&rsquo;accesso ai database di pochi grandi fornitori di servizi.</p>
+
+<p>La soluzione tecnica a questo problema esiste da cinquant&rsquo;anni: la <strong>crittografia</strong>. L&rsquo;idea &egrave; semplice &mdash; se un messaggio viene cifrato prima di partire e decifrato solo all&rsquo;arrivo, il server che lo trasporta vede solo dati incomprensibili. Non pu&ograve; leggerlo. Non pu&ograve; consegnarlo a nessuno in una forma utile.</p>
+
+<p>Ma la crittografia accessibile a tutti non &egrave; sempre esistita. Per decenni &egrave; stata un privilegio di Stato &mdash; uno strumento militare e diplomatico protetto da leggi di esportazione come le armi. La storia di come sia diventata disponibile per chiunque &egrave; la storia di una battaglia: legale, politica, culturale. E non &egrave; finita.</p>
+
+<blockquote class="pull-quote">
+  &ldquo;Il diritto alla privacy &egrave; il diritto di tenere un segreto. Non perch&eacute; si abbia qualcosa da nascondere &mdash; ma perch&eacute; ci appartiene.&rdquo;
+</blockquote>
+
+  </div>
 </section>
+<div class="chapter-divider"><span></span></div>
 
-<div class="keys-section" id="chiave-pubblica">
-  <div class="keys-eyebrow">// crittografia &middot; contatti &middot; verifica</div>
-  <h2 class="keys-title">Chiavi PGP</h2>
-
-  <!-- CHIAVE CONTATTI -->
-  <div class="key-box key-box-contact">
-    <div class="key-box-label">// per scrivermi messaggi cifrati</div>
-    <div class="key-box-title">Chiave pubblica &mdash; Contatti</div>
-    <p class="key-box-desc">Usa questa chiave per inviarmi messaggi cifrati con Sigillo o qualsiasi client OpenPGP.</p>
-    <div class="fingerprint-box">
-      <span class="fp-label">Fingerprint</span>
-      <code class="fp-value">AA28 F0C4 8857 4E2C 540F&nbsp; E63D 2CCD D28E C64F A94C</code>
-    </div>
-    <div class="key-box-btns">
-      <a href="mike-sigillo-contact.asc" download class="btn-key btn-key-primary">Scarica chiave (.asc)</a>
-    </div>
-    <p class="key-box-note">// importa questa chiave in Sigillo o in qualsiasi client PGP per scrivermi</p>
+<section class="chapter" id="cap2">
+  <div class="chapter-num-bg">02</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 2</span>
+    <h2 class="chapter-title">Quando cifrare era un privilegio di Stato</h2>
   </div>
+  <div class="chapter-body">
 
-  <!-- CHIAVE FIRMA SOFTWARE -->
-  <div class="key-box key-box-sign">
-    <div class="key-box-label">// verifica integrit&agrave; software</div>
-    <div class="key-box-title">Chiave pubblica &mdash; Firma Software</div>
-    <p class="key-box-desc">Usa questa chiave per verificare che gli installer di Sigillo siano stati firmati da me e non siano stati manomessi.</p>
-    <div class="fingerprint-box">
-      <span class="fp-label">Fingerprint</span>
-      <code class="fp-value">1382 C05E 9772 233C C957&nbsp; CA7A FF68 AF59 F8CE C835</code>
-    </div>
-    <div class="key-box-btns">
-      <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/1382C05E9772233CC957CA7AFF68AF59F8CEC835" download="mike-signing-key.asc" class="btn-key btn-key-primary">Scarica chiave (.asc)</a>
-      <a href="https://keys.openpgp.org/search?q=1382C05E9772233CC957CA7AFF68AF59F8CEC835" target="_blank" rel="noopener noreferrer" class="btn-key btn-key-secondary">Verifica su keyserver &rarr;</a>
-    </div>
-    <p class="key-box-note">// verifica sempre il fingerprint prima di importare una chiave</p>
+<p>La crittografia moderna ha radici militari profonde. Durante la Seconda guerra mondiale, la macchina Enigma usata dall&rsquo;esercito tedesco era considerata inviolabile. Il progetto di decrittazione britannico a Bletchley Park &mdash; che coinvolse Alan Turing e migliaia di matematici &mdash; rimase segreto per decenni proprio perch&eacute; la conoscenza di quelle tecniche era un vantaggio strategico inestimabile.</p>
+
+<p>Nel 1952, negli Stati Uniti, viene fondata la <strong>NSA</strong> &mdash; National Security Agency. La sua missione principale &egrave; la <em>signals intelligence</em>: intercettare e decifrare le comunicazioni straniere. E anche, implicitamente, assicurarsi che le comunicazioni americane siano le pi&ugrave; sicure al mondo. Per fare entrambe le cose, la NSA ha bisogno di controllare chi pu&ograve; usare la crittografia forte, e come.</p>
+
+<p>Negli anni Settanta, IBM sviluppa il <strong>DES</strong> &mdash; Data Encryption Standard. &Egrave; il primo algoritmo di crittografia commerciale, pensato per proteggere le transazioni bancarie e le comunicazioni aziendali. Ma prima che venisse adottato come standard ufficiale del governo americano nel 1977, la NSA interviene. Il risultato: la lunghezza della chiave viene ridotta da 64 a 56 bit.</p>
+
+<p>Quei 8 bit in meno sembrano poca cosa. In realt&agrave; dimezzano l&rsquo;universo delle chiavi possibili: la differenza tra uno spazio che un computer normale non pu&ograve; esplorare e uno che un computer governativo degli anni Settanta poteva gi&agrave; attaccare con la forza bruta. Non &egrave; mai stato provato ufficialmente che fosse sabotaggio deliberato. Ma il sospetto non &egrave; mai svanito.</p>
+
+<p>Il principio era chiaro: la crittografia forte era per lo Stato. Per i militari. Per i diplomatici. I privati potevano usarne una versione indebolita &mdash; abbastanza da proteggere i dati dalle minacce ordinarie, non abbastanza da resistere a un governo determinato.</p>
+
+<blockquote class="pull-quote">
+  &ldquo;Chi controlla la crittografia controlla le comunicazioni sicure. E chi controlla le comunicazioni sicure ha un vantaggio asimmetrico su tutti gli altri.&rdquo;
+</blockquote>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+
+<section class="chapter" id="cap3">
+  <div class="chapter-num-bg">03</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 3</span>
+    <h2 class="chapter-title">La rivoluzione: Diffie, Hellman e la chiave pubblica</h2>
+  </div>
+  <div class="chapter-body">
+
+<p>Nel 1976, due matematici americani &mdash; <strong>Whitfield Diffie</strong> e <strong>Martin Hellman</strong> &mdash; pubblicano un articolo accademico dal titolo &ldquo;New Directions in Cryptography&rdquo;. &Egrave; una delle pubblicazioni pi&ugrave; importanti nella storia dell&rsquo;informatica, anche se pochi se ne accorsero sul momento.</p>
+
+<p>Il problema che Diffie e Hellman risolvono &egrave; uno dei paradossi fondamentali della crittografia classica: per comunicare in modo sicuro, due persone devono prima condividere una chiave segreta. Ma come si fa a condividere una chiave segreta senza incontrarsi fisicamente? E se non ci si pu&ograve; incontrare fisicamente &mdash; come nel caso di due sconosciuti su una rete aperta &mdash; come si fa a stabilire un canale sicuro?</p>
+
+<div class="analogy-box">
+  <strong>Un&rsquo;analogia utile:</strong> immagina di voler ricevere una scatola chiusa a chiave da uno sconosciuto, senza che nessun intermediario abbia mai la chiave. La soluzione &egrave; mandare la scatola con il tuo lucchetto aperto &mdash; lo sconosciuto ci mette dentro il messaggio e richiude. Solo tu hai la chiave per aprirlo. Diffie e Hellman hanno formalizzato questo principio in matematica.
+</div>
+
+<p>Il meccanismo si chiama <strong>crittografia a chiave pubblica</strong>. Ogni utente ha due chiavi: una <em>pubblica</em>, che pu&ograve; essere condivisa liberamente, e una <em>privata</em>, che non lascia mai il proprio dispositivo. Un messaggio cifrato con la chiave pubblica di qualcuno pu&ograve; essere decifrato solo con la sua chiave privata. Chiunque pu&ograve; scriverti in modo sicuro conoscendo solo la tua chiave pubblica.</p>
+
+<p>La NSA non apprezza. I funzionari dell&rsquo;agenzia contattano Stanford &mdash; dove Diffie e Hellman lavorano &mdash; per discutere le implicazioni di sicurezza nazionale della pubblicazione. L&rsquo;idea che la crittografia forte possa essere disponibile al pubblico generico, senza possibilit&agrave; di intercettazione governativa, &egrave; esattamente ci&ograve; che l&rsquo;intelligence americana ha sempre cercato di evitare.</p>
+
+<p>Ma l&rsquo;articolo &egrave; gi&agrave; pubblicato. Il gatto &egrave; fuori dal sacco. La crittografia a chiave pubblica comincer&agrave; a diffondersi &mdash; e nulla potr&agrave; fermarla.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+
+<section class="chapter" id="cap4">
+  <div class="chapter-num-bg">04</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 4</span>
+    <h2 class="chapter-title">Phil Zimmermann e la guerra a PGP</h2>
+  </div>
+  <div class="chapter-body">
+
+<p>Nel 1991, un programmatore americano di nome <strong>Phil Zimmermann</strong> rilascia gratuitamente su Internet un software che si chiama <strong>PGP &mdash; Pretty Good Privacy</strong>. PGP implementa la crittografia a chiave pubblica in modo accessibile: chiunque pu&ograve; cifrare una mail o un file in modo che solo il destinatario possa leggerlo, senza bisogno di essere un matematico.</p>
+
+<p>Zimmermann rilascia PGP perch&eacute; ha paura. Teme che il Senato americano stia per approvare leggi che avrebbero reso obbligatorio inserire backdoor governative in tutti i software di crittografia. Vuole mettere la crittografia forte nelle mani di tutti, prima che sia troppo tardi. Vuole farne un fatto compiuto.</p>
+
+<div class="timeline-box">
+  <div class="timeline-item">
+    <div class="timeline-year">1991</div>
+    <div class="timeline-text">Zimmermann rilascia PGP gratuitamente su internet. Il software si diffonde rapidamente negli Stati Uniti e, attraverso reti FTP, in tutto il mondo.</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-year">1993</div>
+    <div class="timeline-text">Il governo americano apre un&rsquo;indagine penale su Zimmermann. L&rsquo;accusa: aver esportato illegalmente &ldquo;munizioni&rdquo; &mdash; perch&eacute; la legge americana (ITAR, International Traffic in Arms Regulations) classificava la crittografia forte come armamento militare.</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-year">1994</div>
+    <div class="timeline-text">L&rsquo;indagine si intensifica. Zimmermann rischia anni di prigione. Il caso diventa un simbolo della guerra dello Stato contro la crittografia privata.</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-year">1995</div>
+    <div class="timeline-text">La risposta creativa: il codice sorgente di PGP viene pubblicato come libro dalla MIT Press. Un libro &egrave; protetto dal Primo Emendamento &mdash; non pu&ograve; essere considerato un&rsquo;esportazione illegale di armi. Chi vuole PGP in Europa pu&ograve; comprare il libro, scannerizzare le pagine e ricompilare il codice.</div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-year">1996</div>
+    <div class="timeline-text">Il governo abbandona l&rsquo;indagine. Zimmermann non viene mai incriminato. PGP &egrave; ormai diffuso in tutto il mondo e non pu&ograve; essere pi&ugrave; fermato.</div>
   </div>
 </div>
 
-<!-- DOWNLOAD -->
-<section class="page-section" id="download">
-  <div class="section-eyebrow">// download &middot; v0.5.0 &middot; verifica firma</div>
-  <h2 class="section-title">Download</h2>
-  <p class="section-intro">Ogni pacchetto &egrave; firmato con la mia chiave PGP. Prima di installare, verifica la firma con il file <code style="font-family:var(--mono);color:var(--gold);font-size:.85em">.asc</code> corrispondente.</p>
+<p>Il caso PGP &egrave; emblematico: uno Stato potente che cerca di fermare un&rsquo;idea usando le armi della legge, e fallisce. Non perch&eacute; l&rsquo;idea fosse illegale in senso sostanziale &mdash; ma perch&eacute; la matematica non ha passaporto. Una volta che un algoritmo &egrave; pubblico, appartiene al mondo.</p>
 
-  <div class="dl-grid">
-    <!-- macOS -->
-    <div class="dl-card">
-      <div class="dl-icon">&#63743;</div>
-      <div class="dl-title">macOS</div>
-      <div class="dl-sub">Pacchetto .dmg universale</div>
-      <div class="dl-btns">
-        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-macOS.dmg">&#11015; Scarica .dmg</a>
-        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-macOS.dmg.asc">&#9112; Firma .asc</a>
-        <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
-      </div>
-    </div>
-    <!-- Windows -->
-    <div class="dl-card">
-      <div class="dl-icon">&#127968;</div>
-      <div class="dl-title">Windows</div>
-      <div class="dl-sub">Installer .msi</div>
-      <div class="dl-btns">
-        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Windows.msi">&#11015; Scarica .msi</a>
-        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Windows.msi.asc">&#9112; Firma .asc</a>
-        <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
-      </div>
-    </div>
-    <!-- Linux -->
-    <div class="dl-card">
-      <div class="dl-icon">&#128268;</div>
-      <div class="dl-title">Linux</div>
-      <div class="dl-sub">AppImage &mdash; nessuna installazione richiesta</div>
-      <div class="dl-btns">
-        <a class="dl-btn-p" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Linux.AppImage">&#11015; Scarica .AppImage</a>
-        <a class="dl-btn-s" href="https://github.com/BitcoinReport/sigillo/releases/latest/download/Sigillo-Linux.AppImage.asc">&#9112; Firma .asc</a>
-        <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc" class="signing-key-link" download>&#8595; SIGNING-KEY.asc (chiave di verifica)</a>
-      </div>
-    </div>
-  </div>
+<blockquote class="pull-quote">
+  &ldquo;Se la privacy &egrave; fuori legge, solo i fuorilegge avranno privacy.&rdquo;
+  <cite>&mdash; Phil Zimmermann</cite>
+</blockquote>
 
-  <!-- VERIFICA FIRMA -->
-  <div class="verify-box">
-    <div class="verify-box-title">// Come verificare la firma</div>
-
-    <details class="verify-details">
-      <summary>&#9654; macOS / Linux</summary>
-      <div class="vd-body">
-<pre class="verify-code"># 1. Importa la chiave pubblica
-gpg --import SIGNING-KEY.asc
-
-# 2. Verifica la firma (sostituisci con il file scaricato)
-gpg --verify Sigillo-macOS.dmg.asc Sigillo-macOS.dmg
-
-# Output atteso:
-# Good signature from "Mike - Bitcoin Report Italia"
-# Primary key fingerprint: 1382 C05E 9772 233C C957  CA7A FF68 AF59 F8CE C835</pre>
-      </div>
-    </details>
-
-    <details class="verify-details">
-      <summary>&#9654; Windows (Kleopatra / Gpg4win)</summary>
-      <div class="vd-body">
-<pre class="verify-code">1. Scarica e installa Gpg4win da https://gpg4win.org
-2. Apri Kleopatra &#8594; File &#8594; Importa &#8594; seleziona SIGNING-KEY.asc
-3. Clic destro su Sigillo-Windows.msi &#8594; "Verifica firma" &#8594; seleziona il file .asc
-4. Risultato atteso: "Firma valida di Mike - Bitcoin Report Italia"</pre>
-      </div>
-    </details>
-
-    <div class="verify-signing-key">
-      Chiave di firma inclusa nella release: <a href="https://github.com/BitcoinReport/sigillo/releases/latest/download/SIGNING-KEY.asc">Scarica SIGNING-KEY.asc</a>
-    </div>
   </div>
 </section>
+<div class="chapter-divider"><span></span></div>
 
-<!-- DONATION -->
+<section class="chapter" id="cap5">
+  <div class="chapter-num-bg">05</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 5</span>
+    <h2 class="chapter-title">Il Clipper Chip: lo Stato vuole la backdoor</h2>
+  </div>
+  <div class="chapter-body">
+
+<p>Nel 1993, mentre il caso PGP &egrave; ancora aperto, l&rsquo;amministrazione Clinton lancia una proposta che far&agrave; storia: il <strong>Clipper Chip</strong>. Si tratta di un chip crittografico progettato dalla NSA che dovrebbe essere integrato in tutti i telefoni e computer americani. L&rsquo;idea: tutti possono usare la crittografia forte, purch&eacute; il governo possa sempre decifrarla.</p>
+
+<p>Il meccanismo si chiama <strong>key escrow</strong>: ogni chip Clipper genera automaticamente una copia della chiave di decrittazione, che viene depositata presso due agenzie governative diverse. Per intercettare una comunicazione, le forze dell&rsquo;ordine devono ottenere un mandato e richiedere le due met&agrave; della chiave alle due agenzie. Il sistema &egrave; progettato per sembrare sicuro: nessuna singola agenzia ha accesso completo.</p>
+
+<div class="warning-box">
+  <div class="warning-box-title">// I problemi del Clipper Chip</div>
+  <ul>
+    <li>Il chip &egrave; progettato dalla NSA &mdash; algoritmo classificato, non verificabile pubblicamente</li>
+    <li>Nel 1994 il ricercatore <strong>Matt Blaze</strong> scopre una falla nel protocollo di escrow che permette di bypassare la consegna della chiave senza che il chip lo segnali</li>
+    <li>Chi vuole comunicare in modo veramente segreto pu&ograve; semplicemente usare PGP sopra il Clipper Chip &mdash; la backdoor diventa inutile</li>
+    <li>Il mercato internazionale rifiuta: nessun governo straniero vuole prodotti con backdoor NSA integrate</li>
+  </ul>
+</div>
+
+<p>La pressione pubblica &egrave; enorme. Aziende tecnologiche, accademici, organizzazioni per i diritti civili si oppongono compattamente. L&rsquo;argomento centrale &egrave; semplice: una backdoor progettata per il governo americano &egrave; una backdoor disponibile per qualsiasi governo, qualsiasi hacker, qualsiasi attore malevolo che riesca ad accedervi. La sicurezza non si dimezza &mdash; si annulla.</p>
+
+<p>Nel 1996 il progetto Clipper viene abbandonato. &Egrave; la seconda sconfitta consecutiva dello Stato nella guerra alla crittografia privata. Ma non &egrave; la fine dei tentativi.</p>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+
+<section class="chapter" id="cap6">
+  <div class="chapter-num-bg">06</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 6</span>
+    <h2 class="chapter-title">Il Manifesto Cypherpunk</h2>
+  </div>
+  <div class="chapter-body">
+
+<p>Nel 1992, un gruppo di matematici, informatici e libertari californiani comincia a riunirsi regolarmente in un appartamento di San Francisco. Si fanno chiamare <strong>cypherpunks</strong> &mdash; una crasi di <em>cipher</em> (cifratura) e <em>punk</em>. Discutono di crittografia, di privacy, di politica. E cominciano a scrivere.</p>
+
+<p>Nel 1993, <strong>Eric Hughes</strong> &mdash; matematico e uno dei fondatori del gruppo &mdash; pubblica quello che diventer&agrave; il testo fondativo del movimento: <em>A Cypherpunk&rsquo;s Manifesto</em>.</p>
+
+<div class="manifesto-excerpt">
+  <p>&ldquo;La privacy &egrave; necessaria per una societ&agrave; aperta nell&rsquo;era elettronica. La privacy non &egrave; segretezza. Una cosa privata &egrave; qualcosa che non si vuole che il mondo intero sappia, ma una cosa segreta &egrave; qualcosa che non si vuole che nessuno sappia. La privacy &egrave; il potere di rivelare selettivamente se stessi al mondo.&rdquo;</p>
+  <p>&ldquo;Noi, i Cypherpunk, ci dedichiamo alla costruzione di sistemi anonimi. Difendiamo la nostra privacy con la crittografia, con i sistemi di posta anonima, con le firme digitali, e con il denaro elettronico.&rdquo;</p>
+  <p>&ldquo;I Cypherpunk scrivono codice. Sappiamo che qualcuno deve scrivere software per difendere la privacy, e poich&eacute; non possiamo ottenere privacy a meno che non lo facciamo tutti, lo scriveremo noi.&rdquo;</p>
+</div>
+
+<p>Il Manifesto fa una distinzione cruciale che ancora oggi viene ignorata nel dibattito pubblico: la differenza tra <em>privacy</em> e <em>segretezza</em>. La privacy non &egrave; nascondere qualcosa di illecito. &Egrave; il diritto di scegliere cosa condividere e con chi. &Egrave; lo stesso diritto che eserciti quando chiudi la porta del bagno &mdash; non perch&eacute; stai facendo qualcosa di illegale, ma perch&eacute; alcune cose ti appartengono.</p>
+
+<p>La risposta al problema della privacy &egrave; esplicita: non chiedere permesso. Non aspettare leggi. Scrivere codice. La crittografia non si conquista pregando &mdash; si costruisce.</p>
+
+<blockquote class="pull-quote">
+  &ldquo;La privacy nel mondo elettronico non pu&ograve; essere garantita dagli Stati. Deve essere costruita con la tecnologia, da chi capisce la tecnologia.&rdquo;
+</blockquote>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+
+<section class="chapter" id="cap7">
+  <div class="chapter-num-bg">07</div>
+  <div class="chapter-header">
+    <span class="chapter-label">Capitolo 7</span>
+    <h2 class="chapter-title">La battaglia continua</h2>
+  </div>
+  <div class="chapter-body">
+
+<p>Se pensate che la guerra alla crittografia sia storia degli anni Novanta, guardatevi intorno. I tentativi di limitare, indebolire o aggirare la crittografia privata non si sono mai fermati. Hanno solo cambiato nome e strategia.</p>
+
+<div class="examples-box">
+  <div class="example-card">
+    <div class="example-card-label">// Unione Europea</div>
+    <div class="example-card-title">Chat Control</div>
+    <div class="example-card-text">La proposta di regolamento europeo &ldquo;Chat Control&rdquo; richiederebbe la scansione automatica di tutti i messaggi privati &mdash; inclusi quelli cifrati end-to-end &mdash; per individuare contenuti illegali. In pratica: una backdoor obbligatoria per tutte le piattaforme di messaggistica. Tecnicamente impossibile da implementare senza rompere la crittografia per tutti.</div>
+  </div>
+  <div class="example-card">
+    <div class="example-card-label">// FBI vs Apple</div>
+    <div class="example-card-title">San Bernardino, 2016</div>
+    <div class="example-card-text">Dopo l&rsquo;attentato di San Bernardino, l&rsquo;FBI chiede ad Apple di creare una versione speciale di iOS con backdoor per accedere all&rsquo;iPhone di uno degli attentatori. Apple rifiuta. Lo scontro legale dura mesi, finch&eacute; l&rsquo;FBI trova una soluzione alternativa e ritira il ricorso. La backdoor non viene creata.</div>
+  </div>
+  <div class="example-card">
+    <div class="example-card-label">// Australia</div>
+    <div class="example-card-title">Assistance and Access Act, 2018</div>
+    <div class="example-card-text">L&rsquo;Australia approva una legge che obbliga le aziende tecnologiche a fornire alle forze dell&rsquo;ordine accesso ai dispositivi cifrati. Gli esperti di sicurezza la definiscono tecnicamente incoerente: non &egrave; possibile creare una backdoor &ldquo;solo per i buoni&rdquo;. Una vulnerabilit&agrave; &egrave; una vulnerabilit&agrave; per chiunque.</div>
+  </div>
+</div>
+
+<p>Il pattern &egrave; sempre lo stesso. Lo Stato avanza una proposta presentata come ragionevole e necessaria per la sicurezza pubblica. Esperti di sicurezza, accademici e aziende tecnologiche rispondono che tecnicamente non funziona &mdash; che una backdoor per il governo &egrave; una backdoor per tutti. La proposta viene temporaneamente ritirata o modificata. E poi riappare, con un altro nome, in un altro paese.</p>
+
+<p>La risposta dei cypherpunk &egrave; rimasta la stessa dal 1993: non aspettare. Costruire. Nel 2009, un anonimo che si firma <strong>Satoshi Nakamoto</strong> pubblica il whitepaper di Bitcoin. Non &egrave; solo una valuta digitale &mdash; &egrave; un sistema di pagamento completamente decentralizzato, basato sulla crittografia, che non richiede fidare in nessuna terza parte. &Egrave; l&rsquo;applicazione pi&ugrave; radicale del principio cypherpunk al problema del denaro.</p>
+
+<p>I cypherpunk volevano la privacy nelle comunicazioni. Satoshi ha portato la stessa logica alle transazioni finanziarie. Entrambi hanno usato la matematica come scudo &mdash; perch&eacute; la matematica non chiede permesso, non ha confini nazionali, e non pu&ograve; essere requisita.</p>
+
+<blockquote class="pull-quote">
+  &ldquo;La crittografia non &egrave; un lusso tecnico. &Egrave; l&rsquo;infrastruttura della libert&agrave; nell&rsquo;era digitale.&rdquo;
+</blockquote>
+
+<div class="leggi-anche-box">
+  <div class="la-title">&#128214; Leggi anche</div>
+  <div class="la-links">
+    <a href="cyphernomicon-spiegato.html" class="la-link">
+      <span class="la-icon">&#128221;</span>
+      <div>
+        <div class="la-link-title">Il Cyphernomicon Spiegato</div>
+        <div class="la-link-desc">Il documento di Timothy C. May che ha fondato l&rsquo;ideologia cypherpunk &mdash; cripto-anarchia, privacy come arma, denaro digitale anonimo</div>
+      </div>
+    </a>
+    <a href="simulatore-crittografia.html" class="la-link">
+      <span class="la-icon">&#128274;</span>
+      <div>
+        <div class="la-link-title">Simulatore di Crittografia</div>
+        <div class="la-link-desc">Capire la crittografia asimmetrica interagendo direttamente con PGP: chiavi, cifratura, firme digitali</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+  </div>
+</section>
+<div class="chapter-divider"><span></span></div>
+
+  </main>
+
+</div>
+
+<!-- DONATION SECTION -->
 <section class="donation-section">
   <div class="donation-inner">
     <div class="donation-text">
@@ -390,32 +515,71 @@ gpg --verify Sigillo-macOS.dmg.asc Sigillo-macOS.dmg
   </div>
 </section>
 
-<footer>
-  <p>&copy; 2026 Bitcoin Report School &mdash;
-  <a href="index.html">Home</a> &middot;
-  <a href="glossario_bitcoin.html">Glossario</a> &middot;
-  <a href="strumenti.html">Strumenti</a>
-  </p>
-  <p style="margin-top:.4rem;font-size:.6rem">Nessun tracker. Nessun cookie. Solo contenuto.</p>
-</footer>
-
 <a href="#" class="back-top" id="back-top">&#8679;</a>
 
 <script>
 function toggleTheme(){
-  const d=document.documentElement;
-  const cur=d.getAttribute('data-theme');
-  if(cur==='light'){d.removeAttribute('data-theme');localStorage.removeItem('theme');}
-  else{d.setAttribute('data-theme','light');localStorage.setItem('theme','light');}
+  var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('theme-btn').textContent=t==='light'?'☽ Scuro':'☀ Chiaro';
 }
-(function(){
-  if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');
-})();
-window.addEventListener('scroll',()=>{
-  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
-  const bar=document.getElementById('reading-bar');if(bar)bar.style.width=p+'%';
-  const bt=document.getElementById('back-top');if(bt){if(window.scrollY>400)bt.classList.add('visible');else bt.classList.remove('visible');}
+
+window.addEventListener('scroll',function(){
+  var scrolled=window.scrollY;
+  var total=document.body.scrollHeight-window.innerHeight;
+  var pct=total>0?scrolled/total*100:0;
+  document.getElementById('reading-bar').style.width=pct+'%';
+  var bt=document.getElementById('back-top');
+  if(scrolled>400){bt.classList.add('visible');}else{bt.classList.remove('visible');}
+  updateActiveToc();
+});
+
+function updateActiveToc(){
+  var caps=document.querySelectorAll('.chapter');
+  var links=document.querySelectorAll('.toc-link');
+  var active=0;
+  caps.forEach(function(c,i){
+    if(c.getBoundingClientRect().top<=120)active=i;
+  });
+  links.forEach(function(l,i){l.classList.toggle('active',i===active);});
+}
+
+document.querySelectorAll('.toc-link').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=a.getAttribute('href');
+    var el=document.querySelector(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+    if(window.innerWidth<860){
+      document.getElementById('toc-list').classList.remove('open');
+    }
+  });
 });
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "La Crittografia come Arma di Difesa &mdash; Bitcoin Report School",
+  "description": "Da Zimmermann a PGP, dal Clipper Chip al Manifesto Cypherpunk: come la matematica &egrave; diventata il campo di battaglia tra potere e libert&agrave; individuale.",
+  "url": "https://bitcoinreportschool.com/lettura-crittografia-arma-di-difesa.html",
+  "inLanguage": "it",
+  "dateModified": "2026-09-05",
+  "author": {
+    "@type": "Person",
+    "name": "Mike",
+    "url": "https://www.instagram.com/bitcoin_report_italia"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bitcoin Report Italia",
+    "url": "https://bitcoinreportschool.com"
+  }
+}
+</script>
+
+<footer>
+  <p>&copy; 2026 Bitcoin Report Italia &mdash; <a href="index.html">Home</a> &middot; <a href="letture.html">Letture</a> &middot; <a href="https://www.instagram.com/bitcoin_report_italia" target="_blank" rel="noopener">Instagram</a></p>
+</footer>
+
 </body>
 </html>
