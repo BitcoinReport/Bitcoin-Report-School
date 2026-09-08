@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Workshop &mdash; Bitcoin Report School</title>
+<meta name="description" content="Iscriviti ai workshop su Bitcoin, autocustodia, crittografia e sovranit&#224; finanziaria. Percorsi formativi di Bitcoin Report Italia.">
+<meta name="author" content="Mike &mdash; Bitcoin Report Italia">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://bitcoinreportschool.com/workshop.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<style>
+:root {
+  --bg: #07080a;
+  --bg2: #0d0e14;
+  --bg3: #13141c;
+  --gold: #f7931a;
+  --gold-dim: rgba(247,147,26,0.10);
+  --gold-dim2: rgba(247,147,26,0.05);
+  --green: #22d3a0;
+  --red: #f87171;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e4dc;
+  --text2: #9a9790;
+  --text3: #4a4844;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Playfair Display', serif;
+}
+[data-theme="light"] {
+  --bg: #f8f6f1;
+  --bg2: #eeeae2;
+  --bg3: #e4e0d8;
+  --text: #1a1814;
+  --text2: #5a5650;
+  --text3: #a0a090;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --gold-dim: rgba(247,147,26,0.12);
+  --gold-dim2: rgba(247,147,26,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); transition: background .3s, color .3s; }
+
+/* ── PROGRESS BAR ── */
+#reading-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--gold); z-index: 9999; transition: width .1s; pointer-events: none; }
+
+/* ── THEME BTN ── */
+.theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── NAV ── */
+.nav-home-btn { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 5px; letter-spacing: 0.05em; transition: color 0.2s, border-color 0.2s; white-space: nowrap; flex-shrink: 0; }
+.nav-home-btn:hover { color: var(--gold); border-color: var(--gold); }
+.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; gap: 1rem; }
+.nav-logo { font-family: var(--mono); font-size: .82rem; color: var(--gold); text-decoration: none; letter-spacing: .08em; }
+.nav-cat { font-family: var(--mono); font-size: .6rem; color: var(--text3); }
+
+/* ── HERO ── */
+.hero { padding: 4rem 2rem 2.5rem; max-width: 860px; margin: 0 auto; }
+.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1.2rem; opacity: .85; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: var(--text); line-height: 1.12; margin-bottom: .7rem; }
+.hero-subtitle { font-size: 1.05rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.4rem; max-width: 580px; font-weight: 300; }
+.hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; font-family: var(--mono); font-size: .62rem; color: var(--text3); }
+.hero-meta span { display: flex; align-items: center; gap: .3rem; }
+
+/* ── OUTER CONTENT ── */
+.outer { max-width: 920px; margin: 0 auto; padding: 0 2rem 6rem; }
+.section-eyebrow { font-family: var(--mono); font-size: .55rem; color: var(--text3); text-transform: uppercase; letter-spacing: .18em; margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+
+/* ── PDF BANNER ── */
+.pdf-banner { display: flex; align-items: center; gap: 1rem; background: var(--bg2); border: 1px solid rgba(247,147,26,.2); border-radius: 10px; padding: 1rem 1.4rem; margin-top: 2.5rem; text-decoration: none; transition: border-color .2s, background .2s; }
+.pdf-banner:hover { border-color: var(--gold); background: var(--bg3); }
+.pdf-icon { font-size: 1.6rem; flex-shrink: 0; }
+.pdf-text-wrap { display: flex; flex-direction: column; gap: .15rem; }
+.pdf-title { font-family: var(--mono); font-size: .78rem; color: var(--gold); font-weight: 500; }
+.pdf-subtitle { font-size: .78rem; color: var(--text2); }
+.pdf-arrow { margin-left: auto; font-family: var(--mono); font-size: .75rem; color: var(--gold); flex-shrink: 0; }
+
+/* ── CALENDAR ── */
+.ws-calendar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+.ws-date-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem; cursor: pointer; transition: border-color .2s, background .2s, transform .15s; user-select: none; }
+.ws-date-card:hover { border-color: rgba(247,147,26,.3); transform: translateY(-1px); }
+.ws-date-card.selected { border-color: var(--gold); background: var(--gold-dim2); }
+.ws-date-num { font-family: var(--mono); font-size: .52rem; color: var(--gold); opacity: .7; text-transform: uppercase; letter-spacing: .15em; margin-bottom: .4rem; }
+.ws-date-topic { font-family: var(--sans); font-weight: 700; font-size: .95rem; color: var(--text); margin-bottom: .35rem; line-height: 1.3; }
+.ws-date-when { font-family: var(--mono); font-size: .65rem; color: var(--text3); margin-bottom: .3rem; }
+.ws-date-desc { font-size: .78rem; color: var(--text2); line-height: 1.55; margin-top: .4rem; }
+.ws-date-card.selected .ws-date-topic { color: var(--gold); }
+.ws-calendar-empty { font-family: var(--mono); font-size: .8rem; color: var(--text3); padding: 1rem 0; }
+
+/* ── FORM WRAPPER ── */
+.ws-form-outer { margin-top: 3.5rem; }
+.ws-form { display: flex; flex-direction: column; gap: 0; }
+.form-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem 1.8rem; margin-bottom: 1rem; }
+.form-block-title { font-family: var(--mono); font-size: .62rem; color: var(--gold); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 1.2rem; opacity: .9; }
+.required { color: var(--red); margin-left: .1rem; }
+
+/* ── FIELDS ── */
+.field-wrap { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+.field-wrap:last-child { margin-bottom: 0; }
+.field-label { font-family: var(--mono); font-size: .68rem; color: var(--text2); letter-spacing: .04em; }
+.field-hint { font-family: var(--mono); font-size: .58rem; color: var(--text3); }
+.field-input { background: var(--bg3); border: 1px solid var(--border2); border-radius: 7px; padding: .65rem .9rem; font-family: var(--sans); font-size: .9rem; color: var(--text); width: 100%; transition: border-color .2s; outline: none; }
+.field-input:focus { border-color: var(--gold); }
+.field-input::placeholder { color: var(--text3); }
+.field-textarea { resize: vertical; min-height: 70px; }
+.field-file { padding: .5rem .7rem; cursor: pointer; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+@media(max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
+
+/* ── WORKSHOP CHECKBOXES IN FORM ── */
+.ws-select-all-label { display: flex; align-items: center; gap: .7rem; font-family: var(--mono); font-size: .72rem; color: var(--gold); cursor: pointer; margin-bottom: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--border); }
+.ws-select-all-label input { accent-color: var(--gold); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+.ws-list { display: flex; flex-direction: column; gap: .5rem; }
+.ws-check-label { display: flex; align-items: flex-start; gap: .7rem; font-family: var(--sans); font-size: .88rem; color: var(--text); cursor: pointer; padding: .65rem .8rem; border-radius: 7px; border: 1px solid var(--border); background: var(--bg3); transition: border-color .15s, background .15s; }
+.ws-check-label:hover { border-color: rgba(247,147,26,.3); }
+.ws-check-label input { accent-color: var(--gold); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; margin-top: .15rem; }
+.ws-check-label.checked { border-color: rgba(247,147,26,.4); background: var(--gold-dim2); }
+.ws-check-date { font-family: var(--mono); font-size: .62rem; color: var(--text3); margin-top: .2rem; display: block; }
+.ws-check-desc { font-size: .78rem; color: var(--text2); margin-top: .2rem; display: block; line-height: 1.5; }
+.ws-list-empty { font-family: var(--mono); font-size: .8rem; color: var(--text3); padding: .5rem 0; }
+
+/* ── RADIO BUTTONS ── */
+.radio-group { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.2rem; }
+.radio-option { display: flex; align-items: flex-start; gap: .9rem; padding: .9rem 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg3); cursor: pointer; transition: border-color .15s, background .15s; }
+.radio-option:has(input:checked) { border-color: var(--gold); background: var(--gold-dim2); }
+.radio-option input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; margin-top: .15rem; }
+.radio-label { font-family: var(--sans); font-size: .92rem; color: var(--text); font-weight: 500; }
+
+/* ── PAYMENT DETAIL ── */
+.payment-detail { border-top: 1px solid var(--border); padding-top: 1.2rem; margin-top: .2rem; }
+.payment-detail-title { font-family: var(--mono); font-size: .58rem; color: var(--text3); text-transform: uppercase; letter-spacing: .14em; margin-bottom: .9rem; }
+.iban-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: .8rem; }
+.iban-row { display: flex; align-items: flex-start; gap: 1rem; padding: .45rem 0; border-bottom: 1px solid var(--border); }
+.iban-row:last-child { border-bottom: none; padding-bottom: 0; }
+.iban-label { font-family: var(--mono); font-size: .6rem; color: var(--text3); text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; min-width: 6rem; padding-top: .05rem; }
+.iban-value { font-family: var(--mono); font-size: .78rem; color: var(--text); word-break: break-all; }
+.payment-note { font-family: var(--mono); font-size: .65rem; color: var(--text3); margin-top: .7rem; line-height: 1.6; }
+
+/* ── BTC QR (riusa stessa struttura donation) ── */
+.payment-qr-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+.qr-frame { padding: 1rem; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px rgba(247,147,26,.3), 0 0 40px rgba(247,147,26,.1), 0 20px 60px rgba(0,0,0,.6); display: inline-block; position: relative; transition: transform .3s; }
+.qr-frame:hover { transform: translateY(-4px) scale(1.02); }
+.qr-frame img { display: block; width: 160px; height: 160px; border-radius: 4px; image-rendering: pixelated; }
+.qr-badge { position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; font-family: var(--mono); font-weight: 700; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 20px; white-space: nowrap; }
+.qr-hint { font-family: var(--mono); font-size: 0.58rem; color: var(--text3); text-align: left; margin-top: 1.2rem; letter-spacing: 0.04em; opacity: 0.75; }
+
+/* ── SUBMIT ── */
+.form-submit-block { background: transparent; border: none; padding: 0; }
+.submit-btn { width: 100%; background: var(--gold); color: #000; font-family: var(--mono); font-size: .82rem; font-weight: 700; padding: 1rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: opacity .2s, transform .15s; }
+.submit-btn:hover { opacity: .88; transform: translateY(-1px); }
+.submit-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.ws-msg { font-family: var(--mono); font-size: .72rem; margin-top: .9rem; line-height: 1.6; min-height: 1.2rem; }
+.ws-msg.ok { color: var(--green); }
+.ws-msg.err { color: var(--red); }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); }
+footer a { color: var(--text3); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div id="reading-bar"></div>
+
+<button class="theme-btn" onclick="toggleTheme()" id="theme-btn">&#9788; Chiaro</button>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
+  <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
+  <span class="nav-cat">// workshop &middot; iscrizioni</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">// workshop &middot; formazione &middot; Bitcoin</div>
+  <h1>Iscriviti ai Workshop</h1>
+  <p class="hero-subtitle">Percorsi formativi su Bitcoin, autocustodia, crittografia e sovranit&agrave; finanziaria. Seleziona le date, invia la prova di pagamento, e sei dentro.</p>
+  <div class="hero-meta">
+    <span>&#9997; Mike &mdash; Bitcoin Report Italia</span>
+    <span>&#128337; Iscrizioni aperte</span>
+  </div>
+</header>
+
+<div class="outer">
+
+  <!-- PDF download -->
+  <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
+    <div class="pdf-icon">&#128196;</div>
+    <div class="pdf-text-wrap">
+      <span class="pdf-title">Benvenuto ai workshop &mdash; leggi prima di iscriverti</span>
+      <span class="pdf-subtitle">Agenda completa, regolamento, info pratiche e prezzi</span>
+    </div>
+    <span class="pdf-arrow">&#8595; PDF</span>
+  </a>
+
+  <!-- Calendar -->
+  <div style="margin-top:3rem">
+    <div class="section-eyebrow">// calendario delle sessioni</div>
+    <div id="ws-calendar" class="ws-calendar-grid">
+      <div class="ws-calendar-empty">Carico il calendario&hellip;</div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="ws-form-outer">
+    <div class="section-eyebrow">// modulo di iscrizione</div>
+
+    <form id="ws-form" class="ws-form" novalidate>
+
+      <!-- Selezione workshop -->
+      <div class="form-block">
+        <div class="form-block-title">Workshop a cui vuoi partecipare <span class="required">*</span></div>
+        <label class="ws-select-all-label">
+          <input type="checkbox" id="ws-all">
+          Percorso completo &mdash; seleziona tutti
+        </label>
+        <div id="ws-list" class="ws-list">
+          <div class="ws-list-empty">Carico i workshop&hellip;</div>
+        </div>
+      </div>
+
+      <!-- Dati personali -->
+      <div class="form-block">
+        <div class="form-block-title">I tuoi dati</div>
+        <label class="field-wrap">
+          <span class="field-label">Nome e cognome (o nickname) <span class="required">*</span></span>
+          <input class="field-input" name="name" required maxlength="200" placeholder="Come vuoi essere chiamato">
+        </label>
+        <div class="field-row">
+          <label class="field-wrap">
+            <span class="field-label">Instagram</span>
+            <input class="field-input" name="instagram" placeholder="@nomeutente">
+          </label>
+          <label class="field-wrap">
+            <span class="field-label">Telegram</span>
+            <input class="field-input" name="telegram" placeholder="@nomeutente">
+          </label>
+        </div>
+        <label class="field-wrap">
+          <span class="field-label">Email</span>
+          <input class="field-input" name="email" type="email" placeholder="tua@email.com">
+        </label>
+      </div>
+
+      <!-- Metodo di pagamento -->
+      <div class="form-block">
+        <div class="form-block-title">Come hai pagato <span class="required">*</span></div>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="paymentMethod" value="FIAT" required>
+            <span class="radio-label">Bonifico in Euro</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="paymentMethod" value="SATS">
+            <span class="radio-label">Bitcoin &mdash; Onchain o Lightning</span>
+          </label>
+        </div>
+
+        <!-- Istruzioni bonifico -->
+        <div id="payment-detail-fiat" class="payment-detail" hidden>
+          <div class="payment-detail-title">// istruzioni bonifico bancario</div>
+          <div class="iban-box">
+            <!-- ⚠ TODO: sostituire con IBAN e intestatario reali prima del lancio -->
+            <div class="iban-row">
+              <span class="iban-label">IBAN</span>
+              <span class="iban-value" id="iban-number">IT00 X000 0000 0000 0000 0000 000</span>
+            </div>
+            <div class="iban-row">
+              <span class="iban-label">Intestatario</span>
+              <span class="iban-value" id="iban-name">Nome Cognome</span>
+            </div>
+            <div class="iban-row">
+              <span class="iban-label">Causale</span>
+              <span class="iban-value">Workshop Bitcoin Report &mdash; [il tuo nome]</span>
+            </div>
+          </div>
+          <p class="payment-note">&#128204; Allega la ricevuta del bonifico nel campo &ldquo;Prova di pagamento&rdquo; qui sotto.</p>
+        </div>
+
+        <!-- Istruzioni Bitcoin (stesso QR/POS delle donazioni) -->
+        <div id="payment-detail-sats" class="payment-detail" hidden>
+          <div class="payment-detail-title">// pagamento Bitcoin onchain o lightning</div>
+          <div class="payment-qr-wrap">
+            <div class="qr-frame">
+              <!-- Stesso QR BTCPay POS usato per le donazioni sul sito -->
+              <img src="QR%20POS%20BTCPay%20Server.png" alt="QR BTCPay POS &mdash; pagamento Bitcoin">
+              <div class="qr-badge">PAGA BTC</div>
+            </div>
+            <p class="qr-hint">&#128247; Scansiona con la fotocamera del telefono, non con un wallet Bitcoin</p>
+          </div>
+          <p class="payment-note">&#128204; Dopo il pagamento allega lo screenshot della conferma nel campo &ldquo;Prova di pagamento&rdquo; qui sotto.</p>
+        </div>
+      </div>
+
+      <!-- Prova di pagamento (obbligatoria) -->
+      <div class="form-block">
+        <label class="field-wrap">
+          <span class="field-label">Prova di pagamento <span class="required">*</span></span>
+          <span class="field-hint">Immagine o PDF, max 8 MB &mdash; ricevuta bonifico o screenshot transazione</span>
+          <input class="field-input field-file" type="file" name="paymentProof" accept="image/*,application/pdf" required>
+        </label>
+      </div>
+
+      <!-- Note facoltative -->
+      <div class="form-block">
+        <label class="field-wrap">
+          <span class="field-label">Note <span style="opacity:.5;font-size:.85em">(facoltative)</span></span>
+          <span class="field-hint">Es. &ldquo;pago in 2 tranche&rdquo;, domande, info utili</span>
+          <textarea class="field-input field-textarea" name="notes" maxlength="500" rows="3" placeholder="Scrivi qui eventuali note&hellip;"></textarea>
+        </label>
+      </div>
+
+      <!-- Honeypot: non toccare -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px">
+        <label>Sito web <input type="text" name="sito_web" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <!-- Turnstile CAPTCHA -->
+      <div class="form-block" style="padding:1.2rem 1.4rem">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAEs9biWczLHHZj8V"></div>
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button type="submit" id="ws-submit" class="submit-btn">Invia iscrizione</button>
+        <p id="ws-msg" class="ws-msg" role="status" aria-live="polite"></p>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 Bitcoin Report Italia &mdash; <a href="index.html">Home</a> &middot; <a href="letture.html">Letture</a></p>
+</footer>
+
+<script>
+function toggleTheme() {
+  var t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('theme-btn').textContent = t === 'light' ? '☽ Scuro' : '☀ Chiaro';
+}
+
+window.addEventListener('scroll', function () {
+  var scrolled = window.scrollY;
+  var total = document.body.scrollHeight - window.innerHeight;
+  var pct = total > 0 ? scrolled / total * 100 : 0;
+  document.getElementById('reading-bar').style.width = pct + '%';
+});
+
+// ── Payment method: show/hide instructions ─────────────────────────
+document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio) {
+  radio.addEventListener('change', function () {
+    document.getElementById('payment-detail-fiat').hidden = true;
+    document.getElementById('payment-detail-sats').hidden = true;
+    if (this.value === 'FIAT') document.getElementById('payment-detail-fiat').hidden = false;
+    if (this.value === 'SATS') document.getElementById('payment-detail-sats').hidden = false;
+  });
+});
+
+// ── Workshop logic (logica originale intatta) ──────────────────────
+(function () {
+  var API = 'https://bitcoin-report-gestione.vercel.app';
+  var form = document.getElementById('ws-form');
+  var list = document.getElementById('ws-list');
+  var all  = document.getElementById('ws-all');
+  var msg  = document.getElementById('ws-msg');
+  var btn  = document.getElementById('ws-submit');
+  var cal  = document.getElementById('ws-calendar');
+
+  var fmt = new Intl.DateTimeFormat('it-IT', {
+    weekday: 'long', day: '2-digit', month: 'long',
+    hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome'
+  });
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  // Render visual calendar cards (same data, no extra fetch)
+  function renderCalendar(workshops) {
+    cal.innerHTML = '';
+    workshops.forEach(function (w, i) {
+      var card = document.createElement('div');
+      card.className = 'ws-date-card';
+      card.dataset.id = w.id;
+      var dateStr = fmt.format(new Date(w.date));
+      card.innerHTML =
+        '<div class="ws-date-num">Workshop ' + pad(i + 1) + '</div>' +
+        '<div class="ws-date-topic">' + escHtml(w.topic) + '</div>' +
+        '<div class="ws-date-when">' + dateStr + '</div>' +
+        (w.description ? '<div class="ws-date-desc">' + escHtml(w.description) + '</div>' : '');
+      card.addEventListener('click', function () {
+        var cb = list.querySelector('input[value="' + w.id + '"]');
+        if (cb) {
+          cb.checked = !cb.checked;
+          cb.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+      cal.appendChild(card);
+    });
+  }
+
+  // Sync calendar card selected state with checkboxes
+  function syncCalendar() {
+    cal.querySelectorAll('.ws-date-card').forEach(function (card) {
+      var cb = list.querySelector('input[value="' + card.dataset.id + '"]');
+      card.classList.toggle('selected', !!(cb && cb.checked));
+    });
+  }
+
+  // Simple HTML escaper to prevent XSS in API data
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  fetch(API + '/api/public/workshop/open')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (!data.workshops || !data.workshops.length) {
+        list.innerHTML = '<div class="ws-list-empty">Nessun workshop aperto alle iscrizioni al momento.</div>';
+        cal.innerHTML  = '<div class="ws-calendar-empty">Nessun workshop aperto al momento.</div>';
+        return;
+      }
+
+      // Render calendar
+      renderCalendar(data.workshops);
+
+      // Render form checkboxes
+      list.innerHTML = '';
+      data.workshops.forEach(function (w, i) {
+        var lbl = document.createElement('label');
+        lbl.className = 'ws-check-label';
+        var dateStr = fmt.format(new Date(w.date));
+        lbl.innerHTML =
+          '<input type="checkbox" name="workshopIds" value="' + w.id + '">' +
+          '<span>' +
+          '<strong>' + escHtml(w.topic) + '</strong>' +
+          '<span class="ws-check-date">' + dateStr + '</span>' +
+          (w.description ? '<span class="ws-check-desc">' + escHtml(w.description) + '</span>' : '') +
+          '</span>';
+        var cb = lbl.querySelector('input');
+        cb.addEventListener('change', function () {
+          lbl.classList.toggle('checked', cb.checked);
+          syncCalendar();
+          // Update "all" indeterminate state
+          var all_cbs = list.querySelectorAll('input[name="workshopIds"]');
+          var checked = list.querySelectorAll('input[name="workshopIds"]:checked');
+          all.checked = checked.length === all_cbs.length;
+          all.indeterminate = checked.length > 0 && checked.length < all_cbs.length;
+        });
+        list.appendChild(lbl);
+      });
+    })
+    .catch(function () {
+      list.innerHTML = '<div class="ws-list-empty">Errore nel caricamento dei workshop. Riprova o contattaci.</div>';
+      cal.innerHTML  = '<div class="ws-calendar-empty">Errore nel caricamento del calendario.</div>';
+    });
+
+  // Select all / deselect all
+  all.addEventListener('change', function () {
+    list.querySelectorAll('input[name="workshopIds"]').forEach(function (c) {
+      c.checked = all.checked;
+      c.closest('label').classList.toggle('checked', all.checked);
+    });
+    syncCalendar();
+  });
+
+  // Form submit (logica originale invariata)
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    msg.textContent = '';
+    msg.className = 'ws-msg';
+    if (!form.querySelector('input[name="workshopIds"]:checked')) {
+      msg.textContent = 'Seleziona almeno un workshop.';
+      msg.className = 'ws-msg err';
+      return;
+    }
+    btn.disabled = true;
+    fetch(API + '/api/public/workshop/signup', { method: 'POST', body: new FormData(form) })
+      .then(function (r) { return r.json().then(function (b) { return { s: r.status, b: b }; }); })
+      .then(function (res) {
+        if (res.s === 200 && res.b.ok) {
+          form.reset();
+          list.querySelectorAll('.ws-check-label').forEach(function (l) { l.classList.remove('checked'); });
+          cal.querySelectorAll('.ws-date-card').forEach(function (c) { c.classList.remove('selected'); });
+          document.getElementById('payment-detail-fiat').hidden = true;
+          document.getElementById('payment-detail-sats').hidden = true;
+          if (window.turnstile) window.turnstile.reset();
+          msg.textContent = 'Iscrizione ricevuta! Verificheremo il pagamento e ti confermeremo a mano.';
+          msg.className = 'ws-msg ok';
+        } else {
+          msg.textContent = res.b.error || 'Errore. Riprova.';
+          msg.className = 'ws-msg err';
+        }
+      })
+      .catch(function () {
+        msg.textContent = 'Errore di rete. Riprova.';
+        msg.className = 'ws-msg err';
+      })
+      .finally(function () { btn.disabled = false; });
+  });
+})();
+</script>
+
+</body>
+</html>
