@@ -315,6 +315,10 @@ footer { border-top:1px solid var(--border); padding:2rem; text-align:center; fo
   letter-spacing: 0.04em;
   opacity: 0.75;
 }
+.bip110-outcome { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.25); border-radius:10px; padding:1rem 1.2rem; margin-top:0.8rem; }
+.bip110-outcome-title { font-family:var(--mono); font-size:0.65rem; color:rgba(239,68,68,0.9); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.6rem; font-weight:700; }
+.bip110-outcome p { font-size:0.83rem; color:var(--text2); line-height:1.7; margin-bottom:0.5rem; }
+.bip110-outcome p:last-child { margin-bottom:0; }
 </style>
 <meta name="language" content="it">
 <meta property="og:site_name" content="Bitcoin Report School">
@@ -476,7 +480,7 @@ footer { border-top:1px solid var(--border); padding:2rem; text-align:center; fo
 <footer>
   <div style="max-width:900px;margin:0 auto">
     <div style="color:var(--gold);font-family:var(--mono);font-size:0.8rem;margin-bottom:0.5rem">&#8383; Bitcoin Report School</div>
-    <div>Enciclopedia dei Client Bitcoin &mdash; dati aggiornati a maggio 2026</div>
+    <div>Enciclopedia dei Client Bitcoin &mdash; dati aggiornati a settembre 2026</div>
     <div style="margin-top:0.5rem"><a href="index.html" style="color:var(--text3);text-decoration:none">&#8592; Torna alla home</a></div>
   </div>
 </footer>
@@ -975,6 +979,38 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
   },
 
   {
+    id:'core-sedited-maintainer', client:'core', version:'Evento Governance', date:'2026-01-08', year:2026,
+    title:`sedited diventa maintainer di Bitcoin Core`,
+    type:'milestone', importance:3,
+    tags:['Governance','Maintainer','sedited','TheCharlatan','libbitcoinkernel'],
+    summary:`8 gennaio 2026: sedited (TheCharlatan) viene nominato nuovo maintainer di Bitcoin Core, portando il numero di maintainer attivi a sei.`,
+    details:`sedited, conosciuto anche come TheCharlatan, è un developer noto per il lavoro su libbitcoinkernel — il progetto per estrarre la logica di consenso di Bitcoin Core in una libreria separata. La sua nomina porta i maintainer attivi a sei: Ava Chow, Michael Ford, Ryan Ofsky, Hennadii Stepanov, TheCharlatan e (fino a febbraio 2026) Gloria Zhao. Sedited ha dichiarato di "dare il benvenuto alla competizione" degli altri client, segnalando un approccio aperto al panorama dei client alternativi. Il suo focus tecnico principale — libbitcoinkernel — mira a ridurre il rischio di divergenze di consenso tra implementazioni diverse.`,
+    contributors:['sedited','TheCharlatan'],
+    funding:`Non pubblicamente dichiarato`,
+    bips:[],
+    recommendation:`Evento storico — nessuna azione richiesta`,
+    score:null,
+    controversy:null,
+    highlight:`Nuovo maintainer Bitcoin Core — focus su libbitcoinkernel e apertura ai client alternativi`
+  },
+
+  {
+    id:'core-gloria-zhao', client:'core', version:'Evento Governance', date:'2026-02-06', year:2026,
+    title:`Gloria Zhao lascia Bitcoin Core`,
+    type:'controversy', importance:4,
+    tags:['Governance','Maintainer','Gloria Zhao','OP_RETURN','Dimissioni'],
+    summary:`6 febbraio 2026: Gloria Zhao, maintainer di Bitcoin Core dal 2022, si dimette e revoca la sua chiave PGP di firma. La sua uscita arriva dopo oltre un anno di conflitti pubblici legati alla guerra su OP_RETURN.`,
+    details:`Gloria Zhao era diventata la prima donna maintainer di Bitcoin Core nel 2022, specializzata su mempool policy e transaction relay. La sua proposta di rimuovere il limite OP_RETURN (poi implementata in v30.0) aveva scatenato attacchi personali prolungati. Il 6 febbraio 2026 ha presentato il suo ultimo pull request: la rimozione della sua chiave di firma dal repository. Ha revocato anche la chiave PGP usata per firmare le release. La sua uscita non modifica il protocollo Bitcoin, le regole di consenso o la sicurezza della rete — ma è un segnale sulle difficoltà di governance di un progetto open source decentralizzato. "Li hanno bullizzati finché non si è arresa — quello che le hanno fatto è stato tragico" ha scritto Pledditor, bitcoiner pseudonimo. A gennaio 2026, alcune settimane prima delle dimissioni di Zhao, era già stato nominato un nuovo maintainer: sedited (TheCharlatan), developer noto per il lavoro su libbitcoinkernel.`,
+    contributors:['Gloria Zhao'],
+    funding:`Brink (ex Chaincode Labs)`,
+    bips:[],
+    recommendation:`Evento storico — non richiede azioni operative per chi gestisce un nodo`,
+    score:null,
+    controversy:`L'uscita di Zhao segue più di un anno di attacchi pubblici durante la guerra OP_RETURN. Ha cancellato il suo account X durante le ostilità. La community è divisa tra chi celebra e chi deplora la sua uscita.`,
+    highlight:`Il maintainer più influente sulla mempool lascia Bitcoin Core — prima donna maintainer nella storia del progetto`
+  },
+
+  {
     id:'core-31.0', client:'core', version:'31.0', date:'2026-04-07', year:2026,
     title:`Cluster Mempool — Mempool Moderna`,
     type:'improvement', importance:5,
@@ -1042,14 +1078,14 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
     type:'improvement', importance:4,
     tags:['Stabile','Anti-Spam','Filtri Avanzati','Attuale'],
     summary:`Versione attuale di Bitcoin Knots. Include tutti i miglioramenti Core 29.x più filtri avanzati per OP_RETURN, Inscriptions, e transazioni non-monetarie.`,
-    details:`Knots 29.2 è basato su Bitcoin Core 29.2 con il patchset di Luke Dashjr. Mantiene il limite OP_RETURN a 83 byte (contrariamente a Core 30.0), filtra pattern di inscriptions noti, e include policy di mempool più conservative. La release incluse anche miglioramenti alle performance del filtering e alla logging delle transazioni rifiutate.`,
+    details:`Knots 29.2 è basato su Bitcoin Core 29.2 con il patchset di Luke Dashjr. Mantiene il limite OP_RETURN a 83 byte (contrariamente a Core 30.0), filtra pattern di inscriptions noti, e include policy di mempool più conservative. La release incluse anche miglioramenti alle performance del filtering e alla logging delle transazioni rifiutate. Dopo il tentativo di attivazione UASF di BIP-110 dell'agosto 2026 — che ha prodotto solo una catena minoritaria di uno-due blocchi prima di bloccarsi — Knots distribuisce ora due build: la build principale con BIP-110 attivo, e una build "non-RDTS" consensualmente identica a Bitcoin Core per chi vuole i filtri Knots senza la divergenza di consenso.`,
     contributors:['Luke Dashjr'],
     funding:`Donazioni community, HRF, sostenitori diretti`,
     bips:[],
-    recommendation:`Versione corrente raccomandata per chi preferisce Knots — stabile e ben mantenuta`,
+    recommendation:`Versione corrente raccomandata per chi preferisce Knots — disponibile in due build: con BIP-110 (catena minoritaria dopo agosto 2026) o senza (consenso identico a Core)`,
     score:{privacy:5,decentral:5,censorship:4,soundness:5,verify:5},
     controversy:null,
-    highlight:`Versione Knots attuale (2025) — la scelta per la comunità cypherpunk`
+    highlight:`Versione Knots attuale (2026) — ora distribuita in due build dopo il tentativo BIP-110 di agosto`
   },
 
   // ── PRODUCTIONREADY ────────────────────────────────────────────────────────
@@ -1091,9 +1127,9 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
     id:'libbitcoin-3', client:'libbitcoin', version:'v3.6.0', date:'2023-01-01', year:2023,
     title:`libbitcoin — Il Client dei Cypherpunk Radicali`,
     type:'improvement', importance:3,
-    tags:['C++','Eric Voskuil','Amir Taaki','SPV','Server'],
-    summary:`libbitcoin di Eric Voskuil: libreria C++ per Bitcoin con filosofia radicalmente diversa. Architettura server-client, focus sulla scalabilità e sull'autonomia tecnica.`,
-    details:`libbitcoin nasce da Amir Taaki (fondatore di Dark Wallet) e viene poi principalmente sviluppato da Eric Voskuil. La filosofia è radicalmente diversa da Bitcoin Core: architettura basata su ZeroMQ per comunicazione asincrona, supporto nativo per server Bitcoin ad alto throughput, focus sulla scalabilità. Eric Voskuil è noto per le sue critiche alla "fee market theory" e per posizioni tecniche non ortodosse. libbitcoin è usato principalmente da sviluppatori che costruiscono infrastrutture Bitcoin custom e da ricercatori. La documentazione "Libbitcoin" di Voskuil è considerata una delle analisi tecniche più profonde del protocollo.`,
+    tags:['C++','Eric Voskuil','Amir Taaki','SPV','Server','v4','2026','In Sviluppo'],
+    summary:`libbitcoin di Eric Voskuil: libreria C++ per Bitcoin con filosofia radicalmente diversa. Architettura server-client, focus sulla scalabilità e sull'autonomia tecnica. Nel 2026 in sviluppo attivo sulla versione v4 con architettura completa full node.`,
+    details:`libbitcoin nasce da Amir Taaki (fondatore di Dark Wallet) e viene poi principalmente sviluppato da Eric Voskuil. La filosofia è radicalmente diversa da Bitcoin Core: architettura basata su ZeroMQ per comunicazione asincrona, supporto nativo per server Bitcoin ad alto throughput, focus sulla scalabilità. Eric Voskuil è noto per le sue critiche alla "fee market theory" e per posizioni tecniche non ortodosse. libbitcoin è usato principalmente da sviluppatori che costruiscono infrastrutture Bitcoin custom e da ricercatori. La documentazione "Libbitcoin" di Voskuil è considerata una delle analisi tecniche più profonde del protocollo. Nel 2026 il team di libbitcoin ha rilasciato una build v4 del server (libbitcoin-server) con architettura aggiornata: include interfacce compatibili con bitcoind, Electrum e Stratum, block explorer integrato, e supporto completo per Linux, Windows e macOS (Intel e ARM). I binary precompilati non erano ancora disponibili a settembre 2026 — la build richiedeva ancora compilazione da sorgente — ma il repository era in sviluppo attivo con commit regolari. Il progetto è distribuito sotto licenza GNU Affero GPL v3.`,
     contributors:['Eric Voskuil','Amir Taaki','Evgeniy Khramtsov'],
     funding:`Donazioni, Unsystem, lavoro volontario`,
     bips:[],
@@ -1292,7 +1328,12 @@ function openDetail(id) {
     <div class="bip110-editorial">Questa e&#39; probabilmente la scheda piu&#39; importante dell&#39;enciclopedia per capire come Bitcoin si governa — e quanto sia difficile farlo senza un&#39;autorita&#39; centrale. Non c&#39;e&#39; una risposta oggettivamente corretta: dipende da cosa credi che Bitcoin debba essere.</div>`;
 
     const nodeHtml = `<div class="bip110-node-guide">
-      <div class="bip110-placeholder">&#128338; Stato (maggio 2026) — Aggiorna questa sezione dopo settembre 2026 con l&#39;esito effettivo dell&#39;attivazione</div>
+      <div class="bip110-outcome">
+        <div class="bip110-outcome-title">&#128680; Esito — Agosto 2026</div>
+        <p>L&#39;8 agosto 2026, alla scadenza del blocco di attivazione UASF, i nodi Knots con BIP-110 attivo hanno seguito una catena minoritaria. La catena ha prodotto uno o due blocchi e si &egrave; poi bloccata — nessuna reorganizzazione della chain principale &egrave; avvenuta.</p>
+        <p><strong>Risultato pratico:</strong> BIP-110 non si &egrave; attivato sulla chain di Bitcoin. La chain principale (seguita da Bitcoin Core e dalla maggioranza dei nodi) non ha subito alcuna modifica. I nodi Knots che applicavano BIP-110 erano una minoranza insufficiente a produrre una chain alternativa sostenibile.</p>
+        <p>Knots ora distribuisce due build: una che applica BIP-110 (per chi vuole supportare la proposta) e una <em>non-RDTS</em> che rimane consensualmente identica a Bitcoin Core. Luke Dashjr mantiene entrambe le versioni.</p>
+      </div>
       ${v.nodeGuide.map(row=>`<div class="bip110-node-row"><div class="bip110-node-row-label">${row.label}</div><p>${row.text}</p></div>`).join('')}
     </div>`;
 
