@@ -910,6 +910,22 @@ Origine: BIP-110 nasce dall'evoluzione di BIP-444, proposto da Dathon Ohm il 24 
   },
 
   {
+    id:'knots-bip110-uasf-fail', client:'knots', version:'Evento BIP-110', date:'2026-08-08', year:2026,
+    title:`BIP-110 UASF fallisce — catena minoritaria`,
+    type:'controversy', importance:4,
+    tags:['BIP-110','UASF','Knots','Chain Split','Fallimento','Agosto 2026'],
+    summary:`8 agosto 2026: alla scadenza del blocco di attivazione UASF, i nodi Knots con BIP-110 attivo seguono una catena minoritaria. La catena produce uno o due blocchi e si blocca — nessuna reorganizzazione della chain principale.`,
+    details:`L'8 agosto 2026 scade il blocco di attivazione UASF di BIP-110 (~blocco 965.664). I nodi Knots che avevano abilitato BIP-110 si separano dalla chain principale e seguono una catena minoritaria. La catena alternativa produce uno o due blocchi, poi si ferma — il supporto economico (exchange, wallet, utenti) era insufficiente a sostenere una chain alternativa vitale. La chain principale, seguita da Bitcoin Core e dalla larga maggioranza dei nodi, non subisce alcuna modifica o riorganizzazione. Il fallimento conferma la tesi degli oppositori: una UASF richiede un supporto economico maggioritario per essere efficace — il signaling di Knots (~22% dei nodi raggiunti durante la guerra OP_RETURN) non era sufficiente a costituire una maggioranza economica. Dopo l'evento, Luke Dashjr distribuisce Knots in due build: la build principale con BIP-110 attivo (per chi vuole continuare a supportare la proposta) e una build "non-RDTS" consensualmente identica a Bitcoin Core (per chi vuole i filtri Knots senza divergenza di consenso).`,
+    contributors:['Luke Dashjr'],
+    funding:`Donazioni community`,
+    bips:['BIP-110'],
+    recommendation:`Nessuna azione richiesta — la chain principale non ha subito modifiche. Chi usa Knots con BIP-110 attivo è ora su una build non-consensuale con la chain principale; valuta il passaggio alla build non-RDTS.`,
+    score:null,
+    controversy:`Il fallimento della UASF BIP-110 riaccende il dibattito sull'efficacia delle UASF senza supporto economico maggioritario. I sostenitori considerano l'esperimento un precedente tecnico valido; i critici vedono nella mancanza di supporto la risposta definitiva della community alla proposta.`,
+    highlight:`UASF BIP-110 fallisce — Bitcoin non cambia, Knots si divide in due build`
+  },
+
+  {
     id:'ecash-fork', client:'fork', version:'eCash Fork', date:'2026-04-24', year:2026,
     title:`eCash — Hard Fork Bitcoin con Drivechains`,
     type:'controversial', importance:5,
