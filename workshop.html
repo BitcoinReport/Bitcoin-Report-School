@@ -151,6 +151,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .ws-msg { font-family: var(--mono); font-size: .72rem; margin-top: .9rem; line-height: 1.6; min-height: 1.2rem; }
 .ws-msg.ok { color: var(--green); }
 .ws-msg.err { color: var(--red); }
+.ws-success-pdf { display: inline-flex; align-items: center; gap: .4rem; margin-top: .5rem; padding: .4rem .8rem; border: 1px solid var(--gold); border-radius: 6px; color: var(--gold); text-decoration: none; font-family: var(--mono); font-size: .72rem; transition: background .2s, color .2s; }
+.ws-success-pdf:hover { background: var(--gold); color: var(--bg); }
 
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text2); }
 footer a { color: var(--text2); text-decoration: none; }
@@ -257,18 +259,21 @@ footer a:hover { color: var(--gold); }
         <div id="payment-detail-fiat" class="payment-detail" hidden>
           <div class="payment-detail-title">// istruzioni bonifico bancario</div>
           <div class="iban-box">
-            <!-- ⚠ TODO: sostituire con IBAN e intestatario reali prima del lancio -->
             <div class="iban-row">
               <span class="iban-label">IBAN</span>
-              <span class="iban-value" id="iban-number">IT00 X000 0000 0000 0000 0000 000</span>
+              <span class="iban-value" id="iban-number">LT92 3480 0148 1964 1772</span>
+            </div>
+            <div class="iban-row">
+              <span class="iban-label">BIC</span>
+              <span class="iban-value" id="iban-bic">UATULT22XXX</span>
             </div>
             <div class="iban-row">
               <span class="iban-label">Intestatario</span>
-              <span class="iban-value" id="iban-name">Nome Cognome</span>
+              <span class="iban-value" id="iban-name">Michele Bottai</span>
             </div>
             <div class="iban-row">
               <span class="iban-label">Causale</span>
-              <span class="iban-value">Workshop Bitcoin Report &mdash; [il tuo nome]</span>
+              <span class="iban-value">Il tuo nome e cognome (per farci risalire al pagamento)</span>
             </div>
           </div>
           <p class="payment-note">&#128204; Allega la ricevuta del bonifico nel campo &ldquo;Prova di pagamento&rdquo; qui sotto.</p>
@@ -461,7 +466,7 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio
           document.getElementById('payment-detail-fiat').hidden = true;
           document.getElementById('payment-detail-sats').hidden = true;
           if (window.turnstile) window.turnstile.reset();
-          msg.textContent = 'Iscrizione ricevuta! Verificheremo il pagamento e ti confermeremo a mano.';
+          msg.innerHTML = 'Iscrizione ricevuta! Verificheremo il pagamento e ti confermeremo a mano.<br>Nel frattempo, scarica il documento di benvenuto: <a href="/downloads/benvenuto-workshop.pdf" download class="ws-success-pdf">&#128196; Scarica il PDF</a>';
           msg.className = 'ws-msg ok';
         } else {
           msg.textContent = res.b.error || 'Errore. Riprova.';
