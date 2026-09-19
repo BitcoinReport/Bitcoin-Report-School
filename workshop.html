@@ -69,6 +69,15 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .outer { max-width: 920px; margin: 0 auto; padding: 0 2rem 6rem; }
 .section-eyebrow { font-family: var(--mono); font-size: .55rem; color: var(--text2); text-transform: uppercase; letter-spacing: .18em; margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
 
+/* ── PDF BANNER ── */
+.pdf-banner { display: flex; align-items: center; gap: 1rem; background: var(--bg2); border: 1px solid rgba(247,147,26,.2); border-radius: 10px; padding: 1rem 1.4rem; margin-top: 2.5rem; text-decoration: none; transition: border-color .2s, background .2s; }
+.pdf-banner:hover { border-color: var(--gold); background: var(--bg3); }
+.pdf-icon { font-size: 1.6rem; flex-shrink: 0; }
+.pdf-text-wrap { display: flex; flex-direction: column; gap: .15rem; }
+.pdf-title { font-family: var(--mono); font-size: .78rem; color: var(--gold); font-weight: 500; }
+.pdf-subtitle { font-size: .78rem; color: var(--text2); }
+.pdf-arrow { margin-left: auto; font-family: var(--mono); font-size: .75rem; color: var(--gold); flex-shrink: 0; }
+
 /* ── PREZZI ── */
 .ws-price-table { display: flex; flex-direction: column; gap: .5rem; margin-top: 1.2rem; }
 .ws-price-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: .8rem 1.1rem; }
@@ -185,6 +194,16 @@ footer a:hover { color: var(--gold); }
 </header>
 
 <div class="outer">
+
+  <!-- PDF download -->
+  <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
+    <div class="pdf-icon">&#128196;</div>
+    <div class="pdf-text-wrap">
+      <span class="pdf-title">Benvenuto ai workshop &mdash; leggi prima di iscriverti</span>
+      <span class="pdf-subtitle">Agenda completa, regolamento, info pratiche e prezzi</span>
+    </div>
+    <span class="pdf-arrow">&#8595; PDF</span>
+  </a>
 
   <!-- Calendario (solo descrittivo) -->
   <div style="margin-top:3rem">
