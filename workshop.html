@@ -74,9 +74,11 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .pdf-banner:hover { border-color: var(--gold); background: var(--bg3); }
 .pdf-icon { font-size: 1.6rem; flex-shrink: 0; }
 .pdf-text-wrap { display: flex; flex-direction: column; gap: .15rem; }
-.pdf-title { font-family: var(--mono); font-size: .78rem; color: var(--gold); font-weight: 500; }
-.pdf-subtitle { font-size: .78rem; color: var(--text2); }
-.pdf-arrow { margin-left: auto; font-family: var(--mono); font-size: .75rem; color: var(--gold); flex-shrink: 0; }
+.pdf-badge { align-self: flex-start; font-family: var(--mono); font-size: .55rem; color: #000; background: var(--gold); border-radius: 20px; padding: .15rem .6rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; margin-bottom: .2rem; }
+.pdf-title { font-family: var(--sans); font-size: 1rem; color: var(--gold); font-weight: 700; }
+.pdf-subtitle { font-size: .78rem; color: var(--text2); line-height: 1.55; }
+.pdf-arrow { margin-left: auto; font-family: var(--mono); font-size: .75rem; color: var(--gold); flex-shrink: 0; white-space: nowrap; }
+@media(max-width: 560px) { .pdf-banner { flex-wrap: wrap; } .pdf-arrow { margin-left: 0; } }
 
 /* ── PREZZI ── */
 .ws-price-table { display: flex; flex-direction: column; gap: .5rem; margin-top: 1.2rem; }
@@ -199,10 +201,11 @@ footer a:hover { color: var(--gold); }
   <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
     <div class="pdf-icon">&#128196;</div>
     <div class="pdf-text-wrap">
-      <span class="pdf-title">Benvenuto ai workshop &mdash; leggi prima di iscriverti</span>
-      <span class="pdf-subtitle">Agenda completa, regolamento, info pratiche e prezzi</span>
+      <span class="pdf-badge">In omaggio &middot; PDF gratuito</span>
+      <span class="pdf-title">Il Contesto Che Nessuno Ti Dà</span>
+      <span class="pdf-subtitle">Cosa sapere sulla moneta prima ancora di sapere cos&rsquo;&egrave; Bitcoin: dal baratto che non &egrave; mai esistito a Roma, Weimar e i cypherpunk. 8 pagine da leggere prima della prima lezione, aperto a tutti.</span>
     </div>
-    <span class="pdf-arrow">&#8595; PDF</span>
+    <span class="pdf-arrow">&#8595; Scarica gratis</span>
   </a>
 
   <!-- Calendario (solo descrittivo) -->
