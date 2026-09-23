@@ -232,14 +232,7 @@ footer a:hover { color: var(--gold); }
         <span class="ws-price-label">Percorso completo (tutti gli 8)</span>
         <span class="ws-price-value">200&euro;</span>
       </div>
-      <div class="ws-price-row ws-price-highlight">
-        <span class="ws-price-label">Percorso completo &mdash; Early Bird (entro il 22/09/2026)</span>
-        <span class="ws-price-value">165&euro;</span>
-      </div>
     </div>
-    <p id="ws-earlybird-note" class="ws-earlybird-note" hidden>
-      &#128293; Sconto Early Bird attivo fino al 22/09/2026: iscrivendoti al percorso completo entro questa data paghi 165&euro; invece di 200&euro;.
-    </p>
   </div>
 
   <!-- Form -->
@@ -420,7 +413,6 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio
   var cal  = document.getElementById('ws-calendar');
   var totalFiat = document.getElementById('ws-total-fiat');
   var totalSats = document.getElementById('ws-total-sats');
-  var earlybirdNote = document.getElementById('ws-earlybird-note');
 
   // Prezzi per TITOLO del workshop (non per posizione in lista): così il
   // prezzo resta corretto anche quando un workshop passato sparisce
@@ -431,13 +423,7 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio
     // tutti gli altri titoli del percorso usano DEFAULT_SINGLE_PRICE (40€)
   };
   var DEFAULT_SINGLE_PRICE = 40;
-  var EARLY_BIRD_CUTOFF = new Date('2026-09-23T00:00:00+02:00');
   var workshopsData = [];
-
-  function isEarlyBird() {
-    return new Date() < EARLY_BIRD_CUTOFF;
-  }
-  earlybirdNote.hidden = !isEarlyBird();
 
   function priceFor(topic) {
     return Object.prototype.hasOwnProperty.call(WORKSHOP_PRICES, topic)
@@ -455,7 +441,7 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio
     // limite che riguarda solo chi si iscrive al percorso a metà, da
     // rivedere se succede.
     if (checked.length === workshopsData.length) {
-      return isEarlyBird() ? 165 : 200;
+      return 200;
     }
     var total = 0;
     checked.forEach(function (cb) {
