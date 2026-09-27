@@ -106,6 +106,10 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); }
 footer a { color: var(--text3); text-decoration: none; }
 footer a:hover { color: var(--gold); }
+
+.section-intro { max-width: 720px; margin: 0 auto 3rem; padding: 0 2rem; }
+.section-intro-text { font-size: 0.95rem; color: var(--text2); line-height: 1.85; margin-bottom: 1rem; font-style: italic; }
+.section-intro-text:first-child { font-size: 1.05rem; color: var(--text); font-weight: 500; font-style: normal; }
 </style>
 <meta name="robots" content="index, follow">
 <meta name="language" content="it">
@@ -133,33 +137,31 @@ footer a:hover { color: var(--gold); }
   <h1>Letture</h1>
   <p class="hero-sub">Approfondimenti, guide pratiche e analisi critiche su Bitcoin, autocustodia e sovranit&#224; finanziaria. Materiale scritto per chi vuole capire davvero, non solo investire.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-num">12</div><div class="hero-stat-label">Letture disponibili</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">13</div><div class="hero-stat-label">Letture disponibili</div></div>
     <div class="hero-stat"><div class="hero-stat-num">0</div><div class="hero-stat-label">Tracker o pubblicit&#224;</div></div>
     <div class="hero-stat"><div class="hero-stat-num">&#8734;</div><div class="hero-stat-label">Accesso libero</div></div>
   </div>
 </header>
 
+<div class="section-intro">
+  <p class="section-intro-text">Queste letture esistono perch&eacute; capire Bitcoin non significa guardare il prezzo.</p>
+  <p class="section-intro-text">Significa capire cos&rsquo;&egrave; stata la moneta nella storia &mdash; prima che i governi la prendessero in mano, la scollegassero dall&rsquo;oro, e la trasformassero in uno strumento di controllo. Significa capire perch&eacute; il contante che molti difendono come &ldquo;libert&agrave;&rdquo; &egrave; gi&agrave; un prodotto dello stesso sistema che vogliono combattere. Significa capire perch&eacute; la crittografia &egrave; stata classificata come munizione dagli Stati Uniti, perch&eacute; Phil Zimmermann &egrave; stato perseguito per aver pubblicato PGP gratis su internet, e perch&eacute; chi scrive codice oggi sta combattendo la stessa battaglia.</p>
+  <p class="section-intro-text">Bitcoin non &egrave; comparso dal nulla. &Egrave; l&rsquo;ultimo anello di una catena lunga decenni &mdash; di matematici, cypherpunk, dissidenti monetari e sviluppatori che hanno costruito strumenti che il potere non pu&ograve; confiscare, censurare o inflazionare. Capire quella catena &egrave; l&rsquo;unico modo per capire davvero perch&eacute; Bitcoin &egrave; diverso da tutto il resto.</p>
+  <p class="section-intro-text">Ogni testo qui &egrave; scritto per chi parte da zero e vuole arrivare a capire davvero. Senza condiscendenza, senza gergo dato per scontato, senza vendere nulla.</p>
+</div>
+
 <div class="articles-section">
-  <div class="section-label">// in evidenza</div>
-<a href="manifesto.html" class="featured-card">
-  <div class="featured-visual">
-    <div class="featured-visual-icon">&#9876;</div>
-    <div class="featured-visual-label">MANIFESTO</div>
-  </div>
-  <div class="featured-content">
-    <div>
-      <div class="featured-eyebrow">Manifesto</div>
-      <div class="featured-title">La strada comoda porta sempre alla stessa gabbia</div>
-      <div class="featured-desc">Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio. La storia della cattura di internet &egrave; la chiave per capire cosa rischia di succedere con Bitcoin.</div>
-    </div>
-    <div>
-      <div class="featured-meta">10 capitoli &middot; ~15 min</div>
-      <div class="featured-cta">Leggi il Manifesto &rarr;</div>
-    </div>
-  </div>
-</a>
   <div class="section-label">// tutti gli approfondimenti</div>
   <div class="cards-grid">
+<a href="lettura-kyc-non-ti-protegge.html" class="article-card">
+  <div class="card-tag">PRIVACY &middot; KYC &middot; AUTODIFESA</div>
+  <div class="card-icon">&#128274;</div>
+  <div class="card-title">Il KYC non ti protegge. Ti espone.</div>
+  <div class="card-desc">Il caso Revolut, Coinbase e Ledger: come cinquant&rsquo;anni di &ldquo;sicurezza finanziaria&rdquo; hanno costruito il database perfetto per i criminali &mdash; e perch&eacute; evitare il KYC non &egrave; evasione, &egrave; autodifesa.</div>
+  <div class="card-meta">Privacy &middot; Sorveglianza &middot; 8 capitoli &middot; ~14 min</div>
+  <div class="card-arrow">Leggi &rarr;</div>
+</a>
+
 <a href="cyphernomicon-spiegato.html" class="article-card">
   <div class="card-tag">IDEOLOGIA &middot; STORIA</div>
   <div class="card-icon">&#128221;</div>
