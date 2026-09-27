@@ -845,6 +845,71 @@ nav {
   letter-spacing: 0.04em;
   opacity: 0.75;
 }
+
+/* ── Workshop Banner ── */
+.workshop-banner {
+  background: linear-gradient(90deg, rgba(247,147,26,0.08) 0%, rgba(34,211,160,0.06) 100%);
+  border-bottom: 1px solid rgba(247,147,26,0.25);
+  padding: 0.75rem 2rem;
+}
+.workshop-banner-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.workshop-banner-left {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.workshop-banner-date {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+.workshop-banner-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.workshop-banner-desc {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text2);
+  letter-spacing: 0.01em;
+}
+.workshop-banner-cta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid rgba(247,147,26,0.4);
+  border-radius: 6px;
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.workshop-banner-cta:hover {
+  background: rgba(247,147,26,0.12);
+  border-color: rgba(247,147,26,0.7);
+}
+@media (max-width: 600px) {
+  .workshop-banner { padding: 0.75rem 1rem; }
+  .workshop-banner-desc { display: none; }
+  .workshop-banner-cta { width: 100%; text-align: center; }
+}
 </style>
 <meta property="og:site_name" content="Bitcoin Report School">
 <meta property="og:locale" content="it_IT">
@@ -860,6 +925,18 @@ nav {
   </div>
   <div class="nav-tag">// open source · gratuito · in italiano</div>
 </nav>
+
+<!-- WORKSHOP BANNER — rimuovere dopo il 1 ottobre 2026 -->
+<div class="workshop-banner">
+  <div class="workshop-banner-inner">
+    <div class="workshop-banner-left">
+      <span class="workshop-banner-date">// 1 ottobre 2026</span>
+      <span class="workshop-banner-title">Inizia il percorso workshop: Bitcoin dalle basi all&rsquo;autocustodia</span>
+      <span class="workshop-banner-desc">8 incontri live pensati per chi parte da zero &mdash; niente tecnicismi, solo quello che serve per capire Bitcoin e custodire i propri fondi in autonomia.</span>
+    </div>
+    <a href="workshop.html" class="workshop-banner-cta">Leggi il programma &rarr;</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -892,18 +969,6 @@ nav {
     </div>
   </div>
 </section>
-
-<!-- MANIFESTO BOX -->
-<div style="max-width:1100px;margin:0 auto;padding:0 2rem 2rem;">
-  <div style="background:linear-gradient(135deg,#0d0a02,#120e00 50%,#0a0a0a);border:1px solid rgba(247,147,26,0.3);border-radius:14px;padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
-    <div style="flex:1;min-width:240px;">
-      <div style="font-family:var(--mono);font-size:0.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:0.8rem;opacity:0.8;">// Manifesto &middot; Bitcoin Report Italia</div>
-      <div style="font-family:var(--cond);font-weight:900;font-size:clamp(1rem,2vw,1.4rem);text-transform:uppercase;letter-spacing:0.04em;color:var(--text);line-height:1.25;margin-bottom:0.6rem;">La strada comoda porta<br>sempre alla stessa gabbia</div>
-      <div style="font-size:0.85rem;color:var(--text2);font-weight:300;line-height:1.65;">Internet era libera. Poi &egrave; arrivata la massa. Bitcoin &egrave; al bivio &mdash; e la storia non deve ripetersi.</div>
-    </div>
-    <a href="manifesto.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(247,147,26,0.12);border:1px solid rgba(247,147,26,0.4);border-radius:8px;padding:0.8rem 1.6rem;font-family:var(--mono);font-size:0.75rem;color:var(--gold);text-decoration:none;letter-spacing:0.05em;white-space:nowrap;transition:all 0.2s;" onmouseover="this.style.background='rgba(247,147,26,0.22)'" onmouseout="this.style.background='rgba(247,147,26,0.12)'">Leggi il Manifesto &rarr;</a>
-  </div>
-</div>
 
 <!-- TRE SEZIONI PRINCIPALI -->
 <section class="main-sections">
