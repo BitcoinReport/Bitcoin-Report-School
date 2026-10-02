@@ -172,6 +172,107 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text2); }
 footer a { color: var(--text2); text-decoration: none; }
 footer a:hover { color: var(--gold); }
+
+/* ── Workshop Status Block ── */
+.ws-status-outer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem 0;
+}
+.ws-status-box {
+  background: linear-gradient(135deg, rgba(34,211,160,0.05) 0%, rgba(247,147,26,0.04) 100%);
+  border: 1px solid rgba(34,211,160,0.25);
+  border-radius: 14px;
+  padding: 1.8rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.ws-status-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.ws-status-badge {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.ws-status-live {
+  background: rgba(34,211,160,0.12);
+  color: var(--green);
+  border: 1px solid rgba(34,211,160,0.3);
+}
+.ws-status-deadline {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.ws-status-title {
+  font-family: var(--cond);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+.ws-status-body {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+.ws-status-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+.ws-status-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+}
+.ws-status-card-icon {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.ws-status-card-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.ws-status-card-text {
+  font-size: 0.82rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.ws-status-urgency {
+  background: rgba(247,147,26,0.07);
+  border: 1px solid rgba(247,147,26,0.25);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.ws-status-urgency strong {
+  color: var(--gold);
+}
 </style>
 </head>
 <body>
@@ -188,12 +289,53 @@ footer a:hover { color: var(--gold); }
 <header class="hero">
   <div class="hero-eyebrow">// workshop &middot; formazione &middot; Bitcoin</div>
   <h1>Iscriviti ai Workshop</h1>
-  <p class="hero-subtitle">Percorsi formativi su Bitcoin, autocustodia, crittografia e sovranit&agrave; finanziaria. Seleziona le date, invia la prova di pagamento, e sei dentro.</p>
+  <p class="hero-subtitle">Il percorso &egrave; iniziato &mdash; ma puoi ancora entrare. Chi si iscrive entro domenica 4 ottobre riceve la registrazione del Workshop 01 e parte da subito.</p>
   <div class="hero-meta">
     <span>&#9997; Mike &mdash; Bitcoin Report Italia</span>
-    <span>&#128337; Iscrizioni aperte</span>
+    <span>&#9201; Iscrizioni aperte fino a domenica 4 ottobre</span>
   </div>
 </header>
+
+<!-- BLOCCO STATO PERCORSO -->
+<div class="ws-status-outer">
+  <div class="ws-status-box">
+
+    <div class="ws-status-header">
+      <span class="ws-status-badge ws-status-live">&#9679; Percorso in corso</span>
+      <span class="ws-status-deadline">Iscrizioni aperte fino a domenica 4 ottobre</span>
+    </div>
+
+    <h2 class="ws-status-title">Il Workshop 01 si &egrave; tenuto il 1&deg; ottobre &mdash; puoi ancora recuperarlo</h2>
+    <p class="ws-status-body">Il percorso &egrave; partito ieri, ma non sei in ritardo: chi si iscrive adesso riceve la registrazione completa del primo incontro e pu&ograve; rimettersi in pari prima del prossimo appuntamento. Chi non pu&ograve; seguire le sessioni in diretta pu&ograve; guardare le registrazioni in un secondo momento &mdash; le ricever&agrave; per ogni workshop a cui si iscrive.</p>
+
+    <div class="ws-status-cards">
+
+      <div class="ws-status-card">
+        <div class="ws-status-card-icon">&#127909;</div>
+        <div class="ws-status-card-title">Registrazione Workshop 01</div>
+        <div class="ws-status-card-text">Chi si iscrive entro domenica 4 ottobre riceve subito la registrazione del primo incontro. Puoi guardarla quando vuoi, quante volte vuoi.</div>
+      </div>
+
+      <div class="ws-status-card">
+        <div class="ws-status-card-icon">&#128337;</div>
+        <div class="ws-status-card-title">Segui in registrazione, non in live</div>
+        <div class="ws-status-card-text">Se non puoi essere presente alle sessioni live, nessun problema: le registrazioni sono incluse per ogni workshop a cui ti iscrivi e le ricevi entro 24 ore dalla sessione.</div>
+      </div>
+
+      <div class="ws-status-card">
+        <div class="ws-status-card-icon">&#128172;</div>
+        <div class="ws-status-card-title">Domande via Telegram</div>
+        <div class="ws-status-card-text">Chi segue in differita pu&ograve; scrivermi su Telegram per le domande che avrebbe fatto in live. Rispondo personalmente a tutti gli iscritti.</div>
+      </div>
+
+    </div>
+
+    <div class="ws-status-urgency">
+      &#9888;&nbsp; Le iscrizioni chiudono <strong>domenica 4 ottobre</strong>. Dopo quella data il percorso prosegue solo con chi &egrave; gi&agrave; dentro.
+    </div>
+
+  </div>
+</div>
 
 <div class="outer">
 
