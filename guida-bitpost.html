@@ -211,6 +211,55 @@ footer a:hover { color: var(--gold); }
   .workshop-banner-desc { display: none; }
   .workshop-banner-cta { width: 100%; text-align: center; }
 }
+
+/* ── Update Cards ── */
+.update-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.4rem 0 0.8rem;
+}
+.update-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(247,147,26,0.15);
+  border-radius: 12px;
+  padding: 1.3rem 1.4rem;
+}
+.update-card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.update-card-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
+}
+.update-card-title {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+.update-card-text {
+  font-size: 0.83rem;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 0.7rem;
+}
+.update-card-note {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--green);
+  line-height: 1.55;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(34,211,160,0.15);
+}
 </style>
 </head>
 <body>
@@ -434,6 +483,43 @@ footer a:hover { color: var(--gold); }
   </ol>
 </section>
 
+<!-- SEZIONE 12 — AGGIORNAMENTI -->
+<section class="page-section">
+  <div class="sec-eyebrow">// aggiornamenti &middot; ottobre 2026</div>
+  <h2 class="sec-title">Novit&agrave; BitPost</h2>
+  <p class="sec-text">BitPost ha rilasciato tre aggiornamenti importanti che migliorano la stabilit&agrave;, la privacy e l&rsquo;accessibilit&agrave; della piattaforma. Eccoli nel dettaglio.</p>
+
+  <div class="update-cards">
+
+    <div class="update-card">
+      <div class="update-card-icon">&#9711;</div>
+      <div class="update-card-label">// stabilit&agrave; &middot; wallet</div>
+      <div class="update-card-title">Wallet Bitcoin on-chain</div>
+      <p class="update-card-text">BitPost ha integrato un wallet Bitcoin on-chain nativo, riducendo la dipendenza da servizi di terze parti come Boltz (che aveva chiuso) e da sidechain come Liquid (bloccata temporaneamente a causa di un hack). Con il wallet on-chain, la piattaforma pu&ograve; operare in modo autonomo anche in caso di problemi sui layer 2 o su servizi esterni.</p>
+      <div class="update-card-note">Per l&rsquo;utente: maggiore continuit&agrave; del servizio, meno interruzioni improvvise.</div>
+    </div>
+
+    <div class="update-card">
+      <div class="update-card-icon">&#128241;</div>
+      <div class="update-card-label">// accesso &middot; mobile</div>
+      <div class="update-card-title">Versione mobile completa</div>
+      <p class="update-card-text">BitPost &egrave; ora pienamente utilizzabile da smartphone. Chi non usa abitualmente il computer pu&ograve; registrarsi, comprare, e gestire i propri scambi direttamente dal telefono, senza dover passare da un browser desktop. L&rsquo;esperienza &egrave; ottimizzata per iOS e Android.</p>
+      <div class="update-card-note">Per l&rsquo;utente: nessun obbligo di usare il PC &mdash; puoi fare tutto dal tuo telefono.</div>
+    </div>
+
+    <div class="update-card">
+      <div class="update-card-icon">&#127760;</div>
+      <div class="update-card-label">// privacy &middot; anonimato</div>
+      <div class="update-card-title">Indirizzo .onion (Tor)</div>
+      <p class="update-card-text">BitPost &egrave; ora raggiungibile anche attraverso un indirizzo .onion sulla rete Tor. Chi vuole una privacy totale &mdash; senza che nemmeno il proprio ISP possa sapere che sta usando BitPost &mdash; pu&ograve; accedere alla piattaforma tramite il browser Tor senza rivelare il proprio indirizzo IP.</p>
+      <div class="update-card-note">Per l&rsquo;utente: livello massimo di privacy nell&rsquo;accesso alla piattaforma. Non obbligatorio, ma disponibile per chi ne ha bisogno.</div>
+    </div>
+
+  </div>
+
+  <p class="sec-text" style="margin-top:1.2rem;font-size:0.83rem;color:var(--text3);">Aggiornato a ottobre 2026. Per le novit&agrave; pi&ugrave; recenti consulta <a href="https://bitblog.bitpost.shop" target="_blank" rel="noopener" style="color:var(--gold)">bitblog.bitpost.shop</a>.</p>
+</section>
+
 <!-- CONTATTI -->
 <section class="page-section">
   <div class="sec-eyebrow">// serve aiuto?</div>
@@ -445,7 +531,7 @@ footer a:hover { color: var(--gold); }
     <li><span class="contacts-label">X (Twitter)</span><a href="https://x.com/bitpostP2P">@bitpostP2P</a></li>
     <li><span class="contacts-label">Blog</span><a href="https://bitblog.bitpost.shop">bitblog.bitpost.shop</a></li>
   </ul>
-  <p class="fine-print">Questa guida descrive il funzionamento della piattaforma sulla base dei Termini &amp; Condizioni e delle FAQ pubblicate su bitpost.shop (agosto 2026). In caso di dubbio, fai sempre riferimento ai Termini &amp; Condizioni ufficiali della piattaforma.</p>
+  <p class="fine-print">Questa guida descrive il funzionamento della piattaforma sulla base dei Termini &amp; Condizioni e delle FAQ pubblicate su bitpost.shop. Aggiornata a ottobre 2026. In caso di dubbio, fai sempre riferimento ai Termini &amp; Condizioni ufficiali della piattaforma.</p>
 </section>
 
 <section class="donation-section">
