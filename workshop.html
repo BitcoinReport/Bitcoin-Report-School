@@ -273,6 +273,24 @@ footer a:hover { color: var(--gold); }
 .ws-status-urgency strong {
   color: var(--gold);
 }
+.ws-status-box-closed {
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(247,147,26,0.03) 100%);
+  border-color: rgba(255,255,255,0.08);
+}
+.ws-status-closed {
+  background: rgba(255,255,255,0.06);
+  color: var(--text3);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.ws-contact-link {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(247,147,26,0.4);
+  transition: border-color 0.2s;
+}
+.ws-contact-link:hover {
+  border-color: var(--gold);
+}
 </style>
 </head>
 <body>
@@ -289,49 +307,46 @@ footer a:hover { color: var(--gold); }
 <header class="hero">
   <div class="hero-eyebrow">// workshop &middot; formazione &middot; Bitcoin</div>
   <h1>Iscriviti ai Workshop</h1>
-  <p class="hero-subtitle">Il percorso &egrave; iniziato &mdash; ma puoi ancora entrare. Chi si iscrive entro domenica 4 ottobre riceve la registrazione del Workshop 01 e parte da subito.</p>
+  <p class="hero-subtitle">Il percorso &egrave; iniziato. Le iscrizioni sono chiuse &mdash; ma il percorso continua e chi &egrave; gi&agrave; dentro sta gi&agrave; lavorando.</p>
   <div class="hero-meta">
     <span>&#9997; Mike &mdash; Bitcoin Report Italia</span>
-    <span>&#9201; Iscrizioni aperte fino a domenica 4 ottobre</span>
+    <span>&#9632; Iscrizioni chiuse</span>
   </div>
 </header>
 
 <!-- BLOCCO STATO PERCORSO -->
 <div class="ws-status-outer">
-  <div class="ws-status-box">
+  <div class="ws-status-box ws-status-box-closed">
 
     <div class="ws-status-header">
-      <span class="ws-status-badge ws-status-live">&#9679; Percorso in corso</span>
-      <span class="ws-status-deadline">Iscrizioni aperte fino a domenica 4 ottobre</span>
+      <span class="ws-status-badge ws-status-closed">&#9632; Iscrizioni chiuse</span>
+      <span class="ws-status-deadline">Percorso in corso &mdash; 7 workshop rimanenti</span>
     </div>
 
-    <h2 class="ws-status-title">Il Workshop 01 si &egrave; tenuto il 1&deg; ottobre &mdash; puoi ancora recuperarlo</h2>
-    <p class="ws-status-body">Il percorso &egrave; partito ieri, ma non sei in ritardo: chi si iscrive adesso riceve la registrazione completa del primo incontro e pu&ograve; rimettersi in pari prima del prossimo appuntamento. Chi non pu&ograve; seguire le sessioni in diretta pu&ograve; guardare le registrazioni in un secondo momento &mdash; le ricever&agrave; per ogni workshop a cui si iscrive.</p>
+    <h2 class="ws-status-title">Le iscrizioni sono chiuse. Il percorso &egrave; partito.</h2>
+    <p class="ws-status-body">Chi si &egrave; iscritto ha gi&agrave; ricevuto la registrazione del primo incontro e sta seguendo il percorso. I prossimi 7 workshop si terranno nelle settimane a venire, con cadenza settimanale.</p>
+    <p class="ws-status-body">Se sei arrivato qui tardi e pensi che questo percorso faccia al caso tuo, <a href="https://t.me/KZ_Mik" target="_blank" rel="noopener" class="ws-contact-link">scrivimi su Telegram</a> &mdash; valuto caso per caso.</p>
 
     <div class="ws-status-cards">
 
       <div class="ws-status-card">
         <div class="ws-status-card-icon">&#127909;</div>
-        <div class="ws-status-card-title">Registrazione Workshop 01</div>
-        <div class="ws-status-card-text">Chi si iscrive entro domenica 4 ottobre riceve subito la registrazione del primo incontro. Puoi guardarla quando vuoi, quante volte vuoi.</div>
-      </div>
-
-      <div class="ws-status-card">
-        <div class="ws-status-card-icon">&#128337;</div>
-        <div class="ws-status-card-title">Segui in registrazione, non in live</div>
-        <div class="ws-status-card-text">Se non puoi essere presente alle sessioni live, nessun problema: le registrazioni sono incluse per ogni workshop a cui ti iscrivi e le ricevi entro 24 ore dalla sessione.</div>
+        <div class="ws-status-card-title">Registrazioni incluse</div>
+        <div class="ws-status-card-text">Chi segue il percorso riceve la registrazione di ogni workshop entro 24 ore dalla sessione live.</div>
       </div>
 
       <div class="ws-status-card">
         <div class="ws-status-card-icon">&#128172;</div>
-        <div class="ws-status-card-title">Domande via Telegram</div>
-        <div class="ws-status-card-text">Chi segue in differita pu&ograve; scrivermi su Telegram per le domande che avrebbe fatto in live. Rispondo personalmente a tutti gli iscritti.</div>
+        <div class="ws-status-card-title">Supporto via Telegram</div>
+        <div class="ws-status-card-text">Gli iscritti possono scrivermi su Telegram per le domande tra un workshop e l&rsquo;altro.</div>
       </div>
 
-    </div>
+      <div class="ws-status-card">
+        <div class="ws-status-card-icon">&#128197;</div>
+        <div class="ws-status-card-title">Prossima edizione</div>
+        <div class="ws-status-card-text">Se vuoi essere avvisato quando apre la prossima edizione, scrivimi su Telegram e ti aggiungo alla lista.</div>
+      </div>
 
-    <div class="ws-status-urgency">
-      &#9888;&nbsp; Le iscrizioni chiudono <strong>domenica 4 ottobre</strong>. Dopo quella data il percorso prosegue solo con chi &egrave; gi&agrave; dentro.
     </div>
 
   </div>
