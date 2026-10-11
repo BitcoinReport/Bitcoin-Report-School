@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Enciclopedia interattiva di tutte le versioni dei client Bitcoin: Bitcoin Core, Bitcoin Knots, ProductionReady, btcd e libbitcoin. Timeline, filtri, confronto versioni, chi finanzia lo sviluppo. In italiano.">
+<meta name="description" content="Enciclopedia interattiva di tutte le versioni dei client Bitcoin: Bitcoin Core, Bitcoin Knots, ProductionReady, btcd, libbitcoin e Bitcoin Roots. Timeline, filtri, confronto versioni, chi finanzia lo sviluppo. In italiano.">
 <meta name="keywords" content="Bitcoin Core versioni, Bitcoin Knots, Taproot, SegWit, hardfork, client Bitcoin, storia Bitcoin, sviluppo Bitcoin">
 <meta name="author" content="Bitcoin Report Italia">
 <meta name="robots" content="index, follow">
@@ -107,6 +107,7 @@ nav { border-bottom:1px solid var(--border); padding:1rem 2rem; display:flex; al
 .v-badge.productionready { border-color:rgba(56,189,248,0.3); color:var(--blue); }
 .v-badge.btcd { border-color:rgba(255,209,102,0.3); color:var(--yellow); }
 .v-badge.libbitcoin { border-color:rgba(255,68,102,0.3); color:var(--red); }
+.v-badge.roots { background: #7c3aed; color: #fff; }
 .v-date { font-family:var(--mono); font-size:0.62rem; color:var(--text3); white-space:nowrap; flex-shrink:0; margin-left:auto; }
 .v-title { font-family:var(--cond); font-weight:700; font-size:1rem; color:var(--text); line-height:1.2; margin-bottom:0.35rem; text-transform:uppercase; letter-spacing:0.04em; }
 .v-summary { font-size:0.8rem; color:var(--text2); line-height:1.55; font-weight:300; }
@@ -131,6 +132,7 @@ nav { border-bottom:1px solid var(--border); padding:1rem 2rem; display:flex; al
 .dp-client-badge.knots { background:var(--green-dim); color:var(--green); border:1px solid rgba(0,255,136,0.3); }
 .dp-client-badge.productionready { background:var(--blue-dim); color:var(--blue); border:1px solid rgba(56,189,248,0.3); }
 .dp-client-badge.btcd, .dp-client-badge.libbitcoin { background:var(--yellow-dim); color:var(--yellow); border:1px solid rgba(255,209,102,0.3); }
+.dp-client-badge.roots { background: #7c3aed; color: #fff; }
 .dp-version { font-family:var(--mono); font-size:0.8rem; color:var(--text2); margin-bottom:0.4rem; }
 .dp-title { font-family:var(--cond); font-weight:900; font-size:1.6rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--text); line-height:1.1; margin-bottom:0.3rem; }
 .dp-date { font-family:var(--mono); font-size:0.65rem; color:var(--text3); margin-bottom:1.2rem; }
@@ -349,7 +351,7 @@ footer { border-top:1px solid var(--border); padding:2rem; text-align:center; fo
       dei <span class="gold">Client Bitcoin</span>
     </h1>
     <p class="hero-desc">
-      Dalla versione 0.1 di Satoshi (2009) a Bitcoin Core 31.0, Bitcoin Knots e ProductionReady.
+      Dalla versione 0.1 di Satoshi (2009) a Bitcoin Core 31.1, Bitcoin Knots, ProductionReady e Bitcoin Roots.
       Timeline interattiva, filtri, confronto versioni e punteggio cypherpunk &mdash; tutto in italiano.
       Il fork eCash di Paul Sztorc (agosto 2026) &egrave; documentato come evento storico rilevante per chi gestisce un nodo Bitcoin, ma non &egrave; un client Bitcoin &mdash; &egrave; una catena separata e incompatibile. Come Bitcoin Cash e Bitcoin SV, viene documentato per completezza informativa e per aiutare chi deve prendere decisioni operative.
     </p>
@@ -373,6 +375,7 @@ footer { border-top:1px solid var(--border); padding:2rem; text-align:center; fo
       <button class="filter-btn" data-filter="client" data-val="productionready" onclick="setFilter('client','productionready')">ProductionReady</button>
       <button class="filter-btn" data-filter="client" data-val="btcd" onclick="setFilter('client','btcd')">btcd</button>
       <button class="filter-btn" data-filter="client" data-val="libbitcoin" onclick="setFilter('client','libbitcoin')">libbitcoin</button>
+      <button class="filter-btn" data-filter="client" data-val="roots" onclick="setFilter('client','roots')">Roots</button>
     </div>
     <div class="filter-sep"></div>
     <div class="filter-group">
@@ -1042,6 +1045,22 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
     highlight:`Versione attuale (2026) — cluster mempool e privacy di rete di default`
   },
 
+  {
+    id:'core-31.1', client:'core', version:'31.1', date:'2026-07-08', year:2026,
+    title:`v31.1 - Patch di sicurezza e stabilita'`,
+    type:'release', importance:3,
+    tags:['Release','Patch','Sicurezza'],
+    summary:`Patch di manutenzione per Bitcoin Core 31.x con fix di sicurezza e miglioramenti alla stabilita'. Versione correntemente raccomandata.`,
+    details:`Release di manutenzione sul branch 31.x. Contrassegnata come "Latest" su GitHub. Include correzioni di bug e miglioramenti minori alla stabilita' del nodo.`,
+    contributors:['Bitcoin Core contributors'],
+    funding:`MIT Digital Currency Initiative, donazioni individuali`,
+    bips:[],
+    recommendation:`Versione attualmente raccomandata. Aggiorna da qualsiasi versione precedente.`,
+    score:{privacy:3,decentral:4,censorship:3,soundness:5,verify:5},
+    controversy:`Nessuna.`,
+    highlight:`Versione Latest a luglio 2026.`
+  },
+
   // ── BITCOIN KNOTS ─────────────────────────────────────────────────────────
   {
     id:'knots-0.8.1', client:'knots', version:'0.8.1-knots20130322', date:'2013-03-22', year:2013,
@@ -1104,6 +1123,22 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
     highlight:`Versione Knots attuale (2026) — ora distribuita in due build dopo il tentativo BIP-110 di agosto`
   },
 
+  {
+    id:'knots-29.4', client:'knots', version:'29.4.knots20260508', date:'2026-05-08', year:2026,
+    title:`v29.4 - Stabilita' sul branch 29.x`,
+    type:'release', importance:3,
+    tags:['Release','Patch','Filtri','Stabilita'],
+    summary:`Release di manutenzione di Bitcoin Knots sul branch 29.x. Mantiene tutte le funzionalita' distintive di Knots: filtri anti-spam, policy OP_RETURN restrittiva, controllo avanzato sulle transazioni accettate nel mempool.`,
+    details:`Aggiornamento di manutenzione che porta le patch specifiche di Knots sulla base di Core 29.4. Knots continua a essere la scelta per chi vuole un nodo con filtri piu' stringenti e una policy mempool piu' conservativa rispetto a Core.`,
+    contributors:['Luke Dashjr','contributors della community Knots'],
+    funding:`Donazioni dirette, HRF, sostenitori individuali`,
+    bips:[],
+    recommendation:`Raccomandato per chi cerca filtri anti-Ordinals/Runes e una policy mempool in linea con la visione conservativa del protocollo.`,
+    score:{privacy:5,decentral:5,censorship:4,soundness:5,verify:5},
+    controversy:`La posizione di Knots sugli Ordinals e le iscrizioni e' divisiva nella community.`,
+    highlight:`Knots mantiene la sua posizione: nodo con filtri, per chi vuole controllo.`
+  },
+
   // ── PRODUCTIONREADY ────────────────────────────────────────────────────────
   {
     id:'pr-foundation', client:'productionready', version:'Fondazione', date:'2026-03-23', year:2026,
@@ -1138,6 +1173,22 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
     highlight:`Il backend Go per Lightning Network — usato da migliaia di nodi lnd`
   },
 
+  {
+    id:'btcd-0.26.2', client:'btcd', version:'v0.26.2', date:'2026-07-24', year:2026,
+    title:`v0.26.2 - Sicurezza e conformita' BIP`,
+    type:'release', importance:3,
+    tags:['Release','Go','Sicurezza','PSBT','BIP-350'],
+    summary:`Nuova release stabile di btcd, l'implementazione Go di Bitcoin. Migliora la gestione di PSBT, rafforza la conformita' a BIP-350 per gli indirizzi segwit, aggiunge controlli piu' stringenti sulle connessioni di rete.`,
+    details:`I miglioramenti principali includono: rifiuto degli indirizzi segwit v2-v16 codificati con bech32 invece di bech32m (conformita' BIP-350), validazione piu' rigorosa di PSBT (Partially Signed Bitcoin Transactions), controlli sulla sicurezza delle chiavi private in btcec/schnorr, correzione di una race condition nei test e di un errore non gestito in blockchain/indexers.`,
+    contributors:['btcsuite contributors'],
+    funding:`Square Crypto (Block), contributi individuali`,
+    bips:['BIP-350'],
+    recommendation:`Aggiornamento raccomandato per chi usa btcd in applicazioni di sviluppo e infrastruttura.`,
+    score:{privacy:3,decentral:3,censorship:3,soundness:4,verify:4},
+    controversy:`btcd e' ancora considerato sperimentale per uso come nodo di produzione su mainnet.`,
+    highlight:`v0.26.2 e' la release Latest di luglio 2026: PSBT piu' sicuro, conformita' BIP-350.`
+  },
+
   // ── LIBBITCOIN ────────────────────────────────────────────────────────────
   {
     id:'libbitcoin-3', client:'libbitcoin', version:'v3.6.0', date:'2023-01-01', year:2023,
@@ -1153,6 +1204,38 @@ Punto piu' controverso: 600.000 eCash creati ex novo assegnati agli indirizzi Sa
     score:{privacy:5,decentral:5,censorship:5,soundness:4,verify:4},
     controversy:null,
     highlight:`Architettura radicalmente diversa — la scelta degli sviluppatori di infrastrutture custom`
+  },
+
+  // -- BITCOIN ROOTS --------------------------------
+  {
+    id:'roots-intro', client:'roots', version:'Introduzione', date:'2025-01-01', year:2025,
+    title:`Bitcoin Roots - Il fork dei principi originari`,
+    type:'informational', importance:3,
+    tags:['Fork','BIP-8','OP_RETURN','Sperimentale','Anonimo'],
+    summary:`Bitcoin Roots e' un fork sperimentale di Bitcoin Core v25.0, sviluppato da un developer anonimo (GitHub: 15Greps). Non e' una altcoin: rimane sulla stessa chain di Bitcoin, compatibile con i wallet esistenti. Il progetto implementa tre patch specifiche che riflettono una posizione precisa sulla governance e i principi del protocollo.`,
+    details:`Bitcoin Roots nasce come risposta pratica a tre questioni tecniche e politiche: come attivare i soft fork in modo resistente alla censura (BIP-8), come limitare l'uso non-monetario della blockchain (OP_RETURN a 80 byte), e come gestire una proposta di soft fork controversa (DEPLOYMENT_NOPAK). Il developer e' anonimo, il codice e' pubblico su GitHub (15Greps/bitcoin-roots), il sorgente e' disponibile al download. Non esiste una release stabile dichiarata: e' un progetto sperimentale, non raccomandato per uso in produzione.`,
+    contributors:['15Greps (anonimo)'],
+    funding:`Sconosciuto`,
+    bips:['BIP-8'],
+    recommendation:`Progetto da seguire per interesse tecnico. Non usare in produzione. Per nodi personali o di studio, valutare con attenzione.`,
+    score:{privacy:3,decentral:4,censorship:4,soundness:3,verify:3},
+    controversy:`Developer completamente anonimo, fork basato su v25.0 (obsoleto rispetto all'attuale Core). Nessuna community strutturata, nessun processo di review pubblico. Il soft fork DEPLOYMENT_NOPAK a blocco 1.050.000 e' una decisione unilaterale non coordinata con il resto della rete.`,
+    highlight:`Tre patch contro la censura del protocollo: BIP-8 per l'attivazione, OP_RETURN limitato a 80 byte, soft fork NOPAK.`
+  },
+  {
+    id:'roots-25.0', client:'roots', version:'25.0-roots', date:'2025-01-01', year:2025,
+    title:`v25.0-roots - La prima release`,
+    type:'release', importance:3,
+    tags:['Release','BIP-8','OP_RETURN','NOPAK','Fork v25'],
+    summary:`Prima (e unica) release di Bitcoin Roots, basata su Bitcoin Core v25.0. Disponibile come sorgente tarball (.tar.xz) da bitcoinroots.org e come repository GitHub. Nessun binario precompilato ufficiale.`,
+    details:`La release include sette file modificati rispetto a Core v25.0. Le tre patch principali sono: (1) Attivazione BIP-8 per i soft fork con block-height invece di MTP, meccanismo piu' resistente alla manipolazione temporale dei miner. (2) Relay OP_RETURN limitato a 80 byte: il nodo non instrada transazioni OP_RETURN oltre questa soglia, in linea con la policy originaria di Satoshi. (3) DEPLOYMENT_NOPAK: implementa il soft fork che disabilita NOPAK (No Path Aggregation Key) a partire dal blocco 1.050.000. Il download e' disponibile come bitcoin-roots-25.0-roots.tar.xz sul sito ufficiale.`,
+    contributors:['15Greps (anonimo)'],
+    funding:`Sconosciuto`,
+    bips:['BIP-8','OP_RETURN'],
+    recommendation:`Solo per utenti esperti interessati a studiare l'implementazione. Non adatto a un nodo in produzione su mainnet.`,
+    score:{privacy:3,decentral:4,censorship:4,soundness:3,verify:3},
+    controversy:`Basato su Core v25.0, che e' superato da molte versioni. Il gap con Core attuale (v30+) significa che mancano anni di fix di sicurezza e miglioramenti. L'attivazione unilaterale di NOPAK a un blocco specifico e' un esperimento - non ha consenso di rete.`,
+    highlight:`Sorgente disponibile, tre patch precise, posizione chiara: protocollo pulito, attivazione resistente alla censura.`
   }
 ];
 
@@ -1220,7 +1303,7 @@ function typeLabel(t) {
   return m[t]||t;
 }
 function clientLabel(c) {
-  const m = {core:'Bitcoin Core',knots:'Bitcoin Knots',productionready:'ProductionReady',btcd:'btcd',libbitcoin:'libbitcoin',bip:'Proposta'};
+  const m = {core:'Bitcoin Core',knots:'Bitcoin Knots',productionready:'ProductionReady',btcd:'btcd',libbitcoin:'libbitcoin',roots:'Bitcoin Roots',bip:'Proposta'};
   return m[c]||c;
 }
 function impDots(n,type) {
