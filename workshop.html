@@ -121,10 +121,17 @@ footer a:hover { color: var(--gold); }
 
 /* ── Lista d'attesa ── */
 .ws-block { margin-top: 3rem; }
-.ws-topics { display: grid; gap: .8rem; }
-.ws-topic { display: flex; align-items: flex-start; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.3rem; }
-.ws-topic-icon { font-size: 1.4rem; line-height: 1.2; flex-shrink: 0; }
-.ws-topic-text { font-size: .95rem; color: var(--text); line-height: 1.55; }
+.hero-intro { font-size: 1.05rem; color: var(--text); line-height: 1.75; max-width: 640px; margin-bottom: 1.2rem; }
+.ws-sessions { display: grid; gap: .8rem; }
+.ws-session { display: flex; align-items: flex-start; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.3rem; }
+.ws-session-num { font-family: var(--mono); font-size: .7rem; color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(247,147,26,.3); border-radius: 6px; padding: .3rem .55rem; flex-shrink: 0; letter-spacing: .08em; }
+.ws-session-title { font-size: .98rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: .2rem; }
+.ws-session-desc { font-size: .82rem; color: var(--text2); line-height: 1.55; }
+.ws-session.live { border: 1px dashed rgba(34,211,160,.5); background: rgba(34,211,160,.05); }
+.ws-session.live .ws-session-num { color: var(--green); background: rgba(34,211,160,.1); border-color: rgba(34,211,160,.35); }
+.ws-block .pdf-banner { margin-top: 0; }
+.ws-success-link { display: inline-block; margin-top: .8rem; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(247,147,26,.4); }
+.ws-success-link:hover { border-color: var(--gold); }
 .ws-why { font-size: .95rem; color: var(--text2); line-height: 1.8; max-width: 680px; }
 .ws-interest-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: var(--text); margin-bottom: 1.2rem; }
 .ws-interest-box { background: var(--bg2); border: 1px solid rgba(247,147,26,.3); border-radius: 14px; padding: 1.8rem 2rem; max-width: 680px; }
@@ -151,6 +158,7 @@ footer a:hover { color: var(--gold); }
 <header class="hero">
   <div class="hero-eyebrow">// workshop &middot; formazione &middot; Bitcoin</div>
   <h1>Il primo ciclo di workshop &egrave; partito. Il prossimo lo decidi anche tu.</h1>
+  <p class="hero-intro">Il primo ciclo ha riempito i posti in pochi giorni, e molti hanno scritto quando era già tardi. Per il prossimo voglio fare le cose in modo diverso: chi lascia qui i contatti viene avvisato per primo, prima dell'apertura pubblica, e può dirmi da dove parte e cosa lo blocca, così costruisco le serate su misura.</p>
   <p class="hero-subtitle">Otto serate dal vivo per portare chi parte da zero ai primi passi concreti con Bitcoin: comprare, custodire, usare. Il primo ciclo &egrave; chiuso, ma se c&rsquo;&egrave; abbastanza interesse ne organizziamo un altro.</p>
   <div class="hero-meta">
     <span>&#9997; Mike &mdash; Bitcoin Report Italia</span>
@@ -160,32 +168,73 @@ footer a:hover { color: var(--gold); }
 
 <div class="outer">
 
-  <!-- PDF download -->
-  <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
-    <div class="pdf-icon">&#128196;</div>
-    <div class="pdf-text-wrap">
-      <span class="pdf-badge">In omaggio &middot; PDF gratuito</span>
-      <span class="pdf-title">Il Contesto Che Nessuno Ti Dà</span>
-      <span class="pdf-subtitle">Cosa sapere sulla moneta prima ancora di sapere cos&rsquo;&egrave; Bitcoin: dal baratto che non &egrave; mai esistito a Roma, Weimar e i cypherpunk. 8 pagine da leggere prima della prima lezione, aperto a tutti.</span>
-    </div>
-    <span class="pdf-arrow">&#8595; Scarica gratis</span>
-  </a>
 
   <!-- Cosa abbiamo fatto -->
   <div class="ws-block">
-    <div class="section-eyebrow">// cosa abbiamo fatto</div>
-    <div class="ws-topics">
-      <div class="ws-topic">
-        <div class="ws-topic-icon">&#127757;</div>
-        <div class="ws-topic-text">Perch&eacute; Bitcoin: il contesto che nessuno ti d&agrave;</div>
+    <div class="section-eyebrow">// il programma</div>
+    <div class="ws-sessions">
+      <div class="ws-session">
+        <div class="ws-session-num">01</div>
+        <div>
+          <div class="ws-session-title">Perch&eacute; Bitcoin</div>
+          <div class="ws-session-desc">Il contesto che nessuno ti d&agrave;: dalla storia della moneta ai cypherpunk, per capire perch&eacute; Bitcoin esiste.</div>
+        </div>
       </div>
-      <div class="ws-topic">
-        <div class="ws-topic-icon">&#128273;</div>
-        <div class="ws-topic-text">Pratica vera: primo acquisto, wallet, seed phrase, Lightning</div>
+      <div class="ws-session">
+        <div class="ws-session-num">02</div>
+        <div>
+          <div class="ws-session-title">Il tuo primo acquisto</div>
+          <div class="ws-session-desc">Come comprare i tuoi primi sats in modo semplice e sicuro, con una dimostrazione dal vivo.</div>
+        </div>
       </div>
-      <div class="ws-topic">
-        <div class="ws-topic-icon">&#128172;</div>
-        <div class="ws-topic-text">Nessun gergo, nessuna domanda &egrave; troppo semplice</div>
+      <div class="ws-session">
+        <div class="ws-session-num">03</div>
+        <div>
+          <div class="ws-session-title">Wallet Sparrow e seed phrase</div>
+          <div class="ws-session-desc">Installi un wallet, verifichi che il download sia autentico e impari a proteggere la tua seed phrase.</div>
+        </div>
+      </div>
+      <div class="ws-session">
+        <div class="ws-session-num">04</div>
+        <div>
+          <div class="ws-session-title">Come funziona Bitcoin</div>
+          <div class="ws-session-desc">Cosa succede davvero quando invii una transazione: blocchi, nodi e mining, senza gergo.</div>
+        </div>
+      </div>
+      <div class="ws-session live">
+        <div class="ws-session-num">LIVE</div>
+        <div>
+          <div class="ws-session-title">Live di esercitazione</div>
+          <div class="ws-session-desc">Una serata per provare insieme le cose imparate fin qui.</div>
+        </div>
+      </div>
+      <div class="ws-session">
+        <div class="ws-session-num">05</div>
+        <div>
+          <div class="ws-session-title">Importare un wallet</div>
+          <div class="ws-session-desc">Come ritrovare i tuoi fondi da zero con la seed phrase, se perdi il telefono o il computer.</div>
+        </div>
+      </div>
+      <div class="ws-session">
+        <div class="ws-session-num">06</div>
+        <div>
+          <div class="ws-session-title">Lightning</div>
+          <div class="ws-session-desc">Pagamenti istantanei e a costi minimi: crei un wallet Lightning, ricevi e invii i tuoi primi sats.</div>
+        </div>
+      </div>
+      <div class="ws-session">
+        <div class="ws-session-num">07</div>
+        <div>
+          <div class="ws-session-title">Acquisti P2P e swap</div>
+          <div class="ws-session-desc">Usare Bitcoin senza intermediari: un acquisto P2P senza KYC e lo scambio tra Lightning e onchain.</div>
+        </div>
+      </div>
+      <div class="ws-session">
+        <div class="ws-session-num">08</div>
+        <div>
+          <div class="ws-session-title">Il tuo percorso di sovranit&agrave;</div>
+          <div class="ws-session-desc">Ricapitolo di quello che hai fatto, una mappa di cosa approfondire e domande dal vivo, senza slide.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -193,7 +242,7 @@ footer a:hover { color: var(--gold); }
   <!-- Perche lasciare i contatti -->
   <div class="ws-block">
     <div class="section-eyebrow">// perch&eacute; lasciare i tuoi contatti</div>
-    <p class="ws-why">Le iscrizioni al primo ciclo si sono chiuse in fretta e molti hanno scritto quando era troppo tardi. Lascia email e Telegram: se parte un nuovo ciclo, ti avviso io per primo, prima dell&rsquo;apertura pubblica. Nessun obbligo, nessuno spam, solo un messaggio quando c&rsquo;&egrave; una data.</p>
+    <p class="ws-why">Lascia la tua email e, se vuoi, anche Telegram. Nessun obbligo, nessuno spam, solo un messaggio quando c&rsquo;&egrave; una data.</p>
   </div>
 
   <!-- Box lista d'attesa -->
@@ -209,8 +258,8 @@ footer a:hover { color: var(--gold); }
         </label>
 
         <label class="field-wrap">
-          <span class="field-label">Telegram <span class="required">*</span></span>
-          <input class="field-input" type="text" name="telegram" id="ws-telegram" required maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@nomeutente">
+          <span class="field-label">Telegram <span style="font-size:.85em;opacity:.6">(facoltativo)</span></span>
+          <input class="field-input" type="text" name="telegram" id="ws-telegram" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@nomeutente">
         </label>
 
         <label class="field-wrap">
@@ -238,10 +287,23 @@ footer a:hover { color: var(--gold); }
         <p id="ws-msg" class="ws-msg" role="status" aria-live="polite"></p>
       </form>
 
-      <div id="ws-success" class="ws-success" role="status" aria-live="polite" hidden>Fatto, ti ho in lista. Appena c&rsquo;&egrave; una data per un nuovo ciclo ti scrivo su Telegram e via mail. Nel frattempo trovi tutto il resto su Instagram, TikTok e YouTube.</div>
+      <div id="ws-success" class="ws-success" role="status" aria-live="polite" hidden>Fatto, ti ho in lista. Appena c&rsquo;&egrave; una data per un nuovo ciclo ti scrivo via email e, se hai lasciato anche Telegram, anche l&igrave;. Nel frattempo trovi tutto il resto su Instagram, TikTok e YouTube.<br><a class="ws-success-link" href="/downloads/benvenuto-workshop.pdf" download>Intanto, se vuoi, scarica il PDF gratuito</a></div>
     </div>
 
     <p class="ws-trust">I tuoi dati restano solo a me e li uso solo per avvisarti del nuovo ciclo.</p>
+  </div>
+
+  <!-- PDF download -->
+  <div class="ws-block">
+    <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
+      <div class="pdf-icon">&#128196;</div>
+      <div class="pdf-text-wrap">
+        <span class="pdf-badge">In omaggio &middot; PDF gratuito</span>
+        <span class="pdf-title">Il Contesto Che Nessuno Ti Dà</span>
+        <span class="pdf-subtitle">Cosa sapere sulla moneta prima ancora di sapere cos&rsquo;&egrave; Bitcoin: dal baratto che non &egrave; mai esistito a Roma, Weimar e i cypherpunk. 8 pagine da leggere prima della prima lezione, aperto a tutti.</span>
+      </div>
+      <span class="pdf-arrow">&#8595; Scarica gratis</span>
+    </a>
   </div>
 
 </div>
@@ -290,7 +352,7 @@ window.addEventListener('scroll', function () {
 
   function refresh() {
     countEl.textContent = notesEl.value.length + ' / 1000';
-    var ready = emailEl.value.trim() !== '' && normTelegram(tgEl.value) !== '' && consentEl.checked;
+    var ready = emailEl.value.trim() !== '' && consentEl.checked;
     btn.disabled = sending || !ready;
   }
 
@@ -316,7 +378,7 @@ window.addEventListener('scroll', function () {
     var notes = notesEl.value.trim();
 
     if (!EMAIL_RE.test(email)) { showMsg('Inserisci un indirizzo email valido.', 'err'); emailEl.focus(); return; }
-    if (!TG_RE.test(telegram)) { showMsg('Username Telegram non valido: 5-32 caratteri tra lettere, numeri e _ (con o senza @).', 'err'); tgEl.focus(); return; }
+    if (telegram !== '' && !TG_RE.test(telegram)) { showMsg('Username Telegram non valido: 5-32 caratteri tra lettere, numeri e _ (con o senza @).', 'err'); tgEl.focus(); return; }
     if (notes.length > 1000) { showMsg('La nota \u00e8 troppo lunga (massimo 1000 caratteri).', 'err'); return; }
     if (!consentEl.checked) { showMsg('Devi accettare il consenso per procedere.', 'err'); return; }
 
