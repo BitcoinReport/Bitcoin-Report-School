@@ -260,6 +260,11 @@ footer a:hover { color: var(--gold); }
   padding-top: 0.6rem;
   border-top: 1px solid rgba(34,211,160,0.15);
 }
+
+/* ── Estensione browser / fee regolabili ── */
+.sec-text code, .steps-list code, .box-note code { font-family: var(--mono); font-size: .8em; color: var(--gold); background: rgba(255,255,255,.06); border: 1px solid var(--border2); border-radius: 4px; padding: .08rem .4rem; overflow-wrap: anywhere; }
+.box-todo { background: rgba(247,147,26,.07); border: 1px dashed rgba(247,147,26,.5); border-radius: 8px; padding: .8rem 1.1rem; margin: .8rem 0; font-size: .84rem; color: var(--text2); line-height: 1.7; }
+.ext-sub { font-family: var(--mono); font-size: .7rem; color: var(--green); text-transform: uppercase; letter-spacing: .12em; margin: 1.6rem 0 .7rem; }
 </style>
 </head>
 <body>
@@ -293,7 +298,7 @@ footer a:hover { color: var(--gold); }
   <div class="badge-row">
     <span class="badge badge-green">No KYC</span>
     <span class="badge badge-gold">Peer-to-peer</span>
-    <span class="badge badge-grey">Aggiornata agosto 2026</span>
+    <span class="badge badge-grey">Aggiornata ottobre 2026</span>
   </div>
   <div class="hero-cta">
     <a class="btn-pdf" href="manuale-bitpost.pdf" download>&#11015; Scarica la guida completa (PDF)</a>
@@ -364,9 +369,9 @@ footer a:hover { color: var(--gold); }
   <p class="sec-text">Immagina di voler comprare un paio di cuffie su Amazon.</p>
   <ol class="steps-list">
     <li><strong>Crea una richiesta d&rsquo;acquisto</strong>: incolli il link del prodotto Amazon nella piattaforma, scegli la quantit&agrave; (un solo prodotto per richiesta &mdash; se vuoi comprare due articoli diversi, servono due richieste separate)</li>
-    <li><strong>Scegli la commissione</strong>: puoi modulare il compenso per il Bitworker tra -5% e +8% rispetto al prezzo dell&rsquo;articolo &mdash; pi&ugrave; alto lo imposti, pi&ugrave; velocemente qualcuno prender&agrave; in carico il tuo ordine</li>
+    <li><strong>Scegli lo sconto</strong>: puoi impostare uno sconto da 0% a 50% sul prezzo dell&rsquo;articolo. Se per esempio il prodotto costa 100&nbsp;&euro; e imposti il 30%, lo paghi 70&nbsp;&euro; in sats</li>
     <li>La richiesta finisce nell&rsquo;<strong>order book</strong>, visibile a tutti i Bitworker registrati</li>
-    <li>Quando un Bitworker accetta la richiesta, <strong>depositi i Bitcoin</strong> (valore dell&rsquo;articolo + fee scelta + commissione BitPost) in un <strong>wallet multisig</strong> condiviso tra te e il Bitworker &mdash; i fondi restano bloccati l&igrave;, non nelle mani di nessuno</li>
+    <li>Quando un Bitworker accetta la richiesta, <strong>depositi i Bitcoin</strong> (il valore dell&rsquo;articolo, con lo sconto che hai scelto) in un <strong>wallet multisig</strong> condiviso tra te e il Bitworker &mdash; i fondi restano bloccati l&igrave;, non nelle mani di nessuno</li>
     <li>Il Bitworker acquista il prodotto e te lo fa spedire all&rsquo;indirizzo o al locker che hai indicato</li>
     <li>Una volta ricevuto l&rsquo;articolo, <strong>sblocchi i fondi</strong> a favore del Bitworker confermando la buona riuscita dello scambio</li>
   </ol>
@@ -374,6 +379,11 @@ footer a:hover { color: var(--gold); }
   <div class="box-privacy">
     <div class="box-privacy-title">// consiglio privacy</div>
     <p>Se disponibile nella tua zona, valuta la spedizione verso un <strong>locker/punto di ritiro</strong> invece dell&rsquo;indirizzo di casa &mdash; riduce ulteriormente i dati collegati al tuo nome. Un altro vantaggio del locker: il nome che indichi per il ritiro <strong>non deve necessariamente essere il tuo nome reale</strong>, un ulteriore livello di privacy rispetto alla spedizione a domicilio.</p>
+  </div>
+  <div class="box-privacy">
+    <div class="box-privacy-title">// opzione &middot; ordine oscurato</div>
+    <p>Puoi scegliere di <strong>oscurare l&rsquo;ordine</strong>: il Bitworker lo vedr&agrave; nella sua interezza solo dopo che lo avr&agrave; accettato e preso in carico, e solo dopo che avrai depositato i fondi.</p>
+    <p>Un ordine nascosto ha una <strong>commissione aggiuntiva dello 0,5%</strong>, che paghi in aggiunta alla tua quota.</p>
   </div>
 </section>
 
@@ -411,12 +421,19 @@ footer a:hover { color: var(--gold); }
   <h2 class="sec-title">Quanto costa usare BitPost</h2>
   <table class="costs-table">
     <tbody>
-      <tr><td>Commissione piattaforma</td><td>8% sullo scambio, ripartita tra Buyer e Bitworker secondo l&rsquo;accordo</td></tr>
-      <tr><td>Fee variabile Buyer&rarr;Bitworker</td><td>Da -5% a +8%, decisa dal Buyer al momento della richiesta</td></tr>
+      <tr><td>Commissione piattaforma</td><td>Al momento BitPost non applica fee. Quando verranno attivate, la fee prevista &egrave; dell&rsquo;8%</td></tr>
+      <tr><td>Sconto del Buyer sul prezzo</td><td>Da 0% a 50%, deciso dal Buyer al momento della richiesta</td></tr>
+      <tr><td>Ordine oscurato (opzionale)</td><td>+0,5% di commissione aggiuntiva, pagata dal Buyer in aggiunta alla sua quota</td></tr>
       <tr><td>Spese di spedizione</td><td>Sempre a carico del Buyer, pagate al Bitworker</td></tr>
       <tr><td>Eventuali dazi doganali</td><td>A carico del Buyer, da calcolare e aggiungere al pagamento</td></tr>
     </tbody>
   </table>
+  <div class="box-privacy">
+    <div class="box-privacy-title">// novit&agrave; &middot; fee regolabili</div>
+    <p>Le fee su BitPost ora sono <strong>regolabili</strong>, e la regolazione funziona in modo diverso per Buyer e Bitworker. Le fee della piattaforma, invece, <strong>non sono ancora attive</strong>: al momento BitPost non applica commissioni.</p>
+    <p><strong>Buyer:</strong> puoi impostare uno <strong>sconto da 0% a 50%</strong>. Esempio: se il prodotto che ordini costa 100&nbsp;&euro; e il tuo ordine ha uno sconto del 30%, quando paghi in sats lo paghi 70&nbsp;&euro;. In pratica fai pagare al Bitworker una fee che copre parte del tuo costo.</p>
+    <p><strong>Bitworker:</strong> puoi arrivare <strong>solo fino all&rsquo;8%</strong>, che &egrave; la fee destinata a BitPost quando le fee verranno attivate. Di fatto il Bitworker non pu&ograve; chiedere sconti per ricevere bitcoin a un prezzo inferiore a quello di mercato.</p>
+  </div>
 </section>
 
 <!-- SEZIONE 7 -->
@@ -477,7 +494,7 @@ footer a:hover { color: var(--gold); }
     <li>Registrati su <a href="https://www.bitpost.shop/register?ref=EdbztsT964" target="_blank" rel="noopener" style="color:var(--gold)">bitpost.shop</a> (il link include già il referral)</li>
     <li>Ricevi e <strong>metti al sicuro le 12 parole</strong> (su carta, mai in digitale)</li>
     <li>Scegli il tuo ruolo: <strong>Buyer</strong> se vuoi comprare in privacy, <strong>Bitworker</strong> se vuoi accumulare sats completando ordini</li>
-    <li>Se sei Buyer: incolla il link Amazon, imposta la fee, deposita i fondi nel wallet multisig quando un Bitworker accetta</li>
+    <li>Se sei Buyer: incolla il link Amazon, imposta lo sconto, deposita i fondi nel wallet multisig quando un Bitworker accetta</li>
     <li>Se sei Bitworker: sfoglia l&rsquo;order book, prendi in carico una richiesta compatibile, acquista e spedisci, fornisci le prove richieste</li>
     <li>Conferma sempre la buona riuscita dello scambio per sbloccare i fondi &mdash; non lasciare nulla in sospeso</li>
   </ol>
@@ -487,7 +504,7 @@ footer a:hover { color: var(--gold); }
 <section class="page-section">
   <div class="sec-eyebrow">// aggiornamenti &middot; ottobre 2026</div>
   <h2 class="sec-title">Novit&agrave; BitPost</h2>
-  <p class="sec-text">BitPost ha rilasciato tre aggiornamenti importanti che migliorano la stabilit&agrave;, la privacy e l&rsquo;accessibilit&agrave; della piattaforma. Eccoli nel dettaglio.</p>
+  <p class="sec-text">BitPost ha rilasciato cinque aggiornamenti importanti che migliorano la stabilit&agrave;, la privacy e l&rsquo;accessibilit&agrave; della piattaforma. Eccoli nel dettaglio.</p>
 
   <div class="update-cards">
 
@@ -515,9 +532,71 @@ footer a:hover { color: var(--gold); }
       <div class="update-card-note">Per l&rsquo;utente: livello massimo di privacy nell&rsquo;accesso alla piattaforma. Non obbligatorio, ma disponibile per chi ne ha bisogno.</div>
     </div>
 
+
+    <div class="update-card">
+      <div class="update-card-icon">&#129513;</div>
+      <div class="update-card-label">// comodit&agrave; &middot; browser</div>
+      <div class="update-card-title">Estensione browser (anteprima)</div>
+      <p class="update-card-text">Un&rsquo;estensione per il browser aggiunge il pulsante &ldquo;Compra con Bitpost&rdquo; sotto i pulsanti di acquisto dei prodotti Amazon, dopo l&rsquo;accesso su bitpost.shop. Per ora &egrave; disponibile in anteprima, solo su richiesta: i dettagli sono nella sezione dedicata qui sotto.</p>
+      <div class="update-card-note">Per l&rsquo;utente: acquisti su Amazon pi&ugrave; rapidi, senza copiare e incollare il link a mano.</div>
+    </div>
+
+
+    <div class="update-card">
+      <div class="update-card-icon">&#128065;</div>
+      <div class="update-card-label">// privacy &middot; ordini</div>
+      <div class="update-card-title">Ordine oscurato</div>
+      <p class="update-card-text">Ora puoi nascondere i dettagli dell&rsquo;ordine: il Bitworker lo vede nella sua interezza solo dopo che lo ha accettato e preso in carico, e solo dopo che hai depositato i fondi. L&rsquo;opzione ha una commissione aggiuntiva dello 0,5%, che si paga in aggiunta alla propria quota.</p>
+      <div class="update-card-note">Per l&rsquo;utente: pi&ugrave; riservatezza sull&rsquo;ordine, al costo di un +0,5%.</div>
+    </div>
+
   </div>
 
   <p class="sec-text" style="margin-top:1.2rem;font-size:0.83rem;color:var(--text3);">Aggiornato a ottobre 2026. Per le novit&agrave; pi&ugrave; recenti consulta <a href="https://bitblog.bitpost.shop" target="_blank" rel="noopener" style="color:var(--gold)">bitblog.bitpost.shop</a>.</p>
+</section>
+
+<!-- SEZIONE 13 — ESTENSIONE BROWSER -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 13 &middot; anteprima</div>
+  <h2 class="sec-title">Estensione browser: &ldquo;Compra con Bitpost&rdquo;</h2>
+  <p class="sec-text">L&rsquo;estensione di BitPost aggiunge il pulsante <strong>&ldquo;Compra con Bitpost&rdquo;</strong> sotto i pulsanti di acquisto dei prodotti Amazon. Funziona dopo aver effettuato l&rsquo;accesso su <strong>www.bitpost.shop</strong>: apri un prodotto su Amazon e trovi il pulsante pronto, senza dover copiare il link a mano.</p>
+
+  <div class="box-note"><strong>Stato attuale: anteprima.</strong> L&rsquo;estensione &egrave; disponibile solo per chi &egrave; iscritto a BitPost tramite il mio referral e mi scrive per ricevere il file. Appena i browser (Chrome Web Store, Firefox Add-ons e gli altri) confermeranno la pubblicazione, sar&agrave; disponibile per tutti. Non ci sono date certe: aggiornerò questa pagina quando succede.</div>
+
+  <div class="ext-sub">// browser supportati</div>
+  <ul class="sec-list">
+    <li>Chrome</li>
+    <li>Brave</li>
+    <li>Edge</li>
+    <li>Opera</li>
+    <li>Firefox</li>
+  </ul>
+
+  <div class="ext-sub">// come richiedere il file</div>
+  <ol class="steps-list">
+    <li><span>Iscriviti a BitPost con il <a href="https://www.bitpost.shop/register?ref=EdbztsT964" target="_blank" rel="noopener" style="color:var(--gold)">link di registrazione con referral</a> di questa guida.</span></li>
+    <li><span>Scrivimi in privato su Telegram: <a href="https://t.me/KZ_Mik" target="_blank" rel="noopener" style="color:var(--gold)">t.me/KZ_Mik</a>. Ti mando il file dell&rsquo;estensione.</span></li>
+  </ol>
+
+  <div class="ext-sub">// installazione su Chrome, Brave, Edge e Opera</div>
+  <ol class="steps-list">
+    <li><span><strong>Estrai lo zip</strong> in una cartella. Non spostarla e non cancellarla: il browser la usa finch&eacute; l&rsquo;estensione &egrave; installata.</span></li>
+    <li><span>Apri la pagina delle estensioni del tuo browser: <code>chrome://extensions</code>, <code>brave://extensions</code>, <code>edge://extensions</code> oppure <code>opera://extensions</code>.</span></li>
+    <li><span>Attiva la <strong>Modalit&agrave; sviluppatore</strong>.</span></li>
+    <li><span>Clicca su <strong>&ldquo;Carica estensione non pacchettizzata&rdquo;</strong> e seleziona la cartella che contiene il file <code>manifest.json</code>.</span></li>
+    <li><span>Accedi su <strong>bitpost.shop</strong>, poi apri un prodotto Amazon: sotto i pulsanti di acquisto trovi <strong>&ldquo;Compra con Bitpost&rdquo;</strong>.</span></li>
+  </ol>
+  <div class="box-note"><strong>Consiglio:</strong> fissa l&rsquo;icona dell&rsquo;estensione con la puntina dal menu del puzzle, cos&igrave; la trovi sempre a portata di clic.</div>
+
+  <div class="ext-sub">// installazione su Firefox</div>
+  <p class="sec-text">Per ora Firefox funziona solo come <strong>componente aggiuntivo temporaneo</strong>.</p>
+  <ol class="steps-list">
+    <li><span>Apri <code>about:debugging#/runtime/this-firefox</code>.</span></li>
+    <li><span>Clicca su <strong>&ldquo;Carica componente aggiuntivo temporaneo&hellip;&rdquo;</strong>.</span></li>
+    <li><span>Seleziona lo <strong>zip per Firefox, senza estrarlo</strong>.</span></li>
+  </ol>
+  <div class="box-note"><strong>Attenzione:</strong> l&rsquo;estensione resta attiva finch&eacute; Firefox non viene chiuso. Alla riapertura va caricata di nuovo, ripetendo gli stessi passaggi.</div>
+  <div class="box-note"><strong>Se il pulsante non compare:</strong> controlla dal menu del puzzle che Bitpost abbia il permesso di funzionare su Amazon.</div>
 </section>
 
 <!-- CONTATTI -->
