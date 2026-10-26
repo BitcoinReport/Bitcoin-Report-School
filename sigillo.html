@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Sigillo &mdash; Crittografia OpenPGP per tutti &mdash; Bitcoin Report School</title>
-<meta name="description" content="Sigillo: app desktop open source per cifrare messaggi e file con OpenPGP senza terminali. Scarica per macOS, Windows e Linux. Verifica la firma PGP.">
+<meta name="description" content="Sigillo: app desktop open source per cifrare messaggi, foto, video, PDF e qualsiasi altro file con OpenPGP senza terminali. Scarica per macOS, Windows e Linux. Verifica la firma PGP.">
 <meta name="author" content="Mike &mdash; Bitcoin Report Italia">
 <link rel="canonical" href="https://bitcoinreportschool.com/sigillo.html">
 <meta property="og:title" content="Sigillo &mdash; Crittografia OpenPGP per tutti">
-<meta property="og:description" content="App desktop open source per cifrare messaggi e file con OpenPGP &mdash; senza terminali, senza configurazioni.">
+<meta property="og:description" content="App desktop open source per cifrare messaggi, foto, video, PDF e qualsiasi altro file con OpenPGP &mdash; senza terminali, senza configurazioni.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bitcoinreportschool.com/sigillo.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -173,7 +173,7 @@ footer a:hover { color: var(--gold); }
 .signing-key-link { display: block; font-family: var(--mono); font-size: 0.62rem; color: var(--text3); text-decoration: none; margin-top: 0.5rem; letter-spacing: 0.04em; transition: color 0.2s; }
 .signing-key-link:hover { color: var(--gold); }
 
-/* ── Features v0.5.1 ── */
+/* ── Features v0.6.0 ── */
 .features-section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 2rem; border-top: 1px solid var(--border); }
 .features-eyebrow { font-family: var(--mono); font-size: 0.6rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.6rem; opacity: 0.8; }
 .features-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); margin: 0 0 1.5rem; }
@@ -213,10 +213,10 @@ footer a:hover { color: var(--gold); }
   <div class="hero-eyebrow">// strumenti &middot; privacy &middot; crittografia</div>
   <h1>Sigillo</h1>
   <p class="hero-subtitle">Crittografia OpenPGP per tutti &mdash; senza terminali, senza configurazioni.</p>
-  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti, cifratura di testo, immagini, GIF animate e video &mdash; il tutto senza mai aprire un terminale. Supporta pi&ugrave; identit&agrave; e l&rsquo;import di chiavi esistenti. Distribuita sotto licenza GPLv3.</p>
+  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti, cifratura di testo, immagini, GIF animate, video, PDF, documenti e qualsiasi altro file &mdash; il tutto senza mai aprire un terminale. Supporta pi&ugrave; identit&agrave; e l&rsquo;import di chiavi esistenti. Distribuita sotto licenza GPLv3.</p>
   <div class="badge-row">
     <span class="badge badge-green">GPLv3</span>
-    <span class="badge badge-gold">v0.5.1</span>
+    <span class="badge badge-gold">v0.6.0</span>
     <span class="badge badge-grey">Tauri / Rust</span>
   </div>
   <a class="hero-github" href="https://github.com/BitcoinReport/sigillo" target="_blank" rel="noopener">&#8594; Codice sorgente su GitHub</a>
@@ -231,9 +231,23 @@ footer a:hover { color: var(--gold); }
 
 <!-- CHIAVI PGP -->
 <section class="features-section">
-  <div class="features-eyebrow">// novit&agrave; &middot; v0.5.1</div>
+  <div class="features-eyebrow">// novit&agrave; &middot; v0.6.0</div>
   <h2 class="features-title">Cosa c&rsquo;&egrave; di nuovo</h2>
   <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">&#128206;</div>
+      <div class="feat-body">
+        <div class="feat-name">Allegati di qualsiasi tipo</div>
+        <div class="feat-desc">Cifra e condividi <strong>PDF</strong>, documenti Word, Excel e PowerPoint, file LibreOffice, <code>.txt</code>, <code>.csv</code>, archivi <code>.zip</code>, audio e qualsiasi altro file. Chi li riceve li ritrova con il nome originale e li salva o li apre con un clic. Puoi allegare un file anche insieme a un messaggio di testo.</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">&#128737;</div>
+      <div class="feat-body">
+        <div class="feat-name">File grandi, nessuna traccia</div>
+        <div class="feat-desc">I file vengono cifrati e decifrati a pezzi, senza caricarli tutti in memoria. Quello decifrato resta in una cartella riservata dell&rsquo;app e viene cancellato quando lasci la schermata, alla chiusura e all&rsquo;avvio successivo. Se un file &egrave; un programma (<code>.exe</code>, <code>.sh</code>, <code>.apk</code>&hellip;) Sigillo ti avvisa prima di aprirlo.</div>
+      </div>
+    </div>
     <div class="feat-card">
       <div class="feat-icon">&#9654;</div>
       <div class="feat-body">
@@ -263,6 +277,7 @@ footer a:hover { color: var(--gold); }
       </div>
     </div>
   </div>
+  <p class="features-stability">&#10003; v0.6.0 &mdash; Allegati di qualsiasi tipo, nomi dei file ricevuti sempre controllati prima dell&rsquo;uso, file decifrati cancellati dopo l&rsquo;uso e aggiornate alcune librerie di rete per correggere problemi di sicurezza segnalati di recente. I messaggi cifrati con le versioni precedenti si decifrano come prima.</p>
   <p class="features-stability">&#10003; v0.5.1 &mdash; Correzione di sicurezza: un messaggio ricevuto non pu&ograve; pi&ugrave; avviare richieste di rete alla sola apertura. Rafforzati inoltre la Content Security Policy e la protezione della passphrase locale.</p>
   <p class="features-stability">&#10003; v0.5.0 &mdash; Migliorata la stabilit&agrave; su alcune configurazioni Linux durante la visualizzazione di contenuti multimediali decifrati.</p>
 </section>
@@ -305,8 +320,9 @@ footer a:hover { color: var(--gold); }
 
 <!-- DOWNLOAD -->
 <section class="page-section" id="download">
-  <div class="section-eyebrow">// download &middot; v0.5.1 &middot; verifica firma</div>
+  <div class="section-eyebrow">// download &middot; v0.6.0 &middot; verifica firma</div>
   <h2 class="section-title">Download</h2>
+  <p class="section-intro">Versione attuale: <strong>v0.6.0</strong> &mdash; <a href="https://github.com/BitcoinReport/sigillo/releases/tag/v0.6.0" target="_blank" rel="noopener" style="color:var(--gold)">note di rilascio</a>. I pulsanti qui sotto scaricano sempre l&rsquo;ultima versione pubblicata.</p>
   <p class="section-intro">Ogni pacchetto &egrave; firmato con la mia chiave PGP. Prima di installare, verifica la firma con il file <code style="font-family:var(--mono);color:var(--gold);font-size:.85em">.asc</code> corrispondente.</p>
 
   <div class="dl-grid">
