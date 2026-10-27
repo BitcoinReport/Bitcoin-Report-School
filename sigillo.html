@@ -173,7 +173,7 @@ footer a:hover { color: var(--gold); }
 .signing-key-link { display: block; font-family: var(--mono); font-size: 0.62rem; color: var(--text3); text-decoration: none; margin-top: 0.5rem; letter-spacing: 0.04em; transition: color 0.2s; }
 .signing-key-link:hover { color: var(--gold); }
 
-/* ── Features v0.6.0 ── */
+/* ── Features ── */
 .features-section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 2rem; border-top: 1px solid var(--border); }
 .features-eyebrow { font-family: var(--mono); font-size: 0.6rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.6rem; opacity: 0.8; }
 .features-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); margin: 0 0 1.5rem; }
@@ -213,10 +213,10 @@ footer a:hover { color: var(--gold); }
   <div class="hero-eyebrow">// strumenti &middot; privacy &middot; crittografia</div>
   <h1>Sigillo</h1>
   <p class="hero-subtitle">Crittografia OpenPGP per tutti &mdash; senza terminali, senza configurazioni.</p>
-  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti, cifratura di testo, immagini, GIF animate, video, PDF, documenti e qualsiasi altro file &mdash; il tutto senza mai aprire un terminale. Supporta pi&ugrave; identit&agrave; e l&rsquo;import di chiavi esistenti. Distribuita sotto licenza GPLv3.</p>
+  <p class="hero-desc">Sigillo &egrave; un&rsquo;applicazione desktop open source che rende la crittografia OpenPGP accessibile a chiunque. Notepad integrato, rubrica dei contatti, cifratura di testo, immagini, GIF animate, video, PDF, documenti e qualsiasi altro file &mdash; il tutto senza mai aprire un terminale. Supporta pi&ugrave; identit&agrave;, l&rsquo;import di chiavi esistenti e l&rsquo;aggiunta dei contatti da fingerprint o da file. Distribuita sotto licenza GPLv3.</p>
   <div class="badge-row">
     <span class="badge badge-green">GPLv3</span>
-    <span class="badge badge-gold">v0.6.0</span>
+    <span class="badge badge-gold">v0.7.0</span>
     <span class="badge badge-grey">Tauri / Rust</span>
   </div>
   <a class="hero-github" href="https://github.com/BitcoinReport/sigillo" target="_blank" rel="noopener">&#8594; Codice sorgente su GitHub</a>
@@ -231,9 +231,23 @@ footer a:hover { color: var(--gold); }
 
 <!-- CHIAVI PGP -->
 <section class="features-section">
-  <div class="features-eyebrow">// novit&agrave; &middot; v0.6.0</div>
+  <div class="features-eyebrow">// novit&agrave; &middot; v0.7.0</div>
   <h2 class="features-title">Cosa c&rsquo;&egrave; di nuovo</h2>
   <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">&#128101;</div>
+      <div class="feat-body">
+        <div class="feat-name">Aggiungi un contatto in tre modi</div>
+        <div class="feat-desc">In Rubrica, <strong>Aggiungi contatto</strong> offre tre modi, tutti con la stessa schermata di conferma prima di salvare. <strong>Da fingerprint:</strong> incolli i 40 caratteri, in qualunque formato, e Sigillo scarica la chiave da keys.openpgp.org (comodo se la persona l&rsquo;ha pubblicata su un keyserver). <strong>Da file:</strong> scegli un file <code>.asc</code> o lo trascini sulla Rubrica (solo desktop), anche se contiene pi&ugrave; chiavi. <strong>Incollando il testo</strong> della chiave, come prima ma con la conferma.</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">&#128269;</div>
+      <div class="feat-body">
+        <div class="feat-name">Chiavi controllate prima di fidarti</div>
+        <div class="feat-desc">La chiave scaricata deve avere esattamente il fingerprint richiesto, altrimenti viene scartata: il server non &egrave; una fonte attendibile, e i Key ID corti sono rifiutati. La conferma mostra il fingerprint a blocchi e le 15 parole, da verificare con la persona. Avviso se la chiave &egrave; scaduta o revocata; se &egrave; privata non si importa nulla. Nessun duplicato, e un avviso se un nome uguale ha un fingerprint diverso. Con Tor attivo la ricerca passa solo da Tor; senza Tor, la prima volta l&rsquo;app avvisa che contatta un server pubblico.</div>
+      </div>
+    </div>
     <div class="feat-card">
       <div class="feat-icon">&#128206;</div>
       <div class="feat-body">
@@ -277,6 +291,7 @@ footer a:hover { color: var(--gold); }
       </div>
     </div>
   </div>
+  <p class="features-stability">&#10003; v0.7.0 &mdash; Importazione dei contatti da fingerprint o da file <code>.asc</code>, con verifica del fingerprint e schermata di conferma prima di salvare. I messaggi cifrati e le rubriche create con le versioni precedenti funzionano come prima.</p>
   <p class="features-stability">&#10003; v0.6.0 &mdash; Allegati di qualsiasi tipo, nomi dei file ricevuti sempre controllati prima dell&rsquo;uso, file decifrati cancellati dopo l&rsquo;uso e aggiornate alcune librerie di rete per correggere problemi di sicurezza segnalati di recente. I messaggi cifrati con le versioni precedenti si decifrano come prima.</p>
   <p class="features-stability">&#10003; v0.5.1 &mdash; Correzione di sicurezza: un messaggio ricevuto non pu&ograve; pi&ugrave; avviare richieste di rete alla sola apertura. Rafforzati inoltre la Content Security Policy e la protezione della passphrase locale.</p>
   <p class="features-stability">&#10003; v0.5.0 &mdash; Migliorata la stabilit&agrave; su alcune configurazioni Linux durante la visualizzazione di contenuti multimediali decifrati.</p>
@@ -299,6 +314,7 @@ footer a:hover { color: var(--gold); }
       <a href="mike-sigillo-contact.asc" download class="btn-key btn-key-primary">Scarica chiave (.asc)</a>
     </div>
     <p class="key-box-note">// importa questa chiave in Sigillo o in qualsiasi client PGP per scrivermi</p>
+    <p class="key-box-note">// per aggiungermi in Rubrica: scarica il file .asc da qui, poi Sigillo &rarr; Rubrica &rarr; Aggiungi contatto &rarr; Scegli file .asc &rarr; conferma. Questa chiave si ottiene solo da questo sito. Quando la importi puoi cambiare il nome in &ldquo;Mike&rdquo; nella schermata di conferma.</p>
   </div>
 
   <!-- CHIAVE FIRMA SOFTWARE -->
@@ -320,9 +336,9 @@ footer a:hover { color: var(--gold); }
 
 <!-- DOWNLOAD -->
 <section class="page-section" id="download">
-  <div class="section-eyebrow">// download &middot; v0.6.0 &middot; verifica firma</div>
+  <div class="section-eyebrow">// download &middot; v0.7.0 &middot; verifica firma</div>
   <h2 class="section-title">Download</h2>
-  <p class="section-intro">Versione attuale: <strong>v0.6.0</strong> &mdash; <a href="https://github.com/BitcoinReport/sigillo/releases/tag/v0.6.0" target="_blank" rel="noopener" style="color:var(--gold)">note di rilascio</a>. I pulsanti qui sotto scaricano sempre l&rsquo;ultima versione pubblicata.</p>
+  <p class="section-intro">Versione attuale: <strong>v0.7.0</strong> &mdash; <a href="https://github.com/BitcoinReport/sigillo/releases/tag/v0.7.0" target="_blank" rel="noopener" style="color:var(--gold)">note di rilascio</a>. I pulsanti qui sotto scaricano sempre l&rsquo;ultima versione pubblicata.</p>
   <p class="section-intro">Ogni pacchetto &egrave; firmato con la mia chiave PGP. Prima di installare, verifica la firma con il file <code style="font-family:var(--mono);color:var(--gold);font-size:.85em">.asc</code> corrispondente.</p>
 
   <div class="dl-grid">
