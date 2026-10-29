@@ -440,6 +440,21 @@ nav {
   font-weight: 300;
 }
 
+/* Strumenti consigliati */
+.recommended-section { padding: 4rem 1.5rem; background: #0d0f12; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.recommended-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.recommended-title { font-family: var(--cond); font-weight: 900; font-size: clamp(1.6rem, 4vw, 2rem); text-transform: uppercase; letter-spacing: 0.06em; color: #e8e8e8; margin-bottom: 0.6rem; }
+.recommended-subtitle { color: #a0a0a0; font-size: 1rem; margin: 0 auto 2.5rem; max-width: 600px; }
+.recommended-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.rec-card { background: #13161b; border: 1px solid #1e2128; border-radius: 10px; padding: 1.25rem 1rem; text-align: left; transition: border-color 0.2s; }
+.rec-card:hover { border-color: #f7931a44; }
+.rec-badge { display: inline-block; font-size: 0.65rem; font-family: var(--mono); color: #f7931a; border: 1px solid #f7931a44; border-radius: 4px; padding: 0.15rem 0.4rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.rec-card h3 { font-family: var(--sans); font-size: 1.05rem; color: #e8e8e8; margin: 0 0 0.4rem; }
+.rec-card p { font-size: 0.85rem; color: #a0a0a0; margin: 0 0 0.5rem; line-height: 1.45; }
+.rec-discount { font-size: 0.72rem; font-family: var(--mono); color: #22d3a0; font-weight: 600; }
+.recommended-cta { display: inline-block; background: #f7931a; color: #07080a; font-family: var(--sans); font-weight: 700; font-size: 0.9rem; padding: 0.7rem 1.8rem; border-radius: 6px; text-decoration: none; transition: opacity 0.2s; }
+.recommended-cta:hover { opacity: 0.88; }
+
 /* DONATION SECTION */
   .donation-section {
     background: linear-gradient(135deg, #0f0a00 0%, #1a0f00 50%, #0a0a0a 100%);
@@ -1072,6 +1087,39 @@ nav {
   </div>
 </section>
 
+<!-- STRUMENTI CONSIGLIATI -->
+<section class="recommended-section" id="consigliati">
+  <div class="recommended-inner">
+    <h2 class="recommended-title">Strumenti consigliati</h2>
+    <p class="recommended-subtitle">Hardware wallet, acquisto no-KYC, cashback in bitcoin. Quello che uso ogni giorno &mdash; con sconti esclusivi per te.</p>
+    <div class="recommended-preview">
+      <div class="rec-card">
+        <span class="rec-badge">Hardware Wallet</span>
+        <h3>BitBox02</h3>
+        <p>Open source, svizzero, Bitcoin-only. Il wallet per chi vuole iniziare bene.</p>
+        <span class="rec-discount">5% di sconto</span>
+      </div>
+      <div class="rec-card">
+        <span class="rec-badge">Hardware Wallet</span>
+        <h3>Jade</h3>
+        <p>Open source, Blockstream. Sicurezza senza secure element proprietario.</p>
+        <span class="rec-discount">10% di sconto</span>
+      </div>
+      <div class="rec-card">
+        <span class="rec-badge">Acquisto no-KYC</span>
+        <h3>Bittr</h3>
+        <p>DCA automatico senza KYC, direttamente al tuo wallet. Svizzero.</p>
+      </div>
+      <div class="rec-card">
+        <span class="rec-badge">Cashback</span>
+        <h3>Bitcashback</h3>
+        <p>Accumula sats su ogni acquisto online. Zero costi aggiuntivi.</p>
+      </div>
+    </div>
+    <a href="consigliati.html" class="recommended-cta">Vedi tutti gli strumenti consigliati &rarr;</a>
+  </div>
+</section>
+
 <!-- MANIFESTO -->
 <section class="manifesto-section">
   <div class="manifesto-inner">
@@ -1250,6 +1298,7 @@ nav {
     <a href="curva_ellittica.html">Curva Ellittica</a>
     <a href="script_playground_bitcoin.html">Script Playground</a>
     <a href="https://github.com/BitcoinReport/Bitcoin-Report-School" target="_blank">GitHub</a>
+    <a href="consigliati.html">Strumenti consigliati</a>
   </div>
   <div class="footer-copy">Open Source · MIT License · Nessun tracker · Nessuna pubblicità</div>
 </footer>

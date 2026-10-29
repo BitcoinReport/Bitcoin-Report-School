@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strumenti consigliati — Bitcoin Report Italia</title>
+<meta name="description" content="Prodotti e servizi Bitcoin consigliati da Bitcoin Report Italia: hardware wallet, acquisto no-KYC, cashback in bitcoin e consulenze. Link con sconti esclusivi.">
+<meta property="og:title" content="Strumenti consigliati — Bitcoin Report Italia">
+<meta property="og:description" content="Hardware wallet, acquisto no-KYC, cashback in bitcoin e consulenze. Link con sconti esclusivi.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://bitcoinreportschool.com/consigliati.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080a;--bg2:#0e0f12;--bg3:#161820;
+  --gold:#f7931a;--green:#22d3a0;
+  --text:#e8e8e8;--text2:#a0a0a0;--text3:#606060;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --sans:'Inter',sans-serif;--mono:'DM Mono',monospace;--cond:'Barlow Condensed',sans-serif;--serif:'Playfair Display',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+.site-nav{display:flex;align-items:center;gap:1rem;padding:0.85rem 1.5rem;border-bottom:1px solid var(--border);background:rgba(7,8,10,0.92);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
+.nav-home-btn{font-family:var(--mono);font-size:0.72rem;color:var(--text2);text-decoration:none;padding:0.3rem 0.7rem;border:1px solid var(--border2);border-radius:5px;transition:border-color 0.2s,color 0.2s;white-space:nowrap;}
+.nav-home-btn:hover{border-color:var(--gold);color:var(--gold);}
+.nav-label{font-family:var(--mono);font-size:0.7rem;color:var(--text3);letter-spacing:0.08em;}
+
+/* HERO */
+.page-hero{padding:4rem 2rem 3rem;max-width:900px;margin:0 auto;}
+.page-hero-eyebrow{font-family:var(--mono);font-size:0.65rem;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1rem;}
+.page-hero h1{font-family:var(--cond);font-weight:900;font-size:clamp(2rem,5vw,3.2rem);text-transform:uppercase;letter-spacing:0.03em;line-height:1.05;margin-bottom:0.9rem;}
+.page-hero h1 span{color:var(--gold);}
+.page-hero-sub{color:var(--text2);font-size:0.95rem;max-width:600px;line-height:1.75;}
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:1.2rem;}
+.hero-stat{display:flex;flex-direction:column;gap:.2rem;}
+.hero-stat-num{font-family:var(--mono);font-size:1.4rem;color:var(--gold);font-weight:700;}
+.hero-stat-label{font-family:var(--mono);font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;}
+.hero-divider{height:1px;background:var(--border);margin:2.5rem auto;max-width:1100px;}
+
+/* PRODUCT GRID */
+.str-section{padding:0 2rem 3rem;max-width:1100px;margin:0 auto;}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
+.prod-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.6rem;display:flex;flex-direction:column;gap:.8rem;transition:border-color .2s,background .2s;}
+.prod-card:hover{border-color:rgba(247,147,26,.35);background:var(--bg3);}
+.prod-badges{display:flex;flex-wrap:wrap;gap:.4rem;}
+.prod-cat,.prod-tag{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.12em;padding:.2rem .5rem;border-radius:4px;}
+.prod-cat{color:var(--gold);border:1px solid rgba(247,147,26,.3);}
+.prod-tag{color:var(--text2);border:1px solid var(--border2);}
+.prod-name{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--text);line-height:1.3;}
+.prod-discount{align-self:flex-start;font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--green);background:rgba(34,211,160,.08);border:1px solid rgba(34,211,160,.3);border-radius:4px;padding:.2rem .6rem;}
+.prod-desc{font-size:.86rem;color:var(--text2);line-height:1.7;flex:1;}
+.prod-code{font-family:var(--mono);font-size:.7rem;color:var(--text3);}
+.prod-code code{color:var(--gold);background:var(--bg);border:1px solid var(--border2);border-radius:4px;padding:.1rem .4rem;font-size:.75rem;user-select:all;}
+.prod-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-top:.3rem;}
+.prod-btn{display:inline-block;background:var(--gold);color:#07080a;font-family:var(--sans);font-weight:700;font-size:.82rem;padding:.6rem 1.2rem;border-radius:6px;text-decoration:none;transition:opacity .2s;}
+.prod-btn:hover{opacity:.88;}
+.prod-btn-alt{background:transparent;color:var(--gold);border:1px solid rgba(247,147,26,.5);}
+.prod-btn-alt:hover{background:rgba(247,147,26,.08);opacity:1;}
+.prod-note{font-family:var(--mono);font-size:.62rem;color:var(--text3);}
+.disclosure{max-width:1100px;margin:0 auto;padding:0 2rem 3rem;font-family:var(--mono);font-size:.68rem;color:var(--text3);line-height:1.7;}
+@media(max-width:700px){.prod-grid{grid-template-columns:1fr;}.str-section,.disclosure,.page-hero{padding-left:1.2rem;padding-right:1.2rem;}}
+
+/* FOOTER */
+footer{padding:2.5rem 1.5rem;text-align:center;border-top:1px solid var(--border);font-size:0.75rem;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;margin:0 0.5rem;}
+footer a:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
+  <span class="nav-label">// strumenti consigliati</span>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-eyebrow">// selezionati &middot; testati &middot; raccomandati</div>
+  <h1>Strumenti <span>consigliati</span></h1>
+  <p class="page-hero-sub">Quello che uso ogni giorno. Prodotti e servizi selezionati, testati e raccomandati. Alcuni link includono uno sconto per te.</p>
+</div>
+
+<section class="str-section">
+<div class="prod-grid">
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Hardware Wallet</span></div>
+    <h2 class="prod-name">BitBox02</h2>
+    <div class="prod-discount">5% di sconto con il link</div>
+    <p class="prod-desc">BitBox02 &#232; l'hardware wallet svizzero che uso e consiglio per chi vuole iniziare con la self-custody in modo semplice e sicuro. Prodotto da Shift Crypto, &#232; open source sia nel software che nell'hardware, ha un design minimalista e un'app desktop (BitBoxApp) che guida anche i meno esperti. Esiste nella versione Bitcoin-only, che &#232; quella che consiglio: meno superficie di attacco, zero distrazioni. Acquistando dal link qui sotto ottieni il 5% di sconto.</p>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://bitbox.swiss/bitcoinreportitalia" target="_blank" rel="noopener noreferrer sponsored">Acquista con il 5% di sconto &#8594;</a>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Hardware Wallet</span></div>
+    <h2 class="prod-name">Jade (Blockstream)</h2>
+    <div class="prod-discount">10% di sconto con il link</div>
+    <p class="prod-desc">Jade &#232; l'hardware wallet open source di Blockstream. Supporta Bitcoin e Liquid Bitcoin, ha uno schermo a colori, &#232; compatibile con le principali app di firma (Sparrow, BlueWallet, Green). Il punto di forza &#232; il modello di sicurezza: non ha un secure element proprietario e chiuso, ma usa un meccanismo di blind oracle che distribuisce il rischio senza sacrificare la sicurezza. Ottimo per chi vuole un secondo dispositivo o un primo wallet a un prezzo accessibile. Con il link qui sotto hai il 10% di sconto su tutti gli acquisti.</p>
+    <div class="prod-code">Codice alternativo: <code>R6JUGG</code></div>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://rewards.blockstream.com/r6jugg" target="_blank" rel="noopener noreferrer sponsored">Acquista con il 10% di sconto &#8594;</a>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Hardware Wallet (fai da te)</span><span class="prod-tag">Consulenza con Mike</span></div>
+    <h2 class="prod-name">SeedSigner</h2>
+    <p class="prod-desc">SeedSigner &#232; un hardware wallet che costruisci tu stesso con componenti reperibili su Amazon per meno di 50 euro: un Raspberry Pi Zero, una fotocamera e uno schermo. Non ha memoria persistente &#8212; la seed phrase non &#232; mai salvata sul dispositivo. &#200; il massimo dell'air-gap e della sovranit&#224; tecnica. Non si compra: si assembla. Se vuoi costruire il tuo SeedSigner con una guida pratica e un supporto personalizzato, prenota una consulenza con me.</p>
+    <div class="prod-actions">
+      <a class="prod-btn" href="index.html#consulenze">Prenota una consulenza &#8594;</a>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Acquisto Bitcoin no-KYC</span><span class="prod-tag">No-KYC &#183; P2P</span></div>
+    <h2 class="prod-name">BitcoinVoucherBot</h2>
+    <p class="prod-desc">BitcoinVoucherBot &#232; un servizio P2P per acquistare Bitcoin senza KYC direttamente via Telegram o dal sito web. Funziona come un mercato peer-to-peer: ti connette con venditori privati, paghi con bonifico SEPA o altri metodi e ricevi bitcoin direttamente nel tuo wallet. Nessun account da creare, nessun documento da caricare. Disponibile anche via rete Tor per chi vuole la massima riservatezza.</p>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://t.me/BitcoinVoucherBot?start=740914800" target="_blank" rel="noopener noreferrer sponsored">Apri su Telegram &#8594;</a>
+      <a class="prod-btn prod-btn-alt" href="https://p2p.bitcoinvoucher.bot/?ref=740914800" target="_blank" rel="noopener noreferrer sponsored">Apri sul web &#8594;</a>
+      <a class="prod-btn prod-btn-alt" href="http://umembxtpokml6fkogemcfnpyt3qqvyw6u3hnvwinevo3gvoe6j7vfyad.onion/?ref=740914800" target="_blank" rel="noopener noreferrer sponsored">Apri su Tor (.onion) &#8594;</a>
+      <span class="prod-note">// richiede Tor Browser</span>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Acquisto Bitcoin no-KYC</span><span class="prod-tag">No-KYC &#183; Svizzera</span></div>
+    <h2 class="prod-name">Bittr</h2>
+    <p class="prod-desc">Bittr &#232; un servizio svizzero per accumulare Bitcoin senza KYC con bonifici ricorrenti. Imposti un importo fisso, Bittr compra bitcoin per te a cadenza regolare e li invia direttamente al tuo wallet. Nessun conto da aprire, nessun deposito sulla piattaforma: i sat arrivano direttamente a te. Perfetto per il DCA (Dollar Cost Averaging) automatico e senza burocrazia.</p>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://getbittr.com?satoshi=BitReport" target="_blank" rel="noopener noreferrer sponsored">Inizia ad accumulare &#8594;</a>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Acquisto Bitcoin</span><span class="prod-tag">Non-custodial</span></div>
+    <h2 class="prod-name">Bull Bitcoin</h2>
+    <p class="prod-desc">Bull Bitcoin &#232; un exchange canadese non-custodial fondato da Francis Pouliot, uno dei bitcoiner pi&#249; rispettati della scena. Non custodisce i tuoi fondi: compri bitcoin e vengono inviati direttamente al tuo wallet. Accetta bonifici bancari, &#232; disponibile anche in Europa. Richiede KYC per gli importi pi&#249; alti, ma &#232; la scelta migliore quando il KYC &#232; inevitabile: filosofia bitcoin-only, nessuna altcoin, nessuna tentazione.</p>
+    <div class="prod-code">Codice alternativo: <code>bitreport</code></div>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://app.bullbitcoin.com/registration/bitreport" target="_blank" rel="noopener noreferrer sponsored">Crea il tuo account &#8594;</a>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Acquisto Bitcoin no-KYC</span><span class="prod-tag">No-KYC &#183; Anonimo &#183; Paga in sats</span></div>
+    <h2 class="prod-name">BitPost</h2>
+    <p class="prod-desc">BitPost &#232; un marketplace P2P completamente anonimo dove puoi acquistare Bitcoin pagando in sats. Non serve account, non serve documento, non serve email. &#200; la scelta per chi vuole accumulare in modo totalmente privato, senza lasciare tracce. Si paga con Lightning Network.</p>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://www.bitpost.shop/register?ref=EdbztsT964" target="_blank" rel="noopener noreferrer sponsored">Vai su BitPost &#8594;</a>
+    </div>
+  </article>
+  <article class="prod-card">
+    <div class="prod-badges"><span class="prod-cat">Cashback in Bitcoin</span><span class="prod-tag">Accumula sats sugli acquisti</span></div>
+    <h2 class="prod-name">Bitcashback</h2>
+    <p class="prod-desc">Bitcashback ti permette di ricevere cashback in bitcoin su migliaia di negozi online. Fai i tuoi acquisti normali &#8212; abbigliamento, elettronica, viaggi, abbonamenti &#8212; e una percentuale torna a te in sats, direttamente nel tuo wallet. &#200; uno dei modi pi&#249; semplici per accumulare bitcoin senza spendere nulla in pi&#249;.</p>
+    <div class="prod-actions">
+      <a class="prod-btn" href="https://bitcashback.net/l/bitreport" target="_blank" rel="noopener noreferrer sponsored">Inizia a guadagnare sats &#8594;</a>
+    </div>
+  </article>
+</div>
+</section>
+
+<p class="disclosure">// Trasparenza: i link di questa pagina sono link referral. Se acquisti o ti registri passando da qui, Bitcoin Report Italia pu&ograve; ricevere una commissione, senza costi aggiuntivi per te (in alcuni casi con uno sconto). Consiglio solo ci&ograve; che userei io.</p>
+
+<footer>
+  <a href="index.html">Home</a>
+  <a href="letture.html">Letture</a>
+  <a href="strumenti.html">Strumenti</a>
+  <a href="guide.html">Guide</a>
+  <a href="consigliati.html">Strumenti consigliati</a>
+  &middot; &copy; 2026 Bitcoin Report School &middot; Open Source MIT
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Strumenti consigliati — Bitcoin Report Italia",
+  "description": "Prodotti e servizi Bitcoin selezionati e raccomandati da Mike di Bitcoin Report Italia",
+  "url": "https://bitcoinreportschool.com/consigliati.html"
+}
+</script>
+</body>
+</html>
