@@ -324,6 +324,12 @@ footer a:hover { color: var(--gold); }
   .workshop-banner-desc { display: none; }
   .workshop-banner-cta { width: 100%; text-align: center; }
 }
+/* Floating donation pill */
+.donation-pill { position: fixed; bottom: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.5rem; background: #f7931a; color: #07080a; text-decoration: none; font-family: var(--sans, 'Barlow', sans-serif); font-size: 0.8rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 2px 12px rgba(247,147,26,0.35); opacity: 0.92; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; z-index: 900; }
+.donation-pill:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 4px 18px rgba(247,147,26,0.5); }
+.donation-pill__icon { font-size: 1rem; line-height: 1; }
+.donation-pill.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
+@media (max-width: 480px) { .donation-pill__text { display: none; } .donation-pill { padding: 0.6rem; border-radius: 50%; } }
 </style>
 </head>
 <body>
@@ -835,7 +841,7 @@ footer a:hover { color: var(--gold); }
 </div>
 
 <!-- Donation -->
-<section class="donation-section">
+<section class="donation-section" id="donazioni">
   <div class="donation-inner">
     <div class="donation-text">
       <h2>&#9889; Supporta il progetto</h2>
@@ -871,6 +877,23 @@ window.addEventListener('scroll', function() {
   if (bar) bar.style.width = (h > 0 ? (s / h * 100) : 0) + '%';
   if (bt)  bt.classList.toggle('visible', s > 400);
 });
+</script>
+<a href="#donazioni" class="donation-pill" id="donation-pill" aria-label="Supporta il progetto con una donazione">
+  <span class="donation-pill__icon">&#9889;</span>
+  <span class="donation-pill__text">Supporta il progetto</span>
+</a>
+<script>
+(function() {
+  var pill = document.getElementById('donation-pill');
+  var target = document.getElementById('donazioni');
+  if (!pill || !target) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { pill.classList.add('hidden'); } else { pill.classList.remove('hidden'); }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(target);
+})();
 </script>
 </body>
 </html>
