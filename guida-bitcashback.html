@@ -299,14 +299,37 @@ footer a:hover { color: var(--gold); }
 <header class="hero">
   <div class="hero-eyebrow">// guide &middot; cashback &middot; bitcoin</div>
   <h1>bitCashback: come accumulare satoshi<br>sugli acquisti che gi&agrave; fai</h1>
-  <p class="hero-intro">Stai gi&agrave; spendendo online: abbigliamento, elettronica, viaggi, abbonamenti. Una parte di quella spesa pu&ograve; tornare indietro in bitcoin, invece di restare dov&rsquo;&egrave;. bitCashback serve a questo, e a nient&rsquo;altro.</p>
-  <p class="hero-intro">Non &egrave; un investimento, non &egrave; un exchange e non &egrave; un modo per comprare Bitcoin: &egrave; un modo per accumularne un po&rsquo; senza cambiare le tue abitudini di acquisto. Per registrarti non serve nessun KYC, e nel contesto di questo sito &mdash; privacy, self custody, meno esposizione possibile &mdash; non &egrave; un dettaglio da poco: ogni satoshi che accumuli senza passare da un exchange KYC &egrave; un satoshi che non hai dovuto giustificare a nessuno.</p>
+  <p class="hero-intro">Hai mai pensato che stai gi&agrave; spendendo online &mdash; abbigliamento, elettronica, viaggi, abbonamenti &mdash; e che una parte di quella spesa potrebbe tornare indietro in Bitcoin invece di svanire? bitCashback serve a questo. Non &egrave; un investimento, non &egrave; un exchange e non &egrave; complicato: continui a comprare come hai sempre fatto, e una parte della spesa arriva a te in satoshi.</p>
+  <p class="hero-intro">Ho scritto questa guida per chi parte da zero: nessun gergo dato per scontato, nessun passaggio saltato. La registrazione non richiede documenti, e in questo sito &egrave; un dettaglio che ha un peso specifico: ogni satoshi che accumuli senza passare da un exchange KYC &egrave; un satoshi che non hai dovuto giustificare a nessuno.</p>
   <div class="badge-row">
     <span class="badge badge-green">Registrazione senza KYC</span>
     <span class="badge badge-gold">Cashback in BTC</span>
     <span class="badge badge-grey">Aggiornata novembre 2026</span>
   </div>
+  <div class="hero-cta">
+    <a class="btn-pdf" href="manuale-bitcashback.pdf" download>&#11015; Scarica la guida completa (PDF)</a>
+  </div>
 </header>
+
+<!-- GLOSSARIO -->
+<section class="page-section">
+  <div class="sec-eyebrow">// glossario</div>
+  <h2 class="sec-title">Prima di iniziare: un glossario in 60 secondi</h2>
+  <p class="sec-text">Se non hai mai usato Bitcoin, queste parole torneranno spesso. Tienile a mente.</p>
+  <table class="gloss-table">
+    <thead>
+      <tr><th>Termine</th><th>Cosa significa</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Cashback</td><td>Una percentuale dell&rsquo;importo speso che ti viene restituita. Qui non in euro ma in Bitcoin.</td></tr>
+      <tr><td>Sats (satoshi)</td><td>La pi&ugrave; piccola unit&agrave; di Bitcoin (1 BTC = 100.000.000 sats). Il cashback arriva in sats.</td></tr>
+      <tr><td>Commissione di referral</td><td>Quando acquisti passando da un link o servizio intermedio, il negozio paga una piccola commissione a chi ti ha indirizzato. bitCashback condivide quella commissione con te.</td></tr>
+      <tr><td>KYC</td><td><em>Know Your Customer</em> &mdash; la procedura con cui banche ed exchange ti chiedono documento d&rsquo;identit&agrave;, selfie, dati personali per identificarti. bitCashback non lo richiede per registrarsi.</td></tr>
+      <tr><td>Wallet non-custodial</td><td>Un portafoglio Bitcoin di cui hai le chiavi. Serve quando vuoi prelevare il cashback accumulato.</td></tr>
+      <tr><td>In attesa</td><td>Stato del cashback prima che il negozio confermi l&rsquo;ordine. Solo dopo la conferma diventa prelevabile.</td></tr>
+    </tbody>
+  </table>
+</section>
 
 <!-- SEZIONE 1 -->
 <section class="page-section">
@@ -322,11 +345,11 @@ footer a:hover { color: var(--gold); }
   <div class="sec-eyebrow">// sezione 2</div>
   <h2 class="sec-title">Come si usa: passo per passo</h2>
   <ol class="steps-list">
-    <li>Ti registri su <strong>bitcashback.net</strong> con email e password. Niente KYC, nessun documento</li>
-    <li>Prima di fare un acquisto apri bitcashback.net e <strong>cerchi il negozio</strong></li>
-    <li><strong>Controlli la percentuale e le condizioni</strong> di quel negozio specifico: cambiano da negozio a negozio</li>
-    <li>Clicchi su <strong>&ldquo;Apri negozio&rdquo;</strong> e completi l&rsquo;acquisto sul sito ufficiale, comprando come al solito</li>
-    <li>Il cashback compare <strong>&ldquo;in attesa&rdquo;</strong> finch&eacute; il negozio non conferma l&rsquo;ordine</li>
+    <li><span>Ti registri su <strong>bitcashback.net</strong> con email e password. Niente KYC, nessun documento</span></li>
+    <li><span>Prima di fare un acquisto apri bitcashback.net e <strong>cerchi il negozio</strong></span></li>
+    <li><span><strong>Controlli la percentuale e le condizioni</strong> di quel negozio specifico: cambiano da negozio a negozio</span></li>
+    <li><span>Clicchi su <strong>&ldquo;Apri negozio&rdquo;</strong> e completi l&rsquo;acquisto sul sito ufficiale, comprando come al solito</span></li>
+    <li><span>Il cashback compare <strong>&ldquo;in attesa&rdquo;</strong> finch&eacute; il negozio non conferma l&rsquo;ordine</span></li>
   </ol>
   <div class="box-privacy">
     <div class="box-privacy-title">// importante</div>
@@ -369,6 +392,21 @@ footer a:hover { color: var(--gold); }
   <h2 class="sec-title">Dove mettere i satoshi</h2>
   <p class="sec-text">Quando arrivi al prelievo ti serve un wallet Bitcoin. Se non sai ancora come gestire la self custody, parti dalla <a href="autocustodia-bitcoin.html">guida all&rsquo;autocustodia</a>. Se preferisci farti seguire, trovi le <a href="index.html#consulenze">consulenze</a>.</p>
   <p class="sec-text">&Egrave; il momento in cui un piccolo cashback diventa il primo passo concreto verso la custodia diretta dei tuoi bitcoin.</p>
+</section>
+
+<!-- RIEPILOGO -->
+<section class="page-section">
+  <div class="sec-eyebrow">// riepilogo</div>
+  <h2 class="sec-title">I tuoi primi passi su bitCashback</h2>
+  <ol class="steps-list">
+    <li><span>Registrati su <a href="https://bitcashback.net/l/bitreport" target="_blank" rel="noopener noreferrer sponsored" style="color:var(--gold)">bitcashback.net</a> (il link include gi&agrave; il referral)</span></li>
+    <li><span>Cerca il negozio su bitcashback.net <strong>prima di ogni acquisto</strong></span></li>
+    <li><span>Controlla la <strong>percentuale e le condizioni</strong> del negozio specifico</span></li>
+    <li><span>Clicca <strong>&ldquo;Apri negozio&rdquo;</strong> e compra come al solito &mdash; senza uscire dalla sessione</span></li>
+    <li><span><strong>Disattiva gli ad blocker</strong> durante l&rsquo;acquisto</span></li>
+    <li><span>Aspetta che il cashback passi da <strong>&ldquo;in attesa&rdquo;</strong> ad approvato</span></li>
+    <li><span>Quando raggiungi <strong>10 &euro; di cashback approvato</strong>, configura il wallet e richiedi il prelievo</span></li>
+  </ol>
 </section>
 
 <!-- CTA -->
