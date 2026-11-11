@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>bitCashback &mdash; Accumula satoshi sugli acquisti che gi&agrave; fai &mdash; Bitcoin Report School</title>
+<meta name="description" content="Guida pratica a bitCashback: come ricevere una parte della spesa online in bitcoin, senza KYC per registrarti. Registrazione, negozi, tempi di approvazione, prelievo.">
+<meta name="author" content="Mike &mdash; Bitcoin Report Italia">
+<link rel="canonical" href="https://bitcoinreportschool.com/guida-bitcashback.html">
+<meta property="og:title" content="bitCashback: come accumulare satoshi sugli acquisti che gi&agrave; fai">
+<meta property="og:description" content="Guida pratica: una parte di quello che spendi online torna in bitcoin. Nessun KYC per registrarsi.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bitcoinreportschool.com/guida-bitcashback.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07080a;
+  --bg2: #0d0e14;
+  --bg3: #13141c;
+  --gold: #f7931a;
+  --gold-dim: rgba(247,147,26,0.10);
+  --gold-dim2: rgba(247,147,26,0.05);
+  --green: #22d3a0;
+  --red: #f87171;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e4dc;
+  --text2: #9a9790;
+  --text3: #4a4844;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Outfit', sans-serif;
+  --serif: 'Playfair Display', serif;
+  --cond: 'Barlow Condensed', 'Outfit', sans-serif;
+}
+[data-theme="light"] {
+  --bg: #f8f6f1; --bg2: #eeeae2; --bg3: #e4e0d8;
+  --text: #1a1814; --text2: #5a5650; --text3: #a0a090;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --gold-dim: rgba(247,147,26,0.12); --gold-dim2: rgba(247,147,26,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); transition: background .3s, color .3s; }
+#reading-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--gold); z-index: 9999; transition: width .1s; pointer-events: none; }
+.nav-home-btn { font-family: var(--mono); font-size: 0.72rem; color: var(--text2); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 5px; letter-spacing: 0.05em; transition: color 0.2s, border-color 0.2s; white-space: nowrap; flex-shrink: 0; }
+.nav-home-btn:hover { color: var(--gold); border-color: var(--gold); }
+.theme-btn { position: fixed; top: 1rem; right: 1rem; z-index: 900; background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: .4rem .7rem; font-family: var(--mono); font-size: .72rem; color: var(--text2); cursor: pointer; transition: all .2s; }
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+.site-nav { border-bottom: 1px solid var(--border); padding: .85rem 2rem; display: flex; align-items: center; justify-content: space-between; background: var(--bg); position: sticky; top: 0; z-index: 800; gap: 1rem; }
+.nav-logo { font-family: var(--mono); font-size: .82rem; color: var(--gold); text-decoration: none; letter-spacing: .08em; }
+.nav-cat { font-family: var(--mono); font-size: .6rem; color: var(--text3); }
+/* HERO */
+.hero { padding: 4rem 2rem 3rem; max-width: 860px; margin: 0 auto; }
+.hero-eyebrow { font-family: var(--mono); font-size: .62rem; color: var(--green); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1.2rem; opacity: .85; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem,5vw,3.4rem); font-weight: 700; color: var(--text); line-height: 1.12; margin-bottom: .7rem; }
+.hero-intro { font-size: .92rem; color: var(--text2); line-height: 1.85; max-width: 680px; margin-bottom: 1.4rem; }
+.hero-intro + .hero-intro { margin-top: -.6rem; }
+.badge-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.badge { font-family: var(--mono); font-size: .62rem; padding: .25rem .7rem; border-radius: 20px; letter-spacing: .06em; }
+.badge-green { background: rgba(34,211,160,.12); color: var(--green); border: 1px solid rgba(34,211,160,.3); }
+.badge-gold { background: rgba(247,147,26,.12); color: var(--gold); border: 1px solid rgba(247,147,26,.3); }
+.badge-grey { background: rgba(255,255,255,.06); color: var(--text3); border: 1px solid var(--border2); }
+.btn-pdf { display: inline-flex; align-items: center; gap: .6rem; background: var(--gold); color: #07080a; font-family: var(--mono); font-size: .82rem; font-weight: 600; letter-spacing: .05em; padding: .9rem 2rem; border-radius: 8px; text-decoration: none; transition: opacity .2s, transform .15s; }
+.btn-pdf:hover { opacity: .88; transform: translateY(-2px); }
+.hero-cta { margin-bottom: 2rem; }
+/* SECTIONS */
+.page-section { max-width: 860px; margin: 0 auto; padding: 2.8rem 2rem; border-top: 1px solid var(--border); }
+.sec-eyebrow { font-family: var(--mono); font-size: .6rem; color: var(--gold); text-transform: uppercase; letter-spacing: .2em; margin-bottom: .5rem; opacity: .85; }
+.sec-title { font-family: var(--cond); font-weight: 900; font-size: clamp(1.2rem,2.5vw,1.7rem); text-transform: uppercase; letter-spacing: .03em; color: var(--text); margin-bottom: 1.2rem; }
+.sec-text { font-size: .88rem; color: var(--text2); line-height: 1.85; margin-bottom: 1rem; }
+.sec-text strong { color: var(--text); font-weight: 600; }
+.sec-list { padding-left: 1.4rem; margin-bottom: 1rem; }
+.sec-list li { font-size: .88rem; color: var(--text2); line-height: 1.85; margin-bottom: .35rem; }
+.sec-list li strong { color: var(--text); }
+/* GLOSSARIO TABLE */
+.gloss-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-bottom: 1rem; }
+.gloss-table th { font-family: var(--mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); padding: .7rem 1rem; text-align: left; border-bottom: 1px solid rgba(247,147,26,.25); }
+.gloss-table td { padding: .65rem 1rem; vertical-align: top; border-bottom: 1px solid var(--border); color: var(--text2); line-height: 1.65; }
+.gloss-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.gloss-table td:first-child { font-family: var(--mono); font-size: .75rem; color: var(--text); white-space: nowrap; }
+.gloss-table em { font-style: italic; color: var(--text3); }
+/* WARNING BOX */
+.box-warning { background: rgba(239,68,68,.06); border-left: 3px solid var(--red); border-radius: 0 8px 8px 0; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+.box-warning-title { font-family: var(--mono); font-size: .72rem; color: var(--red); font-weight: 600; letter-spacing: .06em; margin-bottom: .6rem; }
+.box-warning p, .box-warning li { font-size: .84rem; color: var(--text2); line-height: 1.8; }
+.box-warning ul { padding-left: 1.3rem; margin-top: .5rem; }
+.box-warning strong { color: var(--text); }
+/* REFERRAL BOX */
+.box-referral { background: rgba(247,147,26,.07); border: 1px solid rgba(247,147,26,.3); border-radius: 10px; padding: 1.2rem 1.6rem; margin: 1.2rem 0; display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.referral-label { font-family: var(--mono); font-size: .62rem; color: var(--gold); text-transform: uppercase; letter-spacing: .12em; margin-bottom: .4rem; }
+.referral-code { font-family: var(--mono); font-size: 1.5rem; font-weight: 600; color: var(--gold); letter-spacing: .15em; }
+.referral-desc { font-size: .8rem; color: var(--text2); line-height: 1.6; }
+/* PRIVACY BOX */
+.box-privacy { background: rgba(34,211,160,.06); border-left: 3px solid var(--green); border-radius: 0 8px 8px 0; padding: 1rem 1.4rem; margin: 1rem 0; }
+.box-privacy-title { font-family: var(--mono); font-size: .62rem; color: var(--green); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+.box-privacy p { font-size: .84rem; color: var(--text2); line-height: 1.8; }
+/* NOTE BOX */
+.box-note { background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: .9rem 1.2rem; margin: .8rem 0; font-size: .82rem; color: var(--text3); line-height: 1.7; }
+.box-note strong { color: var(--text2); }
+/* COSTS TABLE */
+.costs-table { width: 100%; border-collapse: collapse; font-size: .84rem; margin: 1rem 0; }
+.costs-table td { padding: .7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text2); line-height: 1.6; vertical-align: top; }
+.costs-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.costs-table td:first-child { font-family: var(--mono); font-size: .76rem; color: var(--text); white-space: nowrap; padding-right: 1.5rem; }
+/* STEPS */
+.steps-list { counter-reset: step; padding-left: 0; list-style: none; margin-bottom: 1rem; }
+.steps-list li { counter-increment: step; display: flex; gap: 1rem; align-items: flex-start; margin-bottom: .8rem; font-size: .88rem; color: var(--text2); line-height: 1.8; }
+.steps-list li::before { content: counter(step); display: flex; align-items: center; justify-content: center; min-width: 1.5rem; height: 1.5rem; background: rgba(247,147,26,.12); border: 1px solid rgba(247,147,26,.3); border-radius: 50%; font-family: var(--mono); font-size: .65rem; color: var(--gold); flex-shrink: 0; margin-top: .15rem; }
+.steps-list li strong { color: var(--text); }
+/* CONTACTS */
+.contacts-list { list-style: none; padding: 0; }
+.contacts-list li { font-size: .88rem; color: var(--text2); padding: .5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: .8rem; align-items: baseline; }
+.contacts-list li:last-child { border-bottom: none; }
+.contacts-list a { color: var(--gold); text-decoration: none; font-family: var(--mono); font-size: .8rem; }
+.contacts-list a:hover { text-decoration: underline; }
+.contacts-label { font-family: var(--mono); font-size: .6rem; color: var(--text3); min-width: 90px; }
+/* FINE PRINT */
+.fine-print { font-size: .72rem; color: var(--text3); line-height: 1.7; margin-top: 1.5rem; font-style: italic; }
+/* DONATION */
+.donation-section { background: linear-gradient(135deg, #0f0a00, #1a0f00 50%, #0a0a0a); border-top: 1px solid #3a2500; padding: 5rem 2rem; }
+.donation-inner { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media(max-width: 680px) { .donation-inner { grid-template-columns: 1fr; gap: 2.5rem; } .donation-qr-wrap { order: -1; } }
+.donation-text h2 { font-family: var(--sans); font-weight: 700; font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem; }
+.donation-text p { color: #8a8780; font-size: .88rem; line-height: 1.75; margin-bottom: 1rem; }
+.donation-manifesto { background: rgba(247,147,26,.06); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: .9rem 1.1rem; font-size: .82rem; font-style: italic; color: #8a8780; line-height: 1.65; }
+.donation-manifesto strong { color: var(--gold); font-style: normal; }
+.donation-qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+.qr-frame { background: #fff; border-radius: 14px; padding: 1rem; display: inline-block; position: relative; box-shadow: 0 0 0 1px rgba(247,147,26,.3), 0 0 40px rgba(247,147,26,.1), 0 20px 60px rgba(0,0,0,.6); }
+.qr-frame img { display: block; width: 160px; height: 160px; image-rendering: pixelated; }
+.qr-badge { position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; font-family: var(--mono); font-weight: 700; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 20px; white-space: nowrap; }
+.btc-address { font-family: var(--mono); font-size: .58rem; color: #8a8780; word-break: break-all; max-width: 220px; text-align: center; line-height: 1.7; }
+/* FOOTER / BACK TOP */
+footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text3); line-height: 1.8; }
+footer a { color: var(--text3); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+.back-top { position: fixed; bottom: 2rem; right: 1.2rem; background: var(--bg3); border: 1px solid var(--border2); color: var(--text2); text-decoration: none; padding: .5rem .7rem; border-radius: 6px; font-size: 1.1rem; opacity: 0; transition: opacity .25s; z-index: 700; }
+.back-top.visible { opacity: 1; }
+.qr-hint {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 0.5rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+/* ── Workshop Banner ── */
+.workshop-banner {
+  background: linear-gradient(90deg, rgba(247,147,26,0.08) 0%, rgba(34,211,160,0.06) 100%);
+  border-bottom: 1px solid rgba(247,147,26,0.25);
+  padding: 0.75rem 2rem;
+}
+.workshop-banner-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.workshop-banner-left {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.workshop-banner-date {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+.workshop-banner-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.workshop-banner-desc {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text2);
+  letter-spacing: 0.01em;
+}
+.workshop-banner-cta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid rgba(247,147,26,0.4);
+  border-radius: 6px;
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.workshop-banner-cta:hover {
+  background: rgba(247,147,26,0.12);
+  border-color: rgba(247,147,26,0.7);
+}
+@media (max-width: 600px) {
+  .workshop-banner { padding: 0.75rem 1rem; }
+  .workshop-banner-desc { display: none; }
+  .workshop-banner-cta { width: 100%; text-align: center; }
+}
+
+/* ── Update Cards ── */
+.update-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.4rem 0 0.8rem;
+}
+.update-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(247,147,26,0.15);
+  border-radius: 12px;
+  padding: 1.3rem 1.4rem;
+}
+.update-card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.update-card-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
+}
+.update-card-title {
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+.update-card-text {
+  font-size: 0.83rem;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 0.7rem;
+}
+.update-card-note {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--green);
+  line-height: 1.55;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(34,211,160,0.15);
+}
+
+/* ── Estensione browser / fee regolabili ── */
+.sec-text code, .steps-list code, .box-note code { font-family: var(--mono); font-size: .8em; color: var(--gold); background: rgba(255,255,255,.06); border: 1px solid var(--border2); border-radius: 4px; padding: .08rem .4rem; overflow-wrap: anywhere; }
+.box-todo { background: rgba(247,147,26,.07); border: 1px dashed rgba(247,147,26,.5); border-radius: 8px; padding: .8rem 1.1rem; margin: .8rem 0; font-size: .84rem; color: var(--text2); line-height: 1.7; }
+.ext-sub { font-family: var(--mono); font-size: .7rem; color: var(--green); text-transform: uppercase; letter-spacing: .12em; margin: 1.6rem 0 .7rem; }
+/* Floating donation pill */
+.donation-pill { position: fixed; bottom: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.5rem; background: #f7931a; color: #07080a; text-decoration: none; font-family: var(--sans, 'Barlow', sans-serif); font-size: 0.8rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 2px 12px rgba(247,147,26,0.35); opacity: 0.92; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; z-index: 900; }
+.donation-pill:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 4px 18px rgba(247,147,26,0.5); }
+.donation-pill__icon { font-size: 1rem; line-height: 1; }
+.donation-pill.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
+@media (max-width: 480px) { .donation-pill__text { display: none; } .donation-pill { padding: 0.6rem; border-radius: 50%; } }
+</style>
+</head>
+<body>
+<div id="reading-bar"></div>
+<button class="theme-btn" onclick="toggleTheme()" aria-label="Cambia tema">&#9681;</button>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-home-btn">&#8592; Home</a>
+  <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
+  <span class="nav-cat">// guide &middot; cashback &middot; bitcoin</span>
+</nav>
+
+<!-- WORKSHOP BANNER — lista d'attesa prossimo ciclo -->
+<div class="workshop-banner">
+  <div class="workshop-banner-inner">
+    <div class="workshop-banner-left">
+      <span class="workshop-banner-date">// prossimo ciclo</span>
+      <span class="workshop-banner-title">Vuoi imparare Bitcoin da zero?</span>
+      <span class="workshop-banner-desc">Ti avvisiamo all&rsquo;apertura del prossimo ciclo.</span>
+    </div>
+    <a href="workshop.html" class="workshop-banner-cta">Lascia il tuo contatto &rarr;</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">// guide &middot; cashback &middot; bitcoin</div>
+  <h1>bitCashback: come accumulare satoshi<br>sugli acquisti che gi&agrave; fai</h1>
+  <p class="hero-intro">Stai gi&agrave; spendendo online: abbigliamento, elettronica, viaggi, abbonamenti. Una parte di quella spesa pu&ograve; tornare indietro in bitcoin, invece di restare dov&rsquo;&egrave;. bitCashback serve a questo, e a nient&rsquo;altro.</p>
+  <p class="hero-intro">Non &egrave; un investimento, non &egrave; un exchange e non &egrave; un modo per comprare Bitcoin: &egrave; un modo per accumularne un po&rsquo; senza cambiare le tue abitudini di acquisto. Per registrarti non serve nessun KYC, e nel contesto di questo sito &mdash; privacy, self custody, meno esposizione possibile &mdash; non &egrave; un dettaglio da poco: ogni satoshi che accumuli senza passare da un exchange KYC &egrave; un satoshi che non hai dovuto giustificare a nessuno.</p>
+  <div class="badge-row">
+    <span class="badge badge-green">Registrazione senza KYC</span>
+    <span class="badge badge-gold">Cashback in BTC</span>
+    <span class="badge badge-grey">Aggiornata novembre 2026</span>
+  </div>
+</header>
+
+<!-- SEZIONE 1 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 1</div>
+  <h2 class="sec-title">Cos&rsquo;&egrave; e come funziona</h2>
+  <p class="sec-text">Quando acquisti su un negozio online passando da bitCashback, il negozio riconosce una commissione al servizio per quell&rsquo;ordine. bitCashback ne passa una quota a te, in Bitcoin.</p>
+  <p class="sec-text">Nessuna magia e nessun trucco: &egrave; un accordo commerciale che esisteva gi&agrave;. La commissione di referral c&rsquo;&egrave; comunque; la differenza &egrave; che invece di lasciarla sul tavolo una parte arriva a te.</p>
+  <div class="box-note"><strong>Cosa non &egrave;:</strong> non &egrave; un exchange e non sostituisce la self custody. &Egrave; un modo per entrare in Bitcoin spendendo quello che spenderesti comunque.</div>
+</section>
+
+<!-- SEZIONE 2 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 2</div>
+  <h2 class="sec-title">Come si usa: passo per passo</h2>
+  <ol class="steps-list">
+    <li>Ti registri su <strong>bitcashback.net</strong> con email e password. Niente KYC, nessun documento</li>
+    <li>Prima di fare un acquisto apri bitcashback.net e <strong>cerchi il negozio</strong></li>
+    <li><strong>Controlli la percentuale e le condizioni</strong> di quel negozio specifico: cambiano da negozio a negozio</li>
+    <li>Clicchi su <strong>&ldquo;Apri negozio&rdquo;</strong> e completi l&rsquo;acquisto sul sito ufficiale, comprando come al solito</li>
+    <li>Il cashback compare <strong>&ldquo;in attesa&rdquo;</strong> finch&eacute; il negozio non conferma l&rsquo;ordine</li>
+  </ol>
+  <div class="box-privacy">
+    <div class="box-privacy-title">// importante</div>
+    <p>Parti sempre da bitcashback.net, ogni volta. Se apri il negozio da un&rsquo;altra strada e poi acquisti, l&rsquo;ordine non viene attribuito al servizio.</p>
+  </div>
+</section>
+
+<!-- SEZIONE 3 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 3</div>
+  <h2 class="sec-title">Quanto ricevi e quando</h2>
+  <p class="sec-text">Un esempio concreto: compri per <strong>100 &euro;</strong> in un negozio che riconosce il <strong>5%</strong>. Il cashback &egrave; di <strong>5 &euro;, pagati in Bitcoin</strong>.</p>
+  <ul class="sec-list">
+    <li>Il cashback appare prima <strong>&ldquo;in attesa&rdquo;</strong> e diventa approvato solo quando il negozio conferma l&rsquo;ordine</li>
+    <li>Per richiedere il prelievo servono <strong>almeno 10 &euro; di cashback approvato</strong>: con piccoli acquisti ci vuole un po&rsquo; per arrivarci</li>
+    <li>Il prelievo va a un <strong>wallet Bitcoin sulla rete BTC</strong></li>
+    <li>Per iniziare <strong>non ti serve gi&agrave; avere un wallet</strong>: ti serve quando arrivi al prelievo</li>
+  </ul>
+</section>
+
+<!-- SEZIONE 4 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 4</div>
+  <h2 class="sec-title">Cosa fare (e cosa non fare) per non perdere il cashback</h2>
+  <ul class="sec-list">
+    <li><strong>Niente ad blocker</strong> durante la sessione di acquisto: possono impedire il tracciamento dell&rsquo;ordine</li>
+    <li><strong>Niente coupon non ammessi</strong>: leggi le condizioni del negozio prima di usarne uno</li>
+    <li>Il cashback <strong>non &egrave; garantito su ogni ordine</strong>: dipende dall&rsquo;approvazione del negozio</li>
+    <li><strong>I tempi li decide il negozio</strong>, non bitCashback</li>
+  </ul>
+  <div class="box-warning">
+    <div class="box-warning-title">&#9888; Prima di acquistare</div>
+    <p>Controlla sempre le condizioni del negozio specifico, poi decidi. Se qualcosa non ti convince, compra direttamente: non perdi nulla.</p>
+  </div>
+</section>
+
+<!-- SEZIONE 5 -->
+<section class="page-section">
+  <div class="sec-eyebrow">// sezione 5</div>
+  <h2 class="sec-title">Dove mettere i satoshi</h2>
+  <p class="sec-text">Quando arrivi al prelievo ti serve un wallet Bitcoin. Se non sai ancora come gestire la self custody, parti dalla <a href="autocustodia-bitcoin.html">guida all&rsquo;autocustodia</a>. Se preferisci farti seguire, trovi le <a href="index.html#consulenze">consulenze</a>.</p>
+  <p class="sec-text">&Egrave; il momento in cui un piccolo cashback diventa il primo passo concreto verso la custodia diretta dei tuoi bitcoin.</p>
+</section>
+
+<!-- CTA -->
+<section class="page-section">
+  <div class="sec-eyebrow">// se vuoi iniziare</div>
+  <h2 class="sec-title">Parti da qui</h2>
+  <p class="sec-text">Se vuoi iniziare, parti da qui.</p>
+  <div class="box-referral">
+    <div>
+      <div class="referral-label">// link di registrazione con referral</div>
+      <a href="https://bitcashback.net/l/bitreport" target="_blank" rel="noopener noreferrer sponsored" class="referral-code" style="text-decoration:none;display:inline-block;">Registrati su bitCashback &rarr;</a>
+    </div>
+    <div class="referral-desc"><em>(link referral Bitcoin Report Italia &mdash; il funzionamento del servizio non cambia per te)</em></div>
+  </div>
+</section>
+
+<section class="donation-section" id="donazioni">
+  <div class="donation-inner">
+    <div class="donation-text">
+      <h2>&#9889; Supporta il progetto</h2>
+      <p>Questo sito &egrave; gratuito, senza tracker, senza cookie di profilazione. Se questi contenuti ti hanno aiutato a capire qualcosa di importante, considera una donazione via Lightning Network.</p>
+      <div class="donation-manifesto">
+        &ldquo;La conoscenza &egrave; il bene pi&ugrave; prezioso che possiamo regalare.<br>
+        <strong>Satoshi lo ha capito e ha condiviso il codice.</strong> Fai lo stesso.&rdquo;
+      </div>
+    </div>
+    <div class="donation-qr-wrap">
+      <div class="qr-frame">
+        <img src="data:image/png;base64,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" alt="Donazione Lightning Network">
+        <div class="qr-badge">DONA SAT</div>
+      </div>
+      <p class="qr-hint">Scansiona con un wallet Lightning Network</p>
+      <p class="donation-note" style="font-size:0.75rem; color:#a0a0a0; margin-top:0.25rem; text-align:center;">Solo Lightning Network &mdash; on-chain temporaneamente non disponibile</p>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <p>&copy; 2026 Bitcoin Report School &mdash;
+  <a href="index.html">Home</a> &middot; <a href="consigliati.html">Strumenti consigliati</a> &middot;
+  <a href="guide.html">Guide</a> &middot;
+  <a href="glossario_bitcoin.html">Glossario</a>
+  </p>
+  <p style="margin-top:.4rem;font-size:.6rem">Nessun tracker. Nessun cookie. Solo contenuto.</p>
+</footer>
+
+<a href="#" class="back-top" id="back-top">&#8679;</a>
+
+<script>
+function toggleTheme(){
+  const d=document.documentElement;
+  const cur=d.getAttribute('data-theme');
+  if(cur==='light'){d.removeAttribute('data-theme');localStorage.removeItem('theme');}
+  else{d.setAttribute('data-theme','light');localStorage.setItem('theme','light');}
+}
+(function(){
+  if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');
+})();
+window.addEventListener('scroll',()=>{
+  const p=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  const bar=document.getElementById('reading-bar');if(bar)bar.style.width=p+'%';
+  const bt=document.getElementById('back-top');if(bt){if(window.scrollY>400)bt.classList.add('visible');else bt.classList.remove('visible');}
+});
+</script>
+<a href="#donazioni" class="donation-pill" id="donation-pill" aria-label="Supporta il progetto con una donazione">
+  <span class="donation-pill__icon">&#9889;</span>
+  <span class="donation-pill__text">Supporta il progetto</span>
+</a>
+<script>
+(function() {
+  var pill = document.getElementById('donation-pill');
+  var target = document.getElementById('donazioni');
+  if (!pill || !target) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { pill.classList.add('hidden'); } else { pill.classList.remove('hidden'); }
+    });
+  }, { threshold: 0.2 });
+  observer.observe(target);
+})();
+</script>
+</body>
+</html>
