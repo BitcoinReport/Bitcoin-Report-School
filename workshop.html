@@ -175,6 +175,8 @@ footer a:hover { color: var(--gold); }
 .ws-price-badge { display: inline-block; font-family: var(--mono); font-size: .55rem; color: #000; background: var(--gold); border-radius: 20px; padding: .12rem .55rem; letter-spacing: .06em; text-transform: uppercase; margin-left: .5rem; vertical-align: middle; }
 .ws-notice { background: var(--gold-dim); border: 1px solid rgba(247,147,26,.55); border-left-width: 4px; border-radius: 9px; padding: 1rem 1.2rem; margin: 0 0 1rem; font-size: .92rem; color: var(--text); line-height: 1.65; }
 .ws-notice a { color: var(--gold); font-weight: 700; }
+.ws-btc-pay { display: inline-block; background: var(--gold); color: #000; font-family: var(--mono); font-size: .82rem; font-weight: 700; padding: .85rem 1.5rem; border-radius: 8px; text-decoration: none; }
+.ws-btc-pay:hover { opacity: .88; }
 .ws-field-note { font-family: var(--mono); font-size: .62rem; color: var(--text2); line-height: 1.55; }
 .ws-blocked { font-family: var(--mono); font-size: .72rem; color: var(--red); line-height: 1.6; margin-bottom: 1rem; }
 .faq-list { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.2rem; }
@@ -366,9 +368,11 @@ footer a:hover { color: var(--gold); }
             <span class="ws-total-label">Totale da pagare</span>
             <span class="ws-total-value" id="ws-total-sats">&mdash;</span>
           </div>
+          <p style="margin:0 0 1rem"><a href="#" id="ws-btc-pay" class="ws-btc-pay" target="_blank" rel="noopener noreferrer">Paga in bitcoin (onchain) &rarr;</a></p>
           <div class="ws-notice" id="ws-btc-notice">
-            <strong>Per pagare in bitcoin, prima di inviare l&rsquo;iscrizione scrivimi su Telegram a <a href="https://t.me/KZ_Mik" target="_blank" rel="noopener noreferrer">@KZ_Mik</a>: ti mando l&rsquo;indirizzo di pagamento.</strong> Dopo il pagamento torna qui e allega la prova: uno screenshot oppure il txid della transazione, scritto nelle note.
+            <strong>Paga in bitcoin con il pulsante qui sopra (si apre in una nuova scheda), poi torna qui e allega la prova:</strong> uno screenshot della fattura pagata oppure il numero della fattura o il txid nelle note.
           </div>
+          <p class="ws-field-note">Vuoi pagare via Lightning? Scrivimi su Telegram a <a href="https://t.me/KZ_Mik" target="_blank" rel="noopener noreferrer" style="color:var(--gold)">@KZ_Mik</a>.</p>
         </div>
       </div>
 
@@ -472,6 +476,7 @@ window.addEventListener('scroll', function () {
       noteEl.hidden = true;
       badge.hidden = true;
     }
+    document.getElementById('ws-btc-pay').href = cfg.btcPayLink();
     var total = eur(cfg.currentPrice());
     document.getElementById('ws-total-fiat').textContent = total;
     document.getElementById('ws-total-sats').textContent = total;
@@ -491,10 +496,10 @@ window.addEventListener('scroll', function () {
     var sats = m === 'SATS';
     document.getElementById('ws-proof-star').hidden = sats;
     document.getElementById('ws-proof-hint').textContent = sats
-      ? 'Facoltativa se scrivi il txid nelle note. Immagine o PDF \u2014 max 8 MB.'
+      ? 'Facoltativa se scrivi il numero della fattura o il txid nelle note. Immagine o PDF \u2014 max 8 MB.'
       : 'Immagine o PDF \u2014 max 8 MB. Ricevuta del bonifico o screenshot della transazione.';
     document.getElementById('ws-notes-label').innerHTML = sats
-      ? 'Note (qui puoi incollare il txid se non alleghi uno screenshot)'
+      ? 'Note (qui puoi incollare il numero della fattura o il txid se non alleghi uno screenshot)'
       : 'Note <span style="font-size:.85em;opacity:.6">(facoltative)</span>';
   }
   form.querySelectorAll('input[name="paymentMethod"]').forEach(function (r) {
@@ -551,7 +556,7 @@ window.addEventListener('scroll', function () {
     if (!method) { fail('Scegli come vuoi pagare.'); return; }
     if (method === 'FIAT' && !hasFile) { fail('Allega la ricevuta del bonifico.'); return; }
     if (method === 'SATS' && !hasFile && !hasNotes) {
-      fail('Per pagare in bitcoin allega uno screenshot oppure scrivi il txid nelle note.');
+      fail('Per pagare in bitcoin allega uno screenshot della fattura pagata oppure scrivi il numero della fattura o il txid nelle note.');
       return;
     }
 

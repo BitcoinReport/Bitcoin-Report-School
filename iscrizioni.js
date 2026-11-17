@@ -13,12 +13,20 @@
     priceFull: 200,
     cycleStart: '2026-12-01T00:00:00+01:00', // workshop del ciclo = data >= di questa
     expectedWorkshops: 8,
+    // Pagamento in bitcoin (onchain) con fatture BTCPay Server Italia:
+    // link early bird fino alla scadenza, link prezzo pieno dopo.
+    btcPayEarly: 'https://pos.btcpayserver.it/apps/2cbez9ZCV1ocAe73xzMpkbBbG3fF/pos',
+    btcPayFull: 'https://pos.btcpayserver.it/apps/4XzwDVx7FNtmjQ227FK9DLmEkiNs/pos',
     startLabel: '3 dicembre'
   };
 
   cfg.isEarlyBird = function (now) {
     var t = (now instanceof Date ? now : new Date()).getTime();
     return t <= new Date(cfg.earlyBirdDeadline).getTime();
+  };
+
+  cfg.btcPayLink = function (now) {
+    return cfg.isEarlyBird(now) ? cfg.btcPayEarly : cfg.btcPayFull;
   };
 
   cfg.currentPrice = function (now) {
