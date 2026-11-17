@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Workshop &mdash; Bitcoin Report School</title>
-<meta name="description" content="Il primo ciclo di workshop di Bitcoin Report School &egrave; chiuso. Lascia email e Telegram per essere avvisato se ne organizziamo un altro.">
+<title>Percorso Bitcoin per principianti &mdash; Iscrizioni &mdash; Bitcoin Report School</title>
+<meta name="description" content="Percorso Bitcoin per principianti di Bitcoin Report Italia e Bitcoin Campus: 8 serate su Zoom dal 3 dicembre 2026. Iscrizioni aperte, early bird fino al 22 novembre.">
 <meta name="author" content="Mike &mdash; Bitcoin Report Italia">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://bitcoinreportschool.com/workshop.html">
@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="iscrizioni.js"></script>
 <style>
 :root {
   --bg: #07080a;
@@ -80,10 +81,31 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .pdf-arrow { margin-left: auto; font-family: var(--mono); font-size: .75rem; color: var(--gold); flex-shrink: 0; white-space: nowrap; }
 @media(max-width: 560px) { .pdf-banner { flex-wrap: wrap; } .pdf-arrow { margin-left: 0; } }
 
+/* ── PREZZI ── */
+.ws-price-table { display: flex; flex-direction: column; gap: .5rem; margin-top: 1.2rem; }
+.ws-price-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: .8rem 1.1rem; }
+.ws-price-row.ws-price-highlight { border-color: rgba(247,147,26,.4); background: var(--gold-dim2); }
+.ws-price-label { font-size: .88rem; color: var(--text); }
+.ws-price-value { font-family: var(--mono); font-weight: 700; color: var(--gold); font-size: .95rem; white-space: nowrap; }
+.ws-earlybird-note { font-family: var(--mono); font-size: .72rem; color: var(--gold); margin-top: .9rem; line-height: 1.6; }
 
+/* ── TOTALE DA PAGARE (vicino alle istruzioni di pagamento) ── */
+.ws-total-box { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; background: var(--gold-dim2); border: 1px solid rgba(247,147,26,.35); border-radius: 8px; padding: .85rem 1.1rem; margin-bottom: 1rem; }
+.ws-total-label { font-family: var(--mono); font-size: .68rem; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; }
+.ws-total-value { font-family: var(--mono); font-size: 1.15rem; font-weight: 700; color: var(--gold); text-align: right; }
 
+/* ── CALENDAR (solo descrittivo, non cliccabile) ── */
+.ws-calendar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+.ws-date-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem; }
+.ws-date-num { font-family: var(--mono); font-size: .52rem; color: var(--gold); opacity: .7; text-transform: uppercase; letter-spacing: .15em; margin-bottom: .4rem; }
+.ws-date-topic { font-family: var(--sans); font-weight: 700; font-size: .95rem; color: var(--text); margin-bottom: .35rem; line-height: 1.3; }
+.ws-date-when { font-family: var(--mono); font-size: .65rem; color: var(--text2); margin-bottom: .3rem; }
+.ws-date-desc { font-size: .78rem; color: var(--text2); line-height: 1.55; margin-top: .4rem; }
+.ws-calendar-empty { font-family: var(--mono); font-size: .8rem; color: var(--text2); padding: 1rem 0; }
 
 /* ── FORM ── */
+.ws-form-outer { margin-top: 3.5rem; }
+.ws-form { display: flex; flex-direction: column; gap: 0; }
 .form-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem 1.8rem; margin-bottom: 1rem; }
 .form-block-title { font-family: var(--mono); font-size: .62rem; color: var(--gold); text-transform: uppercase; letter-spacing: .14em; margin-bottom: 1.2rem; opacity: .9; }
 .required { color: var(--red); margin-left: .1rem; }
@@ -97,14 +119,38 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .field-input:focus { border-color: var(--gold); }
 .field-input::placeholder { color: var(--text3); }
 .field-textarea { resize: vertical; min-height: 70px; }
+.field-file { padding: .5rem .7rem; cursor: pointer; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
 @media(max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
 
 /* ── WORKSHOP CHECKBOXES ── */
+.ws-select-all-label { display: flex; align-items: center; gap: .7rem; font-family: var(--mono); font-size: .72rem; color: var(--gold); cursor: pointer; margin-bottom: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--border); }
+.ws-select-all-label input { accent-color: var(--gold); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+.ws-list { display: flex; flex-direction: column; gap: .5rem; }
+.ws-check-label { display: flex; align-items: flex-start; gap: .7rem; font-family: var(--sans); font-size: .88rem; color: var(--text); cursor: pointer; padding: .65rem .8rem; border-radius: 7px; border: 1px solid var(--border); background: var(--bg3); transition: border-color .15s, background .15s; }
+.ws-check-label:hover { border-color: rgba(247,147,26,.3); }
+.ws-check-label input { accent-color: var(--gold); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; margin-top: .15rem; }
+.ws-check-label.checked { border-color: rgba(247,147,26,.4); background: var(--gold-dim2); }
+.ws-check-date { font-family: var(--mono); font-size: .62rem; color: var(--text2); margin-top: .2rem; display: block; }
+.ws-check-desc { font-size: .78rem; color: var(--text2); margin-top: .2rem; display: block; line-height: 1.5; }
+.ws-list-empty { font-family: var(--mono); font-size: .8rem; color: var(--text2); padding: .5rem 0; }
 
 /* ── RADIO BUTTONS ── */
+.radio-group { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.2rem; }
+.radio-option { display: flex; align-items: flex-start; gap: .9rem; padding: .9rem 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg3); cursor: pointer; transition: border-color .15s, background .15s; }
+.radio-option:has(input:checked) { border-color: var(--gold); background: var(--gold-dim2); }
+.radio-option input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; margin-top: .15rem; }
+.radio-label { font-family: var(--sans); font-size: .92rem; color: var(--text); font-weight: 500; }
 
-
+/* ── PAYMENT DETAIL ── */
+.payment-detail { border-top: 1px solid var(--border); padding-top: 1.2rem; margin-top: .2rem; }
+.payment-detail-title { font-family: var(--mono); font-size: .58rem; color: var(--text2); text-transform: uppercase; letter-spacing: .14em; margin-bottom: .9rem; }
+.iban-box { background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: .9rem; }
+.iban-row { display: flex; align-items: flex-start; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--border); }
+.iban-row:last-child { border-bottom: none; padding-bottom: 0; }
+.iban-label { font-family: var(--mono); font-size: .6rem; color: var(--text2); text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; min-width: 6.5rem; padding-top: .05rem; }
+.iban-value { font-family: var(--mono); font-size: .8rem; color: var(--text); word-break: break-all; }
+.payment-note { font-family: var(--mono); font-size: .68rem; color: var(--text2); margin-top: .8rem; line-height: 1.65; }
 
 /* ── SUBMIT ── */
 .submit-btn { width: 100%; background: var(--gold); color: #000; font-family: var(--mono); font-size: .82rem; font-weight: 700; padding: 1rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: opacity .2s, transform .15s; }
@@ -113,35 +159,32 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); tran
 .ws-msg { font-family: var(--mono); font-size: .72rem; margin-top: .9rem; line-height: 1.6; min-height: 1.2rem; }
 .ws-msg.ok { color: var(--green); }
 .ws-msg.err { color: var(--red); }
+.ws-success-pdf { display: inline-flex; align-items: center; gap: .4rem; margin-top: .5rem; padding: .4rem .8rem; border: 1px solid var(--gold); border-radius: 6px; color: var(--gold); text-decoration: none; font-family: var(--mono); font-size: .72rem; transition: background .2s, color .2s; }
+.ws-success-pdf:hover { background: var(--gold); color: var(--bg); }
 
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: .65rem; color: var(--text2); }
 footer a { color: var(--text2); text-decoration: none; }
 footer a:hover { color: var(--gold); }
 
-
-/* ── Lista d'attesa ── */
-.ws-block { margin-top: 3rem; }
-.hero-intro { font-size: 1.05rem; color: var(--text); line-height: 1.75; max-width: 640px; margin-bottom: 1.2rem; }
-.ws-sessions { display: grid; gap: .8rem; }
-.ws-session { display: flex; align-items: flex-start; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.3rem; }
-.ws-session-num { font-family: var(--mono); font-size: .7rem; color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(247,147,26,.3); border-radius: 6px; padding: .3rem .55rem; flex-shrink: 0; letter-spacing: .08em; }
-.ws-session-title { font-size: .98rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: .2rem; }
-.ws-session-desc { font-size: .82rem; color: var(--text2); line-height: 1.55; }
-.ws-session.live { border: 1px dashed rgba(34,211,160,.5); background: rgba(34,211,160,.05); }
-.ws-session.live .ws-session-num { color: var(--green); background: rgba(34,211,160,.1); border-color: rgba(34,211,160,.35); }
-.ws-block .pdf-banner { margin-top: 0; }
-.ws-success-link { display: inline-block; margin-top: .8rem; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(247,147,26,.4); }
-.ws-success-link:hover { border-color: var(--gold); }
-.ws-why { font-size: .95rem; color: var(--text2); line-height: 1.8; max-width: 680px; }
-.ws-interest-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: var(--text); margin-bottom: 1.2rem; }
-.ws-interest-box { background: var(--bg2); border: 1px solid rgba(247,147,26,.3); border-radius: 14px; padding: 1.8rem 2rem; max-width: 680px; }
-.ws-consent { display: flex; align-items: flex-start; gap: .7rem; cursor: pointer; font-size: .82rem; color: var(--text2); line-height: 1.6; margin-bottom: 1.1rem; }
-.ws-consent input { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; margin-top: .2rem; cursor: pointer; }
-.ws-count { font-family: var(--mono); font-size: .6rem; color: var(--text2); text-align: right; }
-.ws-turnstile { margin: 0 0 1.1rem; min-height: 65px; }
-.ws-trust { font-family: var(--mono); font-size: .68rem; color: var(--text2); margin-top: 1rem; line-height: 1.6; max-width: 680px; }
-.ws-success { background: var(--gold-dim2); border: 1px solid rgba(34,211,160,.35); border-radius: 12px; padding: 1.4rem 1.6rem; color: var(--text); font-size: .95rem; line-height: 1.7; }
-@media(max-width: 560px) { .ws-interest-box { padding: 1.4rem 1.2rem; } }
+/* ── CICLO 2: programma, prezzi, avvisi, FAQ ── */
+.ws-extra-row { grid-column: 1 / -1; border: 1px dashed var(--border2); border-radius: 10px; padding: .8rem 1.3rem; font-size: .8rem; color: var(--text2); line-height: 1.55; background: transparent; }
+.ws-extra-row strong { color: var(--text); font-weight: 600; }
+.ws-extra-row .ws-date-num { margin-bottom: .2rem; }
+.ws-price-old { text-decoration: line-through; color: var(--text2); font-weight: 400; margin-right: .6rem; }
+.ws-price-note { font-family: var(--mono); font-size: .66rem; color: var(--text2); margin-top: .3rem; line-height: 1.6; }
+.ws-price-badge { display: inline-block; font-family: var(--mono); font-size: .55rem; color: #000; background: var(--gold); border-radius: 20px; padding: .12rem .55rem; letter-spacing: .06em; text-transform: uppercase; margin-left: .5rem; vertical-align: middle; }
+.ws-notice { background: var(--gold-dim); border: 1px solid rgba(247,147,26,.55); border-left-width: 4px; border-radius: 9px; padding: 1rem 1.2rem; margin: 0 0 1rem; font-size: .92rem; color: var(--text); line-height: 1.65; }
+.ws-notice a { color: var(--gold); font-weight: 700; }
+.ws-field-note { font-family: var(--mono); font-size: .62rem; color: var(--text2); line-height: 1.55; }
+.ws-blocked { font-family: var(--mono); font-size: .72rem; color: var(--red); line-height: 1.6; margin-bottom: 1rem; }
+.faq-list { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.2rem; }
+.faq-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; }
+.faq-item summary { cursor: pointer; list-style: none; padding: .9rem 1.2rem; font-family: var(--sans); font-weight: 600; font-size: .95rem; color: var(--text); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-family: var(--mono); color: var(--gold); font-size: 1.1rem; flex-shrink: 0; }
+.faq-item[open] summary::after { content: '\2212'; }
+.faq-item[open] { border-color: rgba(247,147,26,.35); }
+.faq-item p { padding: 0 1.2rem 1rem; font-size: .88rem; color: var(--text2); line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -152,158 +195,231 @@ footer a:hover { color: var(--gold); }
 <nav class="site-nav">
   <a href="index.html" class="nav-home-btn">&#8592; Home</a>
   <a class="nav-logo" href="index.html">&#8383; Bitcoin Report School</a>
-  <span class="nav-cat">// workshop &middot; nuovo ciclo</span>
+  <span class="nav-cat">// percorso Bitcoin &middot; iscrizioni</span>
 </nav>
 
 <header class="hero">
-  <div class="hero-eyebrow">// workshop &middot; formazione &middot; Bitcoin</div>
-  <h1>Il primo ciclo di workshop &egrave; partito. Il prossimo lo decidi anche tu.</h1>
-  <p class="hero-intro">Il primo ciclo ha riempito i posti in pochi giorni, e molti hanno scritto quando era già tardi. Per il prossimo voglio fare le cose in modo diverso: chi lascia qui i contatti viene avvisato per primo, prima dell'apertura pubblica, e può dirmi da dove parte e cosa lo blocca, così costruisco le serate su misura.</p>
-  <p class="hero-subtitle">Otto serate dal vivo per portare chi parte da zero ai primi passi concreti con Bitcoin: comprare, custodire, usare. Il primo ciclo &egrave; chiuso, ma se c&rsquo;&egrave; abbastanza interesse ne organizziamo un altro.</p>
+  <div class="hero-eyebrow">// secondo ciclo &middot; Bitcoin Report Italia &times; Bitcoin Campus</div>
+  <h1>Percorso Bitcoin per principianti</h1>
+  <p class="hero-subtitle">Otto serate su Zoom, il gioved&igrave; alle 20:30, a partire dal 3 dicembre 2026. Dopo ogni serata ricevi la registrazione e la dispensa in PDF.</p>
   <div class="hero-meta">
-    <span>&#9997; Mike &mdash; Bitcoin Report Italia</span>
-    <span>&#9632; Primo ciclo chiuso</span>
+    <span>&#9997; Mike &mdash; Bitcoin Report Italia &times; Bitcoin Campus</span>
+    <span>&#128337; Iscrizioni aperte</span>
   </div>
 </header>
 
 <div class="outer">
 
+  <!-- PDF download -->
+  <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
+    <div class="pdf-icon">&#128196;</div>
+    <div class="pdf-text-wrap">
+      <span class="pdf-badge">In omaggio &middot; PDF gratuito</span>
+      <span class="pdf-title">Il Contesto Che Nessuno Ti D&agrave;</span>
+      <span class="pdf-subtitle">Cosa sapere sulla moneta prima ancora di sapere cos&rsquo;&egrave; Bitcoin: dal baratto che non &egrave; mai esistito a Roma, Weimar e i cypherpunk. 8 pagine da leggere prima della prima lezione, aperto a tutti.</span>
+    </div>
+    <span class="pdf-arrow">&#8595; Scarica gratis</span>
+  </a>
 
-  <!-- Cosa abbiamo fatto -->
-  <div class="ws-block">
-    <div class="section-eyebrow">// il programma</div>
-    <div class="ws-sessions">
-      <div class="ws-session">
-        <div class="ws-session-num">01</div>
-        <div>
-          <div class="ws-session-title">Perch&eacute; Bitcoin</div>
-          <div class="ws-session-desc">Il contesto che nessuno ti d&agrave;: dalla storia della moneta ai cypherpunk, per capire perch&eacute; Bitcoin esiste.</div>
-        </div>
+  <!-- Programma -->
+  <div style="margin-top:3rem">
+    <div class="section-eyebrow">// programma &middot; tutte le serate alle 20:30, su Zoom</div>
+    <div id="ws-calendar" class="ws-calendar-grid">
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 01</div>
+        <div class="ws-date-topic">Perch&#233; Bitcoin</div>
+        <div class="ws-date-when">Gioved&#236; 3 dicembre 2026 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Storia della moneta, il problema fiat, e perch&#233; Bitcoin &#232; una risposta concreta &#8212; non un investimento.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">02</div>
-        <div>
-          <div class="ws-session-title">Il tuo primo acquisto</div>
-          <div class="ws-session-desc">Come comprare i tuoi primi sats in modo semplice e sicuro, con una dimostrazione dal vivo.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 02</div>
+        <div class="ws-date-topic">Il tuo primo acquisto</div>
+        <div class="ws-date-when">Gioved&#236; 10 dicembre 2026 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Impari a comprare i tuoi primi sats in modo consapevole, evitando gli errori pi&#249; comuni dei principianti.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">03</div>
-        <div>
-          <div class="ws-session-title">Wallet Sparrow e seed phrase</div>
-          <div class="ws-session-desc">Installi un wallet, verifichi che il download sia autentico e impari a proteggere la tua seed phrase.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 03</div>
+        <div class="ws-date-topic">Il tuo wallet: Sparrow e seed phrase</div>
+        <div class="ws-date-when">Gioved&#236; 17 dicembre 2026 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Sparrow, seed phrase, primo trasferimento: i tuoi Bitcoin passano davvero nelle tue mani.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">04</div>
-        <div>
-          <div class="ws-session-title">Come funziona Bitcoin</div>
-          <div class="ws-session-desc">Cosa succede davvero quando invii una transazione: blocchi, nodi e mining, senza gergo.</div>
-        </div>
+      <div class="ws-extra-row">
+        <div class="ws-date-num">Durante le feste</div>
+        <strong>Esercitazione pratica</strong> &mdash; in una data da concordare con gli iscritti: recupero del wallet e firma di un messaggio.<br>
+        <strong>Pausa</strong> il 24 e il 31 dicembre.
       </div>
-      <div class="ws-session live">
-        <div class="ws-session-num">LIVE</div>
-        <div>
-          <div class="ws-session-title">Live di esercitazione</div>
-          <div class="ws-session-desc">Una serata per provare insieme le cose imparate fin qui.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 04</div>
+        <div class="ws-date-topic">Bitcoin dalle basi</div>
+        <div class="ws-date-when">Gioved&#236; 7 gennaio 2027 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Blockchain, transazioni, mining: la teoria spiegata usando quello che hai appena fatto tu stesso.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">05</div>
-        <div>
-          <div class="ws-session-title">Importare un wallet</div>
-          <div class="ws-session-desc">Come ritrovare i tuoi fondi da zero con la seed phrase, se perdi il telefono o il computer.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 05</div>
+        <div class="ws-date-topic">Importare un wallet e gestirlo</div>
+        <div class="ws-date-when">Gioved&#236; 14 gennaio 2027 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Ripristino, wallet watch-only, primi passi di gestione avanzata.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">06</div>
-        <div>
-          <div class="ws-session-title">Lightning</div>
-          <div class="ws-session-desc">Pagamenti istantanei e a costi minimi: crei un wallet Lightning, ricevi e invii i tuoi primi sats.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 06</div>
+        <div class="ws-date-topic">Lightning: ricevere e spendere</div>
+        <div class="ws-date-when">Gioved&#236; 21 gennaio 2027 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">I pagamenti istantanei di Bitcoin, spiegati e messi in pratica dal vivo.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">07</div>
-        <div>
-          <div class="ws-session-title">Acquisti P2P e swap</div>
-          <div class="ws-session-desc">Usare Bitcoin senza intermediari: un acquisto P2P senza KYC e lo scambio tra Lightning e onchain.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 07</div>
+        <div class="ws-date-topic">Acquisti P2P e swap</div>
+        <div class="ws-date-when">Gioved&#236; 28 gennaio 2027 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Usare Bitcoin senza intermediari, in pratica.</div>
       </div>
-      <div class="ws-session">
-        <div class="ws-session-num">08</div>
-        <div>
-          <div class="ws-session-title">Il tuo percorso di sovranit&agrave;</div>
-          <div class="ws-session-desc">Ricapitolo di quello che hai fatto, una mappa di cosa approfondire e domande dal vivo, senza slide.</div>
-        </div>
+      <div class="ws-date-card">
+        <div class="ws-date-num">Workshop 08</div>
+        <div class="ws-date-topic">Il tuo percorso di sovranit&#224;</div>
+        <div class="ws-date-when">Gioved&#236; 4 febbraio 2027 &middot; 20:30 &middot; Zoom</div>
+        <div class="ws-date-desc">Sintesi del percorso e i prossimi passi, su misura per te.</div>
       </div>
     </div>
   </div>
 
-  <!-- Perche lasciare i contatti -->
-  <div class="ws-block">
-    <div class="section-eyebrow">// perch&eacute; lasciare i tuoi contatti</div>
-    <p class="ws-why">Lascia la tua email e, se vuoi, anche Telegram. Nessun obbligo, nessuno spam, solo un messaggio quando c&rsquo;&egrave; una data.</p>
+  <!-- Prezzo -->
+  <div style="margin-top:3rem">
+    <div class="section-eyebrow">// prezzo</div>
+    <div class="ws-price-table">
+      <div class="ws-price-row ws-price-highlight">
+        <span class="ws-price-label">Percorso completo (tutte e 8 le serate)<span class="ws-price-badge" id="ws-price-badge" hidden>Early bird</span></span>
+        <span class="ws-price-value" id="ws-price-value">200&euro;</span>
+      </div>
+    </div>
+    <p class="ws-price-note" id="ws-price-note" hidden></p>
   </div>
 
-  <!-- Box lista d'attesa -->
-  <div class="ws-block" id="avvisami">
-    <h2 class="ws-interest-title">Avvisami quando riparte</h2>
+  <!-- Form -->
+  <div class="ws-form-outer" id="iscrizione">
+    <div class="section-eyebrow">// modulo di iscrizione</div>
 
-    <div class="ws-interest-box">
-      <form id="ws-interest-form" novalidate>
+    <form id="ws-form" class="ws-form" novalidate>
 
+      <!-- Dati personali -->
+      <div class="form-block">
+        <div class="form-block-title">I tuoi dati</div>
+        <label class="field-wrap">
+          <span class="field-label">Nome e cognome (o nickname) <span class="required">*</span></span>
+          <input class="field-input" name="name" required maxlength="200" autocomplete="name" placeholder="Come vuoi essere chiamato">
+        </label>
         <label class="field-wrap">
           <span class="field-label">Email <span class="required">*</span></span>
-          <input class="field-input" type="email" name="email" id="ws-email" required maxlength="254" autocomplete="email" placeholder="nome@esempio.it">
+          <input class="field-input" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="tua@email.com">
         </label>
-
         <label class="field-wrap">
-          <span class="field-label">Telegram <span style="font-size:.85em;opacity:.6">(facoltativo)</span></span>
-          <input class="field-input" type="text" name="telegram" id="ws-telegram" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@nomeutente">
+          <span class="field-label">Username Telegram <span style="font-size:.85em;opacity:.6">(facoltativo)</span></span>
+          <input class="field-input" name="telegram" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@nomeutente">
+          <span class="ws-field-note">Ci serve per aggiungerti al gruppo del percorso, dove condividiamo link e avvisi delle serate.</span>
         </label>
+      </div>
 
-        <label class="field-wrap">
-          <span class="field-label">Cosa vorresti imparare? Dimmi da dove parti e cosa ti blocca. Mi aiuta a costruire il prossimo ciclo su misura. <span style="font-size:.85em;opacity:.6">(facoltativa)</span></span>
-          <textarea class="field-input field-textarea" name="notes" id="ws-notes" maxlength="1000" rows="4" placeholder="Scrivi qui&hellip;"></textarea>
-          <span class="ws-count" id="ws-count">0 / 1000</span>
-        </label>
-
-        <label class="ws-consent">
-          <input type="checkbox" id="ws-consent" name="consent">
-          <span>Acconsento a essere ricontattato su Telegram e via email solo per essere avvisato di un eventuale nuovo ciclo di workshop. I miei dati non saranno usati per altro. <span class="required">*</span></span>
-        </label>
-
-        <!-- Honeypot -->
-        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px">
-          <label>Sito web <input type="text" name="sito_web" id="ws-hp" tabindex="-1" autocomplete="off"></label>
+      <!-- Metodo di pagamento -->
+      <div class="form-block">
+        <div class="form-block-title">Come vuoi pagare <span class="required">*</span></div>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="paymentMethod" value="FIAT" required>
+            <span class="radio-label">Bonifico in Euro</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="paymentMethod" value="SATS">
+            <span class="radio-label">Bitcoin</span>
+          </label>
         </div>
 
-        <!-- Turnstile -->
-        <div class="ws-turnstile">
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAAEs9biWczLHHZj8V"></div>
+        <!-- Istruzioni bonifico -->
+        <div id="payment-detail-fiat" class="payment-detail" hidden>
+          <div class="payment-detail-title">// istruzioni bonifico bancario</div>
+          <div class="ws-total-box">
+            <span class="ws-total-label">Totale da pagare</span>
+            <span class="ws-total-value" id="ws-total-fiat">&mdash;</span>
+          </div>
+          <div class="iban-box">
+            <div class="iban-row">
+              <span class="iban-label">IBAN</span>
+              <span class="iban-value" id="iban-number">LT92 3480 0148 1964 1772</span>
+            </div>
+            <div class="iban-row">
+              <span class="iban-label">BIC</span>
+              <span class="iban-value" id="iban-bic">UATULT22XXX</span>
+            </div>
+            <div class="iban-row">
+              <span class="iban-label">Intestatario</span>
+              <span class="iban-value" id="iban-name">Michele Bottai</span>
+            </div>
+            <div class="iban-row">
+              <span class="iban-label">Causale</span>
+              <span class="iban-value">Il tuo nome e cognome (per farci risalire al pagamento)</span>
+            </div>
+          </div>
+          <p class="payment-note">&#128204; Allega la ricevuta del bonifico nel campo &ldquo;Prova di pagamento&rdquo; qui sotto.</p>
         </div>
 
-        <button type="submit" id="ws-submit" class="submit-btn" disabled>Voglio essere avvisato</button>
+        <!-- Istruzioni Bitcoin -->
+        <div id="payment-detail-sats" class="payment-detail" hidden>
+          <div class="payment-detail-title">// pagamento in Bitcoin</div>
+          <div class="ws-total-box">
+            <span class="ws-total-label">Totale da pagare</span>
+            <span class="ws-total-value" id="ws-total-sats">&mdash;</span>
+          </div>
+          <div class="ws-notice" id="ws-btc-notice">
+            <strong>Per pagare in bitcoin, prima di inviare l&rsquo;iscrizione scrivimi su Telegram a <a href="https://t.me/KZ_Mik" target="_blank" rel="noopener noreferrer">@KZ_Mik</a>: ti mando l&rsquo;indirizzo di pagamento.</strong> Dopo il pagamento torna qui e allega la prova: uno screenshot oppure il txid della transazione, scritto nelle note.
+          </div>
+        </div>
+      </div>
+
+      <!-- Prova di pagamento -->
+      <div class="form-block">
+        <label class="field-wrap">
+          <span class="field-label">Prova di pagamento <span class="required" id="ws-proof-star">*</span></span>
+          <span class="field-hint" id="ws-proof-hint">Immagine o PDF &mdash; max 8 MB. Ricevuta del bonifico o screenshot della transazione.</span>
+          <input class="field-input field-file" type="file" name="paymentProof" id="ws-proof" accept="image/*,application/pdf">
+        </label>
+      </div>
+
+      <!-- Note -->
+      <div class="form-block">
+        <label class="field-wrap">
+          <span class="field-label" id="ws-notes-label">Note <span style="font-size:.85em;opacity:.6">(facoltative)</span></span>
+          <textarea class="field-input field-textarea" name="notes" id="ws-notes" maxlength="500" rows="3" placeholder="Scrivi qui&hellip;"></textarea>
+        </label>
+      </div>
+
+      <!-- Honeypot -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px">
+        <label>Sito web <input type="text" name="sito_web" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <!-- Turnstile -->
+      <div class="form-block" style="padding:1.2rem 1.4rem">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAEs9biWczLHHZj8V"></div>
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <p class="ws-blocked" id="ws-blocked" hidden></p>
+        <button type="submit" id="ws-submit" class="submit-btn">Invia iscrizione</button>
         <p id="ws-msg" class="ws-msg" role="status" aria-live="polite"></p>
-      </form>
+      </div>
 
-      <div id="ws-success" class="ws-success" role="status" aria-live="polite" hidden>Fatto, ti ho in lista. Appena c&rsquo;&egrave; una data per un nuovo ciclo ti scrivo via email e, se hai lasciato anche Telegram, anche l&igrave;. Nel frattempo trovi tutto il resto su Instagram, TikTok e YouTube.<br><a class="ws-success-link" href="/downloads/benvenuto-workshop.pdf" download>Intanto, se vuoi, scarica il PDF gratuito</a></div>
-    </div>
-
-    <p class="ws-trust">I tuoi dati restano solo a me e li uso solo per avvisarti del nuovo ciclo.</p>
+    </form>
   </div>
 
-  <!-- PDF download -->
-  <div class="ws-block">
-    <a href="/downloads/benvenuto-workshop.pdf" download class="pdf-banner">
-      <div class="pdf-icon">&#128196;</div>
-      <div class="pdf-text-wrap">
-        <span class="pdf-badge">In omaggio &middot; PDF gratuito</span>
-        <span class="pdf-title">Il Contesto Che Nessuno Ti Dà</span>
-        <span class="pdf-subtitle">Cosa sapere sulla moneta prima ancora di sapere cos&rsquo;&egrave; Bitcoin: dal baratto che non &egrave; mai esistito a Roma, Weimar e i cypherpunk. 8 pagine da leggere prima della prima lezione, aperto a tutti.</span>
-      </div>
-      <span class="pdf-arrow">&#8595; Scarica gratis</span>
-    </a>
+  <!-- FAQ -->
+  <div style="margin-top:3.5rem">
+    <div class="section-eyebrow">// domande frequenti</div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Parto da zero, ce la faccio?</summary><p>S&#236;: il percorso &#232; pensato per chi parte da zero. Alterna spiegazione e pratica dal vivo, e dopo ogni lezione ricevi registrazione e dispensa in PDF.</p></details>
+      <details class="faq-item"><summary>Devo comprare prima un hardware wallet?</summary><p>No. Non serve avere niente prima: nel percorso usiamo wallet software gratuiti. Gli hardware wallet non fanno parte delle lezioni.</p></details>
+      <details class="faq-item"><summary>Mi servono un nodo o Tor?</summary><p>No, li incontriamo lungo il percorso, quando servono.</p></details>
+      <details class="faq-item"><summary>Va bene il mio computer?</summary><p>Basta un computer con Windows, macOS o Linux, pi&#249; uno smartphone.</p></details>
+      <details class="faq-item"><summary>Si parla di trading, altcoin o DeFi?</summary><p>No: il percorso &#232; solo su Bitcoin.</p></details>
+      <details class="faq-item"><summary>Come seguo le serate?</summary><p>Su Zoom: il link arriva via mail e su Telegram poco prima di ogni serata. Se non puoi esserci, ricevi la registrazione.</p></details>
+    </div>
   </div>
 
 </div>
@@ -328,107 +444,143 @@ window.addEventListener('scroll', function () {
 
 (function () {
   var API = 'https://bitcoin-report-gestione.vercel.app';
-  var form = document.getElementById('ws-interest-form');
-  var emailEl = document.getElementById('ws-email');
-  var tgEl = document.getElementById('ws-telegram');
-  var notesEl = document.getElementById('ws-notes');
-  var consentEl = document.getElementById('ws-consent');
-  var hpEl = document.getElementById('ws-hp');
-  var btn = document.getElementById('ws-submit');
+  var cfg = window.WS_CONFIG;
+  var form = document.getElementById('ws-form');
   var msg = document.getElementById('ws-msg');
-  var countEl = document.getElementById('ws-count');
-  var okBox = document.getElementById('ws-success');
-  var sending = false;
+  var btn = document.getElementById('ws-submit');
+  var blocked = document.getElementById('ws-blocked');
+  var fiatBox = document.getElementById('payment-detail-fiat');
+  var satsBox = document.getElementById('payment-detail-sats');
+  var proof = document.getElementById('ws-proof');
+  var notes = document.getElementById('ws-notes');
+  var calendarReady = false;
 
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  var TG_RE = /^[A-Za-z0-9_]{5,32}$/;
-
-  function normTelegram(v) { return String(v || '').replace(/\s+/g, '').replace(/^@+/, ''); }
-
-  function showMsg(text, kind) {
-    msg.textContent = text || '';
-    msg.className = 'ws-msg' + (kind ? ' ' + kind : '');
+  // ── Prezzo: early bird fino alla scadenza condivisa (iscrizioni.js) ──
+  function eur(n) { return n + '\u20ac'; }
+  function renderPrice() {
+    var early = cfg.isEarlyBird();
+    var valueEl = document.getElementById('ws-price-value');
+    var noteEl = document.getElementById('ws-price-note');
+    var badge = document.getElementById('ws-price-badge');
+    if (early) {
+      valueEl.innerHTML = '<span class="ws-price-old">' + eur(cfg.priceFull) + '</span>' + eur(cfg.priceEarly);
+      noteEl.textContent = 'Early bird: ' + eur(cfg.priceEarly) + ' fino a domenica 22 novembre 2026, ore 23:59. Dopo la scadenza il prezzo \u00e8 ' + eur(cfg.priceFull) + '.';
+      noteEl.hidden = false;
+      badge.hidden = false;
+    } else {
+      valueEl.textContent = eur(cfg.priceFull);
+      noteEl.hidden = true;
+      badge.hidden = true;
+    }
+    var total = eur(cfg.currentPrice());
+    document.getElementById('ws-total-fiat').textContent = total;
+    document.getElementById('ws-total-sats').textContent = total;
   }
+  renderPrice();
+  setInterval(renderPrice, 30000);
 
-  function refresh() {
-    countEl.textContent = notesEl.value.length + ' / 1000';
-    var ready = emailEl.value.trim() !== '' && consentEl.checked;
-    btn.disabled = sending || !ready;
+  // ── Metodo di pagamento ──
+  function selectedMethod() {
+    var r = form.querySelector('input[name="paymentMethod"]:checked');
+    return r ? r.value : null;
   }
-
-  ['input', 'change'].forEach(function (ev) {
-    form.addEventListener(ev, function () { showMsg(''); refresh(); });
+  function refreshPaymentUi() {
+    var m = selectedMethod();
+    fiatBox.hidden = m !== 'FIAT';
+    satsBox.hidden = m !== 'SATS';
+    var sats = m === 'SATS';
+    document.getElementById('ws-proof-star').hidden = sats;
+    document.getElementById('ws-proof-hint').textContent = sats
+      ? 'Facoltativa se scrivi il txid nelle note. Immagine o PDF \u2014 max 8 MB.'
+      : 'Immagine o PDF \u2014 max 8 MB. Ricevuta del bonifico o screenshot della transazione.';
+    document.getElementById('ws-notes-label').innerHTML = sats
+      ? 'Note (qui puoi incollare il txid se non alleghi uno screenshot)'
+      : 'Note <span style="font-size:.85em;opacity:.6">(facoltative)</span>';
+  }
+  form.querySelectorAll('input[name="paymentMethod"]').forEach(function (r) {
+    r.addEventListener('change', refreshPaymentUi);
   });
-  tgEl.addEventListener('blur', function () {
-    var n = normTelegram(tgEl.value);
-    if (n) tgEl.value = '@' + n;
-  });
-  refresh();
 
-  function resetTurnstile() {
-    if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
+  // ── Workshop del ciclo: tutti e 8, dall'elenco pubblico (data >= 1 dicembre 2026) ──
+  function addIds(ids) {
+    ids.forEach(function (id) {
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = 'workshopIds'; i.value = id;
+      form.appendChild(i);
+    });
   }
+  function block(text) {
+    blocked.textContent = text;
+    blocked.hidden = false;
+    btn.disabled = true;
+  }
+  fetch(API + '/api/public/workshop/open')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var start = new Date(cfg.cycleStart).getTime();
+      var cycle = (data.workshops || []).filter(function (w) {
+        return new Date(w.date).getTime() >= start;
+      });
+      if (cycle.length !== cfg.expectedWorkshops) {
+        block('Il calendario non \u00e8 ancora completo: riprova tra poco o scrivimi su Telegram a @KZ_Mik.');
+        return;
+      }
+      addIds(cycle.map(function (w) { return w.id; }));
+      calendarReady = true;
+    })
+    .catch(function () {
+      block('Non riesco a caricare il calendario. Riprova o scrivimi su Telegram a @KZ_Mik.');
+    });
+
+  function fail(text) { msg.textContent = text; msg.className = 'ws-msg err'; }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (sending) return;
+    msg.textContent = '';
+    msg.className = 'ws-msg';
+    if (!calendarReady) { fail('Il calendario non \u00e8 stato caricato. Ricarica la pagina.'); return; }
 
-    var email = emailEl.value.trim();
-    var telegram = normTelegram(tgEl.value);
-    var notes = notesEl.value.trim();
+    var name = form.elements['name'].value.trim();
+    var email = form.elements['email'];
+    var method = selectedMethod();
+    var hasFile = proof.files && proof.files.length > 0;
+    var hasNotes = notes.value.trim() !== '';
 
-    if (!EMAIL_RE.test(email)) { showMsg('Inserisci un indirizzo email valido.', 'err'); emailEl.focus(); return; }
-    if (telegram !== '' && !TG_RE.test(telegram)) { showMsg('Username Telegram non valido: 5-32 caratteri tra lettere, numeri e _ (con o senza @).', 'err'); tgEl.focus(); return; }
-    if (notes.length > 1000) { showMsg('La nota \u00e8 troppo lunga (massimo 1000 caratteri).', 'err'); return; }
-    if (!consentEl.checked) { showMsg('Devi accettare il consenso per procedere.', 'err'); return; }
+    if (!name) { fail('Inserisci il tuo nome.'); return; }
+    if (!email.value.trim() || !email.checkValidity()) { fail('Inserisci un indirizzo email valido.'); return; }
+    if (!method) { fail('Scegli come vuoi pagare.'); return; }
+    if (method === 'FIAT' && !hasFile) { fail('Allega la ricevuta del bonifico.'); return; }
+    if (method === 'SATS' && !hasFile && !hasNotes) {
+      fail('Per pagare in bitcoin allega uno screenshot oppure scrivi il txid nelle note.');
+      return;
+    }
 
-    var tokenEl = form.querySelector('[name="cf-turnstile-response"]');
-    var token = tokenEl ? tokenEl.value : '';
-    if (!token) { showMsg('Completa la verifica anti-bot qui sopra e riprova.', 'err'); return; }
-
-    sending = true;
-    refresh();
-    btn.textContent = 'Invio in corso...';
-    showMsg('');
-
-    fetch(API + '/api/public/workshop/interest', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        telegram: telegram,
-        notes: notes,
-        consent: true,
-        sito_web: hpEl.value,
-        'cf-turnstile-response': token
-      })
-    })
+    btn.disabled = true;
+    fetch(API + '/api/public/workshop/signup', { method: 'POST', body: new FormData(form) })
+      .then(function (r) { return r.json().then(function (b) { return { s: r.status, b: b }; }); })
       .then(function (res) {
-        return res.json().catch(function () { return {}; }).then(function (data) { return { status: res.status, data: data }; });
-      })
-      .then(function (r) {
-        if (r.status === 200 && r.data && r.data.ok) {
-          form.hidden = true;
-          okBox.hidden = false;
-          okBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          return;
+        if (res.s === 200 && res.b.ok) {
+          form.querySelectorAll('input[name="workshopIds"]').forEach(function (i) { i.remove(); });
+          form.reset();
+          refreshPaymentUi();
+          if (window.turnstile) window.turnstile.reset();
+          msg.innerHTML = 'Iscrizione ricevuta, verifichiamo il pagamento a mano e ti confermiamo.<br>Nel frattempo, scarica il documento di benvenuto: <a href="/downloads/benvenuto-workshop.pdf" download class="ws-success-pdf">&#128196; Scarica il PDF</a>';
+          msg.className = 'ws-msg ok';
+          calendarReady = false; // evita un secondo invio identico senza ricaricare
+          btn.disabled = true;
+          btn.textContent = 'Iscrizione inviata';
+        } else {
+          fail(res.b.error || 'Errore. Riprova.');
+          btn.disabled = false;
         }
-        var text = (r.data && r.data.error) ? r.data.error : 'Qualcosa \u00e8 andato storto. Riprova tra poco.';
-        if (r.status === 429) text = 'Troppe richieste da questo indirizzo. Riprova pi\u00f9 tardi.';
-        showMsg(text, 'err');
-        resetTurnstile();
       })
       .catch(function () {
-        showMsg('Connessione non riuscita. Controlla la rete e riprova.', 'err');
-        resetTurnstile();
-      })
-      .then(function () {
-        sending = false;
-        btn.textContent = 'Voglio essere avvisato';
-        refresh();
+        fail('Errore di rete. Riprova.');
+        btn.disabled = false;
       });
   });
 })();
 </script>
+
 </body>
 </html>
